@@ -206,32 +206,165 @@ Template  : image.html
             gap: 8px;
         }
 
-        .image-viewer {
-            text-align: center;
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            /* 배경 격자 무늬 - 작은 이미지 시각적 인지 */
-            background-image:
-                linear-gradient(45deg, #f8f9fa 25%, transparent 25%),
-                linear-gradient(-45deg, #f8f9fa 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, #f8f9fa 75%),
-                linear-gradient(-45deg, transparent 75%, #f8f9fa 75%);
-            background-size: 20px 20px;
-            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        .viewer-container {
+            width: 100% !important;
+            height: 100% !important;
+            background-color: transparent !important;
+            /* 투명하게 설정하여 아래의 격자 무늬가 보이도록 함 */
         }
 
-        .image-viewer img {
-            max-width: 100%;
-            max-height: 70vh;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .viewer-backdrop {
+            background-color: transparent !important;
+            /* 백드롭도 투명하게 */
+        }
+
+        /* Grid Pattern Background for Image Viewer */
+        .image-viewer {
+            width: 100%;
+            height: 600px;
+            /* 고정 높이 또는 min-height 설정 */
+            background-color: #f8f9fa;
+            border: 1px solid #e5e7eb;
+            /* 격자 무늬 추가 */
+            background-image:
+                linear-gradient(45deg, #eef0f2 25%, transparent 25%),
+                linear-gradient(-45deg, #eef0f2 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #eef0f2 75%),
+                linear-gradient(-45deg, transparent 75%, #eef0f2 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            overflow: hidden;
+            /* Remove border radius for full width viewer */
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        /* Text Viewer Control Bar Style (from text6.html) */
+        .text-viewer-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 40px;
+            padding: 0 12px;
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #d0d0d0;
+            gap: 8px;
+        }
+
+        .controls-desktop {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .control-btn {
+            padding: 4px 8px;
+            min-width: 30px;
+            height: 28px;
+            background-color: #e8e8e8;
+            border: 1px solid #c0c0c0;
             border-radius: 4px;
-            background: white;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .control-btn:hover {
+            background-color: #d8d8d8;
+        }
+
+        .control-btn:active {
+            background-color: #c8c8c8;
+        }
+
+        .btn-group {
+            display: inline-flex;
+            gap: 0;
+        }
+
+        .btn-group .control-btn {
+            border-radius: 0;
+            margin-left: -1px;
+        }
+
+        .btn-group .control-btn:first-child {
+            border-radius: 4px 0 0 4px;
+            margin-left: 0;
+        }
+
+        .btn-group .control-btn:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Zoom Label Style */
+        .zoom-label {
+            font-size: 12px;
+            color: #555;
+            padding: 0 8px;
+            min-width: 45px;
+            text-align: center;
+            background-color: #f8f9fa;
+            border-top: 1px solid #c0c0c0;
+            border-bottom: 1px solid #c0c0c0;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: -1px;
+            margin-right: -1px;
+            z-index: 0;
+        }
+
+        /* Maximize Mode Styles */
+        body.maximize-mode header,
+        body.maximize-mode .doc-info-section,
+        body.maximize-mode .mt-4 {
+            display: none !important;
+        }
+
+        body.maximize-mode .image-container {
+            max-width: none;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.maximize-mode .flex-1.flex.flex-col.bg-gray-50 {
+            height: 100vh;
+        }
+
+        body.maximize-mode .text-viewer-controls {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #d0d0d0;
+            background-color: #f0f0f0;
+        }
+
+        body.maximize-mode .viewer-main-wrapper {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.maximize-mode .image-viewer {
+            flex: 1;
+            height: auto !important;
+            /* 0 대신 auto 사용해봄, flex-basis가 처리 */
+            min-height: 0 !important;
+            border: none;
+        }
+
+        body.maximize-mode .max-w-7xl {
+            max-width: none;
+            padding: 0;
         }
     </style>
 </head>
@@ -396,21 +529,97 @@ Template  : image.html
 
         </div>
 
-        <!-- 이미지 뷰어 -->
+        <!-- 이미지 뷰어 영역 -->
         <div class="flex-1 flex flex-col bg-gray-50">
-            <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6">
-                <div class="bg-white rounded-lg shadow-sm overflow-hidden p-6">
-                    <div class="image-viewer">
-                        <img id="image" src="./images/1.png" alt="1.png" class="image-embed mx-auto" aria-label="이미지">
+            <div class="w-full viewer-main-wrapper">
+
+                <!-- Control Bar (New Style) -->
+                <div class="text-viewer-controls">
+                    <div class="controls-desktop">
+                        <!-- Zoom Group -->
+                        <div class="btn-group">
+                            <button type="button" onclick="viewer.zoom(-0.1)" class="control-btn" title="축소">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4">
+                                    </path>
+                                </svg>
+                            </button>
+                            <span id="zoomLevel" class="zoom-label">100%</span>
+                            <button type="button" onclick="viewer.zoom(0.1)" class="control-btn" title="확대">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Rotate Group -->
+                        <div class="btn-group">
+                            <button type="button" onclick="viewer.rotate(-90)" class="control-btn" title="왼쪽으로 회전">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
+                                </svg>
+                            </button>
+                            <button type="button" onclick="viewer.rotate(90)" class="control-btn" title="오른쪽으로 회전">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 10H11a8 8 0 00-8 8v2M21 10l-6 6m6-6l-6-6"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Flip Group -->
+                        <div class="btn-group">
+                            <button type="button" onclick="viewer.scaleX(-viewer.imageData.scaleX || -1)"
+                                class="control-btn" title="좌우 반전">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                                </svg>
+                            </button>
+                            <button type="button" onclick="viewer.scaleY(-viewer.imageData.scaleY || -1)"
+                                class="control-btn" title="상하 반전">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Reset & Original Size Group -->
+                        <div class="btn-group">
+                            <button type="button" onclick="viewer.zoomTo(1)" class="control-btn" title="원본 크기 (1:1)">
+                                <span style="font-weight: bold; font-size: 10px;">1:1</span>
+                            </button>
+                            <button type="button" onclick="viewer.reset()" class="control-btn" title="초기화">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Maximize Button -->
+                        <button type="button" onclick="toggleMaximize()" class="control-btn" id="maximizeBtn"
+                            title="최대화">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4">
+                                </path>
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
-                <!-- 추가 안내 -->
-                <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                    <p class="text-sm text-blue-900">
-                        <strong>팁:</strong> 이미지를 클릭하면 확대/축소, 회전 등의 기능을 사용할 수 있습니다.
-                    </p>
+                <!-- 뷰어 컨테이너 -->
+                <div class="image-viewer">
+                    <img id="image" src="./images/2.jpg" alt="1.png" class="hidden">
                 </div>
+
+                <!-- 추가 안내 (숨김 또는 스타일 조정 필요시) -->
+                <!-- <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">...</div> -->
             </div>
         </div>
     </div>
@@ -422,6 +631,7 @@ Template  : image.html
         const imageUrl = "\/aview\/file\/converted\/d619d01e3b1c26f4d14e885f3a72900c.png";
         const filename = "1.png";
         const originalUrl = "http:\/\/localhost:8080\/aview\/admin\/run-test\/download\/1.png";
+        var viewer; // Declare viewer globally
         /*]]>*/
 
         // 문서 정보 토글
@@ -476,27 +686,128 @@ Template  : image.html
 
             if (imageElement) {
                 // Viewer.js 초기화
-                window.viewer = new Viewer(imageElement, {
-                    inline: false,
-                    toolbar: {
-                        zoomIn: 1,
-                        zoomOut: 1,
-                        oneToOne: 1,
-                        reset: 1,
-                        prev: 0,
-                        play: 0,
-                        next: 0,
-                        rotateLeft: 1,
-                        rotateRight: 1,
-                        flipHorizontal: 1,
-                        flipVertical: 1
+                viewer = new Viewer(imageElement, {
+                    inline: true,
+                    button: false, // 우측 상단 버튼 제거
+                    navbar: false,
+                    title: false,
+                    toolbar: false, // 기본 툴바 숨김 (외부 버튼 사용)
+                    tooltip: false,
+                    movable: true,
+                    zoomable: true,
+                    rotatable: true,
+                    scalable: true,
+                    transition: false, // 인라인 모드에서 부드러운 전환을 위해 끌 수도 있음
+                    backdrop: false, // 백드롭 제거 (CSS로 제어)
+                    viewed() {
+                        // 초기 줌 레벨 표시
+                        updateZoomLevel();
                     },
-                    title: function (image) {
-                        return filename + ' (' + image.naturalWidth + ' × ' + image.naturalHeight + ')';
+                    zoom(event) {
+                        // 줌 이벤트 발생 시 라벨 업데이트
+                        updateZoomLevel(event.detail.ratio);
+                    },
+                    zoomed(event) {
+                        // 줌 완료 시 라벨 업데이트 (확실하게 하기 위해)
+                        updateZoomLevel(event.detail.ratio);
                     }
                 });
+
+                // 줌 레벨 업데이트 함수
+                function updateZoomLevel(ratio) {
+                    if (!ratio) {
+                        // ratio가 전달되지 않은 경우 (초기 로드 등)
+                        // Viewer.js의 imageData를 사용하여 현재 비율 계산
+                        const imageData = window.viewer.imageData;
+                        if (imageData && imageData.naturalWidth > 0) {
+                            ratio = imageData.width / imageData.naturalWidth;
+                        }
+                    }
+
+                    // 만약 ratio가 여전히 유효하지 않다면 1로 가정
+                    if (!ratio || isNaN(ratio)) ratio = 1;
+
+                    const percentage = Math.round(ratio * 100);
+                    document.getElementById('zoomLevel').textContent = percentage + '%';
+                }
             }
         });
+
+        // 최대화 토글 함수
+        function toggleMaximize() {
+            document.body.classList.toggle('maximize-mode');
+            const btn = document.getElementById('maximizeBtn');
+            const isMaximized = document.body.classList.contains('maximize-mode');
+
+            if (isMaximized) {
+                btn.title = "복원";
+                btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h16v16H4z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 8h8v8H8z"></path></svg>'; // 축소 아이콘 대용
+
+                // 뷰어 리사이즈 및 화면에 꽉 차게(Fit) 줌 설정
+                // 뷰어 리사이즈 및 화면에 꽉 차게(Fit) 줌 설정
+                // 레이아웃 변경(애니메이션 등)이 완료될 시간을 충분히 줌
+                setTimeout(() => {
+                    window.viewer.update();
+
+                    // requestAnimationFrame을 사용하여 레이아웃 업데이트 후 실행 보장
+                    requestAnimationFrame(() => {
+                        const imageData = window.viewer.imageData;
+                        const container = window.viewer.element; // .image-viewer 요소
+
+                        if (imageData && container) {
+                            const naturalWidth = imageData.naturalWidth;
+                            const naturalHeight = imageData.naturalHeight;
+                            // getBoundingClientRect()가 더 정확한 렌더링 크기를 반환함
+                            const containerRect = container.getBoundingClientRect();
+                            let containerWidth = containerRect.width;
+                            let containerHeight = containerRect.height;
+
+
+
+                            // 컨테이너 크기가 유효하지 않으면 window 크기 기반으로 폴백
+                            if (containerWidth === 0 || containerHeight === 0) {
+                                // console.log('Container size is 0, using window fallback');
+                                containerWidth = window.innerWidth;
+                                containerHeight = window.innerHeight - 40; // 컨트롤 바 높이(40px) 제외
+                            }
+
+                            // 컨테이너 크기가 유효하고(0이 아니고), 원본 크기가 있을 때만 계산
+                            if (containerWidth > 0 && containerHeight > 0 && naturalWidth > 0 && naturalHeight > 0) {
+                                // 가로, 세로 비율 중 더 작은 쪽을 기준으로 줌 비율 계산 (Fit to Screen)
+                                const widthRatio = containerWidth / naturalWidth;
+                                const heightRatio = containerHeight / naturalHeight;
+                                const scale = Math.min(widthRatio, heightRatio);
+
+                                console.log('Calculated Scale (Fallback applied):', scale);
+
+                                // 줌 적용 (0.99 등을 곱해 스크롤바 생성을 방지할 수도 있음)
+                                window.viewer.zoomTo(scale * 0.99);
+
+                                // 중앙 정렬을 위해 moveTo 사용
+                                const imageWidth = naturalWidth * scale;
+                                const imageHeight = naturalHeight * scale;
+                                const x = (containerWidth - imageWidth) / 2;
+                                const y = (containerHeight - imageHeight) / 2;
+                                window.viewer.moveTo(x, y);
+                            } else {
+                                console.log('Invalid dimensions even after fallback, resetting');
+                                // 크기 감지 실패 시 기본 리셋
+                                window.viewer.reset();
+                            }
+                        } else {
+                            window.viewer.reset();
+                        }
+                    });
+                }, 300); // 300ms로 늘려 트랜지션/렌더링 완료 대기
+            } else {
+                btn.title = "최대화";
+                btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>';
+                setTimeout(() => {
+                    window.viewer.update();
+                    window.viewer.reset(); // 복원 시에는 초기화
+                }, 100);
+            }
+        }
     </script>
     <!-- Debug Info Console Log -->
     <script>
