@@ -25,10 +25,19 @@ Template  : source.html
         id="highlightThemeDark" disabled>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
-    <!-- Coding font -->
+    <!-- Coding fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- D2Coding -->
+    <link href="https://cdn.jsdelivr.net/gh/joungkyun/font-d2coding/d2coding.css" rel="stylesheet">
+    <!-- JetBrains Mono -->
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Fira Code -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Nanum Gothic Coding -->
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap"
+        rel="stylesheet">
 
     <style>
         :root {
@@ -558,6 +567,46 @@ Template  : source.html
             color: white !important;
         }
 
+        /* Top Button Styles */
+        #topBtn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, background-color 0.2s;
+            z-index: 1000;
+        }
+
+        #topBtn.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #topBtn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        body.dark-mode #topBtn {
+            background-color: #238636;
+        }
+
+        body.dark-mode #topBtn:hover {
+            background-color: #2ea043;
+        }
+
         /* Smooth transition */
         .code-body {
             transition: all 0.3s ease;
@@ -618,7 +667,7 @@ Template  : source.html
             background-color: var(--line-num-bg);
             border-right: 1px solid var(--line-num-border);
             color: var(--line-num-color);
-            font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Consolas', monospace !important;
+            font-family: 'D2Coding', 'JetBrains Mono', 'Fira Code', 'Nanum Gothic Coding', 'Consolas', monospace !important;
             font-size: 14px !important;
             line-height: 1.6 !important;
             padding: 20px 10px !important;
@@ -643,7 +692,7 @@ Template  : source.html
         .code-content code {
             display: block;
             padding: 20px !important;
-            font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Consolas', monospace !important;
+            font-family: 'D2Coding', 'JetBrains Mono', 'Fira Code', 'Nanum Gothic Coding', 'Consolas', monospace !important;
             font-size: 14px !important;
             line-height: 1.6 !important;
         }
@@ -863,67 +912,6 @@ Template  : source.html
             <!-- Control Bar -->
             <div class="source-viewer-controls">
                 <div class="controls-desktop">
-                    <!-- 폰트 크기 -->
-                    <div class="control-item btn-group">
-                        <button type="button" id="fontSizeDecrease" class="control-btn" title="폰트 작게">−</button>
-                        <button type="button" id="fontSizeReset" class="control-btn" title="폰트기본(14px)">14px</button>
-                        <button type="button" id="fontSizeIncrease" class="control-btn" title="폰트 크게">+</button>
-                    </div>
-
-                    <!-- 폰트 선택 -->
-                    <select id="fontFamily" class="control-select" title="폰트 선택">
-                        <option value="'JetBrains Mono', 'Fira Code', 'SF Mono', 'Consolas', monospace" selected>
-                            JetBrains Mono</option>
-                        <option value="'Courier New', monospace">Courier New</option>
-                        <option value="'Monaco', monospace">Monaco</option>
-                        <option value="'Consolas', monospace">Consolas</option>
-                        <option value="'Menlo', monospace">Menlo</option>
-                    </select>
-
-                    <!-- 배경색 선택 -->
-                    <div class="custom-color-dropdown">
-                        <button type="button" class="custom-color-btn" id="bgColorBtn" data-color="#f6f8fa"
-                            title="배경색 선택" style="background-color: #f6f8fa;"></button>
-                        <div class="custom-color-menu" id="bgColorMenu">
-                            <button type="button" class="custom-color-option active" data-color="#f6f8fa"
-                                style="background-color: #f6f8fa;" title="기본 그레이"></button>
-                            <button type="button" class="custom-color-option" data-color="#ffffff"
-                                style="background-color: #ffffff;" title="흰색"></button>
-                            <button type="button" class="custom-color-option" data-color="#fffacd"
-                                style="background-color: #fffacd;" title="라이트 옐로우"></button>
-                            <button type="button" class="custom-color-option" data-color="#e6f3ff"
-                                style="background-color: #e6f3ff;" title="라이트 블루"></button>
-                            <button type="button" class="custom-color-option" data-color="#f0f8f0"
-                                style="background-color: #f0f8f0;" title="라이트 그린"></button>
-                        </div>
-                    </div>
-
-                    <!-- 줄간 선택 -->
-                    <div class="control-item btn-group">
-                        <button type="button" id="lineHeightDecrease" class="control-btn" title="줄간 작게">−</button>
-                        <button type="button" id="lineHeightReset" class="control-btn" title="줄간 기본">✱</button>
-                        <button type="button" id="lineHeightIncrease" class="control-btn" title="줄간 크게">+</button>
-                    </div>
-
-                    <!-- 설정 저장/초기화 버튼 그룹 -->
-                    <div class="control-item btn-group">
-                        <button type="button" id="saveSettings" class="control-btn" title="현재 설정 저장">
-                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                style="display: inline-block; vertical-align: middle;">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                        </button>
-                        <button type="button" id="resetSettings" class="control-btn" title="설정 초기화">
-                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                style="display: inline-block; vertical-align: middle;">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
-                                </path>
-                            </svg>
-                        </button>
-                    </div>
-
                     <!-- 커서라인 체크박스 -->
                     <div class="control-item" style="display: flex; align-items: center; gap: 4px;">
                         <input type="checkbox" id="lineHighlightToggle"
@@ -951,15 +939,46 @@ Template  : source.html
                         <span class="search-counter" id="searchCounter"></span>
                     </div>
 
-                    <!-- 다크모드 토글 버튼 -->
-                    <button type="button" id="darkModeToggle" class="control-btn" title="다크 모드 전환">
-                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            id="darkModeIcon" style="display: inline-block; vertical-align: middle;">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
-                            </path>
-                        </svg>
-                    </button>
+                    <!-- 폰트 크기 -->
+                    <div class="control-item btn-group">
+                        <button type="button" id="fontSizeDecrease" class="control-btn" title="폰트 작게">−</button>
+                        <button type="button" id="fontSizeReset" class="control-btn" title="폰트기본(14px)">14px</button>
+                        <button type="button" id="fontSizeIncrease" class="control-btn" title="폰트 크게">+</button>
+                    </div>
+
+                    <!-- 폰트 선택 -->
+                    <select id="fontFamily" class="control-select" title="폰트 선택">
+                        <option value="D2Coding" selected>D2Coding</option>
+                        <option value="Nanum Gothic Coding">나눔고딕코딩</option>
+                        <option value="JetBrains Mono">JetBrains Mono</option>
+                        <option value="Fira Code">Fira Code</option>
+                        <option value="Consolas">Consolas</option>
+                    </select>
+
+                    <!-- 배경색 선택 -->
+                    <div class="custom-color-dropdown">
+                        <button type="button" class="custom-color-btn" id="bgColorBtn" data-color="#f6f8fa"
+                            title="배경색 선택" style="background-color: #f6f8fa;"></button>
+                        <div class="custom-color-menu" id="bgColorMenu">
+                            <button type="button" class="custom-color-option active" data-color="#f6f8fa"
+                                style="background-color: #f6f8fa;" title="기본 그레이"></button>
+                            <button type="button" class="custom-color-option" data-color="#ffffff"
+                                style="background-color: #ffffff;" title="흰색"></button>
+                            <button type="button" class="custom-color-option" data-color="#fffacd"
+                                style="background-color: #fffacd;" title="라이트 옐로우"></button>
+                            <button type="button" class="custom-color-option" data-color="#e6f3ff"
+                                style="background-color: #e6f3ff;" title="라이트 블루"></button>
+                            <button type="button" class="custom-color-option" data-color="#f0f8f0"
+                                style="background-color: #f0f8f0;" title="라이트 그린"></button>
+                        </div>
+                    </div>
+
+                    <!-- 줄간 선택 -->
+                    <div class="control-item btn-group">
+                        <button type="button" id="lineHeightDecrease" class="control-btn" title="줄간 작게">−</button>
+                        <button type="button" id="lineHeightReset" class="control-btn" title="줄간 기본">✱</button>
+                        <button type="button" id="lineHeightIncrease" class="control-btn" title="줄간 크게">+</button>
+                    </div>
 
                     <!-- 최대화 버튼 -->
                     <button type="button" id="maximizeToggle" class="control-btn" title="전체화면 전환">
@@ -971,6 +990,35 @@ Template  : source.html
                             </path>
                         </svg>
                     </button>
+
+                    <!-- 다크모드 토글 버튼 -->
+                    <button type="button" id="darkModeToggle" class="control-btn" title="다크 모드 전환">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            id="darkModeIcon" style="display: inline-block; vertical-align: middle;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                            </path>
+                        </svg>
+                    </button>
+
+                    <!-- 설정 저장/초기화 버튼 그룹 -->
+                    <div class="control-item btn-group">
+                        <button type="button" id="saveSettings" class="control-btn" title="현재 설정 저장">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                style="display: inline-block; vertical-align: middle;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </button>
+                        <button type="button" id="resetSettings" class="control-btn" title="설정 초기화">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                style="display: inline-block; vertical-align: middle;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -1085,8 +1133,7 @@ echo &quot;==========================================&quot;
         <!-- 추가 안내 -->
         <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
             <p class="text-sm text-blue-900">
-                <strong>팁:</strong> 소스코드는 자동으로 문법 강조 처리됩니다.
-                왼쪽에 라인 번호가 표시되며, 상단의 복사하기 버튼으로 전체 코드를 복사할 수 있습니다.
+                <strong>팁:</strong> Home:처음으로, PageUp/PageDown:스크롤, End:끝으로
             </p>
         </div>
     </div>
@@ -1277,10 +1324,24 @@ echo &quot;==========================================&quot;
             // ========== Control Box Initialization ==========
             console.log('🎛️ Control Box: Starting initialization...');
 
+            // Helper function to build font-family string with fallbacks
+            function buildFontFamily(selectedFont) {
+                // Define the complete fallback chain
+                const fallbackFonts = ['D2Coding', 'JetBrains Mono', 'Fira Code', 'Nanum Gothic Coding', 'Consolas', 'monospace'];
+
+                // Remove the selected font from fallbacks to avoid duplication
+                const filteredFallbacks = fallbackFonts.filter(f => f !== selectedFont);
+
+                // Build the font-family string
+                const allFonts = [selectedFont, ...filteredFallbacks];
+                return allFonts.map(f => f === 'monospace' ? f : `'${f}'`).join(', ');
+            }
+
             // Default settings
             const defaultSettings = {
                 fontSize: 14,
-                fontFamily: "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Consolas', monospace",
+                fontFamily: buildFontFamily('D2Coding'),
+                fontFamilyName: 'D2Coding', // Store the selected font name
                 bgColor: "#f6f8fa",
                 lineHeight: 1.6
             };
@@ -1391,8 +1452,10 @@ echo &quot;==========================================&quot;
             console.log('🎛️ Control Box: Font family selector found:', !!fontFamilySelect);
 
             fontFamilySelect?.addEventListener('change', (e) => {
-                console.log('🎛️ Control Box: Font family changed to', e.target.value);
-                currentSettings.fontFamily = e.target.value;
+                const selectedFont = e.target.value;
+                console.log('🎛️ Control Box: Font family changed to', selectedFont);
+                currentSettings.fontFamilyName = selectedFont;
+                currentSettings.fontFamily = buildFontFamily(selectedFont);
                 applySettings();
             });
 
@@ -1484,7 +1547,7 @@ echo &quot;==========================================&quot;
             saveBtn?.addEventListener('click', () => {
                 console.log('🎛️ Control Box: SAVE clicked, saving settings...', currentSettings);
                 localStorage.setItem('sourceViewer_fontSize', currentSettings.fontSize);
-                localStorage.setItem('sourceViewer_fontFamily', currentSettings.fontFamily);
+                localStorage.setItem('sourceViewer_fontFamilyName', currentSettings.fontFamilyName);
                 localStorage.setItem('sourceViewer_bgColor', currentSettings.bgColor);
                 localStorage.setItem('sourceViewer_lineHeight', currentSettings.lineHeight);
 
@@ -1509,7 +1572,7 @@ echo &quot;==========================================&quot;
 
                     // Reset UI
                     document.getElementById('fontSizeReset').textContent = defaultSettings.fontSize + 'px';
-                    document.getElementById('fontFamily').value = defaultSettings.fontFamily;
+                    document.getElementById('fontFamily').value = defaultSettings.fontFamilyName;
                     bgColorBtn.style.backgroundColor = defaultSettings.bgColor;
 
                     // Update active color option
@@ -1519,7 +1582,7 @@ echo &quot;==========================================&quot;
 
                     // Clear localStorage
                     localStorage.removeItem('sourceViewer_fontSize');
-                    localStorage.removeItem('sourceViewer_fontFamily');
+                    localStorage.removeItem('sourceViewer_fontFamilyName');
                     localStorage.removeItem('sourceViewer_bgColor');
                     localStorage.removeItem('sourceViewer_lineHeight');
                     console.log('🎛️ Control Box: Settings reset to defaults');
@@ -1892,13 +1955,13 @@ echo &quot;==========================================&quot;
             function loadSettings() {
                 console.log('🎛️ Control Box: Loading saved settings from localStorage...');
                 const savedFontSize = localStorage.getItem('sourceViewer_fontSize');
-                const savedFontFamily = localStorage.getItem('sourceViewer_fontFamily');
+                const savedFontFamilyName = localStorage.getItem('sourceViewer_fontFamilyName');
                 const savedBgColor = localStorage.getItem('sourceViewer_bgColor');
                 const savedLineHeight = localStorage.getItem('sourceViewer_lineHeight');
 
                 console.log('🎛️ Control Box: Saved settings found:', {
                     fontSize: savedFontSize,
-                    fontFamily: savedFontFamily,
+                    fontFamilyName: savedFontFamilyName,
                     bgColor: savedBgColor,
                     lineHeight: savedLineHeight
                 });
@@ -1907,9 +1970,10 @@ echo &quot;==========================================&quot;
                     currentSettings.fontSize = parseInt(savedFontSize);
                     document.getElementById('fontSizeReset').textContent = currentSettings.fontSize + 'px';
                 }
-                if (savedFontFamily) {
-                    currentSettings.fontFamily = savedFontFamily;
-                    document.getElementById('fontFamily').value = savedFontFamily;
+                if (savedFontFamilyName) {
+                    currentSettings.fontFamilyName = savedFontFamilyName;
+                    currentSettings.fontFamily = buildFontFamily(savedFontFamilyName);
+                    document.getElementById('fontFamily').value = savedFontFamilyName;
                 }
                 if (savedBgColor) {
                     currentSettings.bgColor = savedBgColor;
@@ -1929,6 +1993,71 @@ echo &quot;==========================================&quot;
             // Load saved settings
             loadSettings();
             console.log('🎛️ Control Box: Initialization complete! ✅');
+
+            // ===== TOP BUTTON & KEYBOARD NAVIGATION =====
+            const topBtn = document.getElementById('topBtn');
+            const codeWithLines = document.querySelector('.code-with-lines');
+
+            function getScrollContainer() {
+                return document.body.classList.contains('fullscreen-active') ? codeWithLines : window;
+            }
+
+            function getScrollTop() {
+                if (document.body.classList.contains('fullscreen-active')) {
+                    return codeWithLines.scrollTop;
+                }
+                return window.scrollY || document.documentElement.scrollTop;
+            }
+
+            function toggleTopButton() {
+                if (getScrollTop() > 300) {
+                    topBtn.classList.add('show');
+                } else {
+                    topBtn.classList.remove('show');
+                }
+            }
+
+            function scrollToTop() {
+                const container = getScrollContainer();
+                container.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+
+            // Scroll Event Listeners
+            window.addEventListener('scroll', toggleTopButton);
+            if (codeWithLines) {
+                codeWithLines.addEventListener('scroll', toggleTopButton);
+            }
+
+            // Button Click Listener
+            topBtn.addEventListener('click', scrollToTop);
+
+            // Keyboard Shortcuts
+            document.addEventListener('keydown', (e) => {
+                // Ignore if focus is on input or textarea
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+                const isFullscreen = document.body.classList.contains('fullscreen-active');
+
+                if (e.key === 'Home') {
+                    e.preventDefault();
+                    scrollToTop();
+                } else if (isFullscreen) {
+                    // Handle PageUp/PageDown manually in fullscreen mode if needed
+                    // (Browser might handle it if focus is right, but let's ensure it works)
+                    const scrollAmount = window.innerHeight * 0.8;
+
+                    if (e.key === 'PageDown') {
+                        e.preventDefault();
+                        codeWithLines.scrollBy({ top: scrollAmount, behavior: 'smooth' });
+                    } else if (e.key === 'PageUp') {
+                        e.preventDefault();
+                        codeWithLines.scrollBy({ top: -scrollAmount, behavior: 'smooth' });
+                    }
+                }
+            });
         });
     </script>
 
@@ -1942,6 +2071,13 @@ echo &quot;==========================================&quot;
         console.log('Template:', 'source.html');
         console.log('─'.repeat(50));
     </script>
+    <!-- Top Button -->
+    <button id="topBtn" title="맨 위로 이동 (Home)">
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
 </body>
 
 </html>
