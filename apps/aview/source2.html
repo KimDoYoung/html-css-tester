@@ -451,6 +451,113 @@ Template  : source.html
             display: none;
         }
 
+        /* Search Feature Styles */
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background-color: #ffffff;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            padding: 2px 6px;
+            height: 28px;
+            margin-right: 8px;
+        }
+
+        .search-input {
+            border: none;
+            outline: none;
+            font-size: 12px;
+            padding: 4px;
+            width: 120px;
+            background: transparent;
+            color: #333;
+        }
+
+        .search-input:focus {
+            width: 160px;
+        }
+
+        .search-btn,
+        .search-clear-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 2px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+
+        .search-btn:hover,
+        .search-clear-btn:hover {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .search-btn svg,
+        .search-clear-btn svg {
+            width: 14px;
+            height: 14px;
+            pointer-events: none;
+            /* Prevent SVG from capturing clicks */
+        }
+
+        .search-counter {
+            font-size: 11px;
+            color: #888;
+            margin-left: 4px;
+            min-width: 40px;
+            text-align: right;
+        }
+
+        /* Search Highlight Styles */
+        mark.search-highlight {
+            background-color: rgba(255, 235, 59, 0.5);
+            color: inherit;
+            padding: 0;
+            border-radius: 2px;
+        }
+
+        mark.search-highlight.current {
+            background-color: #ff9800;
+            color: white;
+            box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.3);
+        }
+
+        /* Dark mode search styles */
+        body.dark-mode .search-box {
+            background-color: #2d333b;
+            border-color: #444c56;
+        }
+
+        body.dark-mode .search-input {
+            color: #c9d1d9;
+        }
+
+        body.dark-mode .search-btn,
+        body.dark-mode .search-clear-btn {
+            color: #8b949e;
+        }
+
+        body.dark-mode .search-btn:hover,
+        body.dark-mode .search-clear-btn:hover {
+            background-color: #444c56;
+            color: #c9d1d9;
+        }
+
+        body.dark-mode mark.search-highlight {
+            background-color: rgba(210, 153, 34, 0.4) !important;
+            color: inherit;
+        }
+
+        body.dark-mode mark.search-highlight.current {
+            background-color: #d29922 !important;
+            color: white !important;
+        }
+
         /* Smooth transition */
         .code-body {
             transition: all 0.3s ease;
@@ -823,6 +930,25 @@ Template  : source.html
                             style="cursor: pointer; width: 14px; height: 14px;">
                         <label for="lineHighlightToggle"
                             style="cursor: pointer; font-size: 12px; user-select: none; margin: 0;">커서라인</label>
+                    </div>
+
+                    <!-- Search Box -->
+                    <div class="search-box">
+                        <input type="text" class="search-input" id="searchInput" placeholder="검색어 입력"
+                            autocomplete="off">
+                        <button type="button" class="search-btn" id="searchBtn" title="다음 찾기 (Enter)">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </button>
+                        <button type="button" class="search-clear-btn" id="searchClearBtn" title="검색 지우기 (Delete)">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                        <span class="search-counter" id="searchCounter"></span>
                     </div>
 
                     <!-- 다크모드 토글 버튼 -->
@@ -1531,6 +1657,236 @@ echo &quot;==========================================&quot;
                     console.log('🎛️ Control Box: Line highlight disabled');
                 }
             });
+
+            // ===== SEARCH FEATURE =====
+            let searchMatches = [];
+            let currentMatchIndex = -1;
+            let lastSearchQuery = '';
+
+            // Search elements
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchBtn');
+            const searchClearBtn = document.getElementById('searchClearBtn');
+            const searchCounter = document.getElementById('searchCounter');
+
+            /**
+             * Search for text in the document
+             */
+            function searchText() {
+                const codeElement = document.querySelector('.code-content code');
+                if (!codeElement) return;
+
+                const query = searchInput.value.trim();
+                lastSearchQuery = query;
+
+                // Clear search if query is empty
+                if (!query) {
+                    clearSearch();
+                    return;
+                }
+
+                // Save original HTML if not already saved
+                if (!originalCodeHTML) {
+                    originalCodeHTML = codeElement.innerHTML;
+                }
+
+                // Reset to original HTML before searching
+                if (isLineHighlightEnabled) {
+                    lineHighlightToggle.checked = false;
+                    isLineHighlightEnabled = false;
+                    codeBody.classList.remove('line-highlight-enabled');
+                    unwrapCodeLines();
+                } else {
+                    codeElement.innerHTML = originalCodeHTML;
+                }
+
+                searchMatches = [];
+                currentMatchIndex = -1;
+
+                // Use TreeWalker to find text nodes
+                const walker = document.createTreeWalker(codeElement, NodeFilter.SHOW_TEXT, null, false);
+                const textNodes = [];
+                let node;
+                while (node = walker.nextNode()) {
+                    textNodes.push(node);
+                }
+
+                // Escape special regex characters
+                const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                const regex = new RegExp(escapedQuery, 'gi');
+
+                // Iterate text nodes and highlight matches
+                // We need to do this in reverse order to not mess up indices when splitting nodes
+                // But actually, we can just collect matches first, then apply highlights
+
+                // Better approach:
+                // 1. Find all matches in text nodes
+                // 2. Replace text nodes with fragments containing highlights
+
+                let matchCount = 0;
+
+                textNodes.forEach(textNode => {
+                    const text = textNode.nodeValue;
+                    let match;
+                    const matchesInNode = [];
+
+                    // Reset regex lastIndex
+                    regex.lastIndex = 0;
+
+                    while ((match = regex.exec(text)) !== null) {
+                        matchesInNode.push({
+                            index: match.index,
+                            length: match[0].length,
+                            text: match[0]
+                        });
+                    }
+
+                    if (matchesInNode.length > 0) {
+                        const fragment = document.createDocumentFragment();
+                        let lastIndex = 0;
+
+                        matchesInNode.forEach(m => {
+                            // Text before match
+                            if (m.index > lastIndex) {
+                                fragment.appendChild(document.createTextNode(text.substring(lastIndex, m.index)));
+                            }
+
+                            // Match
+                            const mark = document.createElement('mark');
+                            mark.className = 'search-highlight';
+                            mark.textContent = m.text;
+                            mark.dataset.matchIndex = matchCount++;
+                            fragment.appendChild(mark);
+
+                            // Add to global matches list (store element for scrolling)
+                            searchMatches.push(mark);
+
+                            lastIndex = m.index + m.length;
+                        });
+
+                        // Text after last match
+                        if (lastIndex < text.length) {
+                            fragment.appendChild(document.createTextNode(text.substring(lastIndex)));
+                        }
+
+                        textNode.parentNode.replaceChild(fragment, textNode);
+                    }
+                });
+
+                // Update counter
+                updateSearchCounter();
+
+                // If matches found, go to first
+                if (searchMatches.length > 0) {
+                    currentMatchIndex = 0;
+                    updateCurrentHighlight();
+                    scrollToMatch(0);
+                }
+            }
+
+            function clearSearch() {
+                const codeElement = document.querySelector('.code-content code');
+                if (!codeElement) return;
+
+                searchInput.value = '';
+                searchInput.focus(); // Focus input after clearing
+                lastSearchQuery = '';
+                searchMatches = [];
+                currentMatchIndex = -1;
+                updateSearchCounter();
+
+                // Restore original HTML
+                if (originalCodeHTML) {
+                    codeElement.innerHTML = originalCodeHTML;
+                }
+            }
+
+            function updateSearchCounter() {
+                if (searchMatches.length > 0) {
+                    searchCounter.textContent = `${currentMatchIndex + 1}/${searchMatches.length}`;
+                } else {
+                    searchCounter.textContent = '';
+                }
+            }
+
+            function updateCurrentHighlight() {
+                // Remove current class from all
+                const current = document.querySelector('.search-highlight.current');
+                if (current) current.classList.remove('current');
+
+                // Add current class to current match
+                if (currentMatchIndex >= 0 && currentMatchIndex < searchMatches.length) {
+                    const match = searchMatches[currentMatchIndex];
+                    match.classList.add('current');
+                }
+            }
+
+            function scrollToMatch(index) {
+                if (index >= 0 && index < searchMatches.length) {
+                    const match = searchMatches[index];
+                    match.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            }
+
+            function findNext() {
+                const query = searchInput.value.trim();
+                if (query !== lastSearchQuery || searchMatches.length === 0) {
+                    searchText();
+                    return;
+                }
+                currentMatchIndex = (currentMatchIndex + 1) % searchMatches.length;
+                updateCurrentHighlight();
+                scrollToMatch(currentMatchIndex);
+                updateSearchCounter();
+            }
+
+            function findPrevious() {
+                const query = searchInput.value.trim();
+                if (query !== lastSearchQuery || searchMatches.length === 0) {
+                    searchText();
+                    return;
+                }
+                currentMatchIndex = (currentMatchIndex - 1 + searchMatches.length) % searchMatches.length;
+                updateCurrentHighlight();
+                scrollToMatch(currentMatchIndex);
+                updateSearchCounter();
+            }
+
+            // Event Listeners
+            searchBtn?.addEventListener('click', findNext);
+
+            searchClearBtn?.addEventListener('mousedown', (e) => {
+                e.preventDefault(); // Prevent focus loss
+                clearSearch();
+            });
+
+            searchInput?.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (e.shiftKey) {
+                        findPrevious();
+                    } else {
+                        findNext();
+                    }
+                } else if (e.key === 'Escape') {
+                    // Optional: clear search on Escape? 
+                    // text6.html doesn't seem to do this, but it's good UX.
+                    // But we already use Escape for fullscreen exit.
+                    // Let's stick to text6.html behavior (Delete key clears)
+                } else if (e.key === 'Delete') {
+                    // Only if input is empty or we want to clear explicitly
+                    // text6.html title says "Del (삭제)"
+                    // But usually Delete deletes text in input.
+                    // Let's check text6.html logic if possible, but standard behavior is fine.
+                }
+            });
+
+            // Input event to trigger search on typing (optional, text6.html seems to search on Enter or button)
+            // But text6.html code shows searchInputDt.value usage in searchText.
+            // Let's just search on Enter for now to avoid performance issues with large code.
 
             // Load settings from localStorage
             function loadSettings() {
