@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!-- 
+===========================================
+🔍 AView Document Metadata
+===========================================
+Generated : 2025-11-21 20:08:20
+Hashcode  : d619d01e3b1c26f4d14e885f3a72900c
+Filename  : 1.png
+Template  : image.html
+===========================================
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.png</title>
+    <link rel="icon" type="image/png" href="/aview/images/favicon32.png" sizes="32x32">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Viewer.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css">
+    <style>
+        .image-embed {
+            max-height: 80vh;
+            min-height: 600px;
+        }
+
+        @media (max-width: 768px) {
+            .image-embed {
+                max-height: 70vh;
+                min-height: 400px;
+            }
+        }
+
+        .doc-info-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .doc-info-section.collapsed {
+            max-height: 0;
+            padding: 0 20px;
+            margin-bottom: 0;
+            opacity: 0;
+        }
+
+        .toggle-doc-info-btn {
+            background: #0d6efd;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .toggle-doc-info-btn:hover {
+            background: #0b5ed7;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-doc-info-btn.collapsed {
+            background: #28a745;
+            animation: pulseCollapsed 2s ease-in-out infinite;
+        }
+
+        .toggle-doc-info-btn.collapsed:hover {
+            background: #218838;
+        }
+
+        .toggle-doc-info-btn svg {
+            color: white;
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-doc-info-btn.collapsed svg {
+            transform: rotate(180deg);
+        }
+
+        @keyframes pulseCollapsed {
+
+            0%,
+            100% {
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 4px 16px rgba(40, 167, 69, 0.4);
+            }
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 16px;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.875rem;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            color: #6c757d;
+            font-size: 1.125rem;
+        }
+
+        .image-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .doc-info-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 16px;
+            grid-auto-flow: dense;
+        }
+
+        @media (max-width: 768px) {
+            .doc-info-row {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        .doc-info-col {
+            padding: 0;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            min-width: 200px;
+        }
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+        .mobile-menu button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            transition: background-color 0.2s;
+        }
+
+        .mobile-menu button:hover {
+            background-color: #f3f4f6;
+        }
+
+        .mobile-menu button svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        .doc-info-header {
+            background-color: #e7f3ff;
+            padding: 12px 16px;
+            margin: -20px -20px 16px -20px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .doc-info-header h3 {
+            margin: 0;
+            color: #333;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .image-viewer {
+            text-align: center;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* 배경 격자 무늬 - 작은 이미지 시각적 인지 */
+            background-image:
+                linear-gradient(45deg, #f8f9fa 25%, transparent 25%),
+                linear-gradient(-45deg, #f8f9fa 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #f8f9fa 75%),
+                linear-gradient(-45deg, transparent 75%, #f8f9fa 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        .image-viewer img {
+            max-width: 100%;
+            max-height: 70vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            background: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header 영역: 전체 너비 (100%) -->
+    <header class="w-full bg-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-start justify-between gap-4">
+                <!-- 왼쪽: 파일명 -->
+                <div class="flex-1 min-w-0">
+                    <h1 class="text-2xl font-bold text-gray-900 truncate">1.png</h1>
+                </div>
+
+                <!-- 오른쪽: 데스크톱 버튼 그룹 (md 이상에서만 표시) -->
+                <div class="hidden md:flex flex-wrap gap-3 justify-end flex-shrink-0">
+                    <!-- 새 창에서 열기 -->
+                    <button type="button" onclick="openInNewWindow()"
+                        class="inline-flex items-center px-4 py-2 rounded-lg bg-blue-600 text-white font-medium text-sm hover:bg-blue-700 transition-colors shadow-sm whitespace-nowrap">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                        새 창에서 열기
+                    </button>
+
+                    <!-- 원본 다운로드 -->
+                    <button type="button" onclick="downloadOriginal()"
+                        class="inline-flex items-center px-4 py-2 rounded-lg bg-orange-600 text-white font-medium text-sm hover:bg-orange-700 transition-colors shadow-sm whitespace-nowrap">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        원본 다운로드
+                    </button>
+
+                    <!-- 문서 정보 토글 버튼 -->
+                    <button type="button" class="toggle-doc-info-btn collapsed" id="toggleDocInfoBtn"
+                        onclick="toggleDocInfo()" title="이미지 정보 보기" aria-label="이미지 정보 토글">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- 오른쪽: 모바일 영역 (토글 버튼 + 햄버거 메뉴) -->
+                <div class="md:hidden flex gap-2 items-center flex-shrink-0">
+                    <!-- 모바일 토글 버튼 -->
+                    <button type="button" class="toggle-doc-info-btn collapsed" onclick="toggleDocInfo()"
+                        title="이미지 정보 보기" aria-label="이미지 정보 토글">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7">
+                            </path>
+                        </svg>
+                    </button>
+
+                    <!-- 햄버거 메뉴 (relative 래퍼) -->
+                    <div class="relative">
+                        <button type="button" id="mobileMenuBtn" onclick="toggleMobileMenu()" title="메뉴"
+                            aria-label="작업 메뉴 열기"
+                            class="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+
+                        <!-- 모바일 드롭다운 메뉴 -->
+                        <div id="mobileMenu" class="mobile-menu">
+                            <button type="button" onclick="openInNewWindow(); toggleMobileMenu();">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
+                                    </path>
+                                </svg>
+                                새 창에서 열기
+                            </button>
+                            <button type="button" onclick="downloadOriginal(); toggleMobileMenu();">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                원본 다운로드
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="image-container">
+
+        <!-- 이미지 정보 섹션 (초기: 숨김) -->
+        <div id="docInfoSection" class="doc-info-section collapsed">
+            <!-- 이미지 정보 헤더 -->
+            <div class="doc-info-header">
+                <h3>이미지 정보</h3>
+            </div>
+
+            <!-- 기본 정보 -->
+            <div class="doc-info-row">
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">파일명</span>
+                        <span class="info-value">1.png</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">파일 크기</span>
+                        <span class="info-value">446,797 bytes</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">이미지 크기</span>
+                        <span class="info-value">882 × 295</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 이미지 포맷 및 색상 정보 -->
+            <div class="doc-info-row">
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">포맷</span>
+                        <span class="info-value">PNG</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">색상 모델</span>
+                        <span class="info-value">RGB</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">비트 깊이</span>
+                        <span class="info-value">24-bit</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 해상도 및 투명도 -->
+            <div class="doc-info-row">
+
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">투명도</span>
+                        <span class="info-value">아니오</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <!-- 3단 레이아웃 유지를 위한 빈 공간 -->
+                </div>
+            </div>
+
+            <!-- EXIF: 촬영 정보 -->
+
+
+            <!-- EXIF: 카메라 설정 -->
+
+
+            <!-- EXIF: GPS 위치 -->
+
+        </div>
+
+        <!-- 이미지 뷰어 -->
+        <div class="flex-1 flex flex-col bg-gray-50">
+            <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6">
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden p-6">
+                    <div class="image-viewer">
+                        <img id="image" src="./images/1.png" alt="1.png" class="image-embed mx-auto" aria-label="이미지">
+                    </div>
+                </div>
+
+                <!-- 추가 안내 -->
+                <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p class="text-sm text-blue-900">
+                        <strong>팁:</strong> 이미지를 클릭하면 확대/축소, 회전 등의 기능을 사용할 수 있습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Viewer.js JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.js"></script>
+    <script>
+        /*<![CDATA[*/
+        const imageUrl = "\/aview\/file\/converted\/d619d01e3b1c26f4d14e885f3a72900c.png";
+        const filename = "1.png";
+        const originalUrl = "http:\/\/localhost:8080\/aview\/admin\/run-test\/download\/1.png";
+        /*]]>*/
+
+        // 문서 정보 토글
+        function toggleDocInfo() {
+            const docInfoSection = document.getElementById('docInfoSection');
+            const toggleBtns = document.querySelectorAll('.toggle-doc-info-btn');
+
+            docInfoSection.classList.toggle('collapsed');
+            toggleBtns.forEach(btn => {
+                btn.classList.toggle('collapsed');
+            });
+        }
+
+        // 모바일 메뉴 토글
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('open');
+        }
+
+        // 모바일 메뉴 외부 클릭시 닫기
+        document.addEventListener('click', function (event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+
+            if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+                mobileMenu.classList.remove('open');
+            }
+        });
+
+        // 새 창에서 열기
+        function openInNewWindow() {
+            window.open(imageUrl, '_blank');
+        }
+
+        // 원본 다운로드
+        function downloadOriginal() {
+            if (originalUrl) {
+                const link = document.createElement('a');
+                link.href = originalUrl;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                alert('원본 URL 정보가 없습니다.');
+            }
+        }
+
+        // Viewer.js 초기화
+        document.addEventListener('DOMContentLoaded', function () {
+            const imageElement = document.getElementById('image');
+
+            if (imageElement) {
+                // Viewer.js 초기화
+                window.viewer = new Viewer(imageElement, {
+                    inline: false,
+                    toolbar: {
+                        zoomIn: 1,
+                        zoomOut: 1,
+                        oneToOne: 1,
+                        reset: 1,
+                        prev: 0,
+                        play: 0,
+                        next: 0,
+                        rotateLeft: 1,
+                        rotateRight: 1,
+                        flipHorizontal: 1,
+                        flipVertical: 1
+                    },
+                    title: function (image) {
+                        return filename + ' (' + image.naturalWidth + ' × ' + image.naturalHeight + ')';
+                    }
+                });
+            }
+        });
+    </script>
+    <!-- Debug Info Console Log -->
+    <script>
+        console.log('%c🔍 AView Document Info', 'color: #0066cc; font-weight: bold; font-size: 14px;');
+        console.log('Generated:', '2025-11-21 20:08:20');
+        console.log('Hashcode:', 'd619d01e3b1c26f4d14e885f3a72900c');
+        console.log('Filename:', '1.png');
+        console.log('Template:', 'pdf.html');
+        console.log('─'.repeat(50));
+    </script>
+</body>
+
+</html>

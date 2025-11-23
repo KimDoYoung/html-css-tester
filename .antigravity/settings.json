@@ -1,0 +1,18 @@
+{
+    "files.exclude": {
+        "**/.gradle": true,
+        "**/build": true,
+        "**/target/**": true,
+        "**/node_modules/**": true
+    },
+    "files.watcherExclude": {
+        "**/target/**": true,
+        "**/build/**": true,
+        "**/.gradle/**": true,
+        "**/.mvn/**": true,
+        "**/node_modules/**": true,
+        "**/.git/**": true,
+        "**/logs/**": true
+    },
+    "terminal.integrated.defaultProfile.windows": "Git Bash"
+}

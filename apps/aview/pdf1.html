@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!-- 
+===========================================
+🔍 AView Document Metadata
+===========================================
+Generated : 2025-11-21 19:57:42
+Hashcode  : 741704818bca50649eaf057c2661d396
+Filename  : 자금관리.pdf
+Template  : pdf.html
+===========================================
+-->    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자금관리.pdf</title>
+    <link rel="icon" type="image/png" href="/aview/images/favicon32.png" sizes="32x32">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .pdf-embed {
+            height: 80vh;
+            min-height: 600px;
+        }
+
+        @media (max-width: 768px) {
+            .pdf-embed {
+                height: 70vh;
+                min-height: 400px;
+            }
+        }
+
+        .doc-info-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .doc-info-section.collapsed {
+            max-height: 0;
+            padding: 0 20px;
+            margin-bottom: 0;
+            opacity: 0;
+        }
+
+        .toggle-doc-info-btn {
+            background: #0d6efd;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .toggle-doc-info-btn:hover {
+            background: #0b5ed7;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .toggle-doc-info-btn.collapsed {
+            background: #28a745;
+            animation: pulseCollapsed 2s ease-in-out infinite;
+        }
+
+        .toggle-doc-info-btn.collapsed:hover {
+            background: #218838;
+        }
+
+        .toggle-doc-info-btn svg {
+            color: white;
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-doc-info-btn.collapsed svg {
+            transform: rotate(180deg);
+        }
+
+        @keyframes pulseCollapsed {
+            0%, 100% {
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+            50% {
+                box-shadow: 0 4px 16px rgba(40, 167, 69, 0.4);
+            }
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.875rem;
+            margin-bottom: 0;
+        }
+
+        .info-value {
+            color: #6c757d;
+            font-size: 1.125rem;
+        }
+
+        .pdf-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .doc-info-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        @media (max-width: 1024px) {
+            .doc-info-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .doc-info-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .doc-info-col {
+            padding: 0;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 10;
+            min-width: 200px;
+        }
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+        .mobile-menu button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            transition: background-color 0.2s;
+        }
+
+        .mobile-menu button:hover {
+            background-color: #f3f4f6;
+        }
+
+        .mobile-menu button svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        .doc-info-header {
+            background-color: #f2ebd3;
+            padding: 12px 16px;
+            margin: -20px -20px 16px -20px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .doc-info-header h3 {
+            margin: 0;
+            color: #333;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header 영역: 전체 너비 (100%) -->
+    <header class="w-full bg-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-start justify-between gap-4">
+                <!-- 왼쪽: 파일명 -->
+                <div class="flex-1 min-w-0">
+                    <h1 class="text-2xl font-bold text-gray-900 truncate">자금관리.pdf</h1>
+                </div>
+
+                <!-- 오른쪽: 데스크톱 버튼 그룹 (md 이상에서만 표시) -->
+                <div class="hidden md:flex flex-wrap gap-3 justify-end flex-shrink-0">
+                    <!-- 새 창에서 열기 -->
+                    <button type="button"
+                            onclick="openInNewWindow()"
+                            class="inline-flex items-center px-4 py-2 rounded-lg bg-blue-600 text-white font-medium text-sm hover:bg-blue-700 transition-colors shadow-sm whitespace-nowrap">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                        새 창에서 열기
+                    </button>
+
+                    <!-- PDF 다운로드 -->
+                    <button type="button"
+                            onclick="downloadPDF()"
+                            class="inline-flex items-center px-4 py-2 rounded-lg bg-green-600 text-white font-medium text-sm hover:bg-green-700 transition-colors shadow-sm whitespace-nowrap">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        PDF 다운로드
+                    </button>
+
+                    <!-- 원본 다운로드 -->
+                    <button type="button"
+                            onclick="downloadOriginal()"
+                            class="inline-flex items-center px-4 py-2 rounded-lg bg-orange-600 text-white font-medium text-sm hover:bg-orange-700 transition-colors shadow-sm whitespace-nowrap">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        원본 다운로드
+                    </button>
+
+                    <!-- 문서 정보 토글 버튼 -->
+                    <button type="button"
+                            class="toggle-doc-info-btn collapsed"
+                            id="toggleDocInfoBtn"
+                            onclick="toggleDocInfo()"
+                            title="문서 정보 보기"
+                            aria-label="문서 정보 토글">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- 오른쪽: 모바일 영역 (토글 버튼 + 햄버거 메뉴) -->
+                <div class="md:hidden flex gap-2 items-center flex-shrink-0">
+                    <!-- 모바일 토글 버튼 -->
+                    <button type="button"
+                            class="toggle-doc-info-btn collapsed"
+                            onclick="toggleDocInfo()"
+                            title="문서 정보 보기"
+                            aria-label="문서 정보 토글">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </button>
+
+                    <!-- 햄버거 메뉴 (relative 래퍼) -->
+                    <div class="relative">
+                        <button type="button"
+                                id="mobileMenuBtn"
+                                onclick="toggleMobileMenu()"
+                                title="메뉴"
+                                aria-label="작업 메뉴 열기"
+                                class="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+
+                        <!-- 모바일 드롭다운 메뉴 -->
+                        <div id="mobileMenu" class="mobile-menu">
+                            <button type="button" onclick="openInNewWindow(); toggleMobileMenu();">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                새 창에서 열기
+                            </button>
+                            <button type="button" onclick="downloadPDF(); toggleMobileMenu();">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                PDF 다운로드
+                            </button>
+                            <button type="button" onclick="downloadOriginal(); toggleMobileMenu();">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                원본 다운로드
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="pdf-container">
+
+        <!-- 문서 정보 섹션 (초기: 숨김) -->
+        <div id="docInfoSection" class="doc-info-section collapsed">
+            <!-- PDF 정보 헤더 -->
+            <div class="doc-info-header">
+                <h3>📄 PDF 정보</h3>
+            </div>
+
+            <div class="doc-info-row">
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">작성자</span>
+                        <span class="info-value">구 윤진</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">작성날짜</span>
+                        <span class="info-value">2025-07-10</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">파일 크기</span>
+                        <span class="info-value">4,232,593 bytes</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">페이지 수</span>
+                        <span class="info-value">19</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">형식</span>
+                        <span class="info-value">PDF</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PDF 뷰어 -->
+        <div class="flex-1 flex flex-col bg-gray-50">
+            <div class="max-w-7xl mx-auto w-full">
+                <div class="bg-white overflow-hidden">
+                    <iframe
+                        src="./자금관리.pdf#toolbar=1&amp;navpanes=1&amp;scrollbar=1&amp;page=1&amp;view=FitH"
+                        class="pdf-embed w-full border-none"
+                        aria-label="PDF 문서"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+                <!-- 추가 안내 -->
+                <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p class="text-sm text-blue-900">
+                        <strong>팁:</strong> PDF가 제대로 표시되지 않는다면 상단의 "새 창에서 열기" 버튼을 시도해보세요.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 문서 정보 토글
+        function toggleDocInfo() {
+            const docInfoSection = document.getElementById('docInfoSection');
+            const toggleBtns = document.querySelectorAll('.toggle-doc-info-btn');
+
+            docInfoSection.classList.toggle('collapsed');
+            toggleBtns.forEach(btn => {
+                btn.classList.toggle('collapsed');
+            });
+        }
+
+        // 모바일 메뉴 토글
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('open');
+        }
+
+        // 모바일 메뉴 외부 클릭시 닫기
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const toggleBtn = document.querySelector('.toggle-doc-info-btn');
+
+            if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target) && !toggleBtn.contains(event.target)) {
+                mobileMenu.classList.remove('open');
+            }
+        });
+
+        // 새 창에서 열기
+        function openInNewWindow() {
+            const pdfUrl = document.querySelector('iframe').getAttribute('src').split('#')[0];
+            window.open(pdfUrl, '_blank');
+        }
+
+        // PDF 다운로드
+        function downloadPDF() {
+            const hashcode = '741704818bca50649eaf057c2661d396';
+            const filename = '자금관리.pdf';
+
+            if (hashcode && filename) {
+                // filename에서 확장자를 제거하고 .pdf 추가
+                const baseName = filename.split('.')[0];
+                const pdfName = baseName + '.pdf';
+
+                // FileController의 /converted/ 엔드포인트를 통해 캐시된 PDF 다운로드
+                // (PDF는 cache/converted/ 폴더에 저장됨)
+                const downloadUrl = '/aview/file/converted/' + hashcode + '.pdf?download=true&name=' + encodeURIComponent(pdfName);
+                downloadFile(downloadUrl, pdfName);
+            } else {
+                alert('문서 정보가 없습니다.');
+            }
+        }
+
+        // 원본 다운로드
+        function downloadOriginal() {
+            const hashcode = '741704818bca50649eaf057c2661d396';
+            const filename = '자금관리.pdf';
+
+            if (hashcode && filename) {
+                // filename에서 확장자 추출
+                const extension = filename.split('.').pop().toLowerCase();
+                // FileController를 통해 캐시된 원본 파일 다운로드
+                const downloadUrl = '/aview/file/' + hashcode + '.' + extension +
+                                  '?download=true&name=' + encodeURIComponent(filename);
+                downloadFile(downloadUrl, filename);
+            } else {
+                alert('원본 문서의 정보가 없습니다.');
+            }
+        }
+
+        // 파일 다운로드 헬퍼 함수
+        function downloadFile(url, filename) {
+            const link = document.createElement('a');
+            link.href = url;
+            if (filename) {
+                link.download = filename;
+            }
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('PDF Viewer loaded');
+        });
+    </script>
+    <!-- Debug Info Console Log -->
+    <script>
+        console.log('%c🔍 AView Document Info', 'color: #0066cc; font-weight: bold; font-size: 14px;');
+        console.log('Generated:', '2025-11-21 19:57:42');
+        console.log('Hashcode:', '741704818bca50649eaf057c2661d396');
+        console.log('Filename:', '자금관리.pdf');
+        console.log('Template:', 'pdf.html');
+        console.log('─'.repeat(50));
+    </script>    
+</body>
+</html>
