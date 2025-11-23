@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!-- 
+===========================================
+🔍 AView Document Metadata
+===========================================
+Generated : 2025-11-21 20:13:22
+Hashcode  : e2f9d4c6e7d5ec355c5cf2b8136b5620
+Filename  : law-crawler.sh
+Template  : source.html
+===========================================
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>law-crawler.sh</title>
+    <link rel="icon" type="image/png" href="/aview/images/favicon32.png" sizes="32x32">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Highlight.js for code syntax highlighting (Light & Dark themes) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+        id="highlightThemeLight">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+        id="highlightThemeDark" disabled>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <!-- Coding font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f6f8fa;
+            --bg-header: #f9fafb;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+            --code-bg: #f6f8fa;
+            --line-num-bg: #eff1f3;
+            --line-num-border: #d1d9e0;
+            --line-num-color: #57606a;
+            --info-header-bg: #fff3cd;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-header: #161b22;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --border-color: #30363d;
+            --code-bg: #0d1117;
+            --line-num-bg: #161b22;
+            --line-num-border: #30363d;
+            --line-num-color: #8b949e;
+            --info-header-bg: #3d3000;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            /* font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Consolas', monospace; */
+            /* Global font removed to allow Tailwind default (sans-serif) for UI elements */
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .source-container {
+            min-height: 70vh;
+        }
+
+        .doc-info-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .doc-info-section.collapsed {
+            max-height: 0;
+            padding: 0 20px;
+            margin-bottom: 0;
+            opacity: 0;
+        }
+
+        .toggle-doc-info-btn {
+            background: #0d6efd;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .toggle-doc-info-btn:hover {
+            background: #0b5ed7;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-doc-info-btn.collapsed {
+            background: #28a745;
+            animation: pulseCollapsed 2s ease-in-out infinite;
+        }
+
+        .toggle-doc-info-btn.collapsed:hover {
+            background: #218838;
+        }
+
+        .toggle-doc-info-btn svg {
+            color: white;
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-doc-info-btn.collapsed svg {
+            transform: rotate(180deg);
+        }
+
+        @keyframes pulseCollapsed {
+
+            0%,
+            100% {
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 4px 16px rgba(40, 167, 69, 0.4);
+            }
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.875rem;
+            margin-bottom: 0;
+        }
+
+        .info-value {
+            color: #6c757d;
+            font-size: 1.125rem;
+        }
+
+        .doc-info-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        @media (max-width: 1024px) {
+            .doc-info-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .doc-info-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .doc-info-col {
+            padding: 0;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            min-width: 200px;
+        }
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+        .mobile-menu button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            transition: background-color 0.2s;
+        }
+
+        .mobile-menu button:hover {
+            background-color: #f3f4f6;
+        }
+
+        .mobile-menu button svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        .doc-info-header {
+            background-color: #f2ebd3;
+            padding: 12px 16px;
+            margin: -20px -20px 16px -20px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .doc-info-header h3 {
+            margin: 0;
+            color: #333;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Source Viewer Control Bar */
+        .source-viewer-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 40px;
+            padding: 0 12px;
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #d0d0d0;
+            gap: 8px;
+        }
+
+        .controls-desktop {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .control-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .control-btn {
+            padding: 4px 8px;
+            min-width: 30px;
+            height: 28px;
+            background-color: #e8e8e8;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .control-btn:hover {
+            background-color: #d8d8d8;
+        }
+
+        .control-btn:active {
+            background-color: #c8c8c8;
+        }
+
+        .control-select {
+            padding: 4px 6px;
+            height: 28px;
+            font-size: 12px;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            background-color: #ffffff;
+            cursor: pointer;
+        }
+
+        /* 버튼 그룹 */
+        .btn-group {
+            display: inline-flex;
+            gap: 0;
+        }
+
+        .btn-group .control-btn {
+            border-radius: 0;
+            margin-left: -1px;
+        }
+
+        .btn-group .control-btn:first-child {
+            border-radius: 4px 0 0 4px;
+            margin-left: 0;
+        }
+
+        .btn-group .control-btn:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+
+        .btn-group .control-btn:hover {
+            z-index: 1;
+        }
+
+        /* 커스텀 색상 드롭다운 */
+        .custom-color-dropdown {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .custom-color-btn {
+            width: 28px;
+            height: 28px;
+            border: 2px solid #333;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .custom-color-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .custom-color-menu {
+            display: none;
+            position: absolute;
+            top: 32px;
+            left: 0;
+            background: white;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            padding: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            gap: 6px;
+        }
+
+        .custom-color-menu.open {
+            display: flex;
+        }
+
+        .custom-color-option {
+            width: 24px;
+            height: 24px;
+            border: 1px solid #c0c0c0;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .custom-color-option:hover {
+            transform: scale(1.15);
+            border-width: 2px;
+            border-color: #666;
+        }
+
+        .custom-color-option.active {
+            border: 2px solid #333;
+            box-shadow: 0 0 0 2px white, 0 0 0 3px #333;
+        }
+
+        body.dark-mode .custom-color-btn {
+            border-color: #666;
+        }
+
+        body.dark-mode .custom-color-menu {
+            background-color: #333;
+            border-color: #555;
+        }
+
+        body.dark-mode .custom-color-option {
+            border-color: #666;
+        }
+
+        body.dark-mode .custom-color-option:hover {
+            border-color: #999;
+        }
+
+        /* Dark mode for control bar */
+        body.dark-mode .source-viewer-controls {
+            background-color: #2d2d2d;
+            border-bottom-color: #444;
+        }
+
+        body.dark-mode .control-btn {
+            background-color: #3a3a3a;
+            border-color: #555;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .control-btn:hover {
+            background-color: #4a4a4a;
+        }
+
+        body.dark-mode .control-btn:active {
+            background-color: #2a2a2a;
+        }
+
+        body.dark-mode .control-select {
+            background-color: #3a3a3a;
+            border-color: #555;
+            color: #e0e0e0;
+        }
+
+        /* Fullscreen mode styles */
+        .code-body.fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+            margin: 0;
+            border-radius: 0;
+            max-width: 100vw;
+        }
+
+        .code-body.fullscreen .code-with-lines {
+            height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
+
+        /* Hide header when in fullscreen */
+        body.fullscreen-active header {
+            display: none;
+        }
+
+        /* Smooth transition */
+        .code-body {
+            transition: all 0.3s ease;
+        }
+
+        /* Line highlight styles */
+        .line-highlight-enabled .code-content code {
+            display: block;
+            position: relative;
+        }
+
+        .line-highlight-enabled .code-content code .line {
+            display: block;
+            padding: 0 4px !important;
+            margin: 0 !important;
+            line-height: inherit !important;
+            transition: background-color 0.15s ease;
+        }
+
+        .line-highlight-enabled .code-content code .line:hover {
+            background-color: rgba(255, 235, 59, 0.2);
+            cursor: pointer;
+        }
+
+        .line-highlight-enabled .code-content code .line.active {
+            background-color: rgba(255, 235, 59, 0.3);
+        }
+
+        /* Dark mode line highlight */
+        body.dark-mode .line-highlight-enabled .code-content code .line:hover {
+            background-color: rgba(255, 235, 59, 0.25) !important;
+        }
+
+        body.dark-mode .line-highlight-enabled .code-content code .line.active {
+            background-color: rgba(255, 235, 59, 0.35) !important;
+        }
+
+        /* Code block styling - 이중 박스 제거 */
+        .code-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 100%;
+            margin: 0 auto;
+            background: var(--code-bg);
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        /* 라인 번호 + 코드 그리드 레이아웃 */
+        .code-with-lines {
+            position: relative;
+            display: grid;
+            grid-template-columns: 50px 1fr;
+        }
+
+        .line-numbers {
+            background-color: var(--line-num-bg);
+            border-right: 1px solid var(--line-num-border);
+            color: var(--line-num-color);
+            font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Consolas', monospace !important;
+            font-size: 14px !important;
+            line-height: 1.6 !important;
+            padding: 20px 10px !important;
+            text-align: right;
+            user-select: none;
+        }
+
+        .line-numbers span {
+            display: block;
+        }
+
+        .code-content {
+            overflow-x: auto;
+        }
+
+        .code-content pre {
+            margin: 0;
+            background: transparent;
+            font-family: inherit;
+        }
+
+        .code-content code {
+            display: block;
+            padding: 20px !important;
+            font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Consolas', monospace !important;
+            font-size: 14px !important;
+            line-height: 1.6 !important;
+        }
+
+        .language-badge {
+            display: inline-block;
+            background: #0969da;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            margin-left: 8px;
+        }
+
+        .header-container {
+            background: var(--bg-header);
+            transition: background-color 0.3s;
+        }
+
+        .dark-mode .text-gray-900 {
+            color: var(--text-primary) !important;
+        }
+
+        .dark-mode .bg-gray-50 {
+            background-color: var(--bg-header) !important;
+        }
+
+        /* Dark mode text colors - override Highlight.js */
+        body.dark-mode .line-numbers,
+        body.dark-mode .line-numbers span {
+            color: #8b949e !important;
+            background-color: #161b22 !important;
+        }
+
+        body.dark-mode .code-content code,
+        body.dark-mode .code-content pre {
+            background-color: #0d1117 !important;
+        }
+
+        /* Remove background from inner elements to allow line highlight to show */
+        body.dark-mode .code-content code * {
+            background-color: transparent !important;
+        }
+
+        /* Preserve syntax highlighting colors in dark mode */
+        body.dark-mode .hljs {
+            background-color: #0d1117 !important;
+            color: #c9d1d9 !important;
+        }
+
+        .dark-mode .bg-gray-100 {
+            background-color: var(--bg-secondary) !important;
+        }
+
+        .dark-mode .text-gray-700 {
+            color: var(--text-primary) !important;
+        }
+
+        .dark-mode .bg-blue-50 {
+            background-color: #1e3a5f !important;
+        }
+
+        .dark-mode .border-blue-200 {
+            border-color: #2d5a8c !important;
+        }
+
+        .dark-mode .text-blue-900 {
+            color: #93c5fd !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header 영역: 전체 너비 (100%) -->
+    <header class="w-full bg-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-start justify-between gap-4">
+                <!-- 왼쪽: 파일명 + 언어 뱃지 -->
+                <div class="flex-1 min-w-0 flex items-center gap-2">
+                    <h1 class="text-2xl font-bold text-gray-900 truncate">law-crawler.sh</h1>
+                    <span class="language-badge">bash</span>
+                </div>
+
+                <!-- 오른쪽: 데스크톱 버튼 그룹 (md 이상에서만 표시) -->
+                <div class="hidden md:flex flex-wrap gap-3 justify-end flex-shrink-0">
+                    <!-- 복사하기 버튼 -->
+                    <button type="button" onclick="copyCode()" id="copyBtn"
+                        class="inline-flex items-center px-4 py-2 rounded-lg bg-blue-600 text-white font-medium text-sm hover:bg-blue-700 transition-colors shadow-sm whitespace-nowrap">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
+                            </path>
+                        </svg>
+                        <span id="copyBtnText">복사하기</span>
+                    </button>
+
+                    <!-- 원본 다운로드 -->
+                    <button type="button" onclick="downloadOriginal()"
+                        class="inline-flex items-center px-4 py-2 rounded-lg bg-orange-600 text-white font-medium text-sm hover:bg-orange-700 transition-colors shadow-sm whitespace-nowrap">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        원본 다운로드
+                    </button>
+
+                    <!-- 문서 정보 토글 버튼 -->
+                    <button type="button" class="toggle-doc-info-btn collapsed" id="toggleDocInfoBtn"
+                        onclick="toggleDocInfo()" title="문서 정보 보기" aria-label="문서 정보 토글">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- 오른쪽: 모바일 영역 (토글 버튼 + 햄버거 메뉴) -->
+                <div class="md:hidden flex gap-2 items-center flex-shrink-0">
+                    <!-- 모바일 토글 버튼 -->
+                    <button type="button" class="toggle-doc-info-btn collapsed" onclick="toggleDocInfo()"
+                        title="문서 정보 보기" aria-label="문서 정보 토글">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7">
+                            </path>
+                        </svg>
+                    </button>
+
+                    <!-- 햄버거 메뉴 (relative 래퍼) -->
+                    <div class="relative">
+                        <button type="button" id="mobileMenuBtn" onclick="toggleMobileMenu()" title="메뉴"
+                            aria-label="작업 메뉴 열기"
+                            class="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+
+                        <!-- 모바일 드롭다운 메뉴 -->
+                        <div id="mobileMenu" class="mobile-menu">
+                            <button type="button" onclick="copyCode(); toggleMobileMenu();">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                                복사하기
+                            </button>
+                            <button type="button" onclick="downloadOriginal(); toggleMobileMenu();">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                원본 다운로드
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="source-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- 문서 정보 섹션 (초기: 숨김) -->
+        <div id="docInfoSection" class="doc-info-section collapsed">
+            <!-- Source Code 정보 헤더 -->
+            <div class="doc-info-header">
+                <h3>
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        class="text-gray-600">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    소스코드 정보
+                </h3>
+            </div>
+
+            <div class="doc-info-row">
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">파일 크기</span>
+                        <span class="info-value">2,095 bytes</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">총 라인 수</span>
+                        <span class="info-value" id="lineCountValue">100</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">비어있지 않은 라인</span>
+                        <span class="info-value" id="nonEmptyLinesValue">76</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">총 문자 수</span>
+                        <span class="info-value" id="charCountValue">1,871</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">프로그래밍 언어</span>
+                        <span class="info-value">bash</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Source Viewer with Control Box -->
+        <div class="code-body">
+            <!-- Control Bar -->
+            <div class="source-viewer-controls">
+                <div class="controls-desktop">
+                    <!-- 폰트 크기 -->
+                    <div class="control-item btn-group">
+                        <button type="button" id="fontSizeDecrease" class="control-btn" title="폰트 작게">−</button>
+                        <button type="button" id="fontSizeReset" class="control-btn" title="폰트기본(14px)">14px</button>
+                        <button type="button" id="fontSizeIncrease" class="control-btn" title="폰트 크게">+</button>
+                    </div>
+
+                    <!-- 폰트 선택 -->
+                    <select id="fontFamily" class="control-select" title="폰트 선택">
+                        <option value="'JetBrains Mono', 'Fira Code', 'SF Mono', 'Consolas', monospace" selected>
+                            JetBrains Mono</option>
+                        <option value="'Courier New', monospace">Courier New</option>
+                        <option value="'Monaco', monospace">Monaco</option>
+                        <option value="'Consolas', monospace">Consolas</option>
+                        <option value="'Menlo', monospace">Menlo</option>
+                    </select>
+
+                    <!-- 배경색 선택 -->
+                    <div class="custom-color-dropdown">
+                        <button type="button" class="custom-color-btn" id="bgColorBtn" data-color="#f6f8fa"
+                            title="배경색 선택" style="background-color: #f6f8fa;"></button>
+                        <div class="custom-color-menu" id="bgColorMenu">
+                            <button type="button" class="custom-color-option active" data-color="#f6f8fa"
+                                style="background-color: #f6f8fa;" title="기본 그레이"></button>
+                            <button type="button" class="custom-color-option" data-color="#ffffff"
+                                style="background-color: #ffffff;" title="흰색"></button>
+                            <button type="button" class="custom-color-option" data-color="#fffacd"
+                                style="background-color: #fffacd;" title="라이트 옐로우"></button>
+                            <button type="button" class="custom-color-option" data-color="#e6f3ff"
+                                style="background-color: #e6f3ff;" title="라이트 블루"></button>
+                            <button type="button" class="custom-color-option" data-color="#f0f8f0"
+                                style="background-color: #f0f8f0;" title="라이트 그린"></button>
+                        </div>
+                    </div>
+
+                    <!-- 줄간 선택 -->
+                    <div class="control-item btn-group">
+                        <button type="button" id="lineHeightDecrease" class="control-btn" title="줄간 작게">−</button>
+                        <button type="button" id="lineHeightReset" class="control-btn" title="줄간 기본">✱</button>
+                        <button type="button" id="lineHeightIncrease" class="control-btn" title="줄간 크게">+</button>
+                    </div>
+
+                    <!-- 설정 저장/초기화 버튼 그룹 -->
+                    <div class="control-item btn-group">
+                        <button type="button" id="saveSettings" class="control-btn" title="현재 설정 저장">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                style="display: inline-block; vertical-align: middle;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </button>
+                        <button type="button" id="resetSettings" class="control-btn" title="설정 초기화">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                style="display: inline-block; vertical-align: middle;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- 커서라인 체크박스 -->
+                    <div class="control-item" style="display: flex; align-items: center; gap: 4px;">
+                        <input type="checkbox" id="lineHighlightToggle"
+                            style="cursor: pointer; width: 14px; height: 14px;">
+                        <label for="lineHighlightToggle"
+                            style="cursor: pointer; font-size: 12px; user-select: none; margin: 0;">커서라인</label>
+                    </div>
+
+                    <!-- 다크모드 토글 버튼 -->
+                    <button type="button" id="darkModeToggle" class="control-btn" title="다크 모드 전환">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            id="darkModeIcon" style="display: inline-block; vertical-align: middle;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                            </path>
+                        </svg>
+                    </button>
+
+                    <!-- 최대화 버튼 -->
+                    <button type="button" id="maximizeToggle" class="control-btn" title="전체화면 전환">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            id="maximizeIcon" style="display: inline-block; vertical-align: middle;">
+                            <!-- Maximize icon (expand) -->
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Code 렌더링 영역 -->
+            <div class="code-with-lines">
+                <div class="line-numbers" id="lineNumbers"></div>
+                <div class="code-content">
+                    <pre><code class="language-bash">#!/bin/bash
+# ==========================================
+# LAW CRAWLER 자동 실행 스크립트 (Linux용)
+# site/page_id 조합별로 호출됨
+# 사용법: ./law-crawler.sh [INITIALIZE]
+# ==========================================
+
+VERSION=&quot;1.0.0&quot;
+
+# 인자 검증
+if [ &quot;$1&quot; == &quot;&quot; ]; then
+    echo &quot;✅ 정상 모드로 실행합니다.&quot;
+    EXTRA_ARG=&quot;&quot;
+elif [ &quot;${1^^}&quot; == &quot;INITIALIZE&quot; ]; then
+    echo &quot;🧹 INITIALIZE 모드로 실행합니다.&quot;
+    EXTRA_ARG=&quot;INITIALIZE&quot;
+else
+    echo &quot;❌ 오류: 유효하지 않은 인자입니다. INITIALIZE만 사용 가능합니다.&quot;
+    echo &quot;사용법: ./law-crawler.sh [INITIALIZE]&quot;
+    exit 1
+fi
+
+# 현재 스크립트 디렉토리 기준으로 EXE 설정
+SCRIPT_DIR=&quot;$(cd &quot;$(dirname &quot;${BASH_SOURCE[0]}&quot;)&quot; &amp;&amp; pwd)&quot;
+EXE=&quot;$SCRIPT_DIR/law-crawler-$VERSION&quot;
+
+# 실행 함수
+run() {
+    SITE=$1
+    PAGE=$2
+    echo &quot;▶️ $SITE $PAGE $EXTRA_ARG&quot;
+    &quot;$EXE&quot; &quot;$SITE&quot; &quot;$PAGE&quot; $EXTRA_ARG
+}
+
+# 각 기관별 호출
+run kofia menu_4
+run kofia menu_5
+run kofia menu_6
+
+run fss menu_200488
+run fss menu_200489
+run fss menu_200218
+
+run fsc po040200
+run fsc po040301
+run fsc no010101
+
+run better menu_11_74_195
+run better menu_11_117_75
+
+run moleg a10104010000
+
+run moef menu_7050300
+run moef menu_4010100
+run moef menu_7090200
+
+run taxlaw USESTI001M
+run taxlaw USESTI002M
+
+run lawgokr law_1_t1
+run lawgokr law_1_t2
+run lawgokr law_5_t1
+
+run lawmaking menu_2
+
+run acrc a10503030000
+run acrc a10402010000
+
+run moel revision
+run moel lawmaking
+run moel instruction
+run moel report
+run moel policydata
+
+run insure4 ntcn
+
+run nts menu_2205
+run nts menu_2206
+run nts menu_6420
+
+run wetax J030103M01
+run wetax J030201M01
+
+run minimumwage news
+run minimumwage promotion
+
+run nps MN24001492
+run nps MN24000898
+run nps MN24000897
+run nps MN24001000
+
+run nhis_edi psd
+run nhis_edi news
+
+run comwel work
+
+echo &quot;==========================================&quot;
+echo &quot;✅ 모든 크롤링 작업이 완료되었습니다.&quot;
+echo &quot;==========================================&quot;
+</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- 추가 안내 -->
+        <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <p class="text-sm text-blue-900">
+                <strong>팁:</strong> 소스코드는 자동으로 문법 강조 처리됩니다.
+                왼쪽에 라인 번호가 표시되며, 상단의 복사하기 버튼으로 전체 코드를 복사할 수 있습니다.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // 테마 초기화 (localStorage에서 읽기)
+        function initTheme() {
+            const savedTheme = localStorage.getItem('sourceViewerTheme') || 'light';
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                updateThemeButton(true);
+                toggleHighlightTheme(true);
+            }
+        }
+
+        // 다크/라이트 모드 토글
+        function toggleTheme() {
+            const isDark = document.body.classList.toggle('dark-mode');
+            localStorage.setItem('sourceViewerTheme', isDark ? 'dark' : 'light');
+            updateThemeButton(isDark);
+            toggleHighlightTheme(isDark);
+        }
+
+        // 테마 버튼 텍스트/아이콘 업데이트
+        function updateThemeButton(isDark) {
+            const themeBtnText = document.getElementById('themeBtnText');
+            const themeBtnTextMobile = document.getElementById('themeBtnTextMobile');
+            const themeIcon = document.getElementById('themeIcon');
+
+            if (isDark) {
+                if (themeBtnText) themeBtnText.textContent = '라이트 모드';
+                if (themeBtnTextMobile) themeBtnTextMobile.textContent = '라이트 모드';
+                if (themeIcon) {
+                    themeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>';
+                }
+            } else {
+                if (themeBtnText) themeBtnText.textContent = '다크 모드';
+                if (themeBtnTextMobile) themeBtnTextMobile.textContent = '다크 모드';
+                if (themeIcon) {
+                    themeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>';
+                }
+            }
+        }
+
+        // Highlight.js 테마 전환
+        function toggleHighlightTheme(isDark) {
+            const lightTheme = document.getElementById('highlightThemeLight');
+            const darkTheme = document.getElementById('highlightThemeDark');
+
+            if (isDark) {
+                if (lightTheme) lightTheme.disabled = true;
+                if (darkTheme) darkTheme.disabled = false;
+            } else {
+                if (lightTheme) lightTheme.disabled = false;
+                if (darkTheme) darkTheme.disabled = true;
+            }
+
+            // Highlight.js 재적용
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+        }
+
+        // 라인 번호 생성
+        function generateLineNumbers() {
+            const codeBlock = document.querySelector('.code-content code');
+            const lineNumbersDiv = document.getElementById('lineNumbers');
+
+            if (codeBlock && lineNumbersDiv) {
+                const lines = codeBlock.textContent.split('\n');
+                const lineCount = lines.length;
+
+                let lineNumbersHtml = '';
+                for (let i = 1; i <= lineCount; i++) {
+                    lineNumbersHtml += '<span>' + i + '</span>';
+                }
+                lineNumbersDiv.innerHTML = lineNumbersHtml;
+            }
+        }
+
+        // 문서 정보 토글
+        function toggleDocInfo() {
+            const docInfoSection = document.getElementById('docInfoSection');
+            const toggleBtns = document.querySelectorAll('.toggle-doc-info-btn');
+
+            docInfoSection.classList.toggle('collapsed');
+            toggleBtns.forEach(btn => {
+                btn.classList.toggle('collapsed');
+            });
+        }
+
+        // 모바일 메뉴 토글
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('open');
+        }
+
+        // 모바일 메뉴 외부 클릭시 닫기
+        document.addEventListener('click', function (event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+
+            if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+                mobileMenu.classList.remove('open');
+            }
+        });
+
+        // 원본 다운로드
+        function downloadOriginal() {
+            const hashcode = 'e2f9d4c6e7d5ec355c5cf2b8136b5620';
+            const filename = 'law-crawler.sh';
+
+            if (hashcode && filename) {
+                const extension = filename.split('.').pop().toLowerCase();
+                const downloadUrl = '/aview/file/' + hashcode + '.' + extension +
+                    '?download=true&name=' + encodeURIComponent(filename);
+                downloadFile(downloadUrl, filename);
+            } else {
+                alert('원본 문서의 정보가 없습니다.');
+            }
+        }
+
+        // 파일 다운로드 헬퍼 함수
+        function downloadFile(url, filename) {
+            const link = document.createElement('a');
+            link.href = url;
+            if (filename) {
+                link.download = filename;
+            }
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // 코드 복사 (라인 번호 제외)
+        function copyCode() {
+            const codeBlock = document.querySelector('.code-content code');
+            const copyBtnText = document.getElementById('copyBtnText');
+            const text = codeBlock.textContent;
+
+            navigator.clipboard.writeText(text).then(() => {
+                if (copyBtnText) {
+                    const originalText = copyBtnText.textContent;
+                    copyBtnText.textContent = '복사됨 ✓';
+
+                    setTimeout(() => {
+                        copyBtnText.textContent = originalText;
+                    }, 2000);
+                } else {
+                    alert('코드가 복사되었습니다.');
+                }
+            }).catch(err => {
+                console.error('복사 실패:', err);
+                alert('복사에 실패했습니다.');
+            });
+        }
+
+        // 키보드 단축키
+        document.addEventListener('keydown', function (event) {
+            // Ctrl+S or Cmd+S: 다운로드
+            if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+                event.preventDefault();
+                downloadOriginal();
+            }
+            // Ctrl+Shift+C or Cmd+Shift+C: 복사
+            if ((event.ctrlKey || event.metaKey) && event.shiftKey && event.key === 'C') {
+                event.preventDefault();
+                copyCode();
+            }
+        });
+
+        // 초기화
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('Source Code Viewer loaded');
+
+            // 테마 초기화
+            initTheme();
+
+            // 라인 번호 생성
+            generateLineNumbers();
+
+            // Highlight.js 초기화
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+
+            // ========== Control Box Initialization ==========
+            console.log('🎛️ Control Box: Starting initialization...');
+
+            // Default settings
+            const defaultSettings = {
+                fontSize: 14,
+                fontFamily: "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Consolas', monospace",
+                bgColor: "#f6f8fa",
+                lineHeight: 1.6
+            };
+
+            // Current settings
+            let currentSettings = { ...defaultSettings };
+            console.log('🎛️ Control Box: Default settings loaded', defaultSettings);
+
+            // Apply settings to code viewer
+            function applySettings() {
+                console.log('🎛️ Control Box: Applying settings...', currentSettings);
+                const codeContent = document.querySelector('.code-content code');
+                const preElement = document.querySelector('.code-content pre');
+                const lineNumbers = document.querySelector('.line-numbers');
+                const isDarkMode = document.body.classList.contains('dark-mode');
+
+                console.log('🎛️ Control Box: Elements found:', {
+                    codeContent: !!codeContent,
+                    preElement: !!preElement,
+                    lineNumbers: !!lineNumbers,
+                    isDarkMode: isDarkMode
+                });
+
+                if (codeContent) {
+                    // Use setProperty with 'important' to override CSS !important rules
+                    codeContent.style.setProperty('font-size', currentSettings.fontSize + 'px', 'important');
+                    codeContent.style.setProperty('font-family', currentSettings.fontFamily, 'important');
+                    codeContent.style.setProperty('line-height', currentSettings.lineHeight, 'important');
+
+                    // Apply background color - use dark theme color if in dark mode
+                    if (isDarkMode) {
+                        codeContent.style.setProperty('background-color', '#0d1117', 'important');
+                    } else {
+                        codeContent.style.setProperty('background-color', currentSettings.bgColor, 'important');
+                    }
+                }
+
+                if (preElement) {
+                    // Apply background color to pre element
+                    if (isDarkMode) {
+                        preElement.style.setProperty('background-color', '#0d1117', 'important');
+                    } else {
+                        preElement.style.setProperty('background-color', currentSettings.bgColor, 'important');
+                    }
+                }
+
+                if (lineNumbers) {
+                    // Use setProperty with 'important' to override CSS !important rules
+                    lineNumbers.style.setProperty('font-size', currentSettings.fontSize + 'px', 'important');
+                    lineNumbers.style.setProperty('font-family', currentSettings.fontFamily, 'important');
+                    lineNumbers.style.setProperty('line-height', currentSettings.lineHeight, 'important');
+
+                    // Apply background color to line numbers
+                    if (isDarkMode) {
+                        lineNumbers.style.setProperty('background-color', '#161b22', 'important');
+                    } else {
+                        lineNumbers.style.setProperty('background-color', currentSettings.bgColor, 'important');
+                    }
+                }
+
+                console.log('🎛️ Control Box: Settings applied successfully');
+            }
+
+            // Font size controls
+            const fontSizeDecreaseBtn = document.getElementById('fontSizeDecrease');
+            const fontSizeIncreaseBtn = document.getElementById('fontSizeIncrease');
+            const fontSizeResetBtn = document.getElementById('fontSizeReset');
+
+            console.log('🎛️ Control Box: Font size buttons found:', {
+                decrease: !!fontSizeDecreaseBtn,
+                increase: !!fontSizeIncreaseBtn,
+                reset: !!fontSizeResetBtn
+            });
+
+            fontSizeDecreaseBtn?.addEventListener('click', () => {
+                console.log('🎛️ Control Box: Font size DECREASE clicked');
+                if (currentSettings.fontSize > 10) {
+                    currentSettings.fontSize--;
+                    applySettings();
+                    document.getElementById('fontSizeReset').textContent = currentSettings.fontSize + 'px';
+                    console.log('🎛️ Control Box: Font size decreased to', currentSettings.fontSize);
+                } else {
+                    console.log('🎛️ Control Box: Font size at minimum (10px)');
+                }
+            });
+
+            fontSizeIncreaseBtn?.addEventListener('click', () => {
+                console.log('🎛️ Control Box: Font size INCREASE clicked');
+                if (currentSettings.fontSize < 24) {
+                    currentSettings.fontSize++;
+                    applySettings();
+                    document.getElementById('fontSizeReset').textContent = currentSettings.fontSize + 'px';
+                    console.log('🎛️ Control Box: Font size increased to', currentSettings.fontSize);
+                } else {
+                    console.log('🎛️ Control Box: Font size at maximum (24px)');
+                }
+            });
+
+            fontSizeResetBtn?.addEventListener('click', () => {
+                console.log('🎛️ Control Box: Font size RESET clicked');
+                currentSettings.fontSize = defaultSettings.fontSize;
+                applySettings();
+                document.getElementById('fontSizeReset').textContent = currentSettings.fontSize + 'px';
+            });
+
+            // Font family selector
+            const fontFamilySelect = document.getElementById('fontFamily');
+            console.log('🎛️ Control Box: Font family selector found:', !!fontFamilySelect);
+
+            fontFamilySelect?.addEventListener('change', (e) => {
+                console.log('🎛️ Control Box: Font family changed to', e.target.value);
+                currentSettings.fontFamily = e.target.value;
+                applySettings();
+            });
+
+            // Background color picker
+            const bgColorBtn = document.getElementById('bgColorBtn');
+            const bgColorMenu = document.getElementById('bgColorMenu');
+
+            console.log('🎛️ Control Box: Color picker elements found:', {
+                button: !!bgColorBtn,
+                menu: !!bgColorMenu
+            });
+
+            bgColorBtn?.addEventListener('click', (e) => {
+                console.log('🎛️ Control Box: Background color button clicked');
+                e.stopPropagation();
+                bgColorMenu.classList.toggle('open');
+            });
+
+            document.querySelectorAll('.custom-color-option').forEach(option => {
+                option.addEventListener('click', (e) => {
+                    const color = e.target.dataset.color;
+                    console.log('🎛️ Control Box: Color selected:', color);
+                    currentSettings.bgColor = color;
+                    applySettings();
+
+                    // Update button color
+                    bgColorBtn.style.backgroundColor = color;
+                    bgColorBtn.dataset.color = color;
+
+                    // Update active state
+                    document.querySelectorAll('.custom-color-option').forEach(opt => opt.classList.remove('active'));
+                    e.target.classList.add('active');
+
+                    bgColorMenu.classList.remove('open');
+                });
+            });
+
+            // Close color menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.custom-color-dropdown')) {
+                    bgColorMenu?.classList.remove('open');
+                }
+            });
+
+            // Line height controls
+            const lineHeightDecreaseBtn = document.getElementById('lineHeightDecrease');
+            const lineHeightIncreaseBtn = document.getElementById('lineHeightIncrease');
+            const lineHeightResetBtn = document.getElementById('lineHeightReset');
+
+            console.log('🎛️ Control Box: Line height buttons found:', {
+                decrease: !!lineHeightDecreaseBtn,
+                increase: !!lineHeightIncreaseBtn,
+                reset: !!lineHeightResetBtn
+            });
+
+            lineHeightDecreaseBtn?.addEventListener('click', () => {
+                console.log('🎛️ Control Box: Line height DECREASE clicked');
+                if (currentSettings.lineHeight > 1.2) {
+                    currentSettings.lineHeight = Math.round((currentSettings.lineHeight - 0.2) * 10) / 10;
+                    applySettings();
+                    console.log('🎛️ Control Box: Line height decreased to', currentSettings.lineHeight);
+                }
+            });
+
+            lineHeightIncreaseBtn?.addEventListener('click', () => {
+                console.log('🎛️ Control Box: Line height INCREASE clicked');
+                if (currentSettings.lineHeight < 2.4) {
+                    currentSettings.lineHeight = Math.round((currentSettings.lineHeight + 0.2) * 10) / 10;
+                    applySettings();
+                    console.log('🎛️ Control Box: Line height increased to', currentSettings.lineHeight);
+                }
+            });
+
+            lineHeightResetBtn?.addEventListener('click', () => {
+                console.log('🎛️ Control Box: Line height RESET clicked');
+                currentSettings.lineHeight = defaultSettings.lineHeight;
+                applySettings();
+            });
+
+            // Save settings to localStorage
+            const saveBtn = document.getElementById('saveSettings');
+            const resetBtn = document.getElementById('resetSettings');
+
+            console.log('🎛️ Control Box: Save/Reset buttons found:', {
+                save: !!saveBtn,
+                reset: !!resetBtn
+            });
+
+            saveBtn?.addEventListener('click', () => {
+                console.log('🎛️ Control Box: SAVE clicked, saving settings...', currentSettings);
+                localStorage.setItem('sourceViewer_fontSize', currentSettings.fontSize);
+                localStorage.setItem('sourceViewer_fontFamily', currentSettings.fontFamily);
+                localStorage.setItem('sourceViewer_bgColor', currentSettings.bgColor);
+                localStorage.setItem('sourceViewer_lineHeight', currentSettings.lineHeight);
+
+                // Visual feedback
+                const btn = document.getElementById('saveSettings');
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '✓';
+                btn.style.backgroundColor = '#28a745';
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.style.backgroundColor = '';
+                }, 1000);
+                console.log('🎛️ Control Box: Settings saved to localStorage');
+            });
+
+            // Reset settings to defaults
+            resetBtn?.addEventListener('click', () => {
+                console.log('🎛️ Control Box: RESET clicked');
+                if (confirm('설정을 초기화하시겠습니까?')) {
+                    currentSettings = { ...defaultSettings };
+                    applySettings();
+
+                    // Reset UI
+                    document.getElementById('fontSizeReset').textContent = defaultSettings.fontSize + 'px';
+                    document.getElementById('fontFamily').value = defaultSettings.fontFamily;
+                    bgColorBtn.style.backgroundColor = defaultSettings.bgColor;
+
+                    // Update active color option
+                    document.querySelectorAll('.custom-color-option').forEach(opt => {
+                        opt.classList.toggle('active', opt.dataset.color === defaultSettings.bgColor);
+                    });
+
+                    // Clear localStorage
+                    localStorage.removeItem('sourceViewer_fontSize');
+                    localStorage.removeItem('sourceViewer_fontFamily');
+                    localStorage.removeItem('sourceViewer_bgColor');
+                    localStorage.removeItem('sourceViewer_lineHeight');
+                    console.log('🎛️ Control Box: Settings reset to defaults');
+                }
+            });
+
+            // Dark mode toggle
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const darkModeIcon = document.getElementById('darkModeIcon');
+
+            console.log('🎛️ Control Box: Dark mode toggle found:', !!darkModeToggle);
+
+            darkModeToggle?.addEventListener('click', () => {
+                console.log('🎛️ Control Box: Dark mode toggle clicked');
+                toggleTheme();
+
+                // Reapply settings to update background colors for dark/light mode
+                applySettings();
+
+                // Update icon
+                const isDark = document.body.classList.contains('dark-mode');
+                if (isDark) {
+                    // Sun icon for light mode
+                    darkModeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>';
+                } else {
+                    // Moon icon for dark mode
+                    darkModeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>';
+                }
+            });
+
+            // Maximize/Fullscreen toggle
+            const maximizeToggle = document.getElementById('maximizeToggle');
+            const maximizeIcon = document.getElementById('maximizeIcon');
+            const codeBody = document.querySelector('.code-body');
+            let isFullscreen = false;
+
+            console.log('🎛️ Control Box: Maximize toggle found:', !!maximizeToggle);
+
+            maximizeToggle?.addEventListener('click', () => {
+                console.log('🎛️ Control Box: Maximize toggle clicked');
+                isFullscreen = !isFullscreen;
+
+                if (isFullscreen) {
+                    // Enter fullscreen
+                    codeBody.classList.add('fullscreen');
+                    document.body.classList.add('fullscreen-active');
+
+                    // Change icon to minimize (compress)
+                    maximizeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25"></path>';
+                    console.log('🎛️ Control Box: Entered fullscreen mode');
+                } else {
+                    // Exit fullscreen
+                    codeBody.classList.remove('fullscreen');
+                    document.body.classList.remove('fullscreen-active');
+
+                    // Change icon back to maximize (expand)
+                    maximizeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>';
+                    console.log('🎛️ Control Box: Exited fullscreen mode');
+                }
+            });
+
+            // ESC key to exit fullscreen
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && isFullscreen) {
+                    maximizeToggle.click();
+                }
+            });
+
+            // Line highlight toggle
+            const lineHighlightToggle = document.getElementById('lineHighlightToggle');
+            let isLineHighlightEnabled = false;
+            let originalCodeHTML = ''; // Store original HTML
+
+            console.log('🎛️ Control Box: Line highlight toggle found:', !!lineHighlightToggle);
+
+            // Function to wrap code lines
+            function wrapCodeLines() {
+                const codeElement = document.querySelector('.code-content code');
+                if (!codeElement) return;
+
+                // Save original HTML if not already saved
+                if (!originalCodeHTML) {
+                    originalCodeHTML = codeElement.innerHTML;
+                }
+
+                // Get the current HTML (with syntax highlighting)
+                const currentHTML = codeElement.innerHTML;
+
+                // Split by line breaks while preserving HTML tags
+                const lines = currentHTML.split('\n');
+
+                // Wrap each line in a span
+                const wrappedHTML = lines.map((line, index) => {
+                    // Preserve empty lines with a non-breaking space
+                    const lineContent = line.trim() === '' ? '&nbsp;' : line;
+                    return `<span class="line" data-line="${index + 1}">${lineContent}</span>`;
+                }).join('');
+
+                codeElement.innerHTML = wrappedHTML;
+
+                // Add click handlers to lines
+                const lineElements = codeElement.querySelectorAll('.line');
+                lineElements.forEach(lineEl => {
+                    lineEl.addEventListener('click', () => {
+                        // Remove active from all lines
+                        lineElements.forEach(l => l.classList.remove('active'));
+                        // Add active to clicked line
+                        lineEl.classList.add('active');
+                    });
+                });
+            }
+
+            // Function to unwrap code lines
+            function unwrapCodeLines() {
+                const codeElement = document.querySelector('.code-content code');
+                if (!codeElement || !originalCodeHTML) return;
+
+                // Restore original HTML
+                codeElement.innerHTML = originalCodeHTML;
+            }
+
+            lineHighlightToggle?.addEventListener('change', (e) => {
+                console.log('🎛️ Control Box: Line highlight toggle changed');
+                isLineHighlightEnabled = e.target.checked;
+
+                if (isLineHighlightEnabled) {
+                    // Enable line highlighting
+                    codeBody.classList.add('line-highlight-enabled');
+                    wrapCodeLines();
+                    console.log('🎛️ Control Box: Line highlight enabled');
+                } else {
+                    // Disable line highlighting
+                    codeBody.classList.remove('line-highlight-enabled');
+                    unwrapCodeLines();
+                    console.log('🎛️ Control Box: Line highlight disabled');
+                }
+            });
+
+            // Load settings from localStorage
+            function loadSettings() {
+                console.log('🎛️ Control Box: Loading saved settings from localStorage...');
+                const savedFontSize = localStorage.getItem('sourceViewer_fontSize');
+                const savedFontFamily = localStorage.getItem('sourceViewer_fontFamily');
+                const savedBgColor = localStorage.getItem('sourceViewer_bgColor');
+                const savedLineHeight = localStorage.getItem('sourceViewer_lineHeight');
+
+                console.log('🎛️ Control Box: Saved settings found:', {
+                    fontSize: savedFontSize,
+                    fontFamily: savedFontFamily,
+                    bgColor: savedBgColor,
+                    lineHeight: savedLineHeight
+                });
+
+                if (savedFontSize) {
+                    currentSettings.fontSize = parseInt(savedFontSize);
+                    document.getElementById('fontSizeReset').textContent = currentSettings.fontSize + 'px';
+                }
+                if (savedFontFamily) {
+                    currentSettings.fontFamily = savedFontFamily;
+                    document.getElementById('fontFamily').value = savedFontFamily;
+                }
+                if (savedBgColor) {
+                    currentSettings.bgColor = savedBgColor;
+                    bgColorBtn.style.backgroundColor = savedBgColor;
+                    document.querySelectorAll('.custom-color-option').forEach(opt => {
+                        opt.classList.toggle('active', opt.dataset.color === savedBgColor);
+                    });
+                }
+                if (savedLineHeight) {
+                    currentSettings.lineHeight = parseFloat(savedLineHeight);
+                }
+
+                applySettings();
+                console.log('🎛️ Control Box: Settings loaded and applied');
+            }
+
+            // Load saved settings
+            loadSettings();
+            console.log('🎛️ Control Box: Initialization complete! ✅');
+        });
+    </script>
+
+    <!-- Debug Info Console Log -->
+    <script>
+        console.log('%c🔍 AView Document Info', 'color: #0066cc; font-weight: bold; font-size: 14px;');
+        console.log('Generated:', '2025-11-21 20:13:22');
+        console.log('Hashcode:', 'e2f9d4c6e7d5ec355c5cf2b8136b5620');
+        console.log('Filename:', 'law-crawler.sh');
+        console.log('Language:', 'bash');
+        console.log('Template:', 'source.html');
+        console.log('─'.repeat(50));
+    </script>
+</body>
+
+</html>
