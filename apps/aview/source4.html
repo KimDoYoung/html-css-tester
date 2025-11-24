@@ -18,14 +18,14 @@ Template  : source.html
     <link rel="icon" type="image/png" href="/aview/images/favicon32.png" sizes="32x32">
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Highlight.js for code syntax highlighting (Light & Dark themes) -->
+    <!-- 코드 구문 강조를 위한 Highlight.js (라이트 & 다크 테마) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
         id="highlightThemeLight">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
         id="highlightThemeDark" disabled>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
-    <!-- Coding fonts -->
+    <!-- 코딩 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- D2Coding -->
@@ -72,7 +72,7 @@ Template  : source.html
 
         body {
             /* font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Consolas', monospace; */
-            /* Global font removed to allow Tailwind default (sans-serif) for UI elements */
+            /* UI 요소에 Tailwind 기본 폰트(sans-serif)를 사용하기 위해 전역 폰트 제거 */
             background-color: var(--bg-secondary);
             color: var(--text-primary);
             transition: background-color 0.3s, color 0.3s;
@@ -437,7 +437,7 @@ Template  : source.html
             color: #e0e0e0;
         }
 
-        /* Fullscreen mode styles */
+        /* 전체화면 모드 스타일 */
         .code-body.fullscreen {
             position: fixed;
             top: 0;
@@ -455,12 +455,12 @@ Template  : source.html
             overflow-y: auto;
         }
 
-        /* Hide header when in fullscreen */
+        /* 전체화면 시 헤더 숨김 */
         body.fullscreen-active header {
             display: none;
         }
 
-        /* Search Feature Styles */
+        /* 검색 기능 스타일 */
         .search-box {
             display: flex;
             align-items: center;
@@ -511,7 +511,7 @@ Template  : source.html
             width: 14px;
             height: 14px;
             pointer-events: none;
-            /* Prevent SVG from capturing clicks */
+            /* SVG가 클릭 이벤트를 가로채지 않도록 방지 */
         }
 
         .search-counter {
@@ -522,7 +522,7 @@ Template  : source.html
             text-align: right;
         }
 
-        /* Search Highlight Styles */
+        /* 검색 하이라이트 스타일 */
         mark.search-highlight {
             background-color: rgba(255, 235, 59, 0.5);
             color: inherit;
@@ -536,7 +536,7 @@ Template  : source.html
             box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.3);
         }
 
-        /* Dark mode search styles */
+        /* 다크 모드 검색 스타일 */
         body.dark-mode .search-box {
             background-color: #2d333b;
             border-color: #444c56;
@@ -567,7 +567,7 @@ Template  : source.html
             color: white !important;
         }
 
-        /* Top Button Styles */
+        /* 탑 버튼 스타일 */
         #topBtn {
             position: fixed;
             bottom: 30px;
@@ -607,12 +607,12 @@ Template  : source.html
             background-color: #2ea043;
         }
 
-        /* Smooth transition */
+        /* 부드러운 전환 효과 */
         .code-body {
             transition: all 0.3s ease;
         }
 
-        /* Line highlight styles */
+        /* 라인 하이라이트 스타일 */
         .line-highlight-enabled .code-content code {
             display: block;
             position: relative;
@@ -635,7 +635,7 @@ Template  : source.html
             background-color: rgba(255, 235, 59, 0.3);
         }
 
-        /* Dark mode line highlight */
+        /* 다크 모드 라인 하이라이트 */
         body.dark-mode .line-highlight-enabled .code-content code .line:hover {
             background-color: rgba(255, 235, 59, 0.25) !important;
         }
@@ -722,7 +722,7 @@ Template  : source.html
             background-color: var(--bg-header) !important;
         }
 
-        /* Dark mode text colors - override Highlight.js */
+        /* 다크 모드 텍스트 색상 - Highlight.js 재정의 */
         body.dark-mode .line-numbers,
         body.dark-mode .line-numbers span {
             color: #8b949e !important;
@@ -734,12 +734,12 @@ Template  : source.html
             background-color: #0d1117 !important;
         }
 
-        /* Remove background from inner elements to allow line highlight to show */
+        /* 라인 하이라이트가 보이도록 내부 요소의 배경색 제거 */
         body.dark-mode .code-content code * {
             background-color: transparent !important;
         }
 
-        /* Preserve syntax highlighting colors in dark mode */
+        /* 다크 모드에서 구문 강조 색상 유지 */
         body.dark-mode .hljs {
             background-color: #0d1117 !important;
             color: #c9d1d9 !important;
@@ -765,9 +765,9 @@ Template  : source.html
             color: #93c5fd !important;
         }
 
-        /* ========== Multi-Page View Styles ========== */
+        /* ========== 멀티 페이지 뷰 스타일 ========== */
 
-        /* Active/Pressed button state for page view buttons */
+        /* 페이지 뷰 버튼의 활성/눌림 상태 */
         .control-btn.active {
             background-color: #c8c8c8;
             border-color: #a0a0a0;
@@ -780,7 +780,7 @@ Template  : source.html
             border-color: #444;
         }
 
-        /* Width scaling for multi-page views - Controlled by container max-width */
+        /* 멀티 페이지 뷰의 너비 조정 - 컨테이너 max-width로 제어 */
         .code-body.page-2,
         .code-body.page-3 {
             width: 100%;
@@ -788,10 +788,10 @@ Template  : source.html
             margin: 0 auto;
         }
 
-        /* Expand source container for multi-page views */
-        /* Base max-w-7xl is 80rem. 
-           Page 2: 115% -> 92rem
-           Page 3: 125% -> 100rem */
+        /* 멀티 페이지 뷰를 위해 소스 컨테이너 확장 */
+        /* 기본 max-w-7xl은 80rem. 
+           2페이지: 115% -> 92rem
+           3페이지: 125% -> 100rem */
         .source-container.page-2 {
             max-width: 92rem !important;
         }
@@ -800,11 +800,11 @@ Template  : source.html
             max-width: 100rem !important;
         }
 
-        /* Multi-column layout */
+        /* 다단 레이아웃 */
         .code-with-lines.multi-column {
             display: flex;
             gap: 0;
-            /* Remove extra spacing to keep total width within container */
+            /* 전체 너비를 컨테이너 안에 유지하기 위해 추가 여백 제거 */
         }
 
         .code-with-lines.multi-column .code-column {
@@ -812,15 +812,15 @@ Template  : source.html
         }
 
         .code-with-lines.columns-2 {
-            /* No additional grid needed when using flex */
+            /* flex 사용 시 추가 그리드 필요 없음 */
         }
 
         .code-with-lines.columns-3 .code-column {
-            /* For 3 columns, each takes 33.33% */
+            /* 3단 컬럼의 경우, 각각 33.33% 차지 */
             flex: 0 0 33.33%;
         }
 
-        /* Each column container */
+        /* 각 컬럼 컨테이너 */
         .code-column {
             display: grid;
             grid-template-columns: 50px 1fr;
@@ -829,7 +829,7 @@ Template  : source.html
             overflow: hidden;
         }
 
-        /* Fullscreen mode adjustments for multi-page */
+        /* 멀티 페이지를 위한 전체화면 모드 조정 */
         .code-body.fullscreen.page-2,
         .code-body.fullscreen.page-3 {
             width: 100vw;
@@ -939,7 +939,7 @@ Template  : source.html
 
         <!-- 문서 정보 섹션 (초기: 숨김) -->
         <div id="docInfoSection" class="doc-info-section collapsed">
-            <!-- Source Code 정보 헤더 -->
+            <!-- 소스 코드 정보 헤더 -->
             <div class="doc-info-header">
                 <h3>
                     <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -985,9 +985,9 @@ Template  : source.html
             </div>
         </div>
 
-        <!-- Source Viewer with Control Box -->
+        <!-- 컨트롤 박스가 포함된 소스 뷰어 -->
         <div class="code-body">
-            <!-- Control Bar -->
+            <!-- 컨트롤 바 -->
             <div class="source-viewer-controls">
                 <div class="controls-desktop">
                     <!-- 커서라인 체크박스 -->
@@ -998,14 +998,14 @@ Template  : source.html
                             style="cursor: pointer; font-size: 12px; user-select: none; margin: 0;">커서라인</label>
                     </div>
 
-                    <!-- Page View Buttons -->
+                    <!-- 페이지 뷰 버튼 -->
                     <div class="control-item btn-group">
                         <button type="button" id="pageView1" class="control-btn active" title="1페이지">1</button>
                         <button type="button" id="pageView2" class="control-btn" title="2페이지">2</button>
                         <button type="button" id="pageView3" class="control-btn" title="3페이지">3</button>
                     </div>
 
-                    <!-- Search Box -->
+                    <!-- 검색 박스 -->
                     <div class="search-box">
                         <input type="text" class="search-input" id="searchInput" placeholder="검색어 입력"
                             autocomplete="off">
@@ -1069,7 +1069,7 @@ Template  : source.html
                     <button type="button" id="maximizeToggle" class="control-btn" title="전체화면 전환">
                         <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             id="maximizeIcon" style="display: inline-block; vertical-align: middle;">
-                            <!-- Maximize icon (expand) -->
+                            <!-- 최대화 아이콘 (확장) -->
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4">
                             </path>
@@ -1107,7 +1107,7 @@ Template  : source.html
                 </div>
             </div>
 
-            <!-- Code 렌더링 영역 -->
+            <!-- 코드 렌더링 영역 -->
             <div class="code-with-lines">
                 <div class="line-numbers" id="lineNumbers"></div>
                 <div class="code-content">
@@ -1406,46 +1406,46 @@ echo &quot;==========================================&quot;
                 hljs.highlightElement(block);
             });
 
-            // ========== Control Box Initialization ==========
+            // ========== 컨트롤 박스 초기화 ==========
             console.log('🎛️ Control Box: Starting initialization...');
 
-            // Helper function to build font-family string with fallbacks
+            // 폰트 패밀리 문자열을 생성하는 헬퍼 함수 (폴백 포함)
             function buildFontFamily(selectedFont) {
-                // Define the complete fallback chain
+                // 전체 폴백 체인 정의
                 const fallbackFonts = ['D2Coding', 'JetBrains Mono', 'Fira Code', 'Nanum Gothic Coding', 'Consolas', 'monospace'];
 
-                // Remove the selected font from fallbacks to avoid duplication
+                // 중복 방지를 위해 선택된 폰트를 폴백에서 제거
                 const filteredFallbacks = fallbackFonts.filter(f => f !== selectedFont);
 
-                // Build the font-family string
+                // 폰트 패밀리 문자열 생성
                 const allFonts = [selectedFont, ...filteredFallbacks];
                 return allFonts.map(f => f === 'monospace' ? f : `'${f}'`).join(', ');
             }
 
-            // Default settings
+            // 기본 설정
             const defaultSettings = {
                 fontSize: 14,
                 fontFamily: buildFontFamily('D2Coding'),
-                fontFamilyName: 'D2Coding', // Store the selected font name
+                fontFamilyName: 'D2Coding', // 선택된 폰트 이름 저장
                 bgColor: "#f6f8fa",
                 lineHeight: 1.6
             };
 
-            // Current settings
+            // 현재 설정
             let currentSettings = { ...defaultSettings };
             console.log('🎛️ Control Box: Default settings loaded', defaultSettings);
 
-            // Apply settings to code viewer
+            // 코드 뷰어에 설정 적용
             function applySettings() {
                 console.log('🎛️ Control Box: Applying settings...', currentSettings);
                 const isDarkMode = document.body.classList.contains('dark-mode');
 
-                // Check if we're in multi-column mode (only if codeWithLinesContainer exists)
+                // 멀티 컬럼 모드인지 확인 (codeWithLinesContainer가 존재하는 경우에만)
                 const codeWithLines = document.querySelector('.code-with-lines');
                 const isMultiColumn = codeWithLines ? codeWithLines.classList.contains('multi-column') : false;
 
                 if (isMultiColumn) {
-                    // Apply to all columns
+                    // 모든 컬럼에 적용
                     const allCodeElements = document.querySelectorAll('.code-content code');
                     const allLineNumbers = document.querySelectorAll('.line-numbers');
                     const allPreElements = document.querySelectorAll('.code-content pre');
@@ -1484,7 +1484,7 @@ echo &quot;==========================================&quot;
                         }
                     });
                 } else {
-                    // Single column mode - original logic
+                    // 단일 컬럼 모드 - 기존 로직
                     const codeContent = document.querySelector('.code-content code');
                     const preElement = document.querySelector('.code-content pre');
                     const lineNumbers = document.querySelector('.line-numbers');
@@ -1527,7 +1527,7 @@ echo &quot;==========================================&quot;
                 console.log('🎛️ Control Box: Settings applied successfully');
             }
 
-            // Font size controls
+            // 폰트 크기 제어
             const fontSizeDecreaseBtn = document.getElementById('fontSizeDecrease');
             const fontSizeIncreaseBtn = document.getElementById('fontSizeIncrease');
             const fontSizeResetBtn = document.getElementById('fontSizeReset');
@@ -1569,7 +1569,7 @@ echo &quot;==========================================&quot;
                 document.getElementById('fontSizeReset').textContent = currentSettings.fontSize + 'px';
             });
 
-            // Font family selector
+            // 폰트 패밀리 선택기
             const fontFamilySelect = document.getElementById('fontFamily');
             console.log('🎛️ Control Box: Font family selector found:', !!fontFamilySelect);
 
@@ -1581,7 +1581,7 @@ echo &quot;==========================================&quot;
                 applySettings();
             });
 
-            // Background color picker
+            // 배경색 선택기
             const bgColorBtn = document.getElementById('bgColorBtn');
             const bgColorMenu = document.getElementById('bgColorMenu');
 
@@ -1603,11 +1603,11 @@ echo &quot;==========================================&quot;
                     currentSettings.bgColor = color;
                     applySettings();
 
-                    // Update button color
+                    // 버튼 색상 업데이트
                     bgColorBtn.style.backgroundColor = color;
                     bgColorBtn.dataset.color = color;
 
-                    // Update active state
+                    // 활성 상태 업데이트
                     document.querySelectorAll('.custom-color-option').forEach(opt => opt.classList.remove('active'));
                     e.target.classList.add('active');
 
@@ -1615,14 +1615,14 @@ echo &quot;==========================================&quot;
                 });
             });
 
-            // Close color menu when clicking outside
+            // 외부 클릭 시 색상 메뉴 닫기
             document.addEventListener('click', (e) => {
                 if (!e.target.closest('.custom-color-dropdown')) {
                     bgColorMenu?.classList.remove('open');
                 }
             });
 
-            // Line height controls
+            // 줄 간격 제어
             const lineHeightDecreaseBtn = document.getElementById('lineHeightDecrease');
             const lineHeightIncreaseBtn = document.getElementById('lineHeightIncrease');
             const lineHeightResetBtn = document.getElementById('lineHeightReset');
@@ -1657,7 +1657,7 @@ echo &quot;==========================================&quot;
                 applySettings();
             });
 
-            // Save settings to localStorage
+            // 설정을 localStorage에 저장
             const saveBtn = document.getElementById('saveSettings');
             const resetBtn = document.getElementById('resetSettings');
 
@@ -1673,7 +1673,7 @@ echo &quot;==========================================&quot;
                 localStorage.setItem('sourceViewer_bgColor', currentSettings.bgColor);
                 localStorage.setItem('sourceViewer_lineHeight', currentSettings.lineHeight);
 
-                // Visual feedback
+                // 시각적 피드백
                 const btn = document.getElementById('saveSettings');
                 const originalHTML = btn.innerHTML;
                 btn.innerHTML = '✓';
@@ -1685,24 +1685,24 @@ echo &quot;==========================================&quot;
                 console.log('🎛️ Control Box: Settings saved to localStorage');
             });
 
-            // Reset settings to defaults
+            // 설정을 기본값으로 초기화
             resetBtn?.addEventListener('click', () => {
                 console.log('🎛️ Control Box: RESET clicked');
                 if (confirm('설정을 초기화하시겠습니까?')) {
                     currentSettings = { ...defaultSettings };
                     applySettings();
 
-                    // Reset UI
+                    // UI 초기화
                     document.getElementById('fontSizeReset').textContent = defaultSettings.fontSize + 'px';
                     document.getElementById('fontFamily').value = defaultSettings.fontFamilyName;
                     bgColorBtn.style.backgroundColor = defaultSettings.bgColor;
 
-                    // Update active color option
+                    // 활성 색상 옵션 업데이트
                     document.querySelectorAll('.custom-color-option').forEach(opt => {
                         opt.classList.toggle('active', opt.dataset.color === defaultSettings.bgColor);
                     });
 
-                    // Clear localStorage
+                    // localStorage 초기화
                     localStorage.removeItem('sourceViewer_fontSize');
                     localStorage.removeItem('sourceViewer_fontFamilyName');
                     localStorage.removeItem('sourceViewer_bgColor');
@@ -1711,7 +1711,7 @@ echo &quot;==========================================&quot;
                 }
             });
 
-            // Dark mode toggle
+            // 다크 모드 토글
             const darkModeToggle = document.getElementById('darkModeToggle');
             const darkModeIcon = document.getElementById('darkModeIcon');
 
@@ -1721,21 +1721,21 @@ echo &quot;==========================================&quot;
                 console.log('🎛️ Control Box: Dark mode toggle clicked');
                 toggleTheme();
 
-                // Reapply settings to update background colors for dark/light mode
+                // 다크/라이트 모드에 맞춰 배경색 업데이트를 위해 설정 재적용
                 applySettings();
 
-                // Update icon
+                // 아이콘 업데이트
                 const isDark = document.body.classList.contains('dark-mode');
                 if (isDark) {
-                    // Sun icon for light mode
+                    // 라이트 모드용 해 아이콘
                     darkModeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>';
                 } else {
-                    // Moon icon for dark mode
+                    // 다크 모드용 달 아이콘
                     darkModeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>';
                 }
             });
 
-            // Maximize/Fullscreen toggle
+            // 최대화/전체화면 토글
             const maximizeToggle = document.getElementById('maximizeToggle');
             const maximizeIcon = document.getElementById('maximizeIcon');
             const codeBody = document.querySelector('.code-body');
@@ -1748,56 +1748,56 @@ echo &quot;==========================================&quot;
                 isFullscreen = !isFullscreen;
 
                 if (isFullscreen) {
-                    // Enter fullscreen
+                    // 전체화면 진입
                     codeBody.classList.add('fullscreen');
                     document.body.classList.add('fullscreen-active');
 
-                    // Change icon to minimize (compress)
+                    // 아이콘을 축소(압축)로 변경
                     maximizeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25"></path>';
                     console.log('🎛️ Control Box: Entered fullscreen mode');
                 } else {
-                    // Exit fullscreen
+                    // 전체화면 종료
                     codeBody.classList.remove('fullscreen');
                     document.body.classList.remove('fullscreen-active');
 
-                    // Change icon back to maximize (expand)
+                    // 아이콘을 다시 최대화(확장)로 변경
                     maximizeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>';
                     console.log('🎛️ Control Box: Exited fullscreen mode');
                 }
             });
 
-            // ESC key to exit fullscreen
+            // ESC 키로 전체화면 종료
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && isFullscreen) {
                     maximizeToggle.click();
                 }
             });
 
-            // Line highlight toggle
+            // 라인 하이라이트 토글
             const lineHighlightToggle = document.getElementById('lineHighlightToggle');
             let isLineHighlightEnabled = false;
-            let originalCodeHTML = ''; // Store original HTML
+            let originalCodeHTML = ''; // 원본 HTML 저장
 
             console.log('🎛️ Control Box: Line highlight toggle found:', !!lineHighlightToggle);
 
-            // Function to wrap code lines
+            // 코드 라인 래핑 함수
             function wrapCodeLines() {
-                // Handle all code elements (single or multi-column)
+                // 모든 코드 요소 처리 (단일 또는 멀티 컬럼)
                 const codeElements = document.querySelectorAll('.code-content code');
                 if (codeElements.length === 0) return;
 
                 codeElements.forEach(codeElement => {
-                    // Get the current HTML (with syntax highlighting)
+                    // 현재 HTML 가져오기 (구문 강조 포함)
                     const currentHTML = codeElement.innerHTML;
 
-                    // Split by line breaks while preserving HTML tags
+                    // HTML 태그를 보존하며 줄바꿈으로 분할
                     const lines = currentHTML.split('\n');
 
-                    // Wrap each line in a span
+                    // 각 라인을 span으로 감싸기
                     const wrappedHTML = lines.map((line, index) => {
-                        // Preserve empty lines with a non-breaking space
+                        // 빈 라인을 공백 문자로 보존
                         const lineContent = line.trim() === '' ? '&nbsp;' : line;
-                        // Note: index is relative to the column in multi-page view
+                        // 참고: 인덱스는 멀티 페이지 뷰의 컬럼에 상대적임
                         return `<span class="line">${lineContent}</span>`;
                     }).join('');
 
@@ -1805,34 +1805,34 @@ echo &quot;==========================================&quot;
                 });
             }
 
-            // Function to unwrap code lines
+            // 코드 라인 래핑 해제 함수
             function unwrapCodeLines() {
-                // If in multi-page mode, we need to re-split columns from original source
-                // But for simplicity, we can just restore the original view if needed
-                // Or just remove the span wrappers if we want to keep multi-page view
+                // 멀티 페이지 모드인 경우, 원본 소스에서 컬럼을 다시 분할해야 함
+                // 하지만 단순함을 위해 필요 시 원본 뷰를 복원하거나
+                // 멀티 페이지 뷰를 유지하려면 span 래퍼만 제거할 수 있음
 
                 const codeElements = document.querySelectorAll('.code-content code');
                 codeElements.forEach(codeElement => {
                     const lines = codeElement.querySelectorAll('.line');
                     if (lines.length > 0) {
-                        // Replace spans with their content and join with newlines
+                        // span을 내용으로 교체하고 줄바꿈으로 연결
                         const content = Array.from(lines).map(line => line.innerHTML).join('\n');
                         codeElement.innerHTML = content;
                     }
                 });
             }
 
-            // Event delegation for line highlighting
-            // This works for both single and multi-page views
+            // 라인 하이라이팅을 위한 이벤트 위임
+            // 단일 및 멀티 페이지 뷰 모두에서 작동
             const codeContainer = document.querySelector('.code-with-lines');
             if (codeContainer) {
                 codeContainer.addEventListener('click', (e) => {
-                    // Check if clicked element is a line
+                    // 클릭된 요소가 라인인지 확인
                     const lineEl = e.target.closest('.line');
                     if (lineEl && isLineHighlightEnabled) {
-                        // Remove active from all lines in all columns
+                        // 모든 컬럼의 모든 라인에서 활성 상태 제거
                         document.querySelectorAll('.line.active').forEach(l => l.classList.remove('active'));
-                        // Add active to clicked line
+                        // 클릭된 라인에 활성 상태 추가
                         lineEl.classList.add('active');
                     }
                 });
@@ -1843,137 +1843,137 @@ echo &quot;==========================================&quot;
                 isLineHighlightEnabled = e.target.checked;
 
                 if (isLineHighlightEnabled) {
-                    // Enable line highlighting
+                    // 라인 하이라이팅 활성화
                     codeBodyElement.classList.add('line-highlight-enabled');
                     wrapCodeLines();
                     console.log('🎛️ Control Box: Line highlight enabled');
                 } else {
-                    // Disable line highlighting
+                    // 라인 하이라이팅 비활성화
                     codeBodyElement.classList.remove('line-highlight-enabled');
                     unwrapCodeLines();
                     console.log('🎛️ Control Box: Line highlight disabled');
                 }
             });
 
-            // ===== SEARCH FEATURE =====
+            // ===== 검색 기능 =====
             let searchMatches = [];
             let currentMatchIndex = -1;
             let lastSearchQuery = '';
 
-            // Search elements
+            // 검색 요소
             const searchInput = document.getElementById('searchInput');
             const searchBtn = document.getElementById('searchBtn');
             const searchClearBtn = document.getElementById('searchClearBtn');
             const searchCounter = document.getElementById('searchCounter');
 
             /**
-             * Search for text in the document
+             * 문서 내 텍스트 검색
              */
             function searchText() {
-                const codeElement = document.querySelector('.code-content code');
-                if (!codeElement) return;
+                // 모든 코드 요소 선택 (멀티 페이지 지원)
+                const codeElements = document.querySelectorAll('.code-content code');
+                if (codeElements.length === 0) return;
 
                 const query = searchInput.value.trim();
                 lastSearchQuery = query;
 
-                // Clear search if query is empty
+                // 검색어가 비어있으면 검색 초기화
                 if (!query) {
                     clearSearch();
                     return;
                 }
 
-                // Save original HTML if not already saved
-                if (!originalCodeHTML) {
-                    originalCodeHTML = codeElement.innerHTML;
+                // 원본 HTML이 저장되지 않았다면 저장
+                if (!originalCodeHTMLContent) {
+                    // 1페이지 뷰 기준의 원본을 저장해야 함 (이미 저장되어 있어야 함)
+                    saveOriginalHTML();
                 }
 
-                // Reset to original HTML before searching
+                // 검색 전 초기화 (하이라이트 제거 등)
                 if (isLineHighlightEnabled) {
-                    lineHighlightToggle.checked = false;
-                    isLineHighlightEnabled = false;
-                    codeBody.classList.remove('line-highlight-enabled');
-                    unwrapCodeLines();
-                } else {
-                    codeElement.innerHTML = originalCodeHTML;
+                    // 라인 하이라이트가 켜져 있으면 끔 (검색 하이라이트와 충돌 방지)
+                    codeBodyElement.classList.remove('line-highlight-enabled');
                 }
+
+                // 기존 검색 하이라이트만 제거 (DOM 구조는 유지)
+                document.querySelectorAll('.search-highlight').forEach(mark => {
+                    const parent = mark.parentNode;
+                    parent.replaceChild(document.createTextNode(mark.textContent), mark);
+                });
 
                 searchMatches = [];
                 currentMatchIndex = -1;
-
-                // Use TreeWalker to find text nodes
-                const walker = document.createTreeWalker(codeElement, NodeFilter.SHOW_TEXT, null, false);
-                const textNodes = [];
-                let node;
-                while (node = walker.nextNode()) {
-                    textNodes.push(node);
-                }
-
-                // Escape special regex characters
-                const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                const regex = new RegExp(escapedQuery, 'gi');
-
-                // Iterate text nodes and highlight matches
-                // We need to do this in reverse order to not mess up indices when splitting nodes
-                // But actually, we can just collect matches first, then apply highlights
-
-                // Better approach:
-                // 1. Find all matches in text nodes
-                // 2. Replace text nodes with fragments containing highlights
-
                 let matchCount = 0;
 
-                textNodes.forEach(textNode => {
-                    const text = textNode.nodeValue;
-                    let match;
-                    const matchesInNode = [];
+                // 각 코드 블록(컬럼)에 대해 검색 수행
+                const currentCodeElements = document.querySelectorAll('.code-content code');
 
-                    // Reset regex lastIndex
-                    regex.lastIndex = 0;
-
-                    while ((match = regex.exec(text)) !== null) {
-                        matchesInNode.push({
-                            index: match.index,
-                            length: match[0].length,
-                            text: match[0]
-                        });
+                currentCodeElements.forEach(codeElement => {
+                    // TreeWalker를 사용하여 텍스트 노드 찾기
+                    const walker = document.createTreeWalker(codeElement, NodeFilter.SHOW_TEXT, null, false);
+                    const textNodes = [];
+                    let node;
+                    while (node = walker.nextNode()) {
+                        textNodes.push(node);
                     }
 
-                    if (matchesInNode.length > 0) {
-                        const fragment = document.createDocumentFragment();
-                        let lastIndex = 0;
+                    // 특수 정규식 문자 이스케이프
+                    const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    const regex = new RegExp(escapedQuery, 'gi');
 
-                        matchesInNode.forEach(m => {
-                            // Text before match
-                            if (m.index > lastIndex) {
-                                fragment.appendChild(document.createTextNode(text.substring(lastIndex, m.index)));
-                            }
+                    textNodes.forEach(textNode => {
+                        const text = textNode.nodeValue;
+                        let match;
+                        const matchesInNode = [];
 
-                            // Match
-                            const mark = document.createElement('mark');
-                            mark.className = 'search-highlight';
-                            mark.textContent = m.text;
-                            mark.dataset.matchIndex = matchCount++;
-                            fragment.appendChild(mark);
+                        // 정규식 lastIndex 초기화
+                        regex.lastIndex = 0;
 
-                            // Add to global matches list (store element for scrolling)
-                            searchMatches.push(mark);
-
-                            lastIndex = m.index + m.length;
-                        });
-
-                        // Text after last match
-                        if (lastIndex < text.length) {
-                            fragment.appendChild(document.createTextNode(text.substring(lastIndex)));
+                        while ((match = regex.exec(text)) !== null) {
+                            matchesInNode.push({
+                                index: match.index,
+                                length: match[0].length,
+                                text: match[0]
+                            });
                         }
 
-                        textNode.parentNode.replaceChild(fragment, textNode);
-                    }
+                        if (matchesInNode.length > 0) {
+                            const fragment = document.createDocumentFragment();
+                            let lastIndex = 0;
+
+                            matchesInNode.forEach(m => {
+                                // 일치 항목 앞의 텍스트
+                                if (m.index > lastIndex) {
+                                    fragment.appendChild(document.createTextNode(text.substring(lastIndex, m.index)));
+                                }
+
+                                // 일치 항목
+                                const mark = document.createElement('mark');
+                                mark.className = 'search-highlight';
+                                mark.textContent = m.text;
+                                mark.dataset.matchIndex = matchCount++;
+                                fragment.appendChild(mark);
+
+                                // 전역 일치 목록에 추가 (스크롤을 위해 요소 저장)
+                                searchMatches.push(mark);
+
+                                lastIndex = m.index + m.length;
+                            });
+
+                            // 마지막 일치 항목 뒤의 텍스트
+                            if (lastIndex < text.length) {
+                                fragment.appendChild(document.createTextNode(text.substring(lastIndex)));
+                            }
+
+                            textNode.parentNode.replaceChild(fragment, textNode);
+                        }
+                    });
                 });
 
-                // Update counter
+                // 카운터 업데이트
                 updateSearchCounter();
 
-                // If matches found, go to first
+                // 일치 항목이 있으면 첫 번째로 이동
                 if (searchMatches.length > 0) {
                     currentMatchIndex = 0;
                     updateCurrentHighlight();
@@ -1982,19 +1982,23 @@ echo &quot;==========================================&quot;
             }
 
             function clearSearch() {
-                const codeElement = document.querySelector('.code-content code');
-                if (!codeElement) return;
-
                 searchInput.value = '';
-                searchInput.focus(); // Focus input after clearing
+                searchInput.focus(); // 초기화 후 입력창에 포커스
                 lastSearchQuery = '';
                 searchMatches = [];
                 currentMatchIndex = -1;
                 updateSearchCounter();
 
-                // Restore original HTML
-                if (originalCodeHTML) {
-                    codeElement.innerHTML = originalCodeHTML;
+                // 검색 하이라이트만 제거 (DOM 구조 보존)
+                document.querySelectorAll('.search-highlight').forEach(mark => {
+                    const parent = mark.parentNode;
+                    parent.replaceChild(document.createTextNode(mark.textContent), mark);
+                });
+
+                // 라인 하이라이트가 활성화되어 있었다면 재적용
+                if (isLineHighlightEnabled) {
+                    codeBodyElement.classList.add('line-highlight-enabled');
+                    wrapCodeLines();
                 }
             }
 
@@ -2007,11 +2011,11 @@ echo &quot;==========================================&quot;
             }
 
             function updateCurrentHighlight() {
-                // Remove current class from all
+                // 모든 항목에서 current 클래스 제거
                 const current = document.querySelector('.search-highlight.current');
                 if (current) current.classList.remove('current');
 
-                // Add current class to current match
+                // 현재 일치 항목에 current 클래스 추가
                 if (currentMatchIndex >= 0 && currentMatchIndex < searchMatches.length) {
                     const match = searchMatches[currentMatchIndex];
                     match.classList.add('current');
@@ -2052,11 +2056,11 @@ echo &quot;==========================================&quot;
                 updateSearchCounter();
             }
 
-            // Event Listeners
+            // 이벤트 리스너
             searchBtn?.addEventListener('click', findNext);
 
             searchClearBtn?.addEventListener('mousedown', (e) => {
-                e.preventDefault(); // Prevent focus loss
+                e.preventDefault(); // 포커스 손실 방지
                 clearSearch();
             });
 
@@ -2069,23 +2073,22 @@ echo &quot;==========================================&quot;
                         findNext();
                     }
                 } else if (e.key === 'Escape') {
-                    // Optional: clear search on Escape? 
-                    // text6.html doesn't seem to do this, but it's good UX.
-                    // But we already use Escape for fullscreen exit.
-                    // Let's stick to text6.html behavior (Delete key clears)
+                    // Escape 키로 검색 초기화
+                    e.preventDefault();
+                    clearSearch();
                 } else if (e.key === 'Delete') {
-                    // Only if input is empty or we want to clear explicitly
-                    // text6.html title says "Del (삭제)"
-                    // But usually Delete deletes text in input.
-                    // Let's check text6.html logic if possible, but standard behavior is fine.
+                    // Delete 키로 검색 초기화 (사용자 요청)
+                    // 입력값이 있을 때만 초기화하거나, 항상 초기화할 수 있음.
+                    // 여기서는 입력창을 비우고 검색을 종료하는 동작으로 구현
+                    clearSearch();
                 }
             });
 
-            // Input event to trigger search on typing (optional, text6.html seems to search on Enter or button)
-            // But text6.html code shows searchInputDt.value usage in searchText.
-            // Let's just search on Enter for now to avoid performance issues with large code.
+            // 입력 시 검색을 트리거하는 Input 이벤트 (선택 사항, text6.html은 Enter나 버튼으로 검색하는 듯함)
+            // 하지만 text6.html 코드는 searchText에서 searchInputDt.value 사용을 보여줌.
+            // 대용량 코드에서의 성능 문제를 피하기 위해 일단 Enter로 검색하도록 함.
 
-            // Load settings from localStorage
+            // localStorage에서 설정 로드
             function loadSettings() {
                 console.log('🎛️ Control Box: Loading saved settings from localStorage...');
                 const savedFontSize = localStorage.getItem('sourceViewer_fontSize');
@@ -2124,11 +2127,11 @@ echo &quot;==========================================&quot;
                 console.log('🎛️ Control Box: Settings loaded and applied');
             }
 
-            // Load saved settings
+            // 저장된 설정 로드
             loadSettings();
             console.log('🎛️ Control Box: Initialization complete! ✅');
 
-            // ===== TOP BUTTON & KEYBOARD NAVIGATION =====
+            // ===== 탑 버튼 & 키보드 탐색 =====
             const topBtn = document.getElementById('topBtn');
             const codeWithLines = document.querySelector('.code-with-lines');
 
@@ -2159,16 +2162,16 @@ echo &quot;==========================================&quot;
                 });
             }
 
-            // Scroll Event Listeners
+            // 스크롤 이벤트 리스너
             window.addEventListener('scroll', toggleTopButton);
             if (codeWithLines) {
                 codeWithLines.addEventListener('scroll', toggleTopButton);
             }
 
-            // Button Click Listener
+            // 버튼 클릭 리스너
             topBtn.addEventListener('click', scrollToTop);
 
-            // ===== MULTI-PAGE VIEW FEATURE =====
+            // ===== 멀티 페이지 뷰 기능 =====
             console.log('📄 Multi-Page View: Starting initialization...');
 
             const pageView1Btn = document.getElementById('pageView1');
@@ -2177,18 +2180,24 @@ echo &quot;==========================================&quot;
             const codeBodyElement = document.querySelector('.code-body');
             const codeWithLinesContainer = document.querySelector('.code-with-lines');
 
-            // Store original HTML for reverting to 1-page view
+            // 1페이지 뷰 복원을 위해 원본 HTML 저장
             let originalCodeHTMLContent = null;
             let originalLineNumbersHTML = null;
             let currentPageView = 1;
 
-            // Save original HTML on first load
+            // 첫 로드 시 원본 HTML 저장
             function saveOriginalHTML() {
+                // 멀티 페이지 뷰에서는 원본 저장을 시도하지 않음 (데이터 오염 방지)
+                if (document.querySelector('.code-with-lines.multi-column')) {
+                    console.warn('📄 Multi-Page View: Cannot save original HTML while in multi-column mode.');
+                    return;
+                }
+
                 if (!originalCodeHTMLContent) {
                     const codeElement = document.querySelector('.code-content code');
                     const lineNumbers = document.querySelector('.line-numbers');
                     if (codeElement && lineNumbers) {
-                        // Use textContent to preserve exact code without HTML artifacts
+                        // HTML 아티팩트 없이 정확한 코드를 보존하기 위해 textContent 사용
                         originalCodeHTMLContent = codeElement.textContent;
                         originalLineNumbersHTML = lineNumbers.innerHTML;
                         console.log('📄 Multi-Page View: Original HTML saved');
@@ -2196,14 +2205,14 @@ echo &quot;==========================================&quot;
                 }
             }
 
-            // Get total number of lines
+            // 총 라인 수 가져오기
             function getTotalLines() {
                 const lineNumbers = document.querySelector('.line-numbers');
                 if (!lineNumbers) return 0;
                 return lineNumbers.querySelectorAll('span').length;
             }
 
-            // Split code into columns
+            // 코드를 컬럼으로 분할
             function splitCodeIntoColumns(numColumns) {
                 console.log(`📄 Multi-Page View: Splitting into ${numColumns} columns`);
 
@@ -2216,7 +2225,7 @@ echo &quot;==========================================&quot;
                 const linesPerColumn = Math.ceil(totalLines / numColumns);
                 console.log(`📄 Multi-Page View: ${totalLines} lines, ${linesPerColumn} per column`);
 
-                // Get original elements
+                // 원본 요소 가져오기
                 const originalCodeContent = document.querySelector('.code-content code');
                 const originalLineNumbers = document.querySelector('.line-numbers');
 
@@ -2225,24 +2234,24 @@ echo &quot;==========================================&quot;
                     return;
                 }
 
-                // Get all line number spans and code lines
+                // 모든 라인 번호 span과 코드 라인 가져오기
                 const lineNumberSpans = Array.from(originalLineNumbers.querySelectorAll('span'));
                 const codeLines = originalCodeHTMLContent.split('\n');
 
-                // Clear the container
+                // 컨테이너 비우기
                 codeWithLinesContainer.innerHTML = '';
                 codeWithLinesContainer.classList.add('multi-column', `columns-${numColumns}`);
 
-                // Create columns
+                // 컬럼 생성
                 for (let col = 0; col < numColumns; col++) {
                     const startLine = col * linesPerColumn;
                     const endLine = Math.min((col + 1) * linesPerColumn, totalLines);
 
-                    // Create column container
+                    // 컬럼 컨테이너 생성
                     const columnDiv = document.createElement('div');
                     columnDiv.className = 'code-column';
 
-                    // Create line numbers for this column
+                    // 이 컬럼의 라인 번호 생성
                     const columnLineNumbers = document.createElement('div');
                     columnLineNumbers.className = 'line-numbers';
                     const columnLineNumbersContent = lineNumberSpans
@@ -2251,46 +2260,46 @@ echo &quot;==========================================&quot;
                         .join('');
                     columnLineNumbers.innerHTML = columnLineNumbersContent;
 
-                    // Create code content for this column
+                    // 이 컬럼의 코드 콘텐츠 생성
                     const columnCodeContent = document.createElement('div');
                     columnCodeContent.className = 'code-content';
                     const columnCode = document.createElement('pre');
                     const columnCodeElement = document.createElement('code');
                     columnCodeElement.className = originalCodeContent.className;
 
-                    // Use textContent to set code, preserving exact formatting
+                    // 정확한 포맷을 보존하며 코드를 설정하기 위해 textContent 사용
                     const columnCodeLines = codeLines.slice(startLine, endLine).join('\n');
                     columnCodeElement.textContent = columnCodeLines;
 
                     columnCode.appendChild(columnCodeElement);
                     columnCodeContent.appendChild(columnCode);
 
-                    // Append to column
+                    // 컬럼에 추가
                     columnDiv.appendChild(columnLineNumbers);
                     columnDiv.appendChild(columnCodeContent);
 
-                    // Append column to container
+                    // 컨테이너에 컬럼 추가
                     codeWithLinesContainer.appendChild(columnDiv);
 
-                    // Re-apply syntax highlighting
+                    // 구문 강조 재적용
                     hljs.highlightElement(columnCodeElement);
                 }
 
-                // Apply current settings to all columns
+                // 모든 컬럼에 현재 설정 적용
                 applySettings();
 
                 console.log(`📄 Multi-Page View: ${numColumns} columns created`);
             }
 
-            // Restore original 1-page view
+            // 원본 1페이지 뷰 복원
             function restoreOriginalView() {
                 console.log('📄 Multi-Page View: Restoring original view');
 
-                // Clear container
+                // 컨테이너 비우기
                 codeWithLinesContainer.innerHTML = '';
                 codeWithLinesContainer.classList.remove('multi-column', 'columns-2', 'columns-3');
 
-                // Recreate original structure
+                // 원본 구조 재생성
                 const lineNumbers = document.createElement('div');
                 lineNumbers.className = 'line-numbers';
                 lineNumbers.id = 'lineNumbers';
@@ -2301,7 +2310,7 @@ echo &quot;==========================================&quot;
                 const pre = document.createElement('pre');
                 const code = document.createElement('code');
                 code.className = 'language-bash hljs';
-                // Use textContent to restore exact code
+                // 정확한 코드 복원을 위해 textContent 사용
                 code.textContent = originalCodeHTMLContent;
 
                 pre.appendChild(code);
@@ -2310,49 +2319,49 @@ echo &quot;==========================================&quot;
                 codeWithLinesContainer.appendChild(lineNumbers);
                 codeWithLinesContainer.appendChild(codeContent);
 
-                // Re-apply syntax highlighting
+                // 구문 강조 재적용
                 hljs.highlightElement(code);
 
-                // Apply current settings
+                // 현재 설정 적용
                 applySettings();
 
                 console.log('📄 Multi-Page View: Original view restored');
             }
 
-            // Switch to specific page view
+            // 특정 페이지 뷰로 전환
             function switchToPageView(pageNum) {
                 console.log(`📄 Multi-Page View: Switching to ${pageNum}-page view`);
 
                 const sourceContainer = document.querySelector('.source-container');
 
-                // Save original HTML if not already saved
+                // 원본 HTML이 저장되지 않았다면 저장
                 saveOriginalHTML();
 
-                // Always restore to 1-page first to ensure clean state
+                // 깨끗한 상태를 보장하기 위해 항상 1페이지로 먼저 복원
                 if (currentPageView !== 1 && pageNum !== 1) {
                     restoreOriginalView();
                 }
 
-                // Update current page view
+                // 현재 페이지 뷰 업데이트
                 currentPageView = pageNum;
 
-                // Remove all page classes from codeBody and sourceContainer
+                // codeBody와 sourceContainer에서 모든 페이지 클래스 제거
                 codeBodyElement.classList.remove('page-2', 'page-3');
                 if (sourceContainer) {
                     sourceContainer.classList.remove('page-2', 'page-3');
                 }
 
-                // Update button states
+                // 버튼 상태 업데이트
                 [pageView1Btn, pageView2Btn, pageView3Btn].forEach(btn => btn.classList.remove('active'));
 
                 switch (pageNum) {
                     case 1:
                         pageView1Btn.classList.add('active');
                         restoreOriginalView();
-                        // Re-enable features for 1-page view
+                        // 1페이지 뷰 기능 재활성화
                         enableFeaturesFor1Page();
 
-                        // Re-apply line highlight if enabled
+                        // 활성화된 경우 라인 하이라이트 재적용
                         if (isLineHighlightEnabled) {
                             codeBodyElement.classList.add('line-highlight-enabled');
                             wrapCodeLines();
@@ -2363,10 +2372,10 @@ echo &quot;==========================================&quot;
                         codeBodyElement.classList.add('page-2');
                         if (sourceContainer) sourceContainer.classList.add('page-2');
                         splitCodeIntoColumns(2);
-                        // Disable cursor line and search in multi-page mode
+                        // 멀티 페이지 모드에서 검색 비활성화
                         disableFeaturesForMultiPage();
 
-                        // Re-apply line highlight if enabled
+                        // 활성화된 경우 라인 하이라이트 재적용
                         if (isLineHighlightEnabled) {
                             codeBodyElement.classList.add('line-highlight-enabled');
                             wrapCodeLines();
@@ -2377,10 +2386,10 @@ echo &quot;==========================================&quot;
                         codeBodyElement.classList.add('page-3');
                         if (sourceContainer) sourceContainer.classList.add('page-3');
                         splitCodeIntoColumns(3);
-                        // Disable cursor line and search in multi-page mode
+                        // 멀티 페이지 모드에서 검색 비활성화
                         disableFeaturesForMultiPage();
 
-                        // Re-apply line highlight if enabled
+                        // 활성화된 경우 라인 하이라이트 재적용
                         if (isLineHighlightEnabled) {
                             codeBodyElement.classList.add('line-highlight-enabled');
                             wrapCodeLines();
@@ -2391,24 +2400,22 @@ echo &quot;==========================================&quot;
                 console.log(`📄 Multi-Page View: Switched to ${pageNum}-page view`);
             }
 
-            // Disable features that don't work in multi-page mode
+            // 멀티 페이지 모드에서 작동하지 않는 기능 비활성화
             function disableFeaturesForMultiPage() {
-                // Line highlight is now supported in multi-page mode!
-                // We only disable search for now.
+                // 이제 멀티 페이지 모드에서 라인 하이라이트와 검색이 모두 지원됩니다!
+                // 따라서 이 함수는 더 이상 기능을 비활성화하지 않습니다.
+                // 다만, 검색 결과가 있는 상태에서 뷰를 전환하면 초기화하는 것이 안전할 수 있습니다.
 
-                // Clear and disable search
                 const searchInput = document.getElementById('searchInput');
                 const searchClearBtn = document.getElementById('searchClearBtn');
+
+                // 검색어가 있으면 초기화 (뷰 전환 시 하이라이트 위치가 달라질 수 있으므로)
                 if (searchInput && searchInput.value) {
                     searchClearBtn?.click();
                 }
-                if (searchInput) {
-                    searchInput.disabled = true;
-                    searchInput.placeholder = '멀티 페이지에서 사용 불가';
-                }
             }
 
-            // Re-enable features when returning to 1-page
+            // 1페이지 복귀 시 기능 재활성화
             function enableFeaturesFor1Page() {
                 const searchInput = document.getElementById('searchInput');
                 if (searchInput) {
@@ -2417,19 +2424,19 @@ echo &quot;==========================================&quot;
                 }
             }
 
-            // Button event listeners
+            // 버튼 이벤트 리스너
             pageView1Btn?.addEventListener('click', () => switchToPageView(1));
             pageView2Btn?.addEventListener('click', () => switchToPageView(2));
             pageView3Btn?.addEventListener('click', () => switchToPageView(3));
 
-            // Save original HTML on page load
+            // 페이지 로드 시 원본 HTML 저장
             saveOriginalHTML();
 
             console.log('📄 Multi-Page View: Initialization complete! ✅');
 
-            // Keyboard Shortcuts
+            // 키보드 단축키
             document.addEventListener('keydown', (e) => {
-                // Ignore if focus is on input or textarea
+                // 입력창이나 텍스트 영역에 포커스가 있으면 무시
                 if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
                 const isFullscreen = document.body.classList.contains('fullscreen-active');
@@ -2438,8 +2445,8 @@ echo &quot;==========================================&quot;
                     e.preventDefault();
                     scrollToTop();
                 } else if (isFullscreen) {
-                    // Handle PageUp/PageDown manually in fullscreen mode if needed
-                    // (Browser might handle it if focus is right, but let's ensure it works)
+                    // 전체화면 모드에서 필요 시 PageUp/PageDown 수동 처리
+                    // (포커스가 맞으면 브라우저가 처리할 수 있지만, 작동을 보장하기 위해)
                     const scrollAmount = window.innerHeight * 0.8;
 
                     if (e.key === 'PageDown') {
@@ -2454,7 +2461,7 @@ echo &quot;==========================================&quot;
         });
     </script>
 
-    <!-- Debug Info Console Log -->
+    <!-- 디버그 정보 콘솔 로그 -->
     <script>
         console.log('%c🔍 AView Document Info', 'color: #0066cc; font-weight: bold; font-size: 14px;');
         console.log('Generated:', '2025-11-21 20:13:22');
@@ -2464,7 +2471,7 @@ echo &quot;==========================================&quot;
         console.log('Template:', 'source.html');
         console.log('─'.repeat(50));
     </script>
-    <!-- Top Button -->
+    <!-- 탑 버튼 -->
     <button id="topBtn" title="맨 위로 이동 (Home)">
         <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
