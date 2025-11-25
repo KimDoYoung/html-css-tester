@@ -1,0 +1,3318 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!-- 
+===========================================
+🔍 AView Document Metadata
+===========================================
+Generated : 2025-11-25 09:14:43
+Hashcode  : c1dd492fb2a6e923f7a6fa0701eb80d6
+Filename  : lucy.md
+Template  : markdown.html
+===========================================
+-->    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lucy.md</title>
+    <link rel="icon" type="image/png" href="/aview/images/favicon32.png" sizes="32x32">
+    <!-- Google Fonts: Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- GitHub Markdown CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css">
+    
+    <!-- Highlight.js for code syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .markdown-container {
+            min-height: 70vh;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .doc-info-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .doc-info-section.collapsed {
+            max-height: 0;
+            padding: 0 20px;
+            margin-bottom: 0;
+            opacity: 0;
+        }
+
+        .toggle-doc-info-btn {
+            background: #0d6efd;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .toggle-doc-info-btn {
+                display: none;
+            }
+        }
+
+        .toggle-doc-info-btn-mobile {
+            background: #0d6efd;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .toggle-doc-info-btn-mobile {
+                display: flex;
+            }
+        }
+
+        .toggle-doc-info-btn-mobile:hover {
+            background: #0b5ed7;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .toggle-doc-info-btn-mobile.collapsed {
+            background: #28a745;
+            animation: pulseCollapsed 2s ease-in-out infinite;
+        }
+
+        .toggle-doc-info-btn-mobile.collapsed:hover {
+            background: #218838;
+        }
+
+        .toggle-doc-info-btn-mobile svg {
+            color: white;
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-doc-info-btn-mobile.collapsed svg {
+            transform: rotate(180deg);
+        }
+
+        .toggle-doc-info-btn:hover {
+            background: #0b5ed7;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .toggle-doc-info-btn:active {
+            transform: scale(0.95);
+            transition: all 0.1s ease;
+        }
+
+        .toggle-doc-info-btn svg {
+            color: white;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .toggle-doc-info-btn.collapsed {
+            background: #28a745;
+            animation: pulseCollapsed 2s ease-in-out infinite;
+        }
+
+        .toggle-doc-info-btn.collapsed:hover {
+            background: #218838;
+        }
+
+        .toggle-doc-info-btn.collapsed svg {
+            transform: rotate(180deg);
+        }
+
+        @keyframes pulseCollapsed {
+            0%, 100% {
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+            50% {
+                box-shadow: 0 4px 16px rgba(40, 167, 69, 0.4);
+            }
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.875rem;
+            margin-bottom: 0;
+        }
+
+        .info-value {
+            color: #6c757d;
+            font-size: 1.125rem;
+        }
+
+        .doc-info-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        @media (max-width: 1024px) {
+            .doc-info-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .doc-info-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .doc-info-col {
+            padding: 0;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 10;
+            min-width: 200px;
+        }
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+        .mobile-menu button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            transition: background-color 0.2s;
+        }
+
+        .mobile-menu button:hover {
+            background-color: #f3f4f6;
+        }
+
+        .mobile-menu button svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        .doc-info-header {
+            background-color: #f2ebd3;
+            padding: 12px 16px;
+            margin: -20px -20px 16px -20px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .doc-info-header h3 {
+            margin: 0;
+            color: #333;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* Markdown content styling */
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 45px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .markdown-body {
+                padding: 20px;
+            }
+        }
+
+        /* Code block styling */
+        .markdown-body pre {
+            background-color: #f6f8fa;
+            border-radius: 6px;
+            padding: 16px;
+            overflow: auto;
+        }
+
+        .markdown-body code {
+            background-color: rgba(110,118,129,0.1);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 85%;
+        }
+
+        .markdown-body pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+
+        /* Table styling */
+        .markdown-body table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+
+        .markdown-body table th,
+        .markdown-body table td {
+            border: 1px solid #d0d7de;
+            padding: 6px 13px;
+        }
+
+        .markdown-body table tr:nth-child(2n) {
+            background-color: #f6f8fa;
+        }
+
+        /* Heading anchor links */
+        .markdown-body h1,
+        .markdown-body h2,
+        .markdown-body h3,
+        .markdown-body h4,
+        .markdown-body h5,
+        .markdown-body h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            line-height: 1.25;
+        }
+
+        .markdown-body h1 {
+            font-size: 2em;
+            border-bottom: 1px solid #d0d7de;
+            padding-bottom: 0.3em;
+        }
+
+        .markdown-body h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #d0d7de;
+            padding-bottom: 0.3em;
+        }
+
+        /* Control Bar Styles */
+        .text-viewer-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 40px;
+            padding: 0 12px;
+            background-color: #f0f0f0;
+            border: 1px solid #d0d0d0;
+            gap: 8px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .controls-desktop {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .controls-mobile {
+            display: none;
+            position: relative;
+            margin-left: auto;
+        }
+
+        @media (max-width: 768px) {
+            .controls-desktop {
+                display: none;
+            }
+
+            .controls-mobile {
+                display: flex;
+            }
+        }
+
+        .control-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .control-btn {
+            padding: 4px 8px;
+            min-width: 30px;
+            height: 28px;
+            background-color: #e8e8e8;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .control-btn:hover {
+            background-color: #d8d8d8;
+        }
+
+        .control-btn:active {
+            background-color: #c8c8c8;
+        }
+
+        .control-select {
+            padding: 4px 6px;
+            height: 28px;
+            font-size: 12px;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            background-color: #ffffff;
+            cursor: pointer;
+        }
+
+        .btn-group {
+            display: inline-flex;
+            gap: 0;
+        }
+
+        .btn-group .control-btn {
+            border-radius: 0;
+            margin-left: -1px;
+        }
+
+        .btn-group .control-btn:first-child {
+            border-radius: 4px 0 0 4px;
+            margin-left: 0;
+        }
+
+        .btn-group .control-btn:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Custom Color Dropdown */
+        .custom-color-dropdown {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .custom-color-btn {
+            width: 28px;
+            height: 28px;
+            border: 2px solid #333;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .custom-color-menu {
+            display: none;
+            position: absolute;
+            top: 32px;
+            left: 0;
+            background: white;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            padding: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+            gap: 6px;
+        }
+
+        .custom-color-menu.open {
+            display: flex;
+        }
+
+        .custom-color-option {
+            width: 24px;
+            height: 24px;
+            border: 1px solid #c0c0c0;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .custom-color-option:hover {
+            transform: scale(1.15);
+            border-width: 2px;
+            border-color: #666;
+        }
+
+        .custom-color-option.active {
+            border: 2px solid #333;
+            box-shadow: 0 0 0 2px white, 0 0 0 3px #333;
+        }
+
+        /* Search Box */
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background-color: #ffffff;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            padding: 2px 6px;
+            height: 28px;
+        }
+
+        .search-input {
+            border: none;
+            outline: none;
+            font-size: 12px;
+            padding: 4px;
+            width: 120px;
+            background: transparent;
+        }
+
+        .search-btn, .search-clear-btn {
+            background: none;
+            border: none;
+            padding: 2px 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+        }
+        
+        .search-clear-btn {
+            display: none;
+        }
+
+        .search-clear-btn.visible {
+            display: flex;
+        }
+
+        .search-btn svg, .search-clear-btn svg {
+            width: 14px;
+            height: 14px;
+            color: #666;
+        }
+
+        .search-counter {
+            font-size: 11px;
+            color: #666;
+            min-width: 35px;
+            text-align: center;
+        }
+
+        .search-highlight {
+            background-color: #ffff00;
+            color: #000;
+        }
+
+        .search-highlight.current {
+            background-color: #ff9500;
+            color: #fff;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+
+        body.dark-mode .markdown-body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            border-color: #30363d;
+        }
+        
+        body.dark-mode .text-viewer-controls {
+            background-color: #161b22;
+            border-color: #30363d;
+        }
+
+        body.dark-mode .control-btn, 
+        body.dark-mode .control-select,
+        body.dark-mode .search-box {
+            background-color: #21262d;
+            border-color: #30363d;
+            color: #c9d1d9;
+        }
+
+        body.dark-mode .doc-info-section {
+            background-color: #161b22;
+            border-color: #30363d;
+        }
+        
+        body.dark-mode .doc-info-header {
+            background-color: #21262d;
+        }
+        
+        body.dark-mode .info-label {
+            color: #8b949e;
+        }
+        
+        body.dark-mode .info-value {
+            color: #c9d1d9;
+        }
+
+        /* Fullscreen */
+        .markdown-container.fullscreen-mode {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 20px;
+            z-index: 9999;
+            background: white;
+            overflow: auto;
+        }
+        
+        body.dark-mode .markdown-container.fullscreen-mode {
+            background: #0d1117;
+        }
+
+        /* Mobile Menu */
+        .controls-dropdown {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background-color: white;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            min-width: 200px;
+            padding: 8px;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .controls-dropdown.open {
+            display: flex;
+        }
+        /* Top Button Style */
+        #topBtn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, background-color 0.2s;
+            z-index: 1000;
+        }
+
+        #topBtn.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #topBtn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        body.dark-mode #topBtn {
+            background-color: #238636;
+        }
+
+        body.dark-mode #topBtn:hover {
+            background-color: #2ea043;
+        }
+
+        /* Floating TOC Button */
+        #tocFloatingBtn {
+            position: fixed;
+            bottom: 80px; /* Above Top Button */
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, background-color 0.2s;
+            z-index: 1000;
+        }
+
+        #tocFloatingBtn.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #tocFloatingBtn:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        body.dark-mode #tocFloatingBtn {
+            background-color: #30363d;
+        }
+
+        body.dark-mode #tocFloatingBtn:hover {
+            background-color: #484f58;
+        }
+
+        /* Table of Contents (TOC) Drawer */
+        .toc-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .toc-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .toc-drawer {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: white;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 1002;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .toc-drawer.open {
+            right: 0;
+        }
+
+        .toc-drawer.left {
+            right: auto;
+            left: -300px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            transition: left 0.3s ease;
+        }
+
+        .toc-drawer.left.open {
+            left: 0;
+            right: auto;
+        }
+
+        .toc-header {
+            padding: 16px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .toc-header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .toc-position-selector {
+            display: flex;
+            gap: 12px;
+            font-size: 0.85rem;
+            font-weight: normal;
+        }
+
+        .toc-position-selector label {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .toc-close-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .toc-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-item {
+            margin-bottom: 8px;
+        }
+
+        .toc-link {
+            text-decoration: none;
+            color: #333;
+            display: block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .toc-link:hover {
+            background-color: #f5f5f5;
+            color: #0366d6;
+        }
+
+        .toc-item.h1 { margin-left: 0; font-weight: 600; }
+        .toc-item.h2 { margin-left: 12px; }
+        .toc-item.h3 { margin-left: 24px; }
+        .toc-item.h4 { margin-left: 36px; }
+        .toc-item.h5 { margin-left: 48px; }
+        .toc-item.h6 { margin-left: 60px; }
+
+        body.dark-mode .toc-drawer {
+            background-color: #1e1e1e;
+            color: #c9d1d9;
+        }
+
+        body.dark-mode .toc-header {
+            border-bottom-color: #30363d;
+        }
+
+        body.dark-mode .toc-close-btn {
+            color: #8b949e;
+        }
+
+        body.dark-mode .toc-link {
+            color: #c9d1d9;
+        }
+
+        body.dark-mode .toc-link:hover {
+            background-color: #30363d;
+            color: #58a6ff;
+        }
+
+        /* Code Block Copy Button */
+        .markdown-body pre {
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 12px;
+            color: #666;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s, background-color 0.2s;
+            z-index: 10;
+        }
+
+        .markdown-body pre:hover .copy-btn {
+            opacity: 1;
+        }
+
+        .copy-btn:hover {
+            background-color: #fff;
+            color: #0366d6;
+        }
+
+        body.dark-mode .copy-btn {
+            background-color: rgba(30, 30, 30, 0.8);
+            border-color: #444;
+            color: #aaa;
+        }
+
+        body.dark-mode .copy-btn:hover {
+            background-color: #333;
+            color: #58a6ff;
+        }
+
+        /* Image Lightbox */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            cursor: default;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            line-height: 1;
+            transition: opacity 0.2s;
+        }
+
+        .lightbox-close:hover {
+            opacity: 0.7;
+        }
+
+        .markdown-body img {
+            cursor: zoom-in;
+            transition: opacity 0.2s;
+        }
+
+        .markdown-body img:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- Header 영역: 전체 너비 (100%) -->
+    <div class="w-full bg-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between gap-4">
+                <!-- 왼쪽: 파일명 -->
+                <div class="flex-1 min-w-0">
+                    <h1 class="text-2xl font-bold text-gray-900 truncate">lucy.md</h1>
+                </div>
+
+                <!-- 오른쪽: 데스크톱 버튼 (md 이상에서만 표시) -->
+                <div class="hidden md:flex gap-3 flex-shrink-0">
+                    <!-- 원본 다운로드 -->
+                    <button type="button"
+                            onclick="downloadOriginal()"
+                            class="inline-flex items-center px-4 py-2 rounded-lg bg-green-600 text-white font-medium text-sm hover:bg-green-700 transition-colors shadow-sm whitespace-nowrap">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        원본 다운로드
+                    </button>
+
+                    <!-- 문서 정보 토글 버튼 -->
+                    <button type="button"
+                            class="toggle-doc-info-btn collapsed"
+                            id="toggleDocInfoBtn"
+                            onclick="toggleDocInfo()"
+                            title="문서 정보 보기"
+                            aria-label="문서 정보 토글">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- 오른쪽: 모바일 영역 (토글 버튼 + 햄버거 메뉴) -->
+                <div class="md:hidden flex gap-2 items-center flex-shrink-0">
+                    <!-- 모바일 토글 버튼 -->
+                    <button type="button"
+                            class="toggle-doc-info-btn-mobile collapsed"
+                            id="toggleDocInfoBtnMobile"
+                            onclick="toggleDocInfo()"
+                            title="문서 정보 보기"
+                            aria-label="문서 정보 토글">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </button>
+
+                    <!-- 햄버거 메뉴 (relative 래퍼) -->
+                    <div class="relative">
+                        <button type="button"
+                                id="mobileMenuBtn"
+                                onclick="toggleMobileMenu()"
+                                title="메뉴"
+                                aria-label="작업 메뉴 열기"
+                                class="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+
+                        <!-- 모바일 드롭다운 메뉴 -->
+                        <div id="mobileMenu" class="mobile-menu">
+                            <button type="button" onclick="downloadOriginal(); toggleMobileMenu();">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                원본 다운로드
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="markdown-container px-4 sm:px-6 lg:px-8 py-6" id="markdownContainer">
+        
+        <!-- Control Bar -->
+        <div class="text-viewer-controls">
+            <!-- Desktop Controls -->
+            <div class="controls-desktop">
+                <!-- Search Box -->
+                <div class="search-box">
+                    <input type="text" class="search-input" id="searchInput" placeholder="검색어 입력" autocomplete="off">
+                    <button type="button" class="search-btn" id="searchBtn" title="다음 찾기 (Enter)">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </button>
+                    <button type="button" class="search-clear-btn" id="searchClearBtn" title="검색 지우기">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                    <span class="search-counter" id="searchCounter"></span>
+                </div>
+
+                <!-- Font Size -->
+                <div class="control-item btn-group">
+                    <button type="button" id="fontSizeDecrease" class="control-btn" title="폰트 작게">−</button>
+                    <button type="button" id="fontSizeReset" class="control-btn" title="폰트기본(16px)">16px</button>
+                    <button type="button" id="fontSizeIncrease" class="control-btn" title="폰트 크게">+</button>
+                </div>
+
+                <!-- Font Family -->
+                <select id="fontFamily" class="control-select" title="폰트 선택">
+                    <option value="'Noto Sans KR', sans-serif" selected>Noto Sans KR</option>
+                    <option value="'Malgun Gothic', '맑은 고딕'">맑은 고딕</option>
+                    <option value="'SeoulNamsan', sans-serif">서울 남산체</option>
+                    <option value="'Courier New', monospace">Courier New</option>
+                </select>
+
+                <!-- Background Color -->
+                <div class="custom-color-dropdown">
+                    <button type="button" class="custom-color-btn" id="bgColorBtn" data-color="#ffffff" title="배경색 선택" style="background-color: #ffffff;"></button>
+                    <div class="custom-color-menu" id="bgColorMenu">
+                        <button type="button" class="custom-color-option active" data-color="#ffffff" style="background-color: #ffffff;" title="흰색"></button>
+                        <button type="button" class="custom-color-option" data-color="#f5f5f5" style="background-color: #f5f5f5;" title="라이트 그레이"></button>
+                        <button type="button" class="custom-color-option" data-color="#fffacd" style="background-color: #fffacd;" title="라이트 옐로우"></button>
+                        <button type="button" class="custom-color-option" data-color="#e6f3ff" style="background-color: #e6f3ff;" title="라이트 블루"></button>
+                        <button type="button" class="custom-color-option" data-color="#f0f8f0" style="background-color: #f0f8f0;" title="라이트 그린"></button>
+                    </div>
+                </div>
+
+                <!-- Line Height -->
+                <div class="control-item btn-group">
+                    <button type="button" id="lineHeightDecrease" class="control-btn" title="줄간 작게">−</button>
+                    <button type="button" id="lineHeightReset" class="control-btn" title="줄간 기본">✱</button>
+                    <button type="button" id="lineHeightIncrease" class="control-btn" title="줄간 크게">+</button>
+                </div>
+
+                <!-- Fullscreen -->
+                <button type="button" id="toggleFullscreen" class="control-btn" title="전체화면">⛶</button>
+
+                <!-- Dark Mode -->
+                <button type="button" id="toggleDarkMode" class="control-btn" title="다크모드">🌙</button>
+
+                <!-- TOC Position -->
+                <div class="control-item" style="display: flex; align-items: center; gap: 4px; font-size: 12px;">
+                    <span style="margin-right: 4px;">메뉴:</span>
+                    <label style="display: flex; align-items: center; gap: 2px; cursor: pointer;">
+                        <input type="radio" name="tocPosition" value="left" id="tocPosLeft">
+                        <span>왼쪽</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 2px; cursor: pointer;">
+                        <input type="radio" name="tocPosition" value="right" id="tocPosRight" checked>
+                        <span>오른쪽</span>
+                    </label>
+                </div>
+
+                <!-- TOC Toggle (Icon Only) -->
+                <button type="button" class="control-btn" id="tocToggleBtnDesktop" title="목차">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+
+                <!-- Raw Markdown Toggle -->
+                <button type="button" class="control-btn" id="rawToggleBtn" title="Raw Markdown">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                    </svg>
+                </button>
+
+                <!-- Settings -->
+                <div class="control-item btn-group">
+                    <button type="button" id="saveSettings" class="control-btn" title="설정 저장">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </button>
+                    <button type="button" id="resetSettings" class="control-btn" title="설정 초기화">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Controls Menu -->
+            <div class="controls-mobile">
+                <!-- Mobile TOC Button (Left) -->
+                <button type="button" id="tocToggleBtnMobile" class="control-btn" title="목차">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                
+                <!-- Mobile Settings Menu Button (Right) -->
+                <button type="button" id="controlsMenuBtn" class="control-btn" title="설정">⋯</button>
+                <div id="controlsMenu" class="controls-dropdown">
+                    <!-- Mobile Search -->
+                    <div class="search-box">
+                        <input type="text" class="search-input" id="searchInput-mobile" placeholder="검색" autocomplete="off">
+                        <button type="button" class="search-btn" id="searchBtn-mobile"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
+                    </div>
+                    
+                    <!-- Mobile Font Size -->
+                    <div class="control-item btn-group">
+                        <button type="button" id="fontSizeDecrease-mobile" class="control-btn">−</button>
+                        <button type="button" id="fontSizeReset-mobile" class="control-btn">16px</button>
+                        <button type="button" id="fontSizeIncrease-mobile" class="control-btn">+</button>
+                    </div>
+                    
+                    <!-- Mobile Font Family -->
+                    <select id="fontFamily-mobile" class="control-select" title="폰트 선택">
+                        <option value="'Noto Sans KR', sans-serif" selected>Noto Sans KR</option>
+                        <option value="'Malgun Gothic', '맑은 고딕'">맑은 고딕</option>
+                        <option value="'SeoulNamsan', sans-serif">서울 남산체</option>
+                        <option value="'Courier New', monospace">Courier New</option>
+                    </select>
+                    
+                    <!-- Mobile Line Height -->
+                    <div class="control-item btn-group">
+                        <button type="button" id="lineHeightDecrease-mobile" class="control-btn" title="줄간 작게">−</button>
+                        <button type="button" id="lineHeightReset-mobile" class="control-btn" title="줄간 기본">✱</button>
+                        <button type="button" id="lineHeightIncrease-mobile" class="control-btn" title="줄간 크게">+</button>
+                    </div>
+                    
+                    <!-- Mobile Dark Mode -->
+                    <button type="button" id="toggleDarkMode-mobile" class="control-btn">🌙 다크모드</button>
+                    
+                    <!-- Mobile Settings Save/Reset -->
+                    <div class="control-item btn-group">
+                        <button type="button" id="saveSettings-mobile" class="control-btn" title="설정 저장">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            저장
+                        </button>
+                        <button type="button" id="resetSettings-mobile" class="control-btn" title="설정 초기화">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                            초기화
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 문서 정보 섹션 (초기: 숨김) -->
+        <div id="docInfoSection" class="doc-info-section collapsed">
+            <!-- Markdown 정보 헤더 -->
+            <div class="doc-info-header">
+                <h3>Markdown 정보</h3>
+            </div>
+
+            <div class="doc-info-row">
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">파일 크기</span>
+                        <span class="info-value">41,838 bytes</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">총 라인 수</span>
+                        <span class="info-value" id="lineCountValue">859</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">총 문자 수</span>
+                        <span class="info-value" id="charCountValue">27,622</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">인코딩</span>
+                        <span class="info-value">UTF-8</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Markdown 렌더링 영역 -->
+        <div class="markdown-body"><h1>OMS(Lucy) 프로젝트</h1>
+<h2>1. Lucy 프로젝트의 개요</h2>
+<h3>1.1 프로젝트의 명칭</h3>
+<p>OMS(주문관리시스템)을 추구하면서 개발되었으며 개발코드명으로 Lucy라는 명칭을 사용하였습니다. 개발이 완료되는 시점에
+AssetERP에 추가되는 형식으로 프로젝트가 계획되었으므로 공식적인 명칭은 갖고 있지 않습니다.
+이하 <strong>Lucy</strong>라는 명칭을 사용합니다.</p>
+<p>※ 본 문서는 2024.12에 작성 됨</p>
+<h3>1.2 프로젝트이 기간과 투입인원</h3>
+<p>기간 : 2024.3.1 ~ 2024.12.31
+설계 : 천영임부장(1인)
+개발 : 김도영부장(1인)</p>
+<img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Ho_Chi_Minh_City_Skyline_%28night%29.jpg" alt="도시야경"> 
+<h3>1.3 Lucy의 목표</h3>
+<p>Lucy의 목표는 Restful방식으로 증권사가 제공하는 OpenAPI를 이용하여 운용사가 AssetERP를 통해서 주문을 넣고
+체결이 되면 통보를 받는 것을 1차목표로 합니다.
+최종적으로는 운용사의 정해진 자금과 분배계획에 따라서 여러 증권사에 주문을 넣고 체결통보를 받는 것입니다.</p>
+<h3>1.4 Lucy의 개발과정</h3>
+<p>Lucy는 2개의 증권사 즉 한국투자증권과 LS증권(이베스트투자증권)을 대상으로 open api를 통해서 주문을 넣고 체결통보를 받는 것을
+시도하였는데, 기타 증권사들은 Restful방식으로 OpenAPI를 제공하고 있지 않기 때문이었습니다.(2024.3 기준 참조-<a href="https://www.bluestones.biz/cms/pages?action=view&amp;page=/HomePage/stock/stock_products.md">증권사별 openapi제공현황</a>)
+2개의 증권사를 제외하면 대부분의 증권사들이 윈도우 기반의 OCX,DLL,COM등의 기술로 open api를 제공하고 있습니다.
+윈도우기반의 기술은 웹으로 구현하기 용이하지 않으므로 Lucy의 개발에는 적용을 고려하지 않았습니다.</p>
+<p>Restful OpenAPI를 제공하는 2개의 증권사 api는 법인과 개인을 구별하여 서비스를 제공합니다. 그러나 개발과정에서 법인으로
+개발하기가 용이하지 않아서 (법인은 openapi 키발급이 개인보다 엄격함, 법인으로 개발시 실제적인 거래를 하기 쉽지 않음 )
+개발자 개인으로 open api key를 발급받아서 개발을 진행하였습니다.</p>
+<p>참고로 두 개의 증권사 모두 모의계좌를 제공하지만 실제로 개발을 진행하다보면 모의계좌로 개발을 진행하는 것은 여러가지 제약조건이 있습니다
+그래서 개발진도상 모의계좌로 진행하기가 어려웠습니다.</p>
+<h3>1.5 목표 미달의 사유</h3>
+<p>Lucy의 구현 내용이 작지는 않지만 그래도 실질적으로 AssetERP에 적용할 수 없어서 만족할 수 있는 상황에 이르지 못한 것에는
+아래와 같은 사유가 있습니다</p>
+<ol>
+<li>Restful API방식의 OpenAPI를 제공하는 증권사가 2개밖에 존재하지 않는다.</li>
+<li>명확한 설계를 갖고 있지 않다. 즉 운용사가 실제적으로 OMS를 어떤 식으로 원하는지 구체적인 요구사항이 존재하지 않는다.</li>
+<li>법인을 대상으로 개발을 해야했지만 상기 기술한 바와 같이 법인으로 개발하기 쉽지 않은 환경이었습니다.</li>
+</ol>
+<h3>1.6 개발 내용 (주요기능)</h3>
+<p>초기 상정했던 목표에 미달하였지만 Lucy는 아래와 같은 기능을 갖도록 구현되었습니다.
+개인이 한국투자증권과 LS증권에 계좌를 갖고 있으며 Open API 키를 발급받은 상태여야 합니다</p>
+<h4>주요기능</h4>
+<ol>
+<li>로그인</li>
+<li>계좌 내용을 조회</li>
+<li>매수/매도 주문</li>
+<li>체결통보 및 체결정보 조회</li>
+<li>주식종목 조회</li>
+<li>공모주 일정 및 내용 조회</li>
+<li>사용자정보 관리</li>
+</ol>
+<h2>2. 기술스택(Tech Stack)</h2>
+<h3>2.1 기술 개요</h3>
+<p>Lucy는 파이썬언어(version 3.12.2)를 기반으로 개발되었으며 현재 한국펀드서비스(주)의 AssetERP의  메인 개발 언어인 java 기반의 기술과는 다른
+환경과 개발방법을 가지고 개발되었습니다.
+그래서 AssertERP의 개발자의 이해를 높이기위해서 java기술스택과 비교하는 방식으로 기술합니다.
+괄호 안의 기술은 Lucy에 사용된 기술과 대응하는 기술입니다.</p>
+<p>Lucy는 아래와 같은 기술적 특징을 갖고 있습니다.</p>
+<ol>
+<li>백엔드(Backend) 와 프런트엔드(Frontend)를 모두 갖고 있음</li>
+<li><a href="https://fastapi.tiangolo.com/ko/">FastAPI</a>로 개발됨</li>
+<li><a href="https://www.mongodb.com/ko-kr">MongoDB</a>를 <a href="https://beanie-odm.dev/">Beanie</a> <a href="https://gmlwjd9405.github.io/2019/02/01/orm.html">ORM</a> 으로 사용</li>
+<li>자체 스케줄러를 갖고 있음
+<ol>
+<li><a href="https://www.judal.co.kr/">주달</a> 사이트 scrapping</li>
+<li><a href="https://www.38.co.kr/">38커뮤니케이션</a> 사이트 scrapping IPO정보 취득</li>
+</ol>
+</li>
+<li><a href="https://ko.wikipedia.org/wiki/JSON_%EC%9B%B9_%ED%86%A0%ED%81%B0">JWT</a> 인증</li>
+<li>웹소켓 : 체결정보를 서버로부터 수신하기 위하여 사용됨</li>
+<li>자체적인 스케줄러를 갖고 있슴</li>
+</ol>
+<h3>2.1 백엔드 기술 (Backend)</h3>
+<ul>
+<li>
+<p>프로그래밍 언어 : python 3.12 (java 1.8)</p>
+</li>
+<li>
+<p>웹프레임워크 : FastAPI (GWT)</p>
+<ul>
+<li>python은 웹프레임워크는 Django,Flask,FastAPI 3가지가 주요 프레임워크이며 FastAPI가 가장 최근에 개발되어졌습니다.</li>
+<li>FastAPI가 비동기를 지원한다는 점과 가장 빠르다는 의견때문에 선정하였습니다.(참고: <a href="https://www.hanbit.co.kr/channel/category/category_view.html?cms_code=CMS5997817104">python 웹프레임워크비교</a>)</li>
+</ul>
+</li>
+<li>
+<p>웹서버 : <a href="https://www.uvicorn.org/">Uvicorn</a> (Tomcat)</p>
+<ul>
+<li>통칭 <strong>ASGI</strong>(Asynchronous Server Gateway Interface)서버라고 하며 fastAPI를 돌리기 위해서는 필수적으로 사용됩니다.</li>
+</ul>
+</li>
+<li>
+<p>DBMS : MongoDB(PostgreSQL)</p>
+<ul>
+<li>no-sql database로 R-DBMS와 비교하여 비정형데이터를 다루기 용이합니다.</li>
+<li>주식정보데이터 즉 증권사가 제공하는 데이터가 변경되기 쉽다는 점에서 선정하였습니다.</li>
+</ul>
+</li>
+<li>
+<p>템플릿 엔진 : jinja2(java 대응 기술 없슴) 서버쪽 template 엔진으로 python 계열의 웹어플리케이션에 널리 사용되고 있습니다.</p>
+</li>
+<li>
+<p>미들웨어 : JWT를 기반으로 인증처리, Static파일들 처리</p>
+</li>
+</ul>
+<h3>2.2 프런트엔트 기술 (Frontend)</h3>
+<ul>
+<li>CSS프레임워크 : <a href="https://getbootstrap.com/">bootstrap5</a> ( GXT )</li>
+<li>템플릿 엔진 : <a href="https://handlebarsjs.com/">handlebar</a> (없음)</li>
+<li>DOM handling : jquery (없음)</li>
+<li>javascript자체의 fetch 함수 : API 통신</li>
+</ul>
+<h3>2.3 FastAPI 웹프레임워크</h3>
+<ul>
+<li>Lucy는 FastAPI 웹프레임워크를 기반으로 자체적인 프레임워크(개발방법)을 구축했습니다.</li>
+</ul>
+<p><img src="./images/lucy_system.png" alt="시스템구성도" /></p>
+<ul>
+<li>스케줄러에서 구동되는 모듈을 제외한 모든 모듈이 async로 동작합니다.</li>
+<li>Lucy는 기본적으로 MVC모델을 따라서 설계되었으며 Request는 Router에서 해석되어
+Service 모듈에서 필요한 정보를 획득한 후 사용자에게 전송합니다. 이때 정보의 단위는 model단위로 전송됩니다.</li>
+</ul>
+<h4>2.3.1 각 모듈의 설명</h4>
+<ol>
+<li>
+<p>Middleware</p>
+<ol>
+<li>실제 구현체 : jwtmiddleware.py</li>
+<li>기능
+<ul>
+<li>request의 header를 해석하여 인증합니다.</li>
+<li>Lucy에서는 권한에 따른 기능 제한은 없습니다.</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>Router 모듈들</p>
+<ul>
+<li>client로부터 요청받는 서비스(method와 parameter)를 받아서 각 service모듈을 호출하여 응답(json)을 client에 리턴해 줌</li>
+</ul>
+</li>
+<li>
+<p>Db Service 모듈들</p>
+<ul>
+<li>Database와의 동작을 담당하면 각 테이블당 1개씩의 Service를 갖고 있음.</li>
+</ul>
+</li>
+<li>
+<p>Api Service 모듈</p>
+<ul>
+<li>증권사(KIS,LS)의 open api를 호출함</li>
+</ul>
+</li>
+<li>
+<p>Websocket 모듈들</p>
+<ul>
+<li>증권사와의 websocket연결 및 client와의 websocket연결을 담당</li>
+</ul>
+</li>
+<li>
+<p>Scheduler</p>
+<ul>
+<li>judal scrapping및 커뮤니케이션38사이트 스크래핑을 관리</li>
+</ul>
+</li>
+</ol>
+<h4>2.3.2 디렉토리 구조</h4>
+<ul>
+<li>Lucy는 backend와 frontend를 모두 가지고 있습니다.</li>
+<li>backend는 backend폴더에, frontend는 frontend 폴더 하위에 존재합니다.</li>
+<li>backend의 특징
+<ul>
+<li>backend는 Restful api 서버와 같이 동작합니다</li>
+<li>page url에 대해서 jinja2를 이용하여 페이지를 rendering해서 html을 보내줍니다.</li>
+<li>backend 디렉토리 구조</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-text">|-- backend
+|   |-- app
+|   |   |-- api
+|   |   |   `-- v1
+|   |   |       `-- endpoints
+|   |   |-- background
+|   |   |   `-- jobs
+|   |   |-- core
+|   |   |   `-- exception
+|   |   |-- domains
+|   |   |   |-- ipo
+|   |   |   |-- judal
+|   |   |   |-- stc
+|   |   |   |   |-- kis
+|   |   |   |   |   `-- model
+|   |   |   |   `-- ls
+|   |   |   |       `-- model
+|   |   |   |-- system
+|   |   |   `-- user
+|   |   |-- managers
+|   |   `-- utils
+</code></pre>
+<ul>
+<li>
+<p>backend 각 폴더의 설명</p>
+<ul>
+<li>app/api/v1/endposts : router들 즉 Restful api 서버와 같이 url,method에 대한 서비스제공</li>
+<li>app/api/background : 스케줄러가 호출하는 프로그램들</li>
+<li>app/api/core : middleware, logger, exception등</li>
+<li>app/api/domain : router가 사용하는 service 및 model 들 (DTO)</li>
+<li>app/api/managers : websocket manager들</li>
+</ul>
+</li>
+<li>
+<p>frontend의 특징</p>
+<ul>
+<li>template 엔진으로 handlebar를 사용</li>
+<li>javascript 자체의 fetch함수를 사용</li>
+<li>bootstrap5 css library의 사용</li>
+<li>jquery 사용</li>
+</ul>
+</li>
+<li>
+<p>frontend 디렉토리 구조</p>
+</li>
+</ul>
+<pre><code class="language-text">`-- frontend
+    |-- public
+    |   |-- css
+    |   |-- images
+    |   `-- js
+    |       `-- kis
+    `-- views
+        |-- common
+        |-- handlebar
+        |   |-- kis
+        |   |-- ls
+        |   `-- mystock
+        `-- template
+            |-- config
+            |-- danta
+            |-- ipo
+            |-- judal
+            |-- kis
+            |-- ls
+            |-- mystock
+            |-- scheduler
+            `-- user
+</code></pre>
+<ul>
+<li>
+<p>frontend 각 폴더의 설명</p>
+<ul>
+<li>public : static 파일들 즉 javascript, css, image 들 보관</li>
+<li>views/common : nav.html등 공통 화면</li>
+<li>handlebar : client에서 data와 함께 rendering 되어야할 handlebar script들</li>
+<li>templates : server side에서 rendering되어야 할 페이지들</li>
+</ul>
+</li>
+<li>
+<p>기타 폴더들</p>
+<ul>
+<li>doc : 관련 문서들</li>
+<li>data: 산출되는 data들</li>
+<li>data/judal : judal사이트에서 scrapping한 파일들을 날짜별로 보관</li>
+</ul>
+</li>
+</ul>
+<h2>3. 프로젝트 상세</h2>
+<h3>3.1 프로그램의 시작</h3>
+<ul>
+<li>Lucy는 기본적으로 fastAPI로 작성된 web 어플리케이션입니다.</li>
+<li>/backend/main.py 에서 시작됩니다.</li>
+<li>tomcat에 해당하는 역활을 하는 <a href="https://www.uvicorn.org/">uvicorn</a>에 의해서 구동됩니다.</li>
+<li>main.py는 다음과 같은 순서로 수행됩니다.</li>
+</ul>
+<pre><code class="language-text">  1. 미들웨어의 설정(client인증수행)
+  2. router 설정 : 서비스 endpoints 설정
+  3. web server start/end event 핸들러설정
+     - start시 mongo db의 연결
+     - end 시 mongo db의 close
+  4. static_files 설정 : js, image, css 폴더 설정
+  5. exception handler 설정
+</code></pre>
+<h3>3.2 config 및 JWT인증</h3>
+<ul>
+<li>cleint와의 인증은 JWT(Json Web Token)을 사용합니다</li>
+<li>/login router에서 jwt token을 발급합니다.</li>
+<li>유효시간은 config에서 설정된 값에 의해서 제한됩니다</li>
+<li>config는 .env_{profile}에 저장된 값을 사용합니다.</li>
+<li>profile은 환경변수에 LUCY_MODE에 설정된 값입니다.
+즉 set LUCY_MODE=real이면 .env_real 파일을 읽어서 각 변수의 값을 설정합니다.</li>
+<li>config는 프로젝트 전반에 걸쳐서 사용됩니다.</li>
+<li>git repository에 .env_{profile}은 배포되어서는 안되며, .gitignore에 설정되어 있습니다.</li>
+</ul>
+<pre><code class="language-python">class Config:
+    def __init__(self):
+        self.PROFILE_NAME = os.getenv('LUCY_MODE', 'local')
+        load_dotenv(dotenv_path=f'.env.{self.PROFILE_NAME}')
+
+        ...
+        self.DEFAULT_USER_ID = os.getenv('DEFAULT_USER_ID', 'kdy987')
+config = Config()
+</code></pre>
+<h3>3.3 각 증권사와의 인증</h3>
+<ul>
+<li>
+<p>RESTful api를 사용하기 위해서는 <a href="https://apiportal.koreainvestment.com/intro">KIS</a>, <a href="https://openapi.ls-sec.co.kr/intro">LS</a> 각 증권사에 1)<strong>계좌가 존재</strong>해야 하고 2)<strong>사용자 등록</strong>을 해야하고 3)<strong>Key를 발급</strong>받아야 합니다</p>
+</li>
+<li>
+<p>KIS 및 LS 증권사는 개인 사용자에게는 24시간, 법인 사용자에게는 1달의 유효기간을 갖는 키를 발급합니다.</p>
+</li>
+<li>
+<p>두 증권사 모두 유사한 방식으로 인증을 처리합니다.</p>
+<pre><code class="language-text">  1. APP_KEY와 APP_SECRET_KEY 2개의 키를 발급함.
+  2. 두 개의 키를 header에 넣어서 token발급 서비스를 요청하면 access token을 발급해 줌
+  3. 이후 토큰의 유효시간 내에서 token을 header의 authorization에 넣고 기타 서비스를 호출
+</code></pre>
+</li>
+<li>
+<p>Lucy에서는 mongo DB에 APP_KEY와 APP_SECRET_KEY를 저장하여 사용합니다.</p>
+</li>
+<li>
+<p>발급받은 ACCESS_TOKEN 역시 mongo db에 저장하여 사용하며 만료 시간 초과시 다시 발급받고 다시 저장하는 방식으로 동작합니다.</p>
+</li>
+</ul>
+<h3>3.4 KIS 증권 api</h3>
+<ul>
+<li>부모 클래스 StockApi로 부터 상속받습니다. 즉 StockApi의 자식 클래스입니다.</li>
+</ul>
+<pre><code class="language-mermaid">classDiagram
+    StockApi &lt;|-- KisStockApi
+    StockApi &lt;|-- LsStockApi
+    StockApi : +user_id
+    StockApi : +acctno
+    StockApi : +user_service
+    StockApi : initialize()
+    StockApi : get_access_token_time()
+    LsStockApi : send_request()
+    KisStockApi : send_request()
+</code></pre>
+<ul>
+<li>KIS 증권과의 api를 위해서 KisStockApi class 작성하여 사용합니다.</li>
+<li>파일명 : kis_stock_api.py</li>
+<li><a href="https://apiportal.koreainvestment.com/apiservice/oauth2#L_5c87ba63-740a-4166-93ac-803510bb9c02">KIS에서 제공하는 RestfulAPI</a>의 각 서비스를 호출합니다.</li>
+<li>많은 method가 있지만 동일한 구조를 갖고 있습니다.</li>
+<li>KisStockApi의 주요 메소드
+<ul>
+<li>set_access_token_from_kis : 동기(sync)방식으로 ACCESS_TOKEN을 발급받고 몽고 DB에 저장함</li>
+<li>send_request : 기타 함수(class method)에서 이 메소드를 호출하여 KIS에 서비스를 요청함.
+<ul>
+<li>KIS는 GET, POST 2개의 method(http)만을 제공함</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python">    async def send_request(self, title, method, url, headers, params=None, data=None):
+        try:
+            async with aiohttp.ClientSession() as session:
+                if method == 'GET':
+                    async with session.get(url, headers=headers, params=params) as response:
+                        response.raise_for_status()
+                        return await response.json()
+                elif method == 'POST':
+                    async with session.post(url, headers=headers, data=data) as response:
+                        response.raise_for_status()
+                        return await response.json()
+        except aiohttp.ClientError as e:
+            logger.error(f&quot;HTTP 오류 ({title}): {e}&quot;)
+            raise KisApiException(status_code=500, detail=f&quot;HTTP 오류 ({title}): {e}&quot;)                    
+        except json.JSONDecodeError as e:
+            logger.error(f&quot;Response is not in JSON format.{title}&quot;)
+            raise InvalidResponseException(f&quot;응답 내용이 JSON형식이 아닙니다 ({title})&quot;)
+</code></pre>
+<ul>
+<li>각 서비스는 KIS에서 제공하는 문서에 따른 서비스를 호출하기 위해 header와 params또는 data를 설정한 후 send_request를  호츨하는 것으로 구현했습니다.</li>
+<li>아래는 stk_code를 인자로 하는 <a href="https://apiportal.koreainvestment.com/apiservice/apiservice-domestic-stock-quotations2#L_07802512-4f49-4486-91b4-1050b6f5dc9d">현재가를 구하는  함수</a>의 예 입니다.</li>
+</ul>
+<pre><code class="language-python">    async def current_cost(self, stk_code:str) -&gt; InquirePrice_Response:
+        ''' 현재가 조회 '''
+        url = self.BASE_URL +  '/uapi/domestic-stock/v1/quotations/inquire-price' 
+        headers = {&quot;Content-Type&quot;:&quot;application/json&quot;, 
+                &quot;authorization&quot;: f&quot;Bearer {self.ACCESS_TOKEN}&quot;,
+                &quot;appKey&quot;:self.APP_KEY,
+                &quot;appSecret&quot;:self.APP_SECRET,
+                &quot;tr_id&quot;:&quot;FHKST01010100&quot;}
+        params = {
+            &quot;fid_cond_mrkt_div_code&quot;:&quot;J&quot;,
+            &quot;fid_input_iscd&quot;:stk_code,
+        }
+        json_response = await self.send_request('현재가 조회', 'GET', url, headers, params=params)
+        self.check_access_token(json_response)
+        logger.debug(f&quot;현재가: {stk_code} : {json_response['output']['stck_prpr']}&quot;)
+        try:
+            return InquirePrice_Response(**json_response)
+        except ValidationError as e:
+            raise HTTPException(status_code=500, detail=f&quot;받은 json 파싱 오류: {e}&quot;)    
+</code></pre>
+<ul>
+<li>
+<p>사용방법</p>
+<pre><code class="language-python">  kis_api = await StockApiManager().kis_api()
+  cost = await kis_api.get_current_price(stk_code) 
+</code></pre>
+</li>
+</ul>
+<h3>3.5 LS 증권 api</h3>
+<ul>
+<li>부모 클래스 StockApi로 부터 상속받습니다. 즉 StockApi의 자식 클래스입니다.</li>
+<li>LS증권의 제공되는 API를 사용하기 위해서 KIS와 유사하게 LsStockApi class가 작성되었습니다.</li>
+<li>KIS와 유사한 방식으로 작성되었습니다.</li>
+<li>파일명 : ls_stock_api.py</li>
+<li><a href="https://openapi.ls-sec.co.kr/apiservice?group_id=ffd2def7-a118-40f7-a0ab-cd4c6a538a90&amp;api_id=33bd887a-6652-4209-88cd-5324bc7c5e36">LS에서 제공하는 RestfulAPI</a>의 각 서비스를 호출합니다.</li>
+<li>LS에서 제공하는 서비스를 구현한 다수의  method가 있지만 동일한 구조를 갖고 있습니다.</li>
+<li>KisStockApi의 주요 메소드
+<ul>
+<li>set_access_token_from_kis : 동기(sync)방식으로 ACCESS_TOKEN을 발급받고 몽고 DB에 저장함</li>
+<li>send_request : 기타 함수(class method)에서 이 메소드를 호출하여 KIS에 서비스를 요청함.
+<ul>
+<li>KIS는 GET, POST 2개의 method(http)만을 제공함</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>3.6 StockApiManager</h3>
+<ul>
+<li>Lucy(OMS시스템)은 <strong>여러명의 사용자가 다수의 증권사에 주문을 내고 체결통보를 받는다</strong> 는 조건으로 설계되었습니다.</li>
+<li>즉 다수의 사용자, 각 사용자별로 다수의 증권사 계정을 관리하여야 합니다.</li>
+<li>이런 관리를 담당하는 것이 StockApiManager입니다.</li>
+<li>로그인 된 사용자 계정에 대해서 요청된 서비스가 KIS 서비스인지, LS 서비스인지 판별하여 해당하는 StockApi 객체를 반환해 주는 역활을 합니다.</li>
+<li>싱글레톤으로 구현되어 있습니다.</li>
+</ul>
+<h3>3.7 WebSocket Managers</h3>
+<ul>
+<li>KIS, LS 증권사들은 실시간 데이터를 Websocket을 사용하여 제공하고 있습니다.</li>
+<li>증권사들이 실시간으로 데이터를 제공하는 것에는 stkcode에 대한 실시간 가격정보와 체결정보가 있습니다.</li>
+<li>실시간 가격정보는 Lucy에서 사용하지 않으며 <strong>체결정보만</strong>을 사용합니다.</li>
+<li>Lucy에서는 사용자별로 증권사의  websocket의 client로서 동작하는 <strong>StockWsManager</strong> 가 있습니다.</li>
+<li>Lucy에서는 사용자 즉 접속한 Browser의 서버로서 동작하는 <strong>ClientWsManager</strong> 가 있습니다.</li>
+<li>동작순서
+<ol>
+<li>사용자가 웹소켓 endpoint /ws에 접속</li>
+<li>ClientWsManager 생성</li>
+<li>증권사별 StockWsManager의 생성 이때 2.에서 생성된 ClientWsManager를 인자로 넘겨 줌</li>
+<li>3.에서 생성된 StockWsManager는 증권사로부터 계속 실시간 데이터를 기다리고 있음
+(참고: 실시간 가격정보는 계속 데이터가 전송되어져 오고, 체결정보는 체결시에만 데이터가 옴)</li>
+<li>증권사에서 체결정보가 전송되었을 때 StockWsManager는 자신에게 알려진 client로 체결정보를 전송함.</li>
+</ol>
+</li>
+</ul>
+<h3>3.8 Core 모듈들</h3>
+<ul>
+<li>Lucy(fastApi 서버)를 구성하는 모듈들 입니다.</li>
+<li>목록(backend/app/core)
+<ol>
+<li>config : .env<profile>에서 상수값들을 loading해서 사용가능하게 함.</li>
+<li>exception_handler : request에 대한 예외처리를 담담함.</li>
+<li>jwtmiddleware : reqeust에 대한 인증처리 jwt를 사용</li>
+<li>logger : 로깅처리 config에 설정된 파일에 로그를 남기며 profile이 local일 경우에는 console에도 로그를 남김</li>
+<li>mongodb : 몽고db의 초기화와 close담담</li>
+<li>scheduelr : cron 작업을 관리</li>
+</ol>
+</li>
+</ul>
+<h3>3.9 Scheduler</h3>
+<ul>
+<li>
+<p>Lucy는 현재 4개의 작업을 cron동작으로 작업하도록 하고 있습니다.</p>
+</li>
+<li>
+<p><strong>SchedulerJobService</strong> 클래스와  <strong>Scheduler</strong> 클래스가 주요 클래스입니다.</p>
+</li>
+<li>
+<p>Scheduler는 Apscheduler의 BackgroundScheduler을 사용합니다.</p>
+</li>
+<li>
+<p>SchedulerJobService가  Scheduler클래스를 가지고 있으며 실제적으로 job등록등의 기능을 수행합니다.</p>
+</li>
+<li>
+<p>비동기작업이 아닙니다. 즉 scheduler에 의해서 구동되는 프로그램이 동작하고 있는 동안은 fastapi의 서비스가 지연됩니다.</p>
+</li>
+<li>
+<p>작업목록은 DB에  보관되며 Lucy가 기동될 때 Scheduler에 등록됩니다.</p>
+</li>
+<li>
+<p>SchedulerJobService의  가장 주요한 method는 <strong>register_system_jobs</strong>입니다.</p>
+<ol>
+<li>DB에서 등록된 job 데이터를 loading한다.</li>
+<li>jobmapper와 연결된 job을 Scheduler클래스에 등록한다.</li>
+</ol>
+</li>
+<li>
+<p>작업목록</p>
+</li>
+</ul>
+<ol>
+<li>site38_work : 커뮤니케이션38 스크래핑 (공모주 정보)</li>
+<li>holiday_godata : 휴일정보</li>
+<li>fil_ls_stk_info :  LS stk_info 정보 채우기</li>
+<li>judal_fetch : <a href="https://www.judal.co.kr/">Judal사이트</a>에서 정보를 스크래핑</li>
+</ol>
+<h3>4.0 frontend framework</h3>
+<ul>
+<li>
+<p>template 엔진으로 handlebar를 사용했습니다.</p>
+</li>
+<li>
+<p>css framework로 bootstrap5를 사용했습니다.</p>
+</li>
+<li>
+<p>jQuery를 사용했습니다.</p>
+</li>
+<li>
+<p>page 이동의 router는 home_router입니다</p>
+</li>
+<li>
+<p>home_router는 다음과 같은 endpoint를 갖고 있습니다.
+- /main: 메인 페이지
+- /page: path에 해당하는 페이지를 가져와서 보낸다.
+- /template: path에 해당하는 html에서 body추출해서 jinja2처리한 JSON을 리턴
+- /login: 로그인 페이지
+- /logout: 로그아웃 페이지
+- /login: 로그인 프로세스</p>
+</li>
+<li>
+<p>페이지 rendering</p>
+<ul>
+<li>/page url에 path를 인자로 주어서 page를 이동하니다.</li>
+<li>예를 들어 /page?path=/ipo/ipo-card 일 경우 /frontend/views/template하위의 폴더 ipo의 ipo-card.html 을 jinja2로 rendeing해서 보여주게 됩니다.</li>
+</ul>
+<pre><code class="language-html">  &lt;li&gt;&lt;a class=&quot;nav-link&quot; href=&quot;/page?path=ipo/ipo-card&quot;&gt;공모주-상세&lt;/a&gt;&lt;/li&gt;  
+</code></pre>
+<ol>
+<li>base folder : /frontend/views/template</li>
+<li>base folder + path 값에 해당하는 html페이지를 찾음</li>
+<li>최종 ipo-card.html을 jinja2의 소스로 사용</li>
+<li>jinja2 로 rendering된 html을 리턴해 줌. 이때 rendering에 사용되는 값들은 아래와 같습니니다</li>
+</ol>
+</li>
+</ul>
+<pre><code class="language-python">    context = {
+        &quot;request&quot;: request, 
+        &quot;today&quot; : today,
+        &quot;page_path&quot;: path, 
+        &quot;user_id&quot;: current_user[&quot;user_id&quot;], 
+        &quot;user_name&quot;: current_user[&quot;user_name&quot;],
+        &quot;stk_code&quot; : stk_code
+    }
+    # id = ipo_calendar 와 같은 형식이고 이를 분리한다.
+    template_path = path.lstrip('/') 
+    template_page = f&quot;template/{template_path}.html&quot;
+    logger.debug(f&quot;template_page 호출됨: {template_page}&quot;)
+    return render_template(template_page, context)    
+</code></pre>
+<ul>
+<li>
+<p>template rendering</p>
+<ul>
+<li>template란 handlebar의 template를 의미합니다.</li>
+<li>상기 기술한 /page url에서 rendering되는 페이지는 실제적인 데이터를 갖고 있지 않습니다.</li>
+<li>단, document 가 준비되면 필요한 데이터를 가져오는 구조로 되어 있습니다.
+<ol>
+<li>화면에 보여줄 데이터를 가져온다.</li>
+<li>handlerbar를 이용해서 rendering.한다.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-javascript">    function display_mystocks() {
+        fetch(&quot;/api/v1/mystock&quot;)
+        .then(response =&gt; response.json())
+        .then(data =&gt; {
+            $(&quot;#list-area&quot;).empty();
+            //2. 가져온 데이터는 handlerbar를 이용해서 rendering한다.
+            var template = Handlebars.compile($(&quot;#mystock_list_template&quot;).html());
+            $(&quot;#list-area&quot;).html(template({list: data}));
+        })
+        .catch(error =&gt; {
+            console.log(error);
+        });
+    }
+    $(document).ready(function() {
+        ....
+        display_mystocks(); //1. 화면에 보여줄 데이터를 가져온다.
+    });
+</code></pre>
+<ul>
+<li>/template url
+<ul>
+<li>상기 기술한 기본적인 페이지 rendering외에 /template url로 handlebar의 소스 script를  가져와서 사용 할 수 있습니다.</li>
+<li>handlebar 소스 script가 너무 복잡할 경우, 페이지에 너무 많은 handlerbar 소스 script가 존재할 경우, 여러 곳에서 사용하는 handlerbar 소스 script일 경우 유용합니다.</li>
+</ul>
+</li>
+</ul>
+<h3>4.1 frontend 주요 javascript 모듈</h3>
+<ul>
+<li>
+<p>billboard_candle_chart.js : naver에서 제공하는 open source <a href="https://naver.github.io/billboard.js/release/latest/doc/">billboard</a>를 사용하여 candle 챠트를 그리는 모듈</p>
+</li>
+<li>
+<p>calendar-utiliity.js : 달력을 그리고 해당하는 날짜의 ipo정보를 표시</p>
+</li>
+<li>
+<p>common.js : 프로젝트 전반에 걸쳐서 사용되는 javascript utility함수들 모음</p>
+</li>
+<li>
+<p>fetch-util.js : Lucy에서는 javascript자체의 fetch함수를 사용하며 그 fetch함수를 베이스로 만든 유틸리티 함수들</p>
+</li>
+<li>
+<p>handlebar-helpers.js : handlebar 헬퍼함수 모음</p>
+</li>
+<li>
+<p>ipo_helper : IPO용 handlebar 헬퍼함수 모음</p>
+</li>
+<li>
+<p>lucy_main.js : lucy에서 공통으로 사용되는 화면과 관련된 javascript함수들</p>
+<ul>
+<li>매수/매도 canvas 함수</li>
+<li>alert 함수</li>
+<li>회사정보 canvas 함수</li>
+</ul>
+<pre><code class="language-javascript">  window.showBuySellCanvas = showBuySellCanvas;
+  window.showToastError = showToastError;
+  window.showCompanyCanvas = showCompanyCanvas;
+  window.showAlertError = showAlertError;
+</code></pre>
+<ul>
+<li>lucy_websocket.js : 서버 (lucy backend)로부터 받는 websocket 데이터를 위한 함수들</li>
+<li>tab-manager: tab ui를 위한 함수</li>
+</ul>
+</li>
+</ul>
+<h3>4.2 데이터 베이스</h3>
+<ul>
+<li>Lucy는 <a href="https://www.mongodb.com/ko-kr">몽고데이터베이스</a>를 사용합니다.</li>
+<li>몽고DB를 async 방식으로 사용하기 위해서 <a href="https://beanie-odm.dev/">beanie</a>사용</li>
+<li>DB명 : stockdb</li>
+<li>Collections 과 대응하는 schema
+<ul>
+<li>Config (config_model) : 설정정보를 저장</li>
+<li>EventDays (eventdays_model) : GODATA에서 open api를 통해서 가져온 휴일정보</li>
+<li>Ipo (ipo_model) : ipo 일정정보 및 상세 정보등 커뮤니케이션38사이트에서 얻은 ipo관련 정보</li>
+<li>IpoHistory (ipo_history_model) : 상장된 ipo일정에 대해서 예상체결가를 산정하기 위한 정보</li>
+<li>SchedulerJob (schduler_job_model) : 스케줄러에 등록될 job 정보</li>
+<li>Users (user_model) : 사용자의 계좌정보등</li>
+</ul>
+</li>
+</ul>
+<h2>4. 사용자 화면 설명</h2>
+<h3>4.1 개요</h3>
+<p>사용자 화면은 처음 기획과는 달리 법인사용자가 아닌 개인 사용자로 작성되었으며, 매수/매도 주문, 체결통보외에 IPO관련 메뉴를 갖고 있으며, 미완성기능으로 단타머신의 기능이 있습니다.
+또한, KIS,LS의 여러 api를 호출하여 데이터를 가져와서 보여주는 기능이 있습니다.
+그러나 제공되는 데이터의 2차 가공 및 의미있는 판단을 내리는 기능은 없습니다.</p>
+<p>또한 단타머신은 자동으로 매수/매도의 기능을 수행하고 telegram을 통해서 사용자에게 information을 주도록 기획했으나 실효성의 문제(즉 자동으로 수행시 손실이 클 수 있음)와
+시간상의 문제로 개발 중에 프로젝트가 되게 되었습니다.</p>
+<h3>4.2 메뉴 구성 및 설명</h3>
+<ul>
+<li>
+<p>공모주</p>
+<ul>
+<li>공모주 - 상세 : 공모주 내용 표시</li>
+<li>공무주 - 달력 : 달력 상에 공모주 일정 (청약일,환불일,상장일) 표시</li>
+<li>공모주 - 기록 : 지난 공모주와 상장일 최고액 표시 및 예상체결가 공식 산출</li>
+</ul>
+</li>
+<li>
+<p>종목찾기</p>
+<ul>
+<li>My Stock : 주식 종목을 보유/관심/단타로 구분하여 표시, 10초마다 현재가를 갱신</li>
+<li>주달검색  : 주달사이트에서 scrapping한 데이터로 검색</li>
+<li>외국인 매매조목 : 외국인 매매 중 상위 종목 표시</li>
+<li>증권사-투자의견 : 증권사의 투자의견를 회원사별 괴리율 별로 표시</li>
+<li>KIS-관심종목 : KIS(한국투자증권)의 HTS를 통해서 추가한 관심그룹과 속한 종목 표시</li>
+<li>KIS-조건식 : KIS의 HTS를 통해서 등록한 조건식의 조회 및 조건식을 수행한 결과 표시</li>
+<li>KIS-상위종목 : KIS의 시간외호가잔량과 호가잔량을 조회</li>
+<li>LS-상위종목 : LS증권사의 등락률,거래량 등으로 금일/전일의 상위종목 조회</li>
+</ul>
+</li>
+<li>
+<p>단타머신 : 단타머신 관리페이지</p>
+</li>
+<li>
+<p>한국투자증권</p>
+<ul>
+<li>KIS 계좌 : 등록된 한국투자증권 계좌의 상태 및 보유 종목에 대한 금액정보 표시</li>
+<li>일별주문체결 : 일자로 체결된 정보 조회</li>
+</ul>
+</li>
+<li>
+<p>LS증권</p>
+<ul>
+<li>LS계좌 : 등록된 계좌의 상태와 보유 종목에 대한 금액정보 표시</li>
+<li>거래내역 : 일자로 거래내역 및 체결정보 조회</li>
+</ul>
+</li>
+<li>
+<p>나의 주식정보 : 주식종목을 보유/관심/단타로 분류하여 현재가를 표시, 10초마다 가격정보를 실제 가격으로 조회</p>
+</li>
+<li>
+<p>설정 및 스케줄 : 설정 및 Scheduler 정보 표시 및 수정</p>
+</li>
+<li>
+<p>사용자 정보 : 사용자의 기본정보와 계좌정보를 표시 수정</p>
+</li>
+</ul>
+<h3>4.3 화면 캡쳐 및 설명</h3>
+<h4>4.3.1 로그인 / 메인화면</h4>
+<ul>
+<li>
+<p><strong>로그인</strong>
+<img src="./images/login.png" alt="로그인" /></p>
+<ul>
+<li>id/pw 로그인시 /login url호출 jwt token을 발급받음.</li>
+<li>fulldown 메뉴를 사용</li>
+<li>login사용자 표시</li>
+</ul>
+</li>
+<li>
+<p><strong>메인화면</strong>
+<img src="./images/main.png" alt="메인화면" /></p>
+<ul>
+<li>fulldown menu를 사용함.</li>
+<li>나의 주식 상황과 Websocket연결상태를 표시</li>
+</ul>
+</li>
+</ul>
+<h4>4.3.2 공모주</h4>
+<ul>
+<li>
+<p><strong>공모주-목록(상세)</strong>
+<img src="./images/ipo-list.png" alt="ipo-list" /></p>
+<ul>
+<li>커뮤니케이션38에서 scrapping한 데이터를 보여줌.</li>
+<li>스팩은 다른 스타일로 보여줌</li>
+<li>예상체결가를 구할 수 있는 것은 IPO과거데이터 기록을 참조하여 생산한 수식으로 계산하여 산출</li>
+<li>찾기기능과 최근 scrapping일시를 보여줌</li>
+</ul>
+</li>
+<li>
+<p><strong>공모주-달력</strong>
+<img src="./images/ipo-calendar.png" alt="ipo-calendar" /></p>
+<ul>
+<li>달력에 공모주 청약일,환불일,상장일을 표시</li>
+</ul>
+</li>
+<li>
+<p><strong>공모주 과거데이터 기록</strong>
+<img src="./images/ipo-history.png" alt="ipo-hisotory" /></p>
+<ul>
+<li>공모주 상장일에 최고체결가를 확인해서 수식을 만듬.</li>
+<li>수식은 선형회귀식을 사용함.</li>
+<li>인자로 사용된 항목은 확정공모가, 매출액, 기관경쟁률, 의무보유확약임.</li>
+<li>수식만들기버튼을 클릭하면 현재까지 축적된 데이터로 선형회귀식을 만듬.</li>
+<li>만들어진 데이터는 db의 Config collection에 저장됨</li>
+</ul>
+<pre><code class="language-json">  {
+  &quot;key&quot;: &quot;ipo_expected_cost_express&quot;,
+  &quot;mode&quot;: &quot;System&quot;,
+  &quot;value&quot;: &quot;(2.925374714862828e-05 * 매출액) + (0.0016757608759126886 * 기관경쟁률) + (0.008617509095604907 * 의무보유확약) + 0.6401964822960602&quot;,
+  &quot;note&quot;: &quot;체결예상가_배율을  매출액, 기관경쟁률, 의무보유확약 3가지로 공모가의 배율을 구하는 공식&quot;,
+  &quot;editable&quot;: true
+  }
+</code></pre>
+<ul>
+<li>수식은 ipo-목록(상세)에서 예상체결가를 구하는데 사용됨</li>
+</ul>
+<h4>4.3.3 종목찾기</h4>
+<ul>
+<li>
+<p>종목찾기는 투자종목을 선택하기 위해서 여러가지 소스에서 자료를 검색합니다.</p>
+</li>
+<li>
+<p>검색한 자료에서 선택하여 나의 주식(My Stock)에 추가하여 관리합니다.</p>
+</li>
+<li>
+<p><strong>나의 주식</strong>
+<img src="./images/mystock.png" alt="mystock" /></p>
+</li>
+<li>
+<p>나의 주식은 보유,관심,단타 3가지 분류에 다중으로 소속되며 현재가는 장중일때 10초마다 갱신합니다.</p>
+</li>
+<li>
+<p>보유버튼은 현재 사용자의 KIS,LS의 계좌내용을 검색해서 자동으로 보유 태그를 각 주식 종목에 부여합니다.</p>
+</li>
+<li>
+<p><strong>주달검색</strong></p>
+</li>
+<li>
+<p><img src="./images/judal.png" alt="judal" /></p>
+</li>
+<li>
+<p><a href="https://www.judal.co.kr/">주달</a>사이트의 내용을 scheduler에서 정해진 시간에 scrapping하여 data/judal폴더에 날짜별로 저장합니다.</p>
+</li>
+<li>
+<p>저장된 데이터는 csv파일의 형태로 저장됩니다</p>
+</li>
+<li>
+<p>저장된 데이터 중 가장 최근의 데이터를 사용하여 각 종목을 검색할 수 있습니다.</p>
+</li>
+<li>
+<p><strong>외국인 매매 종목</strong>
+<img src="./images/foregin.png" alt="외국인매매종목" /></p>
+</li>
+<li>
+<p>한국투자증권의 api중 '국내기관_외국인-&gt;매매종목가집계'을 이용하여 데이터를 보여준다.</p>
+</li>
+<li>
+<p><strong>증권사 투자의견</strong>
+<img src="./images/opniion.png" alt="증권사투자의견" /></p>
+</li>
+<li>
+<p>한국투자증권의 api중 '국내주식 종목투자의견'을 이용하여 데이터를 보여준다.</p>
+</li>
+<li>
+<p><strong>KIS관심종목 그룹</strong>
+<img src="./images/kis_interisting.png" alt="kis관심종목" /></p>
+</li>
+<li>
+<p>KIS(한국투자증권)의 HTS에서 관심종목 그룹을 만들고 각 그룹에 종목을 추가했을 경우</p>
+</li>
+<li>
+<p>그룹의 목록과 그룹별로 추가된 종목을 표시합니다.</p>
+</li>
+<li>
+<p><strong>KIS 조건식</strong>
+<img src="./images/kis-condition.png" alt="kis-condition" /></p>
+</li>
+<li>
+<p>KIS HTS에서 추가한 조건식리스트를 보여주고 클릭시 조건식이 수행되면서 검색한 종목들을 표시합니다.</p>
+</li>
+<li>
+<p><strong>KIS 상위종목</strong>
+<img src="./images/kis-rank.png" alt="kis-rank" /></p>
+</li>
+<li>
+<p>한국투자증권의 api중 '시간외호가잔량순위'과 '호가잔량순위' api를 이용하여 종목을 검색하여 표시합니다.</p>
+</li>
+<li>
+<p>LS-상위종목
+<img src="./images/ls-rank.png" alt="ls-rank" /></p>
+</li>
+<li>
+<p>LS 증권에서 제공하는 각 지수별로 상위종목을 표시합니다.</p>
+</li>
+<li>
+<p>지수는 등락률, 거래량, 전일동시간대비 거래급증, 시간외등락율, 시간외거래량, 예상체결량, 당일가예상등락율, 거래대금 입니다.</p>
+</li>
+</ul>
+<h4>4.3.4 한국투자증권</h4>
+<ul>
+<li>
+<p>한국투자증권 계좌에 대한 정보를 표시합니다.</p>
+</li>
+<li>
+<p><strong>KIS계좌</strong>
+<img src="./images/kis-account.png" alt="kis계좌" /></p>
+</li>
+<li>
+<p>사용자의 한국투자증권 계좌의 계좌정보(예수금등)와 보유 종목의 목록과 종목의 현재가 등을 표시합니다.</p>
+</li>
+<li>
+<p>만약 매수/매도의 현재가가 아닌 금액으로 주문을 넣었을 경우 오늘의 미체결에 표시합니다.</p>
+</li>
+<li>
+<p>주식 일별주문체결
+<img src="./images/kis-chegeol.png" alt="일별주문체결" /></p>
+</li>
+<li>
+<p>KIS계좌에서 체결된 정보를 일자별로 조회합니다.</p>
+</li>
+</ul>
+<h3>4.3.5 LS증권</h3>
+<ul>
+<li>
+<p>LS증권 계좌에 대한 정보를 표시합니다.</p>
+</li>
+<li>
+<p><strong>LS계좌</strong>
+<img src="./images/ls-account.png" alt="LS계좌" /></p>
+</li>
+<li>
+<p>사용자의 LS계좌에 대한 예수금등의 정보와 보유 종목의 목록과 종목의 현재가 등을 표시합니다.</p>
+</li>
+<li>
+<p><strong>LS증권 거래내역</strong>
+<img src="./images/ls-chegeul.png" alt="LS거래내역" /></p>
+</li>
+<li>
+<p>LS계좌에서 체결된 정보 및 거래내역을 조회합ㅈ니다.</p>
+</li>
+</ul>
+<h3>4.3.6 매수/매도</h3>
+<ul>
+<li>매수/매도는 모든 메뉴에서 호출될 수 있도록 구현되어 있으며 bootstrap의 canvas를 이용해서 UI를 구현했습니다.
+<img src="./images/buysell.png" alt="매수매도" /></li>
+<li>증권사를 선택하고 상품번호(stock code)를 입력 후 수량과 금액을 입력한 후 매수/매도 버튼을 클릭함으로서 해당 증권사에 주문을 넣게 됩니다.</li>
+<li>이때 금액이 0일 경우 시장가로 주문이 들어가게 됩니다.</li>
+<li>현재 메뉴에 따라서 증권사가 자동선택될 수 있으며 매수/매도 수량은 기본적으로 1로, 시장가 0으로 설정됩니다.</li>
+</ul>
+<h3>4.3.7 fulldown 오른쪽 메뉴</h3>
+<ul>
+<li>fulldown 메뉴의 오른쪽 메뉴는 문자열이 아니라 아이콘으로 이루어져 있습니다.
+<img src="./images/right-menu.png" alt="right-menu" />
+-순서대로 다음과 같은 기능입니다.</li>
+</ul>
+<ol>
+<li>별표 : 나의 주식(My Stock)</li>
+<li>새로고침 : 각 메뉴마다 현재가가 있는 경우 모든 페이지에서 자동으로 갱신되지 않을 경우에 사용가능</li>
+<li>날짜와 요일 : 거래일와 거래시간에 따라서 각 화면이 달리 작용할 수 있습니다.</li>
+<li>설정 : 시스템 설정 사항와 스케줄러 설정 현황</li>
+<li>사용자 : 사용자 정보</li>
+</ol>
+<h3>4.3.8 설정</h3>
+<p><img src="./images/config.png" alt="config" /></p>
+<ul>
+<li>
+<p>Lucy는 상수값에 해당하는 값을 .env<profile>과 몽고db의 config collection에 넣어 두고 사용합니다.</p>
+</li>
+<li>
+<p>몽고db에서 관리하는 설정값을 조회, 편집가능합니다.</p>
+</li>
+<li>
+<p>설정값들은  Config collection에 저장됩니다.</p>
+</li>
+<li>
+<p>몽고db에서 관리하는 설정값</p>
+<ul>
+<li>ip_expected_cost_express : IPO의 예상체결가 공식 (IPO 과거기록에서 산출, IPO목록에서 예상체결가 산출)</li>
+<li>38-scrapping-time : 커뮤니케이션38에서 scrapping한 최종 시각 (Scheduler job site38_work에서 산축, IPO목록에서 사용)</li>
+</ul>
+</li>
+<li>
+<p>또한 설정메뉴에서는 Scheduler의 Job 리스트를 조회 편집할 수 있습니다</p>
+<ul>
+<li>scheduler job의 동작시간은 cron형태이며 편집가능합니다.</li>
+<li>설정된 cron job들
+<ul>
+<li>site38_work : <a href="https://www.38.co.kr/">커뮤니케이션38</a> 사이트 스크랩</li>
+<li>holiday_godata : <a href="https://www.data.go.kr/">공공데이터</a>에서 제공하는 휴일정보</li>
+<li>LS_stk_info채우기 : LS정보의 종목정보, LS증권은 6자리의 stkcode외에 자신들이 지정한 코드를 api에서 사용하도록 강제함으로 이 정보를 채워두었다가 사용하게 됨.</li>
+<li>juda_fetch : <a href="https://www.judal.co.kr/">주달</a>사이트에서 scrapping</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>4.3.9 사용자정보</h3>
+<p><img src="./images/user.png" alt="user" /></p>
+<ul>
+<li>사용자 정보를 조회, 편집할 수 있습니다.</li>
+<li>사용자 정보는 몽고db의 Users collection에 저장됩니다.</li>
+<li>사용자의 기본정보 : 로그인시 사용</li>
+<li>키-값 : 사용자의 open api 신청 후 받은 키 값
+<ul>
+<li>공공데이터에서 발급</li>
+<li>DART에서 발급</li>
+<li>Telegram 에서 생성</li>
+</ul>
+</li>
+<li>KIS, LS의 계좌번호 및 암호</li>
+<li>KIS, LS의 APP_KEY와 SECRET_KEY</li>
+<li>KIS, LS의 TOKEN은 발급받은 후 발급시간과 함께 저장되어 24시간 이내에서는 이 값을 사용하게 됩니다.</li>
+</ul>
+</li>
+</ul>
+<h2>5. 배포 및 운영</h2>
+<h3>5.1 배포 전략</h3>
+<ul>
+<li>배포는 기본적으로 docker를 사용하여 linux에서 운영하는 것을 전제로 수립되었습니다.
+<ul>
+<li>배포 서버에서는 docker가 설치되어 있어야 함.</li>
+</ul>
+</li>
+<li>mongodb가 linux에 이미 설정되어 있지 않다는 가정하에 docker-compose가 작성되었습니다.</li>
+<li>Docker파일은 scrapping에 필요한 설정도 포함되어 있습니다.</li>
+</ul>
+<h3>5.2 docker-compose</h3>
+<pre><code class="language-yml">version: '3.8'
+
+services:
+  backend:
+    build: .
+    container_name: lucy-backend
+    ports:
+      - &quot;8000:8000&quot;
+    depends_on:
+      - mongo
+    networks:
+      - lucy-network
+    environment:
+      - LUCY_MODE=real
+    volumes:
+      - ./backend:/backend
+      - ./frontend:/frontend
+      - /home/kdy987/fastapi/lucy/log:/log
+      - /home/kdy987/fastapi/lucy/data:/data
+      - /home/kdy987/fastapi/lucy/files:/files
+      - /etc/localtime:/etc/localtime:ro  # 호스트 시간대 설정 마운트      
+    restart: always  # 서버 재시작 시 항상 컨테이너를 재시작
+
+  mongo:
+    image: mongo:4.4
+    container_name: lucy-mongo
+    ports:
+      - &quot;27017:27017&quot;
+    volumes:
+      - /home/kdy987/fastapi/mongodb:/data/db
+      - /root/fastapi-data/kdydata:/data/import
+      - /etc/localtime:/etc/localtime:ro  # 호스트 시간대 설정 마운트            
+    networks:
+      - lucy-network
+    command: &gt;
+      bash -c &quot;
+      mongod --bind_ip_all &amp;
+      sleep 5 &amp;&amp;
+      if ! mongo stockdb --eval 'db.Config.findOne()'; then
+        mongoimport --host localhost --db stockdb --collection Config --file /data/import/stockdb.Config.json --jsonArray &amp;&amp;
+        mongoimport --host localhost --db stockdb --collection SchedulerJob --file /data/import/stockdb.SchedulerJob.json --jsonArray &amp;&amp;
+        mongoimport --host localhost --db stockdb --collection Users --file /data/import/stockdb.Users.json --jsonArray
+      fi &amp;&amp;
+      tail -f /dev/null
+      &quot;
+    restart: always  # 서버 재시작 시 항상 컨테이너를 재시작  
+volumes:
+  mongo_data:
+
+networks:
+  lucy-network:
+
+</code></pre>
+<pre><code>- 몽고db의 port는 기본포트를 사용합니다.
+- 포트는 변경가능합니다. 기존 포트와 충돌 확인이 필요합니다.
+- volumes에 의해 host machine에 log, data, files를 위한 폴더가 존재해야 합니다
+- mongodb의 초기화에 3개의 collection이 이미  json으로 만들어져서 loading되어야 합니다.
+</code></pre>
+<h3>5.3 Dockerfile</h3>
+<pre><code class="language-text">FROM python:3.12-slim
+
+# 필요한 패키지 설치
+RUN apt-get update &amp;&amp; apt-get install -y \
+  wget \
+  unzip \
+  curl \
+  gnupg2 \
+  --no-install-recommends
+
+# Google Chrome 설치
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - &amp;&amp; \
+  echo &quot;deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main&quot; &gt; /etc/apt/sources.list.d/google-chrome.list &amp;&amp; \
+  apt-get update &amp;&amp; apt-get install -y google-chrome-stable
+
+# ChromeDriver 설치
+RUN CHROME_DRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE` &amp;&amp; \
+  wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip &amp;&amp; \
+  unzip /tmp/chromedriver.zip -d /usr/local/bin/ &amp;&amp; \
+  rm /tmp/chromedriver.zip
+
+RUN pip install --upgrade pip
+
+# 작업 디렉토리 설정
+WORKDIR /
+
+# 필요한 라이브러리 설치를 위해 requirements.txt 파일을 복사
+COPY . .
+
+# 의존성 패키지 설치
+RUN pip install --no-cache-dir -r requirements.txt
+
+
+# FastAPI 실행 (main.py에서 FastAPI 객체를 정의했을 때의 파일 경로)
+CMD [&quot;uvicorn&quot;, &quot;backend.main:app&quot;, &quot;--host&quot;, &quot;0.0.0.0&quot;, &quot;--port&quot;, &quot;8000&quot;, &quot;--log-level&quot;, &quot;debug&quot;]
+
+</code></pre>
+<ul>
+<li>python:3.12-slim  베이스 docker입니다.</li>
+<li>scrapping을 위한 driver를 설치합니다</li>
+</ul>
+</div>
+
+        <!-- 추가 안내 -->
+        <div style="background-color: #f0f9ff; border-left: 4px solid #0ea5e9; padding: 8px 12px; margin-top: 16px; font-size: 13px; color: #0c4a6e;">
+            <p style="margin: 0;">
+                <strong>⌨️ 단축키:</strong> Home(맨위로) | PgUp/PgDn(페이지 이동) | F2(목차) | Enter/Shift+Enter(검색 이동) | ESC(닫기)
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // 문서 정보 토글
+        function toggleDocInfo() {
+            const docInfoSection = document.getElementById('docInfoSection');
+            const toggleBtnDesktop = document.getElementById('toggleDocInfoBtn');
+            const toggleBtnMobile = document.getElementById('toggleDocInfoBtnMobile');
+
+            docInfoSection.classList.toggle('collapsed');
+            if (toggleBtnDesktop) {
+                toggleBtnDesktop.classList.toggle('collapsed');
+            }
+            if (toggleBtnMobile) {
+                toggleBtnMobile.classList.toggle('collapsed');
+            }
+        }
+
+        // 모바일 메뉴 토글
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('open');
+        }
+
+        // 모바일 메뉴 외부 클릭시 닫기
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const toggleBtnMobile = document.getElementById('toggleDocInfoBtnMobile');
+
+            if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target) && !toggleBtnMobile.contains(event.target)) {
+                mobileMenu.classList.remove('open');
+            }
+        });
+
+        // 원본 다운로드
+        function downloadOriginal() {
+            const hashcode = 'c1dd492fb2a6e923f7a6fa0701eb80d6';
+            const filename = 'lucy.md';
+
+            if (hashcode && filename) {
+                // filename에서 확장자 추출
+                const extension = filename.split('.').pop().toLowerCase();
+                // FileController를 통해 캐시된 원본 파일 다운로드
+                const downloadUrl = '/aview/file/' + hashcode + '.' + extension +
+                                  '?download=true&name=' + encodeURIComponent(filename);
+                downloadFile(downloadUrl, filename);
+            } else {
+                alert('원본 문서의 정보가 없습니다.');
+            }
+        }
+
+        // 파일 다운로드 헬퍼 함수
+        function downloadFile(url, filename) {
+            const link = document.createElement('a');
+            link.href = url;
+            if (filename) {
+                link.download = filename;
+            }
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // 키보드 단축키 (Ctrl+S / Cmd+S: 다운로드)
+        document.addEventListener('keydown', function(event) {
+            if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+                event.preventDefault();
+                downloadOriginal();
+            }
+        });
+
+        // 초기화 및 코드 하이라이팅
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Markdown Viewer loaded');
+            
+            // Highlight.js 초기화
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+        });
+    </script>
+    
+    <!-- Debug Info Console Log -->
+    <script>
+        console.log('%c🔍 AView Document Info', 'color: #0066cc; font-weight: bold; font-size: 14px;');
+        console.log('Generated:', '2025-11-25 09:14:43');
+        console.log('Hashcode:', 'c1dd492fb2a6e923f7a6fa0701eb80d6');
+        console.log('Filename:', 'lucy.md');
+        console.log('Template:', 'markdown.html');
+        console.log('─'.repeat(50));
+    </script>    
+    
+    <!-- Raw Markdown Content (hidden) -->
+    <script type="text/plain" id="rawMarkdownSource"># 1. 문서 개요 (Heading Level 1)
+
+이 문서는 **마크다운 뷰어를 테스트**하기 위한 종합 샘플입니다.  
+다양한 문법 요소를 포함하고 있으므로, 렌더링 결과를 비교·검증하는 용도로 사용할 수 있습니다.
+
+> 💡 *Tip*: 이 문서에는 CommonMark 기본 문법 + GitHub Flavored Markdown(GFM)에서 자주 쓰는 기능을 최대한 포함했습니다.[^about]
+
+---
+
+## 1.1. 헤딩(Heading) 테스트
+
+### 1.1.1. H3 제목
+
+#### 1.1.1.1. H4 제목
+
+##### 1.1.1.1.1. H5 제목
+
+###### 1.1.1.1.1.1. H6 제목
+
+---
+
+# 2. 텍스트 스타일 및 인라인 요소
+
+일반 텍스트입니다.
+
+- *이탤릭* (italic)
+- **볼드** (bold)
+- ***볼드+이탤릭*** (bold + italic)
+- ~~취소선 (strikethrough)~~
+- `inline code`
+- <sub>아래첨자</sub>와 <sup>위첨자</sup>  
+- 이모지: 😀 😎 🚀  
+
+문장 안에서 **굵게**, *기울임*, 그리고 `코드`를 섞어서 사용할 수도 있습니다.  
+HTML 태그를 사용한 <span style="color: red; font-weight:bold;">강조 텍스트 (HTML)</span> 도 일부 렌더러에서는 지원됩니다.
+
+특수 문자 이스케이프:
+
+- 별표: \*literal asterisk\*
+- 샵: \# literal hash
+- 백슬래시: \\
+
+---
+
+# 3. 링크 (Links)
+
+## 3.1. 인라인 링크
+
+- [OpenAI 홈페이지](https://openai.com/)
+- [GitHub](https://github.com/)
+- [위키백과(한국어)](https://ko.wikipedia.org/)
+
+## 3.2. 참조 스타일 링크 (Reference-style links)
+
+이것은 [참조 링크 A][ref-a] 이고, 이것은 [참조 링크 B][ref-b] 입니다.
+
+[ref-a]: https://www.markdownguide.org/basic-syntax/ "Markdown Guide"
+[ref-b]: https://commonmark.org/ "CommonMark 공식 사이트"
+
+## 3.3. 자동 링크 (Autolinks)
+
+URL을 직접 쓰면 대부분의 뷰어에서 자동으로 링크 처리됩니다.
+
+- <https://example.com>
+- <mailto:someone@example.com>
+
+---
+
+# 4. 이미지 (Images)
+
+## 4.1. 기본 이미지 (살아있는 실제 URL)
+
+아래 이미지는 위키미디어 공용의 PNG 투명도 예제입니다.
+![이미지](https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png)
+```md
+![PNG 예제 이미지](https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png)
+```
+
+# 5. 소스코드
+
+## 자바
+```java
+public class Hello {
+    public static void main(String[] args) {
+        System.out.println("Hello, Markdown Viewer!");
+
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Square of " + i + " is " + (i * i));
+        }
+    }
+}
+```
+
+## GO
+
+```go
+package main
+
+import (
+    "fmt"
+)
+
+func fib(n int) int {
+    if n <= 1 {
+        return n
+    }
+    return fib(n-1) + fib(n-2)
+}
+
+func main() {
+    for i := 0; i < 10; i++ {
+        fmt.Printf("%d ", fib(i))
+    }
+}
+```
+    </script>
+    
+    <!-- Floating TOC Button -->
+    <button id="tocFloatingBtn" title="목차">
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </button>
+
+    <!-- Top Button -->
+    <button id="topBtn" title="맨 위로 이동 (Home)">
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
+    <!-- Image Lightbox -->
+    <div class="lightbox-overlay" id="lightboxOverlay">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <img class="lightbox-content" id="lightboxImage" src="" alt="">
+    </div>
+
+    <!-- TOC Drawer -->
+    <div class="toc-overlay" id="tocOverlay"></div>
+    <div class="toc-drawer" id="tocDrawer">
+        <div class="toc-header">
+            <div class="toc-header-top">
+                <span>목차</span>
+                <button class="toc-close-btn" id="tocCloseBtn">&times;</button>
+            </div>
+        </div>
+        <div class="toc-content">
+            <ul class="toc-list" id="tocList"></ul>
+        </div>
+    </div>
+
+    <script>
+        // --- Control Box Logic ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const markdownBody = document.querySelector('.markdown-body');
+            const markdownContainer = document.getElementById('markdownContainer');
+            
+            // State
+            let currentFontSize = 16;
+            let currentLineHeight = 1.6;
+            let searchMatches = [];
+            let currentMatchIndex = -1;
+            let lastSearchQuery = '';
+            
+            // Font Size
+            function updateFontSize(size) {
+                currentFontSize = size;
+                markdownBody.style.fontSize = `${size}px`;
+                const resetBtn = document.getElementById('fontSizeReset');
+                if(resetBtn) resetBtn.textContent = `${size}px`;
+                const resetBtnMobile = document.getElementById('fontSizeReset-mobile');
+                if(resetBtnMobile) resetBtnMobile.textContent = `${size}px`;
+            }
+            
+            const fontSizeIncrease = document.getElementById('fontSizeIncrease');
+            if(fontSizeIncrease) fontSizeIncrease.addEventListener('click', () => updateFontSize(currentFontSize + 1));
+            
+            const fontSizeDecrease = document.getElementById('fontSizeDecrease');
+            if(fontSizeDecrease) fontSizeDecrease.addEventListener('click', () => updateFontSize(Math.max(10, currentFontSize - 1)));
+            
+            const fontSizeReset = document.getElementById('fontSizeReset');
+            if(fontSizeReset) fontSizeReset.addEventListener('click', () => updateFontSize(16));
+
+            // Mobile Font Size
+            const fontSizeIncreaseMobile = document.getElementById('fontSizeIncrease-mobile');
+            if(fontSizeIncreaseMobile) fontSizeIncreaseMobile.addEventListener('click', () => updateFontSize(currentFontSize + 1));
+            
+            const fontSizeDecreaseMobile = document.getElementById('fontSizeDecrease-mobile');
+            if(fontSizeDecreaseMobile) fontSizeDecreaseMobile.addEventListener('click', () => updateFontSize(Math.max(10, currentFontSize - 1)));
+            
+            const fontSizeResetMobile = document.getElementById('fontSizeReset-mobile');
+            if(fontSizeResetMobile) fontSizeResetMobile.addEventListener('click', () => updateFontSize(16));
+
+            // Font Family
+            const fontFamilySelect = document.getElementById('fontFamily');
+            if(fontFamilySelect) {
+                fontFamilySelect.addEventListener('change', (e) => {
+                    document.body.style.fontFamily = e.target.value;
+                    markdownBody.style.fontFamily = e.target.value;
+                });
+            }
+
+            // Background Color
+            const bgColorBtn = document.getElementById('bgColorBtn');
+            const bgColorMenu = document.getElementById('bgColorMenu');
+            
+            if(bgColorBtn && bgColorMenu) {
+                bgColorBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    bgColorMenu.classList.toggle('open');
+                });
+                
+                document.addEventListener('click', (e) => {
+                    if (!bgColorBtn.contains(e.target) && !bgColorMenu.contains(e.target)) {
+                        bgColorMenu.classList.remove('open');
+                    }
+                });
+            }
+            
+            document.querySelectorAll('.custom-color-option').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const color = e.target.dataset.color;
+                    document.body.classList.remove('dark-mode'); // Disable dark mode if specific color selected
+                    document.body.style.backgroundColor = color;
+                    markdownBody.style.backgroundColor = color;
+                    if(bgColorBtn) bgColorBtn.style.backgroundColor = color;
+                    if(bgColorMenu) bgColorMenu.classList.remove('open');
+                    
+                    // Update active state
+                    document.querySelectorAll('.custom-color-option').forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                });
+            });
+
+            // Dark Mode
+            function toggleDarkMode() {
+                document.body.classList.toggle('dark-mode');
+                const isDark = document.body.classList.contains('dark-mode');
+                if (isDark) {
+                    document.body.style.backgroundColor = '';
+                    markdownBody.style.backgroundColor = '';
+                } else {
+                    // Restore selected background color
+                    const activeColorBtn = document.querySelector('.custom-color-option.active');
+                    if (activeColorBtn) {
+                        const color = activeColorBtn.dataset.color;
+                        document.body.style.backgroundColor = color;
+                        markdownBody.style.backgroundColor = color;
+                    }
+                }
+            }
+            const toggleDarkModeBtn = document.getElementById('toggleDarkMode');
+            if(toggleDarkModeBtn) toggleDarkModeBtn.addEventListener('click', toggleDarkMode);
+            
+            const toggleDarkModeBtnMobile = document.getElementById('toggleDarkMode-mobile');
+            if(toggleDarkModeBtnMobile) toggleDarkModeBtnMobile.addEventListener('click', toggleDarkMode);
+
+            // Line Height
+            function updateLineHeight(val) {
+                currentLineHeight = val;
+                markdownBody.style.lineHeight = val;
+            }
+            const lineHeightIncrease = document.getElementById('lineHeightIncrease');
+            if(lineHeightIncrease) lineHeightIncrease.addEventListener('click', () => updateLineHeight(currentLineHeight + 0.1));
+            
+            const lineHeightDecrease = document.getElementById('lineHeightDecrease');
+            if(lineHeightDecrease) lineHeightDecrease.addEventListener('click', () => updateLineHeight(Math.max(1.0, currentLineHeight - 0.1)));
+            
+            const lineHeightReset = document.getElementById('lineHeightReset');
+            if(lineHeightReset) lineHeightReset.addEventListener('click', () => updateLineHeight(1.6));
+
+            // Fullscreen
+            const toggleFullscreenBtn = document.getElementById('toggleFullscreen');
+            if(toggleFullscreenBtn) {
+                toggleFullscreenBtn.addEventListener('click', () => {
+                    markdownContainer.classList.toggle('fullscreen-mode');
+                });
+            }
+
+            // Search
+            function performSearch(query) {
+                // Remove existing highlights
+                const marks = markdownBody.querySelectorAll('mark.search-highlight');
+                marks.forEach(mark => {
+                    const parent = mark.parentNode;
+                    parent.replaceChild(document.createTextNode(mark.textContent), mark);
+                    parent.normalize();
+                });
+                
+                searchMatches = [];
+                currentMatchIndex = -1;
+                lastSearchQuery = query;
+                
+                if (!query) {
+                    const counter = document.getElementById('searchCounter');
+                    if(counter) counter.textContent = '';
+                    const clearBtn = document.getElementById('searchClearBtn');
+                    if(clearBtn) clearBtn.classList.remove('visible');
+                    return;
+                }
+
+                // Recursive text node search
+                function getTextNodes(node) {
+                    let textNodes = [];
+                    if (node.nodeType === 3) {
+                        textNodes.push(node);
+                    } else {
+                        // Skip scripts and styles
+                        if (node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
+                            for (let child of node.childNodes) {
+                                textNodes = textNodes.concat(getTextNodes(child));
+                            }
+                        }
+                    }
+                    return textNodes;
+                }
+
+                const textNodes = getTextNodes(markdownBody);
+                let count = 0;
+                
+                textNodes.forEach(node => {
+                    const text = node.nodeValue;
+                    if (!text) return;
+                    
+                    const regex = new RegExp(query, 'gi');
+                    let match;
+                    const matches = [];
+                    while ((match = regex.exec(text)) !== null) {
+                        matches.push({ index: match.index, length: match[0].length, text: match[0] });
+                    }
+
+                    if (matches.length > 0) {
+                        const fragment = document.createDocumentFragment();
+                        let lastIndex = 0;
+                        matches.forEach(m => {
+                            fragment.appendChild(document.createTextNode(text.slice(lastIndex, m.index)));
+                            const mark = document.createElement('mark');
+                            mark.className = 'search-highlight';
+                            mark.textContent = m.text;
+                            fragment.appendChild(mark);
+                            searchMatches.push(mark); // Store match reference
+                            lastIndex = m.index + m.length;
+                            count++;
+                        });
+                        fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+                        node.parentNode.replaceChild(fragment, node);
+                    }
+                });
+
+                const counter = document.getElementById('searchCounter');
+                if(counter) counter.textContent = count > 0 ? `${count}건` : '0';
+                
+                // Show clear button
+                const clearBtn = document.getElementById('searchClearBtn');
+                if(clearBtn) clearBtn.classList.add('visible');
+
+                // Scroll to first match
+                if (searchMatches.length > 0) {
+                    currentMatchIndex = 0;
+                    scrollToMatch(0);
+                    updateCurrentHighlight();
+                }
+            }
+
+            function scrollToMatch(index) {
+                if (index >= 0 && index < searchMatches.length) {
+                    const match = searchMatches[index];
+                    match.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+
+            function updateCurrentHighlight() {
+                searchMatches.forEach((match, idx) => {
+                    if (idx === currentMatchIndex) {
+                        match.classList.add('current');
+                    } else {
+                        match.classList.remove('current');
+                    }
+                });
+                
+                const counter = document.getElementById('searchCounter');
+                if(counter && searchMatches.length > 0) {
+                    counter.textContent = `${currentMatchIndex + 1}/${searchMatches.length}`;
+                }
+            }
+
+            function findNext() {
+                if (searchMatches.length === 0) return;
+                currentMatchIndex = (currentMatchIndex + 1) % searchMatches.length;
+                scrollToMatch(currentMatchIndex);
+                updateCurrentHighlight();
+            }
+
+            function findPrevious() {
+                if (searchMatches.length === 0) return;
+                currentMatchIndex = (currentMatchIndex - 1 + searchMatches.length) % searchMatches.length;
+                scrollToMatch(currentMatchIndex);
+                updateCurrentHighlight();
+            }
+
+            const searchBtn = document.getElementById('searchBtn');
+            if(searchBtn) searchBtn.addEventListener('click', () => {
+                performSearch(document.getElementById('searchInput').value);
+            });
+            
+            const searchInput = document.getElementById('searchInput');
+            if(searchInput) {
+                searchInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (searchInput.value !== lastSearchQuery) {
+                            performSearch(searchInput.value);
+                        } else {
+                            if (e.shiftKey) {
+                                findPrevious();
+                            } else {
+                                findNext();
+                            }
+                        }
+                    } else if (e.key === 'Delete') {
+                        // Clear search on Delete key
+                        searchInput.value = '';
+                        performSearch('');
+                    }
+                });
+            }
+            
+            const searchClearBtn = document.getElementById('searchClearBtn');
+            if(searchClearBtn) searchClearBtn.addEventListener('click', () => {
+                document.getElementById('searchInput').value = '';
+                performSearch('');
+            });
+            
+            // Mobile Search
+            const searchBtnMobile = document.getElementById('searchBtn-mobile');
+            if(searchBtnMobile) searchBtnMobile.addEventListener('click', () => {
+                performSearch(document.getElementById('searchInput-mobile').value);
+            });
+            
+            const searchInputMobile = document.getElementById('searchInput-mobile');
+            if(searchInputMobile) searchInputMobile.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') performSearch(e.target.value);
+            });
+
+            // Mobile Font Family
+            const fontFamilySelectMobile = document.getElementById('fontFamily-mobile');
+            if(fontFamilySelectMobile) {
+                fontFamilySelectMobile.addEventListener('change', (e) => {
+                    document.body.style.fontFamily = e.target.value;
+                    markdownBody.style.fontFamily = e.target.value;
+                });
+            }
+
+            // Mobile Line Height
+            const lineHeightIncreaseMobile = document.getElementById('lineHeightIncrease-mobile');
+            if(lineHeightIncreaseMobile) lineHeightIncreaseMobile.addEventListener('click', () => updateLineHeight(currentLineHeight + 0.1));
+            
+            const lineHeightDecreaseMobile = document.getElementById('lineHeightDecrease-mobile');
+            if(lineHeightDecreaseMobile) lineHeightDecreaseMobile.addEventListener('click', () => updateLineHeight(Math.max(1.0, currentLineHeight - 0.1)));
+            
+            const lineHeightResetMobile = document.getElementById('lineHeightReset-mobile');
+            if(lineHeightResetMobile) lineHeightResetMobile.addEventListener('click', () => updateLineHeight(1.6));
+
+            // Settings Save/Reset (Desktop)
+            const saveSettingsBtn = document.getElementById('saveSettings');
+            if(saveSettingsBtn) saveSettingsBtn.addEventListener('click', () => {
+                const settings = {
+                    fontSize: currentFontSize,
+                    lineHeight: currentLineHeight,
+                    fontFamily: document.getElementById('fontFamily').value,
+                    darkMode: document.body.classList.contains('dark-mode'),
+                    bgColor: document.querySelector('.custom-color-option.active')?.dataset.color || '#ffffff',
+                    tocPosition: document.querySelector('input[name="tocPosition"]:checked')?.value || 'right'
+                };
+                localStorage.setItem('mdViewerSettings', JSON.stringify(settings));
+                alert('설정이 저장되었습니다.');
+            });
+
+            const resetSettingsBtn = document.getElementById('resetSettings');
+            if(resetSettingsBtn) resetSettingsBtn.addEventListener('click', () => {
+                localStorage.removeItem('mdViewerSettings');
+                location.reload();
+            });
+
+            // Settings Save/Reset (Mobile)
+            const saveSettingsBtnMobile = document.getElementById('saveSettings-mobile');
+            if(saveSettingsBtnMobile) saveSettingsBtnMobile.addEventListener('click', () => {
+                const settings = {
+                    fontSize: currentFontSize,
+                    lineHeight: currentLineHeight,
+                    fontFamily: document.getElementById('fontFamily-mobile').value,
+                    darkMode: document.body.classList.contains('dark-mode'),
+                    bgColor: document.querySelector('.custom-color-option.active')?.dataset.color || '#ffffff',
+                    tocPosition: document.querySelector('input[name="tocPosition"]:checked')?.value || 'right'
+                };
+                localStorage.setItem('mdViewerSettings', JSON.stringify(settings));
+                alert('설정이 저장되었습니다.');
+            });
+
+            const resetSettingsBtnMobile = document.getElementById('resetSettings-mobile');
+            if(resetSettingsBtnMobile) resetSettingsBtnMobile.addEventListener('click', () => {
+                localStorage.removeItem('mdViewerSettings');
+                location.reload();
+            });
+
+            // Mobile Menu
+            const controlsMenuBtn = document.getElementById('controlsMenuBtn');
+            const controlsMenu = document.getElementById('controlsMenu');
+            if(controlsMenuBtn && controlsMenu) {
+                controlsMenuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    controlsMenu.classList.toggle('open');
+                });
+                
+                document.addEventListener('click', (e) => {
+                    if (!controlsMenuBtn.contains(e.target) && !controlsMenu.contains(e.target)) {
+                        controlsMenu.classList.remove('open');
+                    }
+                });
+            }
+
+            // --- Table of Contents (TOC) Logic ---
+            const tocToggleBtnDesktop = document.getElementById('tocToggleBtnDesktop'); // Desktop
+            const tocToggleBtnMobile = document.getElementById('tocToggleBtnMobile'); // Mobile
+            const tocFloatingBtn = document.getElementById('tocFloatingBtn'); // Floating
+            const tocDrawer = document.getElementById('tocDrawer');
+            const tocOverlay = document.getElementById('tocOverlay');
+            const tocCloseBtn = document.getElementById('tocCloseBtn');
+            const tocList = document.getElementById('tocList');
+            const tocPosLeft = document.getElementById('tocPosLeft');
+            const tocPosRight = document.getElementById('tocPosRight');
+
+            function generateTOC() {
+                const headers = markdownBody.querySelectorAll('h1, h2, h3, h4, h5, h6');
+                tocList.innerHTML = '';
+
+                headers.forEach((header, index) => {
+                    // Assign ID if not present
+                    if (!header.id) {
+                        header.id = `header-${index}`;
+                    }
+
+                    const li = document.createElement('li');
+                    li.className = `toc-item ${header.tagName.toLowerCase()}`;
+                    
+                    const link = document.createElement('a');
+                    link.className = 'toc-link';
+                    link.href = `#${header.id}`;
+                    link.textContent = header.textContent;
+                    
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        header.scrollIntoView({ behavior: 'smooth' });
+                        closeTOC();
+                    });
+
+                    li.appendChild(link);
+                    tocList.appendChild(li);
+                });
+            }
+
+            function openTOC() {
+                tocDrawer.classList.add('open');
+                tocOverlay.classList.add('open');
+            }
+
+            function closeTOC() {
+                tocDrawer.classList.remove('open');
+                tocOverlay.classList.remove('open');
+            }
+            
+            function toggleTOC() {
+                if (tocDrawer.classList.contains('open')) {
+                    closeTOC();
+                } else {
+                    openTOC();
+                }
+            }
+
+            if(tocToggleBtnDesktop) {
+                tocToggleBtnDesktop.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleTOC();
+                });
+            }
+            
+            if(tocToggleBtnMobile) {
+                tocToggleBtnMobile.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleTOC();
+                });
+            }
+            
+            if(tocFloatingBtn) {
+                tocFloatingBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleTOC();
+                });
+            }
+            
+            if(tocCloseBtn) tocCloseBtn.addEventListener('click', closeTOC);
+            if(tocOverlay) tocOverlay.addEventListener('click', closeTOC);
+            
+            // TOC Position Change
+            function setTOCPosition(position) {
+                if (position === 'left') {
+                    tocDrawer.classList.add('left');
+                } else {
+                    tocDrawer.classList.remove('left');
+                }
+            }
+
+            if(tocPosLeft) {
+                tocPosLeft.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        setTOCPosition('left');
+                    }
+                });
+            }
+
+            if(tocPosRight) {
+                tocPosRight.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        setTOCPosition('right');
+                    }
+                });
+            }
+            
+            // Load Settings (after TOC variables and functions are defined)
+            const saved = localStorage.getItem('mdViewerSettings');
+            if (saved) {
+                try {
+                    const settings = JSON.parse(saved);
+                    if (settings.fontSize) updateFontSize(settings.fontSize);
+                    if (settings.lineHeight) updateLineHeight(settings.lineHeight);
+                    if (settings.fontFamily) {
+                        const fontSelect = document.getElementById('fontFamily');
+                        if(fontSelect) fontSelect.value = settings.fontFamily;
+                        const fontSelectMobile = document.getElementById('fontFamily-mobile');
+                        if(fontSelectMobile) fontSelectMobile.value = settings.fontFamily;
+                        document.body.style.fontFamily = settings.fontFamily;
+                        markdownBody.style.fontFamily = settings.fontFamily;
+                    }
+                    if (settings.bgColor) {
+                        const btn = document.querySelector(`.custom-color-option[data-color="${settings.bgColor}"]`);
+                        if (btn) btn.click();
+                    }
+                    if (settings.darkMode) toggleDarkMode();
+                    if (settings.tocPosition) {
+                        if (settings.tocPosition === 'left') {
+                            if(tocPosLeft) tocPosLeft.checked = true;
+                            setTOCPosition('left');
+                        } else {
+                            if(tocPosRight) tocPosRight.checked = true;
+                            setTOCPosition('right');
+                        }
+                    } else {
+                        // Default to right if not saved
+                        if(tocPosRight) tocPosRight.checked = true;
+                        setTOCPosition('right');
+                    }
+                } catch(e) {
+                    console.error('Failed to load settings', e);
+                }
+            } else {
+                // No saved settings - set default to right
+                if (tocPosRight) {
+                    tocPosRight.checked = true;
+                    setTOCPosition('right');
+                }
+            }
+            
+            // F2 Shortcut for TOC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'F2') {
+                    e.preventDefault();
+                    toggleTOC();
+                }
+            });
+
+            // Generate TOC on load
+            generateTOC();
+
+            // --- Code Block Copy Logic ---
+            function addCopyButtons() {
+                const preBlocks = markdownBody.querySelectorAll('pre');
+                preBlocks.forEach(pre => {
+                    // Check if it already has a button
+                    if (pre.querySelector('.copy-btn')) return;
+
+                    const button = document.createElement('button');
+                    button.className = 'copy-btn';
+                    button.title = 'Copy code';
+                    // Icon for copy
+                    button.innerHTML = `<svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>`;
+
+                    button.addEventListener('click', async () => {
+                        const code = pre.querySelector('code');
+                        if (!code) return;
+
+                        try {
+                            await navigator.clipboard.writeText(code.innerText);
+                            // Change to Check icon temporarily
+                            const originalHTML = button.innerHTML;
+                            button.innerHTML = `<svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+                            setTimeout(() => {
+                                button.innerHTML = originalHTML;
+                            }, 2000);
+                        } catch (err) {
+                            console.error('Failed to copy:', err);
+                        }
+                    });
+
+                    pre.appendChild(button);
+                });
+            }
+
+            addCopyButtons();
+            
+            // --- Top Button & Floating TOC Logic ---
+            const topBtn = document.getElementById('topBtn');
+            
+            function toggleFloatingButtons() {
+                const shouldShow = window.scrollY > 300 || document.documentElement.scrollTop > 300;
+                
+                if (topBtn) {
+                    if (shouldShow) topBtn.classList.add('show');
+                    else topBtn.classList.remove('show');
+                }
+                
+                if (tocFloatingBtn) {
+                    if (shouldShow) tocFloatingBtn.classList.add('show');
+                    else tocFloatingBtn.classList.remove('show');
+                }
+            }
+            
+            function scrollToTop() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+            
+            window.addEventListener('scroll', toggleFloatingButtons);
+            if(topBtn) topBtn.addEventListener('click', scrollToTop);
+            
+            // Home key to scroll to top
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Home') {
+                    // Ignore if focus is in input
+                    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+                    e.preventDefault();
+                    scrollToTop();
+                }
+            });
+
+            // --- Image Lightbox Logic ---
+            const lightboxOverlay = document.getElementById('lightboxOverlay');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxClose = document.getElementById('lightboxClose');
+
+            function openLightbox(imageSrc, imageAlt) {
+                lightboxImage.src = imageSrc;
+                lightboxImage.alt = imageAlt;
+                lightboxOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightboxOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+                lightboxImage.src = '';
+            }
+
+            // Add click event to all images in markdown body
+            const images = markdownBody.querySelectorAll('img');
+            images.forEach(img => {
+                img.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openLightbox(img.src, img.alt);
+                });
+            });
+
+            // Close lightbox on close button click
+            if(lightboxClose) {
+                lightboxClose.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    closeLightbox();
+                });
+            }
+
+            // Close lightbox on overlay click
+            if(lightboxOverlay) {
+                lightboxOverlay.addEventListener('click', closeLightbox);
+            }
+
+            // Prevent closing when clicking on image itself
+            if(lightboxImage) {
+                lightboxImage.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+            }
+
+            // Close lightbox on ESC key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightboxOverlay.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+
+            // --- Raw Markdown View Logic ---
+            const rawToggleBtn = document.getElementById('rawToggleBtn');
+            let isRawView = false;
+            let savedHtmlContent = '';
+            let rawMarkdownContent = '';
+            let isFetchingRaw = false;
+
+            async function displayRaw() {
+                // Toggle between rendered and raw view
+                if (!isRawView) {
+                    // Switch to Raw view
+                    if (!rawMarkdownContent && !isFetchingRaw) {
+                        // Get markdown from hidden script tag
+                        const rawSource = document.getElementById('rawMarkdownSource');
+                        if (rawSource) {
+                            rawMarkdownContent = rawSource.textContent;
+                        } else {
+                            alert('마크다운 소스를 찾을 수 없습니다.');
+                            return;
+                        }
+                    }
+
+                    // Save current HTML content
+                    savedHtmlContent = markdownBody.innerHTML;
+
+                    // Get current font family from control box
+                    const currentFont = document.getElementById('fontFamily')?.value || "'Noto Sans KR', sans-serif";
+
+                    // Display raw markdown with current font settings and copy button
+                    markdownBody.innerHTML = `
+                        <div style="position: relative;">
+                            <button id="rawCopyBtn" style="position: absolute; top: 12px; right: 12px; background-color: rgba(255, 255, 255, 0.9); border: 1px solid #ddd; border-radius: 4px; padding: 6px 12px; font-size: 12px; color: #666; cursor: pointer; z-index: 10; display: flex; align-items: center; gap: 4px;" title="전체 복사">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                <span>복사</span>
+                            </button>
+                            <pre style="white-space: pre-wrap; word-wrap: break-word; font-family: ${currentFont}; font-size: 14px; line-height: 1.6; padding: 16px; margin: 0; background-color: #f6f8fa; border-radius: 6px; overflow-x: auto;"><code>${escapeHtml(rawMarkdownContent)}</code></pre>
+                        </div>
+                    `;
+                    
+                    // Add copy button event listener
+                    const rawCopyBtn = document.getElementById('rawCopyBtn');
+                    if (rawCopyBtn) {
+                        rawCopyBtn.addEventListener('click', async () => {
+                            try {
+                                await navigator.clipboard.writeText(rawMarkdownContent);
+                                const originalHTML = rawCopyBtn.innerHTML;
+                                rawCopyBtn.innerHTML = `<svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>복사됨!</span>`;
+                                rawCopyBtn.style.backgroundColor = '#d4edda';
+                                rawCopyBtn.style.color = '#155724';
+                                setTimeout(() => {
+                                    rawCopyBtn.innerHTML = originalHTML;
+                                    rawCopyBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+                                    rawCopyBtn.style.color = '#666';
+                                }, 2000);
+                            } catch (err) {
+                                console.error('Failed to copy:', err);
+                                alert('복사에 실패했습니다.');
+                            }
+                        });
+                    }
+                    
+                    isRawView = true;
+                    rawToggleBtn.style.backgroundColor = '#0ea5e9';
+                    rawToggleBtn.style.color = 'white';
+                } else {
+                    // Switch back to rendered view
+                    markdownBody.innerHTML = savedHtmlContent;
+                    
+                    // Re-attach image lightbox listeners
+                    const images = markdownBody.querySelectorAll('img');
+                    images.forEach(img => {
+                        img.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            openLightbox(img.src, img.alt);
+                        });
+                    });
+
+                    // Re-attach copy buttons to code blocks
+                    addCopyButtons();
+
+                    // Re-generate TOC
+                    generateTOC();
+                    
+                    isRawView = false;
+                    rawToggleBtn.style.backgroundColor = '';
+                    rawToggleBtn.style.color = '';
+                }
+            }
+
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            if (rawToggleBtn) {
+                rawToggleBtn.addEventListener('click', displayRaw);
+            }
+        });
+    </script>
+</body>
+</html>
