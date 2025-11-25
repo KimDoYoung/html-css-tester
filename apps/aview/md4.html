@@ -348,9 +348,10 @@ Template  : markdown.html
             padding: 0 12px;
             background-color: #f0f0f0;
             border: 1px solid #d0d0d0;
+            border-bottom: none;
             gap: 8px;
-            margin-bottom: 20px;
-            border-radius: 8px;
+            margin-bottom: 0;
+            border-radius: 8px 8px 0 0;
         }
 
         .controls-desktop {
@@ -1095,6 +1096,41 @@ Template  : markdown.html
 
     <div class="markdown-container px-4 sm:px-6 lg:px-8 py-6" id="markdownContainer">
         
+        <!-- 문서 정보 섹션 (초기: 숨김) -->
+        <div id="docInfoSection" class="doc-info-section collapsed">
+            <!-- Markdown 정보 헤더 -->
+            <div class="doc-info-header">
+                <h3>Markdown 정보</h3>
+            </div>
+
+            <div class="doc-info-row">
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">파일 크기</span>
+                        <span class="info-value">41,838 bytes</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">총 라인 수</span>
+                        <span class="info-value" id="lineCountValue">859</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">총 문자 수</span>
+                        <span class="info-value" id="charCountValue">27,622</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">인코딩</span>
+                        <span class="info-value">UTF-8</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Control Bar -->
         <div class="text-viewer-controls">
             <!-- Desktop Controls -->
@@ -1186,8 +1222,19 @@ Template  : markdown.html
                         </svg>
                     </button>
                     <div class="export-menu" id="exportMenu">
-                        <button type="button" id="exportHTML">📄 HTML 내보내기</button>
-                        <button type="button" id="exportPDF">📄 PDF 내보내기</button>
+                        <button type="button" id="exportHTML">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: inline-block; vertical-align: middle; margin-right: 4px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                            HTML 내보내기
+                        </button>
+                        <button type="button" id="exportPDF">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: inline-block; vertical-align: middle; margin-right: 4px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6"></path>
+                            </svg>
+                            PDF 내보내기
+                        </button>
                     </div>
                 </div>
 
@@ -1255,41 +1302,6 @@ Template  : markdown.html
                             <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                             초기화
                         </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 문서 정보 섹션 (초기: 숨김) -->
-        <div id="docInfoSection" class="doc-info-section collapsed">
-            <!-- Markdown 정보 헤더 -->
-            <div class="doc-info-header">
-                <h3>Markdown 정보</h3>
-            </div>
-
-            <div class="doc-info-row">
-                <div class="doc-info-col">
-                    <div class="info-item">
-                        <span class="info-label">파일 크기</span>
-                        <span class="info-value">41,838 bytes</span>
-                    </div>
-                </div>
-                <div class="doc-info-col">
-                    <div class="info-item">
-                        <span class="info-label">총 라인 수</span>
-                        <span class="info-value" id="lineCountValue">859</span>
-                    </div>
-                </div>
-                <div class="doc-info-col">
-                    <div class="info-item">
-                        <span class="info-label">총 문자 수</span>
-                        <span class="info-value" id="charCountValue">27,622</span>
-                    </div>
-                </div>
-                <div class="doc-info-col">
-                    <div class="info-item">
-                        <span class="info-label">인코딩</span>
-                        <span class="info-value">UTF-8</span>
                     </div>
                 </div>
             </div>
@@ -3403,6 +3415,18 @@ func main() {
                 }
             });
 
+            // Generate filename with timestamp
+            function generateFilename(extension) {
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                const day = String(now.getDate()).padStart(2, '0');
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                return `lucy_${year}${month}${day}_${hours}${minutes}${seconds}.${extension}`;
+            }
+
             // Export as HTML
             if (exportHTMLBtn) {
                 exportHTMLBtn.addEventListener('click', () => {
@@ -3441,7 +3465,7 @@ ${markdownBody.innerHTML}
                     const url = URL.createObjectURL(blob);
                     const a = document.createElement('a');
                     a.href = url;
-                    a.download = 'markdown-export.html';
+                    a.download = generateFilename('html');
                     a.click();
                     URL.revokeObjectURL(url);
                 });
@@ -3463,7 +3487,7 @@ ${markdownBody.innerHTML}
                         // PDF export options
                         const opt = {
                             margin: 10,
-                            filename: 'markdown-export.pdf',
+                            filename: generateFilename('pdf'),
                             image: { type: 'jpeg', quality: 0.98 },
                             html2canvas: { scale: 2, useCORS: true },
                             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
