@@ -178,13 +178,36 @@ Template  : source.html
 
         @media (max-width: 1024px) {
             .doc-info-row {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
         @media (max-width: 768px) {
             .doc-info-row {
                 grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .info-item {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 0;
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            .doc-info-col:last-child .info-item {
+                border-bottom: none;
+            }
+
+            .info-label {
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+
+            .info-value {
+                text-align: right;
             }
         }
 
