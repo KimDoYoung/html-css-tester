@@ -1,0 +1,2969 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!--
+===========================================
+🔍 AView Document Metadata
+===========================================
+Generated : 2025-11-26 16:34:26
+Hashcode  : ad41e45d5be6cd37b8c3bf0eed54dd96
+Filename  : tomcat.log
+Template  : log.html
+===========================================
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tomcat.log</title>
+    <link rel="icon" type="image/png" href="/aview/images/favicon32.png" sizes="32x32">
+    <!-- Google Fonts: Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @font-face {
+            font-family: 'SeoulNamsan';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulNamsanM.woff') format('woff');
+            font-weight: normal;
+            font-display: swap;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f6f8fa;
+            font-family: 'Malgun Gothic', '맑은 고딕', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            transition: background-color 0.3s ease;
+        }
+
+        .text-viewer {
+            background: white;
+            border-radius: 0;
+            box-shadow: none;
+            border: 1px solid #e5e7eb;
+            border-left: none;
+            border-right: none;
+            overflow: hidden;
+            min-height: 400px;
+            margin-top: 0;
+        }
+
+        .doc-info-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .doc-info-section.collapsed {
+            max-height: 0;
+            padding: 0 20px;
+            margin-bottom: 0;
+            opacity: 0;
+        }
+
+        .doc-info-header {
+            background-color: #f2ebd3;
+            padding: 12px 16px;
+            margin: -20px -20px 16px -20px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .doc-info-header h3 {
+            margin: 0;
+            color: #333;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .toggle-doc-info-btn {
+            background: #0d6efd;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .toggle-doc-info-btn:hover {
+            background: #0b5ed7;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .toggle-doc-info-btn.collapsed {
+            background: #28a745;
+            animation: pulseCollapsed 2s ease-in-out infinite;
+        }
+
+        .toggle-doc-info-btn.collapsed:hover {
+            background: #218838;
+        }
+
+        .toggle-doc-info-btn svg {
+            color: white;
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-doc-info-btn.collapsed svg {
+            transform: rotate(180deg);
+        }
+
+        @keyframes pulseCollapsed {
+            0%, 100% {
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+            50% {
+                box-shadow: 0 4px 16px rgba(40, 167, 69, 0.4);
+            }
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.875rem;
+            margin-bottom: 0;
+        }
+
+        .info-value {
+            color: #6c757d;
+            font-size: 1.125rem;
+        }
+
+        .text-container {
+            width: 100%;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .doc-info-wrapper {
+            margin-bottom: 20px;
+        }
+
+        .doc-info-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        @media (max-width: 1024px) {
+            .doc-info-row {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .doc-info-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .info-item {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 0;
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            .doc-info-col:last-child .info-item {
+                border-bottom: none;
+            }
+
+            .info-label {
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+
+            .info-value {
+                text-align: right;
+            }
+        }
+
+        .doc-info-col {
+            padding: 0;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 10;
+            min-width: 200px;
+        }
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+        .mobile-menu button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            transition: background-color 0.2s;
+        }
+
+        .mobile-menu button:hover {
+            background-color: #f3f4f6;
+        }
+
+        .mobile-menu button svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        /* Text Viewer Control Bar */
+        .text-viewer-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 40px;
+            padding: 0 12px;
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #d0d0d0;
+            gap: 8px;
+        }
+
+        .controls-desktop {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .controls-mobile {
+            display: none;
+            position: relative;
+            margin-left: auto;
+        }
+
+        @media (max-width: 768px) {
+            .controls-desktop {
+                display: none;
+            }
+
+            .controls-mobile {
+                display: flex;
+            }
+        }
+
+        .control-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .control-item input[type="checkbox"] {
+            cursor: pointer;
+        }
+
+        .control-item span {
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .control-btn {
+            padding: 4px 8px;
+            min-width: 30px;
+            height: 28px;
+            background-color: #e8e8e8;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .control-btn:hover {
+            background-color: #d8d8d8;
+        }
+
+        .control-btn:active {
+            background-color: #c8c8c8;
+        }
+
+        .control-select {
+            padding: 4px 6px;
+            height: 28px;
+            font-size: 12px;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            background-color: #ffffff;
+            cursor: pointer;
+        }
+
+        /* 버튼 그룹 */
+        .btn-group {
+            display: inline-flex;
+            gap: 0;
+        }
+
+        .btn-group .control-btn {
+            border-radius: 0;
+            margin-left: -1px;
+        }
+
+        .btn-group .control-btn:first-child {
+            border-radius: 4px 0 0 4px;
+            margin-left: 0;
+        }
+
+        .btn-group .control-btn:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+
+        .btn-group .control-btn:hover {
+            z-index: 1;
+        }
+
+        /* 커스텀 색상 드롭다운 */
+        .custom-color-dropdown {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .custom-color-btn {
+            width: 28px;
+            height: 28px;
+            border: 2px solid #333;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .custom-color-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .custom-color-menu {
+            display: none;
+            position: absolute;
+            top: 32px;
+            left: 0;
+            background: white;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            padding: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+            gap: 6px;
+        }
+
+        .custom-color-menu.open {
+            display: flex;
+        }
+
+        .custom-color-option {
+            width: 24px;
+            height: 24px;
+            border: 1px solid #c0c0c0;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .custom-color-option:hover {
+            transform: scale(1.15);
+            border-width: 2px;
+            border-color: #666;
+        }
+
+        .custom-color-option.active {
+            border: 2px solid #333;
+            box-shadow: 0 0 0 2px white, 0 0 0 3px #333;
+        }
+
+        body.dark-mode .custom-color-btn {
+            border-color: #666;
+        }
+
+        body.dark-mode .custom-color-menu {
+            background-color: #333;
+            border-color: #555;
+        }
+
+        body.dark-mode .custom-color-option {
+            border-color: #666;
+        }
+
+        body.dark-mode .custom-color-option:hover {
+            border-color: #999;
+        }
+
+        .controls-dropdown {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background-color: white;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            min-width: 180px;
+            padding: 8px;
+        }
+
+        .controls-dropdown.open {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .controls-dropdown label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .controls-dropdown .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Color Picker Container */
+        .color-picker-container {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .color-box {
+            width: 24px;
+            height: 24px;
+            border-radius: 3px;
+            border: 1px solid #c0c0c0;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .color-box:hover {
+            transform: scale(1.1);
+            border-color: #666;
+        }
+
+        .color-box:active {
+            transform: scale(0.95);
+        }
+
+        .color-box.active {
+            border: 2px solid #333;
+            box-shadow: 0 0 0 2px white, 0 0 0 3px #333;
+        }
+
+        body.dark-mode .color-box {
+            border-color: #666;
+        }
+
+        body.dark-mode .color-box.active {
+            box-shadow: 0 0 0 2px #1e1e1e, 0 0 0 3px #fff;
+        }
+
+        /* Color Box Color Classes */
+        .color-box.white {
+            background-color: #ffffff;
+        }
+
+        .color-box.gray {
+            background-color: #f5f5f5;
+        }
+
+        .color-box.yellow {
+            background-color: #fffacd;
+        }
+
+        .color-box.blue {
+            background-color: #e6f3ff;
+        }
+
+        .color-box.green {
+            background-color: #f0f8f0;
+        }
+
+        .text-content {
+            background: #fafbfc;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #d1d9e0;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #24292f;
+            overflow-x: auto;
+            min-height: 400px;
+            max-height: calc(100vh - 150px);
+            overflow-y: auto;
+            position: relative;
+            cursor: text;
+        }
+
+        /* 커서 라인 하이라이트 */
+        .text-content.line-highlight-enabled::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: var(--highlight-top, 0);
+            height: var(--line-height-px, 22.4px);
+            background-color: rgba(255, 235, 59, 0.25);
+            pointer-events: none;
+            transition: top 0.05s ease;
+            z-index: 0;
+        }
+
+        body.dark-mode .text-content.line-highlight-enabled::before {
+            background-color: rgba(255, 235, 59, 0.18);
+        }
+
+        /* 하이라이트된 라인의 텍스트 강조 */
+        .text-content span.highlighted-line {
+            font-size: 105%;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #0d1117;
+        }
+
+        body.dark-mode .text-viewer-controls {
+            background-color: #161b22;
+            border-bottom-color: #30363d;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body.dark-mode .control-btn {
+            background-color: #444444;
+            border-color: #666666;
+            color: #ffffff;
+        }
+
+        body.dark-mode .control-btn:hover {
+            background-color: #555555;
+        }
+
+        body.dark-mode .control-select {
+            background-color: #444444;
+            border-color: #666666;
+            color: #ffffff;
+        }
+
+        body.dark-mode .controls-dropdown {
+            background-color: #333333;
+            border-color: #555555;
+            color: #ffffff;
+        }
+
+        body.dark-mode .control-item span {
+            color: #e6edf3;
+        }
+
+        /* Search Feature Styles */
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background-color: #ffffff;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            padding: 2px 6px;
+            height: 28px;
+        }
+
+        .search-input {
+            border: none;
+            outline: none;
+            font-size: 12px;
+            padding: 4px;
+            width: 120px;
+            background: transparent;
+        }
+
+        .search-input:focus {
+            outline: none;
+        }
+
+        .search-btn {
+            background: none;
+            border: none;
+            padding: 2px 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            border-radius: 3px;
+        }
+
+        .search-btn:hover {
+            background-color: #e8e8e8;
+        }
+
+        .search-btn:active {
+            background-color: #d0d0d0;
+        }
+
+        .search-btn svg {
+            width: 14px;
+            height: 14px;
+            color: #666;
+        }
+
+        .search-clear-btn {
+            background: none;
+            border: none;
+            padding: 2px 4px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            border-radius: 3px;
+        }
+
+        .search-clear-btn.visible {
+            display: flex;
+        }
+
+        .search-clear-btn:hover {
+            background-color: #ffebee;
+        }
+
+        .search-clear-btn:active {
+            background-color: #ffcdd2;
+        }
+
+        .search-clear-btn svg {
+            width: 14px;
+            height: 14px;
+            color: #999;
+        }
+
+        .search-clear-btn:hover svg {
+            color: #d32f2f;
+        }
+
+        body.dark-mode .search-clear-btn:hover {
+            background-color: #5d2020;
+        }
+
+        body.dark-mode .search-clear-btn svg {
+            color: #999;
+        }
+
+        body.dark-mode .search-clear-btn:hover svg {
+            color: #ff6b6b;
+        }
+
+        .search-counter {
+            font-size: 11px;
+            color: #666;
+            white-space: nowrap;
+            min-width: 35px;
+            text-align: center;
+        }
+
+        /* Search Highlight Styles */
+        .search-highlight {
+            background-color: #ffff00;
+            color: #000;
+            padding: 1px 0;
+        }
+
+        .search-highlight.current {
+            background-color: #ff9500;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* Dark Mode Search Styles */
+        body.dark-mode .search-box {
+            background-color: #444444;
+            border-color: #666666;
+        }
+
+        body.dark-mode .search-input {
+            color: #ffffff;
+        }
+
+        body.dark-mode .search-input::placeholder {
+            color: #999;
+        }
+
+        body.dark-mode .search-btn svg {
+            color: #ccc;
+        }
+
+        body.dark-mode .search-btn:hover {
+            background-color: #555555;
+        }
+
+        body.dark-mode .search-counter {
+            color: #ccc;
+        }
+
+        body.dark-mode .search-highlight {
+            background-color: #ffff00;
+            color: #000;
+        }
+
+        body.dark-mode .search-highlight.current {
+            background-color: #ff9500;
+            color: #fff;
+        }
+
+        body.dark-mode .text-content {
+            background-color: #1c1c1c !important;
+            border-color: #30363d;
+            color: #d4d4d4 !important;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+
+        /* Fullscreen Mode */
+        .text-viewer.fullscreen-mode {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+            margin: 0;
+            padding: 0;
+            z-index: 9999;
+            max-height: 100vh;
+        }
+
+        .text-viewer.fullscreen-mode .text-content {
+            max-height: calc(100vh - 40px);
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header 영역: 전체 너비 (100%) -->
+    <header class="w-full bg-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between gap-4">
+                <!-- 왼쪽: 파일명 -->
+                <div class="flex-1 min-w-0">
+                    <h1 class="text-2xl font-bold text-gray-900 truncate">tomcat.log</h1>
+                </div>
+
+                <!-- 오른쪽: 데스크톱 버튼 그룹 (md 이상에서만 표시) -->
+                <div class="hidden md:flex gap-2 items-center flex-shrink-0">
+                    <!-- 전체 복사 -->
+                    <button type="button"
+                            onclick="copyToClipboard()"
+                            class="inline-flex items-center px-4 py-2 rounded-lg bg-blue-600 text-white font-medium text-sm hover:bg-blue-700 transition-colors shadow-sm whitespace-nowrap">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                        </svg>
+                        전체 복사
+                    </button>
+
+                    <!-- 원본 다운로드 -->
+                    <button type="button"
+                            onclick="downloadOriginal()"
+                            class="inline-flex items-center px-4 py-2 rounded-lg bg-green-600 text-white font-medium text-sm hover:bg-green-700 transition-colors shadow-sm whitespace-nowrap">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        원본 다운로드
+                    </button>
+
+                    <!-- 문서 정보 토글 버튼 -->
+                    <button type="button"
+                            class="toggle-doc-info-btn collapsed"
+                            id="toggleDocInfoBtn"
+                            onclick="toggleDocInfo()"
+                            title="문서 정보 보기"
+                            aria-label="문서 정보 토글">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- 오른쪽: 모바일 영역 (토글 버튼 + 햄버거 메뉴) -->
+                <div class="md:hidden flex gap-2 items-center flex-shrink-0">
+                    <!-- 모바일 토글 버튼 -->
+                    <button type="button"
+                            class="toggle-doc-info-btn collapsed"
+                            onclick="toggleDocInfo()"
+                            title="문서 정보 보기"
+                            aria-label="문서 정보 토글">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </button>
+
+                    <!-- 햄버거 메뉴 (relative 래퍼) -->
+                    <div class="relative">
+                        <button type="button"
+                                id="mobileMenuBtn"
+                                onclick="toggleMobileMenu()"
+                                title="메뉴"
+                                aria-label="작업 메뉴 열기"
+                                class="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+
+                        <!-- 모바일 드롭다운 메뉴 -->
+                        <div id="mobileMenu" class="mobile-menu">
+                            <button type="button" onclick="copyToClipboard(); toggleMobileMenu();">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                                전체 복사
+                            </button>
+                            <button type="button" onclick="downloadOriginal(); toggleMobileMenu();">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                원본 다운로드
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="text-container">
+
+        <!-- 텍스트 뷰어 -->
+        <div class="text-viewer">
+            <!-- Control Bar -->
+            <div class="text-viewer-controls">
+                <!-- Desktop Controls -->
+                <div class="controls-desktop">
+                    <!-- Search Box -->
+                    <div class="search-box">
+                        <input type="text"
+                               class="search-input"
+                               id="searchInput"
+                               placeholder="검색어 입력"
+                               autocomplete="off">
+                        <button type="button"
+                                class="search-btn"
+                                id="searchBtn"
+                                title="다음 찾기 (Enter), Del (삭제)">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </button>
+                        <button type="button"
+                                class="search-clear-btn"
+                                id="searchClearBtn"
+                                title="검색 지우기 (Delete)">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                        <span class="search-counter" id="searchCounter"></span>
+                    </div>
+
+                    <!-- Line Wrap -->
+                    <label class="control-item">
+                        <input type="checkbox" id="toggleLineWrap">
+                        <span>줄바꿈</span>
+                    </label>
+
+                    <!-- 폰트 크기 -->
+                    <div class="control-item btn-group">
+                        <button type="button" id="fontSizeDecrease" class="control-btn" title="폰트 작게" >−</button>
+                        <button type="button" id="fontSizeReset" class="control-btn" title="폰트기본(14px)">14px</button>
+                        <button type="button" id="fontSizeIncrease" class="control-btn" title="폰트 크게">+</button>
+                    </div>
+
+                    <!-- 폰트 선택 -->
+                    <select id="fontFamily" class="control-select" title="폰트 선택">
+                        <option value="'Noto Sans KR', sans-serif" selected>Noto Sans KR</option>
+                        <option value="'Malgun Gothic', '맑은 고딕'">맑은 고딕</option>
+                        <option value="'SeoulNamsan', sans-serif">서울 남산체</option>
+                        <option value="'Courier New', monospace">Courier New</option>
+                        <option value="'Monaco', monospace">Monaco</option>
+                    </select>
+
+                    <!-- 배경색 선택 -->
+                    <div class="custom-color-dropdown">
+                        <button type="button" class="custom-color-btn" id="bgColorBtn" data-color="#ffffff" title="배경색 선택" style="background-color: #ffffff;"></button>
+                        <div class="custom-color-menu" id="bgColorMenu">
+                            <button type="button" class="custom-color-option active" data-color="#ffffff" style="background-color: #ffffff;" title="흰색"></button>
+                            <button type="button" class="custom-color-option" data-color="#f5f5f5" style="background-color: #f5f5f5;" title="라이트 그레이"></button>
+                            <button type="button" class="custom-color-option" data-color="#fffacd" style="background-color: #fffacd;" title="라이트 옐로우"></button>
+                            <button type="button" class="custom-color-option" data-color="#e6f3ff" style="background-color: #e6f3ff;" title="라이트 블루"></button>
+                            <button type="button" class="custom-color-option" data-color="#f0f8f0" style="background-color: #f0f8f0;" title="라이트 그린"></button>
+                        </div>
+                    </div>
+
+                    <!-- 줄간 선택 -->
+                    <div class="control-item btn-group">
+                        <button type="button" id="lineHeightDecrease" class="control-btn" title="줄간 작게">−</button>
+                        <button type="button" id="lineHeightReset" class="control-btn" title="줄간 기본">✱</button>
+                        <button type="button" id="lineHeightIncrease" class="control-btn" title="줄간 크게">+</button>
+                    </div>
+
+                    <!-- 다크모드 -->
+                    <button type="button" id="toggleDarkMode" class="control-btn" title="다크모드">🌙</button>
+
+                    <!-- 설정 저장/초기화 버튼 그룹 -->
+                    <div class="control-item btn-group">
+                        <button type="button" id="saveSettings" class="control-btn" title="현재 설정 저장">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: inline-block; vertical-align: middle;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </button>
+                        <button type="button" id="resetSettings" class="control-btn" title="설정 초기화">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: inline-block; vertical-align: middle;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="controls-mobile">
+                    <button type="button" id="controlsMenuBtn" class="control-btn" title="설정">⋯</button>
+                    <div id="controlsMenu" class="controls-dropdown">
+                        <!-- Search Box Mobile -->
+                        <div class="search-box">
+                            <input type="text"
+                                   class="search-input"
+                                   id="searchInput-mobile"
+                                   placeholder="검색어 입력"
+                                   autocomplete="off">
+                            <button type="button"
+                                    class="search-btn"
+                                    id="searchBtn-mobile"
+                                    title="다음 찾기">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </button>
+                            <button type="button"
+                                    class="search-clear-btn"
+                                    id="searchClearBtn-mobile"
+                                    title="검색 지우기">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                            <span class="search-counter" id="searchCounter-mobile"></span>
+                        </div>
+                        <label>
+                            <input type="checkbox" id="toggleLineWrap-mobile">
+                            줄바꿈
+                        </label>
+                        <div class="dropdown-item btn-group">
+                            <button type="button" id="fontSizeDecrease-mobile" class="control-btn">−</button>
+                            <button type="button" id="fontSizeReset-mobile" class="control-btn" title="14px">14px</button>
+                            <button type="button" id="fontSizeIncrease-mobile" class="control-btn">+</button>
+                        </div>
+                        <select id="fontFamily-mobile" class="control-select" title="폰트 선택">
+                            <option value="'Noto Sans KR', sans-serif" selected>Noto Sans KR</option>
+                            <option value="'Malgun Gothic', '맑은 고딕'">맑은 고딕</option>
+                            <option value="'SeoulNamsan', sans-serif">서울 남산체</option>
+                            <option value="'Courier New', monospace">Courier New</option>
+                            <option value="'Monaco', monospace">Monaco</option>
+                        </select>
+                        <!-- 모바일 배경색 선택 -->
+                        <div class="custom-color-dropdown">
+                            <button type="button" class="custom-color-btn" id="bgColorBtn-mobile" data-color="#ffffff" title="배경색 선택" style="background-color: #ffffff;"></button>
+                            <div class="custom-color-menu" id="bgColorMenu-mobile">
+                                <button type="button" class="custom-color-option active" data-color="#ffffff" style="background-color: #ffffff;" title="흰색"></button>
+                                <button type="button" class="custom-color-option" data-color="#f5f5f5" style="background-color: #f5f5f5;" title="라이트 그레이"></button>
+                                <button type="button" class="custom-color-option" data-color="#fffacd" style="background-color: #fffacd;" title="라이트 옐로우"></button>
+                                <button type="button" class="custom-color-option" data-color="#e6f3ff" style="background-color: #e6f3ff;" title="라이트 블루"></button>
+                                <button type="button" class="custom-color-option" data-color="#f0f8f0" style="background-color: #f0f8f0;" title="라이트 그린"></button>
+                            </div>
+                        </div>
+                        <!-- 모바일 줄간 선택 -->
+                        <div class="dropdown-item btn-group">
+                            <button type="button" id="lineHeightDecrease-mobile" class="control-btn" title="줄간 작게">−</button>
+                            <button type="button" id="lineHeightReset-mobile" class="control-btn" title="줄간 기본">✱</button>
+                            <button type="button" id="lineHeightIncrease-mobile" class="control-btn" title="줄간 크게">+</button>
+                        </div>
+                        <button type="button" id="toggleDarkMode-mobile" class="control-btn">🌙 다크모드</button>
+                        <hr style="margin: 8px 0; border: none; border-top: 1px solid #e0e0e0;">
+                        <!-- 모바일 설정 저장/초기화 -->
+                        <div class="dropdown-item btn-group">
+                            <button type="button" id="saveSettings-mobile" class="control-btn" title="현재 설정 저장">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: inline-block; vertical-align: middle; margin-right: 4px;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                저장
+                            </button>
+                            <button type="button" id="resetSettings-mobile" class="control-btn" title="설정 초기화">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: inline-block; vertical-align: middle; margin-right: 4px;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                </svg>
+                                초기화
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <pre class="text-content" id="textContent">
+
+
+
+10-Oct-2025 14:18:00.652 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 서버 버전 이름:    Apache Tomcat/8.5.99
+10-Oct-2025 14:18:00.655 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log Server 빌드 시각:  Feb 14 2024 22:52:13 UTC
+10-Oct-2025 14:18:00.655 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log Server 버전 번호:  8.5.99.0
+10-Oct-2025 14:18:00.655 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 운영체제 이름:     Linux
+10-Oct-2025 14:18:00.655 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 운영체제 버전:     5.15.0-139-generic
+10-Oct-2025 14:18:00.655 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 아키텍처:          amd64
+10-Oct-2025 14:18:00.655 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 자바 홈:           /usr/lib/jvm/java-8-openjdk-amd64/jre
+10-Oct-2025 14:18:00.655 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log JVM 버전:          1.8.0_462-8u462-ga~us1-0ubuntu2~22.04.2-b08
+10-Oct-2025 14:18:00.656 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log JVM 벤더:          Private Build
+10-Oct-2025 14:18:00.656 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:     /opt/tomcat
+10-Oct-2025 14:18:00.656 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:     /opt/tomcat
+10-Oct-2025 14:18:00.656 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.util.logging.config.file=/opt/tomcat/conf/logging.properties
+10-Oct-2025 14:18:00.656 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+10-Oct-2025 14:18:00.656 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djdk.tls.ephemeralDHKeySize=2048
+10-Oct-2025 14:18:00.656 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+10-Oct-2025 14:18:00.656 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+10-Oct-2025 14:18:00.656 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Xms512m
+10-Oct-2025 14:18:00.657 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Xmx2048m
+10-Oct-2025 14:18:00.657 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dfile.encoding=UTF-8
+10-Oct-2025 14:18:00.657 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dignore.endorsed.dirs=
+10-Oct-2025 14:18:00.657 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dcatalina.base=/opt/tomcat
+10-Oct-2025 14:18:00.657 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dcatalina.home=/opt/tomcat
+10-Oct-2025 14:18:00.657 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.io.tmpdir=/opt/tomcat/temp
+10-Oct-2025 14:18:00.657 정보 [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent 프로덕션 환경들에서 최적의 성능을 제공하는, APR 기반 Apache Tomcat Native 라이브러리가, 다음 java.library.path에서 발견되지 않습니다: [/usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib]
+10-Oct-2025 14:18:00.712 정보 [main] org.apache.coyote.AbstractProtocol.init 프로토콜 핸들러 [&amp;quot;http-nio-8080&amp;quot;]을(를) 초기화합니다.
+10-Oct-2025 14:18:00.727 정보 [main] org.apache.catalina.startup.Catalina.load Initialization processed in 407 ms
+10-Oct-2025 14:18:00.786 정보 [main] org.apache.catalina.core.StandardService.startInternal 서비스 [Catalina]을(를) 시작합니다.
+10-Oct-2025 14:18:00.786 정보 [main] org.apache.catalina.core.StandardEngine.startInternal 서버 엔진을 시작합니다: [Apache Tomcat/8.5.99]
+10-Oct-2025 14:18:00.800 정보 [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployWAR 웹 애플리케이션 아카이브 [/opt/tomcat/webapps/kfs2025.war]을(를) 배치합니다.
+10-Oct-2025 14:18:02.590 정보 [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars 적어도 하나의 JAR가 TLD들을 찾기 위해 스캔되었으나 아무 것도 찾지 못했습니다. 스캔했으나 TLD가 없는 JAR들의 전체 목록을 보시려면, 로그 레벨을 디버그 레벨로 설정하십시오. 스캔 과정에서 불필요한 JAR들을 건너뛰면, 시스템 시작 시간과 JSP 컴파일 시간을 단축시킬 수 있습니다.
+
+  .   ____          _            __ _ _
+ /\\ / ___&amp;#39;_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | &amp;#39;_ | &amp;#39;_| | &amp;#39;_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  &amp;#39;  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::               (v2.7.18)
+
+2025-10-10 14:18:03.232 [localhost-startStop-1] INFO  k.c.k.h.KfsHomepageApplication - Starting KfsHomepageApplication using Java 1.8.0_462 on VX5 with PID 34332 (/opt/tomcat/webapps/kfs2025/WEB-INF/classes started by tomcat in /)
+2025-10-10 14:18:03.235 [localhost-startStop-1] INFO  k.c.k.h.KfsHomepageApplication - The following 1 profile is active: &amp;quot;test&amp;quot;
+2025-10-10 14:18:04.200 [localhost-startStop-1] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-10 14:18:04.270 [localhost-startStop-1] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 61 ms. Found 6 JPA repository interfaces.
+2025-10-10 14:18:04.668 [localhost-startStop-1] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1400 ms
+2025-10-10 14:18:05.087 [localhost-startStop-1] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-10 14:18:05.147 [localhost-startStop-1] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-10-10 14:18:05.289 [localhost-startStop-1] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-10-10 14:18:05.396 [localhost-startStop-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-10-10 14:18:05.567 [localhost-startStop-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-10-10 14:18:05.586 [localhost-startStop-1] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-10-10 14:18:06.494 [localhost-startStop-1] ERROR o.s.o.j.LocalContainerEntityManagerFactoryBean - Failed to initialize JPA EntityManagerFactory: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+2025-10-10 14:18:06.495 [localhost-startStop-1] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &amp;#39;jwtAuthenticationFilter&amp;#39; defined in file [/opt/tomcat/webapps/kfs2025/WEB-INF/classes/kr/co/kfs/homepage/config/JwtAuthenticationFilter.class]: Unsatisfied dependency expressed through constructor parameter 1; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &amp;#39;customUserDetailsService&amp;#39; defined in file [/opt/tomcat/webapps/kfs2025/WEB-INF/classes/kr/co/kfs/homepage/service/CustomUserDetailsService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;adminUserRepository&amp;#39; defined in kr.co.kfs.homepage.repository.AdminUserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean &amp;#39;(inner bean)#2912da9e&amp;#39; of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property &amp;#39;entityManager&amp;#39;; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;(inner bean)#2912da9e&amp;#39;: Cannot resolve reference to bean &amp;#39;entityManagerFactory&amp;#39; while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;entityManagerFactory&amp;#39; defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+2025-10-10 14:18:06.496 [localhost-startStop-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-10-10 14:18:06.505 [localhost-startStop-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-10-10 14:18:06.524 [localhost-startStop-1] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener -
+
+Error starting ApplicationContext. To display the conditions report re-run your application with &amp;#39;debug&amp;#39; enabled.
+2025-10-10 14:18:06.550 [localhost-startStop-1] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.context.ApplicationContextException: Unable to start web server; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &amp;#39;jwtAuthenticationFilter&amp;#39; defined in file [/opt/tomcat/webapps/kfs2025/WEB-INF/classes/kr/co/kfs/homepage/config/JwtAuthenticationFilter.class]: Unsatisfied dependency expressed through constructor parameter 1; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &amp;#39;customUserDetailsService&amp;#39; defined in file [/opt/tomcat/webapps/kfs2025/WEB-INF/classes/kr/co/kfs/homepage/service/CustomUserDetailsService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;adminUserRepository&amp;#39; defined in kr.co.kfs.homepage.repository.AdminUserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean &amp;#39;(inner bean)#2912da9e&amp;#39; of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property &amp;#39;entityManager&amp;#39;; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;(inner bean)#2912da9e&amp;#39;: Cannot resolve reference to bean &amp;#39;entityManagerFactory&amp;#39; while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;entityManagerFactory&amp;#39; defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+        at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:165)
+        at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:585)
+        at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147)
+        at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:732)
+        at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:409)
+        at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+        at org.springframework.boot.web.servlet.support.SpringBootServletInitializer.run(SpringBootServletInitializer.java:175)
+        at org.springframework.boot.web.servlet.support.SpringBootServletInitializer.createRootApplicationContext(SpringBootServletInitializer.java:155)
+        at org.springframework.boot.web.servlet.support.SpringBootServletInitializer.onStartup(SpringBootServletInitializer.java:97)
+        at org.springframework.web.SpringServletContainerInitializer.onStartup(SpringServletContainerInitializer.java:174)
+        at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4889)
+        at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+        at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:710)
+        at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:687)
+        at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:660)
+        at org.apache.catalina.startup.HostConfig.deployWAR(HostConfig.java:1015)
+        at org.apache.catalina.startup.HostConfig$DeployWar.run(HostConfig.java:1867)
+        at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+        at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+        at java.lang.Thread.run(Thread.java:750)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &amp;#39;jwtAuthenticationFilter&amp;#39; defined in file [/opt/tomcat/webapps/kfs2025/WEB-INF/classes/kr/co/kfs/homepage/config/JwtAuthenticationFilter.class]: Unsatisfied dependency expressed through constructor parameter 1; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &amp;#39;customUserDetailsService&amp;#39; defined in file [/opt/tomcat/webapps/kfs2025/WEB-INF/classes/kr/co/kfs/homepage/service/CustomUserDetailsService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;adminUserRepository&amp;#39; defined in kr.co.kfs.homepage.repository.AdminUserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean &amp;#39;(inner bean)#2912da9e&amp;#39; of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property &amp;#39;entityManager&amp;#39;; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;(inner bean)#2912da9e&amp;#39;: Cannot resolve reference to bean &amp;#39;entityManagerFactory&amp;#39; while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;entityManagerFactory&amp;#39; defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+        at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:801)
+        at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:224)
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372)
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222)
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+        at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+        at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+        at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+        at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:213)
+        at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:213)
+        at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:176)
+        at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:171)
+        at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:156)
+        at org.springframework.boot.web.servlet.ServletContextInitializerBeans.&amp;lt;init&amp;gt;(ServletContextInitializerBeans.java:87)
+        at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:262)
+        at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:236)
+        at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:193)
+        at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:162)
+        ... 21 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &amp;#39;customUserDetailsService&amp;#39; defined in file [/opt/tomcat/webapps/kfs2025/WEB-INF/classes/kr/co/kfs/homepage/service/CustomUserDetailsService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;adminUserRepository&amp;#39; defined in kr.co.kfs.homepage.repository.AdminUserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean &amp;#39;(inner bean)#2912da9e&amp;#39; of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property &amp;#39;entityManager&amp;#39;; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;(inner bean)#2912da9e&amp;#39;: Cannot resolve reference to bean &amp;#39;entityManagerFactory&amp;#39; while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;entityManagerFactory&amp;#39; defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+        at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:801)
+        at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:224)
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372)
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222)
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+        at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+        at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+        at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+        at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+        at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
+        at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391)
+        at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)
+        at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:911)
+        at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:788)
+        ... 39 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;adminUserRepository&amp;#39; defined in kr.co.kfs.homepage.repository.AdminUserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean &amp;#39;(inner bean)#2912da9e&amp;#39; of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property &amp;#39;entityManager&amp;#39;; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;(inner bean)#2912da9e&amp;#39;: Cannot resolve reference to bean &amp;#39;entityManagerFactory&amp;#39; while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;entityManagerFactory&amp;#39; defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+        at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveInnerBean(BeanDefinitionValueResolver.java:389)
+        at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:134)
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1707)
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1452)
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+        at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+        at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+        at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+        at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+        at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
+        at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391)
+        at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)
+        at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:911)
+        at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:788)
+        ... 53 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;(inner bean)#2912da9e&amp;#39;: Cannot resolve reference to bean &amp;#39;entityManagerFactory&amp;#39; while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;entityManagerFactory&amp;#39; defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+        at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:342)
+        at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:113)
+        at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:688)
+        at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:505)
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1352)
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1195)
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+        at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveInnerBean(BeanDefinitionValueResolver.java:374)
+        ... 67 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;entityManagerFactory&amp;#39; defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1804)
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620)
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+        at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+        at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+        at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+        at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+        at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:330)
+        ... 75 common frames omitted
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+        at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:421)
+        at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+        at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863)
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800)
+        ... 82 common frames omitted
+Caused by: org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+        at org.hibernate.tool.schema.internal.AbstractSchemaValidator.validateColumnType(AbstractSchemaValidator.java:167)
+        at org.hibernate.tool.schema.internal.AbstractSchemaValidator.validateTable(AbstractSchemaValidator.java:151)
+        at org.hibernate.tool.schema.internal.GroupedSchemaValidatorImpl.validateTables(GroupedSchemaValidatorImpl.java:42)
+        at org.hibernate.tool.schema.internal.AbstractSchemaValidator.performValidation(AbstractSchemaValidator.java:97)
+        at org.hibernate.tool.schema.internal.AbstractSchemaValidator.doValidation(AbstractSchemaValidator.java:76)
+        at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:204)
+        at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:85)
+        at org.hibernate.internal.SessionFactoryImpl.&amp;lt;init&amp;gt;(SessionFactoryImpl.java:335)
+        at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:471)
+        at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1498)
+        at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58)
+        at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+        at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+        ... 86 common frames omitted
+10-Oct-2025 14:18:06.551 심각 [localhost-startStop-1] org.apache.catalina.core.ContainerBase.addChildInternal ContainerBase.addChild: start:
+        org.apache.catalina.LifecycleException: 구성요소 [StandardEngine[Catalina].StandardHost[localhost].StandardContext[/kfs2025]]을(를) 시작하지 못했습니다.
+                at org.apache.catalina.util.LifecycleBase.handleSubClassException(LifecycleBase.java:419)
+                at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:186)
+                at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:710)
+                at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:687)
+                at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:660)
+                at org.apache.catalina.startup.HostConfig.deployWAR(HostConfig.java:1015)
+                at org.apache.catalina.startup.HostConfig$DeployWar.run(HostConfig.java:1867)
+                at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+                at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+                at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+                at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+                at java.lang.Thread.run(Thread.java:750)
+        Caused by: org.springframework.context.ApplicationContextException: Unable to start web server; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &amp;#39;jwtAuthenticationFilter&amp;#39; defined in file [/opt/tomcat/webapps/kfs2025/WEB-INF/classes/kr/co/kfs/homepage/config/JwtAuthenticationFilter.class]: Unsatisfied dependency expressed through constructor parameter 1; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &amp;#39;customUserDetailsService&amp;#39; defined in file [/opt/tomcat/webapps/kfs2025/WEB-INF/classes/kr/co/kfs/homepage/service/CustomUserDetailsService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;adminUserRepository&amp;#39; defined in kr.co.kfs.homepage.repository.AdminUserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean &amp;#39;(inner bean)#2912da9e&amp;#39; of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property &amp;#39;entityManager&amp;#39;; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;(inner bean)#2912da9e&amp;#39;: Cannot resolve reference to bean &amp;#39;entityManagerFactory&amp;#39; while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;entityManagerFactory&amp;#39; defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+                at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:165)
+                at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:585)
+                at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147)
+                at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:732)
+                at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:409)
+                at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+                at org.springframework.boot.web.servlet.support.SpringBootServletInitializer.run(SpringBootServletInitializer.java:175)
+                at org.springframework.boot.web.servlet.support.SpringBootServletInitializer.createRootApplicationContext(SpringBootServletInitializer.java:155)
+                at org.springframework.boot.web.servlet.support.SpringBootServletInitializer.onStartup(SpringBootServletInitializer.java:97)
+                at org.springframework.web.SpringServletContainerInitializer.onStartup(SpringServletContainerInitializer.java:174)
+                at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4889)
+                at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+                ... 10 more
+        Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &amp;#39;jwtAuthenticationFilter&amp;#39; defined in file [/opt/tomcat/webapps/kfs2025/WEB-INF/classes/kr/co/kfs/homepage/config/JwtAuthenticationFilter.class]: Unsatisfied dependency expressed through constructor parameter 1; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &amp;#39;customUserDetailsService&amp;#39; defined in file [/opt/tomcat/webapps/kfs2025/WEB-INF/classes/kr/co/kfs/homepage/service/CustomUserDetailsService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;adminUserRepository&amp;#39; defined in kr.co.kfs.homepage.repository.AdminUserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean &amp;#39;(inner bean)#2912da9e&amp;#39; of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property &amp;#39;entityManager&amp;#39;; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;(inner bean)#2912da9e&amp;#39;: Cannot resolve reference to bean &amp;#39;entityManagerFactory&amp;#39; while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;entityManagerFactory&amp;#39; defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+                at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:801)
+                at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:224)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+                at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:213)
+                at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:213)
+                at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:176)
+                at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:171)
+                at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:156)
+                at org.springframework.boot.web.servlet.ServletContextInitializerBeans.&amp;lt;init&amp;gt;(ServletContextInitializerBeans.java:87)
+                at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:262)
+                at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:236)
+                at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:193)
+                at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:162)
+                ... 21 more
+        Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &amp;#39;customUserDetailsService&amp;#39; defined in file [/opt/tomcat/webapps/kfs2025/WEB-INF/classes/kr/co/kfs/homepage/service/CustomUserDetailsService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;adminUserRepository&amp;#39; defined in kr.co.kfs.homepage.repository.AdminUserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean &amp;#39;(inner bean)#2912da9e&amp;#39; of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property &amp;#39;entityManager&amp;#39;; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;(inner bean)#2912da9e&amp;#39;: Cannot resolve reference to bean &amp;#39;entityManagerFactory&amp;#39; while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;entityManagerFactory&amp;#39; defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+                at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:801)
+                at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:224)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+                at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+                at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
+                at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391)
+                at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)
+                at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:911)
+                at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:788)
+                ... 39 more
+        Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;adminUserRepository&amp;#39; defined in kr.co.kfs.homepage.repository.AdminUserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean &amp;#39;(inner bean)#2912da9e&amp;#39; of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property &amp;#39;entityManager&amp;#39;; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;(inner bean)#2912da9e&amp;#39;: Cannot resolve reference to bean &amp;#39;entityManagerFactory&amp;#39; while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;entityManagerFactory&amp;#39; defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+                at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveInnerBean(BeanDefinitionValueResolver.java:389)
+                at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:134)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1707)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1452)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+                at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+                at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
+                at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391)
+                at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)
+                at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:911)
+                at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:788)
+                ... 53 more
+        Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;(inner bean)#2912da9e&amp;#39;: Cannot resolve reference to bean &amp;#39;entityManagerFactory&amp;#39; while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;entityManagerFactory&amp;#39; defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+                at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:342)
+                at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:113)
+                at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:688)
+                at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:505)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1352)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1195)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+                at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveInnerBean(BeanDefinitionValueResolver.java:374)
+                ... 67 more
+        Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;entityManagerFactory&amp;#39; defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1804)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+                at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+                at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:330)
+                ... 75 more
+        Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+                at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:421)
+                at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+                at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800)
+                ... 82 more
+        Caused by: org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+                at org.hibernate.tool.schema.internal.AbstractSchemaValidator.validateColumnType(AbstractSchemaValidator.java:167)
+                at org.hibernate.tool.schema.internal.AbstractSchemaValidator.validateTable(AbstractSchemaValidator.java:151)
+                at org.hibernate.tool.schema.internal.GroupedSchemaValidatorImpl.validateTables(GroupedSchemaValidatorImpl.java:42)
+                at org.hibernate.tool.schema.internal.AbstractSchemaValidator.performValidation(AbstractSchemaValidator.java:97)
+                at org.hibernate.tool.schema.internal.AbstractSchemaValidator.doValidation(AbstractSchemaValidator.java:76)
+                at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:204)
+                at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:85)
+                at org.hibernate.internal.SessionFactoryImpl.&amp;lt;init&amp;gt;(SessionFactoryImpl.java:335)
+                at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:471)
+                at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1498)
+                at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58)
+                at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+                at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+                ... 86 more
+10-Oct-2025 14:18:06.553 심각 [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployWAR 웹 애플리케이션 아카이브 [/opt/tomcat/webapps/kfs2025.war]을(를) 배치하는 중 오류 발생
+        java.lang.IllegalStateException: 자식 컨테이너를 시작하는 중 오류 발생
+                at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:714)
+                at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:687)
+                at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:660)
+                at org.apache.catalina.startup.HostConfig.deployWAR(HostConfig.java:1015)
+                at org.apache.catalina.startup.HostConfig$DeployWar.run(HostConfig.java:1867)
+                at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+                at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+                at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+                at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+                at java.lang.Thread.run(Thread.java:750)
+        Caused by: org.apache.catalina.LifecycleException: 구성요소 [StandardEngine[Catalina].StandardHost[localhost].StandardContext[/kfs2025]]을(를) 시작하지 못했습니다.
+                at org.apache.catalina.util.LifecycleBase.handleSubClassException(LifecycleBase.java:419)
+                at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:186)
+                at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:710)
+                ... 9 more
+        Caused by: org.springframework.context.ApplicationContextException: Unable to start web server; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &amp;#39;jwtAuthenticationFilter&amp;#39; defined in file [/opt/tomcat/webapps/kfs2025/WEB-INF/classes/kr/co/kfs/homepage/config/JwtAuthenticationFilter.class]: Unsatisfied dependency expressed through constructor parameter 1; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &amp;#39;customUserDetailsService&amp;#39; defined in file [/opt/tomcat/webapps/kfs2025/WEB-INF/classes/kr/co/kfs/homepage/service/CustomUserDetailsService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;adminUserRepository&amp;#39; defined in kr.co.kfs.homepage.repository.AdminUserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean &amp;#39;(inner bean)#2912da9e&amp;#39; of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property &amp;#39;entityManager&amp;#39;; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;(inner bean)#2912da9e&amp;#39;: Cannot resolve reference to bean &amp;#39;entityManagerFactory&amp;#39; while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;entityManagerFactory&amp;#39; defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+                at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:165)
+                at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:585)
+                at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147)
+                at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:732)
+                at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:409)
+                at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+                at org.springframework.boot.web.servlet.support.SpringBootServletInitializer.run(SpringBootServletInitializer.java:175)
+                at org.springframework.boot.web.servlet.support.SpringBootServletInitializer.createRootApplicationContext(SpringBootServletInitializer.java:155)
+                at org.springframework.boot.web.servlet.support.SpringBootServletInitializer.onStartup(SpringBootServletInitializer.java:97)
+                at org.springframework.web.SpringServletContainerInitializer.onStartup(SpringServletContainerInitializer.java:174)
+                at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4889)
+                at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+                ... 10 more
+        Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &amp;#39;jwtAuthenticationFilter&amp;#39; defined in file [/opt/tomcat/webapps/kfs2025/WEB-INF/classes/kr/co/kfs/homepage/config/JwtAuthenticationFilter.class]: Unsatisfied dependency expressed through constructor parameter 1; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &amp;#39;customUserDetailsService&amp;#39; defined in file [/opt/tomcat/webapps/kfs2025/WEB-INF/classes/kr/co/kfs/homepage/service/CustomUserDetailsService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;adminUserRepository&amp;#39; defined in kr.co.kfs.homepage.repository.AdminUserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean &amp;#39;(inner bean)#2912da9e&amp;#39; of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property &amp;#39;entityManager&amp;#39;; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;(inner bean)#2912da9e&amp;#39;: Cannot resolve reference to bean &amp;#39;entityManagerFactory&amp;#39; while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;entityManagerFactory&amp;#39; defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+                at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:801)
+                at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:224)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+                at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:213)
+                at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:213)
+                at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:176)
+                at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:171)
+                at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:156)
+                at org.springframework.boot.web.servlet.ServletContextInitializerBeans.&amp;lt;init&amp;gt;(ServletContextInitializerBeans.java:87)
+                at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:262)
+                at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:236)
+                at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:193)
+                at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:162)
+                ... 21 more
+        Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &amp;#39;customUserDetailsService&amp;#39; defined in file [/opt/tomcat/webapps/kfs2025/WEB-INF/classes/kr/co/kfs/homepage/service/CustomUserDetailsService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;adminUserRepository&amp;#39; defined in kr.co.kfs.homepage.repository.AdminUserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean &amp;#39;(inner bean)#2912da9e&amp;#39; of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property &amp;#39;entityManager&amp;#39;; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;(inner bean)#2912da9e&amp;#39;: Cannot resolve reference to bean &amp;#39;entityManagerFactory&amp;#39; while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;entityManagerFactory&amp;#39; defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+                at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:801)
+                at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:224)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+                at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+                at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
+                at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391)
+                at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)
+                at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:911)
+                at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:788)
+                ... 39 more
+        Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;adminUserRepository&amp;#39; defined in kr.co.kfs.homepage.repository.AdminUserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean &amp;#39;(inner bean)#2912da9e&amp;#39; of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property &amp;#39;entityManager&amp;#39;; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;(inner bean)#2912da9e&amp;#39;: Cannot resolve reference to bean &amp;#39;entityManagerFactory&amp;#39; while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;entityManagerFactory&amp;#39; defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+                at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveInnerBean(BeanDefinitionValueResolver.java:389)
+                at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:134)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1707)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1452)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+                at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+                at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
+                at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391)
+                at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)
+                at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:911)
+                at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:788)
+                ... 53 more
+        Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;(inner bean)#2912da9e&amp;#39;: Cannot resolve reference to bean &amp;#39;entityManagerFactory&amp;#39; while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;entityManagerFactory&amp;#39; defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+                at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:342)
+                at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:113)
+                at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:688)
+                at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:505)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1352)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1195)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+                at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveInnerBean(BeanDefinitionValueResolver.java:374)
+                ... 67 more
+        Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name &amp;#39;entityManagerFactory&amp;#39; defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1804)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+                at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+                at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+                at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:330)
+                ... 75 more
+        Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+                at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:421)
+                at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+                at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863)
+                at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800)
+                ... 82 more
+        Caused by: org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: wrong column type encountered in column [enabled] in table [admin_users]; found [bit (Types#BIT)], but expecting [tinyint(1) default 1 (Types#INTEGER)]
+                at org.hibernate.tool.schema.internal.AbstractSchemaValidator.validateColumnType(AbstractSchemaValidator.java:167)
+                at org.hibernate.tool.schema.internal.AbstractSchemaValidator.validateTable(AbstractSchemaValidator.java:151)
+                at org.hibernate.tool.schema.internal.GroupedSchemaValidatorImpl.validateTables(GroupedSchemaValidatorImpl.java:42)
+                at org.hibernate.tool.schema.internal.AbstractSchemaValidator.performValidation(AbstractSchemaValidator.java:97)
+                at org.hibernate.tool.schema.internal.AbstractSchemaValidator.doValidation(AbstractSchemaValidator.java:76)
+                at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:204)
+                at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:85)
+                at org.hibernate.internal.SessionFactoryImpl.&amp;lt;init&amp;gt;(SessionFactoryImpl.java:335)
+                at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:471)
+                at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1498)
+                at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58)
+                at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+                at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+                ... 86 more
+            </pre>
+
+        <!-- 추가 안내 -->
+        <div class="mt-4 px-4 py-2 bg-blue-50 border border-blue-200 rounded-lg" style="min-height: 0;">
+            <p class="text-sm text-blue-900" style="margin: 0;">
+                <strong>팁:</strong> <kbd>Ctrl+C</kbd> (Mac: <kbd>Cmd+C</kbd>)로 선택 영역 복사, <kbd>Ctrl+S</kbd> (Mac: <kbd>Cmd+S</kbd>)로 파일 다운로드
+            </p>
+        </div>
+    </div>
+
+    <script>
+        /*<![CDATA[*/
+        // Global 변수
+        const globalHashcode = "ad41e45d5be6cd37b8c3bf0eed54dd96";
+        const globalFilename = "tomcat.log";
+
+        // 문서 정보 토글
+        function toggleDocInfo() {
+            const docInfoSection = document.getElementById('docInfoSection');
+            const toggleBtns = document.querySelectorAll('.toggle-doc-info-btn');
+
+            docInfoSection.classList.toggle('collapsed');
+            toggleBtns.forEach(btn => {
+                btn.classList.toggle('collapsed');
+            });
+        }
+
+        // 모바일 메뉴 토글
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('open');
+        }
+
+        // 모바일 메뉴 외부 클릭시 닫기
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const toggleBtn = document.querySelector('.toggle-doc-info-btn');
+
+            if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target) && !toggleBtn.contains(event.target)) {
+                mobileMenu.classList.remove('open');
+            }
+        });
+
+        // 전체 복사
+        function copyToClipboard() {
+            const textContent = document.getElementById('textContent');
+            const text = textContent.textContent;
+
+            navigator.clipboard.writeText(text).then(() => {
+                // 성공 알림 (버튼이 있다면 텍스트 변경)
+                const btns = document.querySelectorAll('button');
+                btns.forEach(btn => {
+                    if (btn.textContent.includes('전체 복사')) {
+                        const originalText = btn.innerHTML;
+                        btn.innerHTML = btn.innerHTML.replace('전체 복사', '✅ 복사됨');
+                        setTimeout(() => {
+                            btn.innerHTML = originalText;
+                        }, 2000);
+                    }
+                });
+            }).catch(err => {
+                console.error('복사 실패:', err);
+                alert('클립보드 복사에 실패했습니다.');
+            });
+        }
+
+        // 원본 다운로드
+        function downloadOriginal() {
+            if (globalHashcode && globalFilename) {
+                // filename에서 확장자 추출
+                const extension = globalFilename.split('.').pop().toLowerCase();
+                // FileController를 통해 캐시된 원본 파일 다운로드
+                const downloadUrl = '/aview/file/' + globalHashcode + '.' + extension +
+                                  '?download=true&name=' + encodeURIComponent(globalFilename);
+                downloadFile(downloadUrl, globalFilename);
+            } else {
+                alert('원본 문서의 정보가 없습니다.');
+            }
+        }
+
+        // 파일 다운로드 헬퍼 함수
+        function downloadFile(url, filename) {
+            const link = document.createElement('a');
+            link.href = url;
+            if (filename) {
+                link.download = filename;
+            }
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // 키보드 단축키
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+S or Cmd+S 다운로드
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                downloadOriginal();
+            }
+        });
+
+        // 숫자 천단위 콤마 포맷팅
+        function formatNumber(num) {
+            if (!num || num === '정보 없음') return num;
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        // 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Text Viewer loaded');
+
+            // 숫자 포맷팅 적용
+            const lineCountEl = document.getElementById('lineCountDisplay');
+            const charCountEl = document.getElementById('charCountDisplay');
+            const wordCountEl = document.getElementById('wordCountDisplay');
+
+            if (lineCountEl && lineCountEl.textContent !== '정보 없음') {
+                lineCountEl.textContent = formatNumber(lineCountEl.textContent);
+            }
+            if (charCountEl && charCountEl.textContent !== '정보 없음') {
+                charCountEl.textContent = formatNumber(charCountEl.textContent);
+            }
+            if (wordCountEl && wordCountEl.textContent !== '정보 없음') {
+                wordCountEl.textContent = formatNumber(wordCountEl.textContent);
+            }
+
+            // Text Viewer Control Bar 초기화
+            initializeTextViewerControls();
+        });
+
+        // ===== TEXT VIEWER CONTROL BAR 기능 =====
+
+        // 설정 기본값
+        const DEFAULT_SETTINGS = {
+            fontSize: 14,
+            lineHeight: 1.6,
+            fontFamily: "'Noto Sans KR', sans-serif",
+            backgroundColor: '#ffffff',
+            darkMode: false,
+            lineWrap: true,
+            lineHighlight: false
+        };
+
+        // 현재 설정 상태
+        let currentSettings = { ...DEFAULT_SETTINGS };
+
+        // 현재 폰트 크기 상태 (하위 호환성)
+        let currentFontSize = 14;
+        // 현재 줄간 상태 (하위 호환성)
+        let currentLineHeight = 1.6;
+
+        /**
+         * Text Viewer Control Bar 초기화
+         */
+        function initializeTextViewerControls() {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+
+            // Desktop 컨트롤 이벤트 리스너 (먼저 설정)
+            setupDesktopControls();
+
+            // Mobile 컨트롤 이벤트 리스너 (먼저 설정)
+            setupMobileControls();
+
+            // 저장된 설정 로드 및 적용 (이벤트 리스너 설정 후)
+            loadSettings();
+
+            // 상태 동기화
+            syncControlsState();
+        }
+
+        /**
+         * Desktop 컨트롤 설정
+         */
+        function setupDesktopControls() {
+            const textContent = document.getElementById('textContent');
+
+            // 라인번호 토글
+            const toggleLineNumbers = document.getElementById('toggleLineNumbers');
+            if (toggleLineNumbers) {
+                toggleLineNumbers.addEventListener('change', function() {
+                    updateLineNumbers(this.checked);
+                    syncLineNumberState(this.checked);
+                });
+            }
+
+            // 커서 라인 하이라이트 토글
+            const toggleLineHighlight = document.getElementById('toggleLineHighlight');
+            if (toggleLineHighlight) {
+                toggleLineHighlight.addEventListener('change', function() {
+                    toggleCursorLineHighlight(this.checked);
+                    syncLineHighlightState(this.checked);
+                });
+            }
+
+            // 줄바꿈 토글
+            const toggleLineWrap = document.getElementById('toggleLineWrap');
+            if (toggleLineWrap) {
+                toggleLineWrap.addEventListener('change', function() {
+                    updateLineWrap(this.checked);
+                    syncLineWrapState(this.checked);
+                });
+            }
+
+            // 폰트 크기 감소
+            const fontSizeDecrease = document.getElementById('fontSizeDecrease');
+            if (fontSizeDecrease) {
+                fontSizeDecrease.addEventListener('click', function() {
+                    decreaseFontSize();
+                });
+            }
+
+            // 폰트 크기 리셋
+            const fontSizeReset = document.getElementById('fontSizeReset');
+            if (fontSizeReset) {
+                fontSizeReset.addEventListener('click', function() {
+                    resetFontSize();
+                });
+            }
+
+            // 폰트 크기 증가
+            const fontSizeIncrease = document.getElementById('fontSizeIncrease');
+            if (fontSizeIncrease) {
+                fontSizeIncrease.addEventListener('click', function() {
+                    increaseFontSize();
+                });
+            }
+
+            // 폰트 패밀리 선택
+            const fontFamily = document.getElementById('fontFamily');
+            if (fontFamily) {
+                fontFamily.addEventListener('change', function() {
+                    updateFontFamily(this.value);
+                    syncFontFamilyState(this.value);
+                });
+            }
+
+            // 전체화면 토글
+            const toggleFullscreen = document.getElementById('toggleFullscreen');
+            if (toggleFullscreen) {
+                toggleFullscreen.addEventListener('click', function() {
+                    toggleFullscreenMode();
+                });
+            }
+
+            // 다크모드 토글
+            const toggleDarkMode = document.getElementById('toggleDarkMode');
+            if (toggleDarkMode) {
+                toggleDarkMode.addEventListener('click', function() {
+                    toggleDarkModeStyle();
+                });
+            }
+
+            // 배경색 선택 (custom dropdown)
+            setupCustomColorPicker('bgColorBtn', 'bgColorMenu');
+
+            // 줄간 감소
+            const lineHeightDecrease = document.getElementById('lineHeightDecrease');
+            if (lineHeightDecrease) {
+                lineHeightDecrease.addEventListener('click', function() {
+                    decreaseLineHeight();
+                });
+            }
+
+            // 줄간 리셋
+            const lineHeightReset = document.getElementById('lineHeightReset');
+            if (lineHeightReset) {
+                lineHeightReset.addEventListener('click', function() {
+                    resetLineHeight();
+                });
+            }
+
+            // 줄간 증가
+            const lineHeightIncrease = document.getElementById('lineHeightIncrease');
+            if (lineHeightIncrease) {
+                lineHeightIncrease.addEventListener('click', function() {
+                    increaseLineHeight();
+                });
+            }
+
+            // 설정 저장 버튼
+            const saveSettingsBtn = document.getElementById('saveSettings');
+            if (saveSettingsBtn) {
+                saveSettingsBtn.addEventListener('click', function() {
+                    saveSettings();
+                    showButtonFeedback(this, '✓');
+                });
+            }
+
+            // 설정 초기화 버튼
+            const resetSettingsBtn = document.getElementById('resetSettings');
+            if (resetSettingsBtn) {
+                resetSettingsBtn.addEventListener('click', function() {
+                    if (confirm('모든 설정을 초기값으로 되돌리시겠습니까?')) {
+                        resetAllSettings();
+                        showButtonFeedback(this, '✓');
+                    }
+                });
+            }
+        }
+
+        /**
+         * Mobile 컨트롤 설정
+         */
+        function setupMobileControls() {
+            // 모바일 메뉴 버튼
+            const controlsMenuBtn = document.getElementById('controlsMenuBtn');
+            if (controlsMenuBtn) {
+                controlsMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    toggleControlsMenu();
+                });
+            }
+
+            // 모바일 라인번호 토글
+            const toggleLineNumbersMobile = document.getElementById('toggleLineNumbers-mobile');
+            if (toggleLineNumbersMobile) {
+                toggleLineNumbersMobile.addEventListener('change', function() {
+                    updateLineNumbers(this.checked);
+                    syncLineNumberState(this.checked);
+                });
+            }
+
+            // 모바일 커서 라인 하이라이트 토글
+            const toggleLineHighlightMobile = document.getElementById('toggleLineHighlight-mobile');
+            if (toggleLineHighlightMobile) {
+                toggleLineHighlightMobile.addEventListener('change', function() {
+                    toggleCursorLineHighlight(this.checked);
+                    syncLineHighlightState(this.checked);
+                });
+            }
+
+            // 모바일 줄바꿈 토글
+            const toggleLineWrapMobile = document.getElementById('toggleLineWrap-mobile');
+            if (toggleLineWrapMobile) {
+                toggleLineWrapMobile.addEventListener('change', function() {
+                    updateLineWrap(this.checked);
+                    syncLineWrapState(this.checked);
+                });
+            }
+
+            // 모바일 폰트 크기 감소
+            const fontSizeDecreaseMobile = document.getElementById('fontSizeDecrease-mobile');
+            if (fontSizeDecreaseMobile) {
+                fontSizeDecreaseMobile.addEventListener('click', function() {
+                    decreaseFontSize();
+                });
+            }
+
+            // 모바일 폰트 크기 리셋
+            const fontSizeResetMobile = document.getElementById('fontSizeReset-mobile');
+            if (fontSizeResetMobile) {
+                fontSizeResetMobile.addEventListener('click', function() {
+                    resetFontSize();
+                });
+            }
+
+            // 모바일 폰트 크기 증가
+            const fontSizeIncreaseMobile = document.getElementById('fontSizeIncrease-mobile');
+            if (fontSizeIncreaseMobile) {
+                fontSizeIncreaseMobile.addEventListener('click', function() {
+                    increaseFontSize();
+                });
+            }
+
+            // 모바일 폰트 패밀리 선택
+            const fontFamilyMobile = document.getElementById('fontFamily-mobile');
+            if (fontFamilyMobile) {
+                fontFamilyMobile.addEventListener('change', function() {
+                    updateFontFamily(this.value);
+                    syncFontFamilyState(this.value);
+                });
+            }
+
+            // 모바일 전체화면 토글
+            const toggleFullscreenMobile = document.getElementById('toggleFullscreen-mobile');
+            if (toggleFullscreenMobile) {
+                toggleFullscreenMobile.addEventListener('click', function() {
+                    toggleFullscreenMode();
+                    closeControlsMenu();
+                });
+            }
+
+            // 모바일 다크모드 토글
+            const toggleDarkModeMobile = document.getElementById('toggleDarkMode-mobile');
+            if (toggleDarkModeMobile) {
+                toggleDarkModeMobile.addEventListener('click', function() {
+                    toggleDarkModeStyle();
+                    closeControlsMenu();
+                });
+            }
+
+            // 모바일 배경색 선택 (custom dropdown)
+            setupCustomColorPicker('bgColorBtn-mobile', 'bgColorMenu-mobile');
+
+            // 모바일 줄간 감소
+            const lineHeightDecreaseMobile = document.getElementById('lineHeightDecrease-mobile');
+            if (lineHeightDecreaseMobile) {
+                lineHeightDecreaseMobile.addEventListener('click', function() {
+                    decreaseLineHeight();
+                });
+            }
+
+            // 모바일 줄간 리셋
+            const lineHeightResetMobile = document.getElementById('lineHeightReset-mobile');
+            if (lineHeightResetMobile) {
+                lineHeightResetMobile.addEventListener('click', function() {
+                    resetLineHeight();
+                });
+            }
+
+            // 모바일 줄간 증가
+            const lineHeightIncreaseMobile = document.getElementById('lineHeightIncrease-mobile');
+            if (lineHeightIncreaseMobile) {
+                lineHeightIncreaseMobile.addEventListener('click', function() {
+                    increaseLineHeight();
+                });
+            }
+
+            // 모바일 설정 저장 버튼
+            const saveSettingsMobile = document.getElementById('saveSettings-mobile');
+            if (saveSettingsMobile) {
+                saveSettingsMobile.addEventListener('click', function() {
+                    saveSettings();
+                    showButtonFeedback(this, '저장됨');
+                    setTimeout(() => closeControlsMenu(), 1500);
+                });
+            }
+
+            // 모바일 설정 초기화 버튼
+            const resetSettingsMobile = document.getElementById('resetSettings-mobile');
+            if (resetSettingsMobile) {
+                resetSettingsMobile.addEventListener('click', function() {
+                    if (confirm('모든 설정을 초기값으로 되돌리시겠습니까?')) {
+                        resetAllSettings();
+                        showButtonFeedback(this, '초기화됨');
+                        setTimeout(() => closeControlsMenu(), 1500);
+                    }
+                });
+            }
+
+            // 모바일 메뉴 외부 클릭시 닫기
+            document.addEventListener('click', function(event) {
+                const controlsMenu = document.getElementById('controlsMenu');
+                const controlsMenuBtn = document.getElementById('controlsMenuBtn');
+                if (controlsMenu && controlsMenuBtn &&
+                    !controlsMenu.contains(event.target) &&
+                    !controlsMenuBtn.contains(event.target)) {
+                    closeControlsMenu();
+                }
+            });
+        }
+
+        /**
+         * 라인번호 업데이트 (현재 미지원 - pre 태그의 특성상 구현 불가)
+         */
+        function updateLineNumbers(show) {
+            // 라인번호 기능은 <pre> 태그의 특성상 구현이 복잡하여 미지원
+            console.log('라인번호 기능은 현재 미지원입니다.');
+        }
+
+        /**
+         * 줄바꿈 업데이트
+         */
+        function updateLineWrap(wrap) {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+
+            currentSettings.lineWrap = wrap;
+
+            if (wrap) {
+                textContent.style.whiteSpace = 'pre-wrap';
+                textContent.style.overflowWrap = 'break-word';
+            } else {
+                textContent.style.whiteSpace = 'pre';
+                textContent.style.overflowWrap = 'normal';
+            }
+        }
+
+        /**
+         * 폰트 크기 증가
+         */
+        function increaseFontSize() {
+            currentFontSize += 2;
+            if (currentFontSize > 28) currentFontSize = 28;
+            currentSettings.fontSize = currentFontSize;
+            applyFontSize();
+        }
+
+        /**
+         * 폰트 크기 감소
+         */
+        function decreaseFontSize() {
+            currentFontSize -= 2;
+            if (currentFontSize < 8) currentFontSize = 8;
+            currentSettings.fontSize = currentFontSize;
+            applyFontSize();
+        }
+
+        /**
+         * 폰트 크기 리셋 (14px로 복원)
+         */
+        function resetFontSize() {
+            currentFontSize = 14;
+            currentSettings.fontSize = currentFontSize;
+            applyFontSize();
+        }
+
+        /**
+         * 폰트 크기 적용
+         */
+        function applyFontSize() {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+
+            textContent.style.fontSize = currentFontSize + 'px';
+
+            // 버튼 텍스트 업데이트 (desktop + mobile)
+            const fontSizeResetBtn = document.getElementById('fontSizeReset');
+            const fontSizeResetBtnMobile = document.getElementById('fontSizeReset-mobile');
+            if (fontSizeResetBtn) fontSizeResetBtn.textContent = currentFontSize + 'px';
+            if (fontSizeResetBtnMobile) fontSizeResetBtnMobile.textContent = currentFontSize + 'px';
+
+            // 하이라이트가 활성화되어 있고 마지막 마우스 위치가 있으면 재계산
+            if (lastMouseEvent && textContent.classList.contains('line-highlight-enabled')) {
+                updateCursorLinePosition(lastMouseEvent);
+            }
+        }
+
+        /**
+         * 폰트 패밀리 업데이트
+         */
+        function updateFontFamily(fontValue) {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+
+            currentSettings.fontFamily = fontValue;
+            textContent.style.fontFamily = fontValue;
+        }
+
+        /**
+         * 줄간 높이 업데이트
+         */
+        function updateLineHeight(height) {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+
+            currentLineHeight = parseFloat(height);
+            currentSettings.lineHeight = currentLineHeight;
+            textContent.style.lineHeight = currentLineHeight;
+
+            // 하이라이트가 활성화되어 있고 마지막 마우스 위치가 있으면 재계산
+            if (lastMouseEvent && textContent.classList.contains('line-highlight-enabled')) {
+                updateCursorLinePosition(lastMouseEvent);
+            }
+        }
+
+        /**
+         * 줄간 감소 (현재값 - 0.2)
+         */
+        function decreaseLineHeight() {
+            currentLineHeight -= 0.2;
+            if (currentLineHeight < 1.0) currentLineHeight = 1.0;
+            updateLineHeight(currentLineHeight);
+        }
+
+        /**
+         * 줄간 리셋 (1.6)
+         */
+        function resetLineHeight() {
+            updateLineHeight(1.6);
+        }
+
+        /**
+         * 줄간 증가 (현재값 + 0.2)
+         */
+        function increaseLineHeight() {
+            currentLineHeight += 0.2;
+            if (currentLineHeight > 3.0) currentLineHeight = 3.0;
+            updateLineHeight(currentLineHeight);
+        }
+
+        /**
+         * 전체화면 토글
+         */
+        function toggleFullscreenMode() {
+            const textViewer = document.querySelector('.text-viewer');
+            if (!textViewer) return;
+
+            textViewer.classList.toggle('fullscreen-mode');
+
+            if (textViewer.classList.contains('fullscreen-mode')) {
+                // 전체화면 모드 활성화
+                document.body.style.overflow = 'hidden';
+            } else {
+                // 전체화면 모드 비활성화
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        /**
+         * 다크모드 토글
+         */
+        function toggleDarkModeStyle() {
+            document.body.classList.toggle('dark-mode');
+
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            currentSettings.darkMode = isDarkMode;
+        }
+
+        /**
+         * 배경색 업데이트
+         */
+        function updateBackgroundColor(color) {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+
+            currentSettings.backgroundColor = color;
+            textContent.style.backgroundColor = color;
+        }
+
+        /**
+         * 커스텀 색상 피커 설정
+         */
+        function setupCustomColorPicker(btnId, menuId) {
+            const btn = document.getElementById(btnId);
+            const menu = document.getElementById(menuId);
+
+            if (!btn || !menu) return;
+
+            // 버튼 클릭 시 메뉴 토글
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                menu.classList.toggle('open');
+            });
+
+            // 색상 옵션 클릭
+            const options = menu.querySelectorAll('.custom-color-option');
+            options.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const color = this.dataset.color;
+
+                    // 배경색 업데이트
+                    updateBackgroundColor(color);
+
+                    // 버튼 색상 업데이트
+                    btn.style.backgroundColor = color;
+                    btn.dataset.color = color;
+
+                    // Active 상태 업데이트
+                    options.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // 다른 피커와 동기화
+                    syncCustomColorPickers(color);
+
+                    // 메뉴 닫기
+                    menu.classList.remove('open');
+                });
+            });
+
+            // 외부 클릭 시 메뉴 닫기
+            document.addEventListener('click', function(e) {
+                if (!btn.contains(e.target) && !menu.contains(e.target)) {
+                    menu.classList.remove('open');
+                }
+            });
+        }
+
+        /**
+         * 모든 커스텀 색상 피커 동기화
+         */
+        function syncCustomColorPickers(color) {
+            const btns = document.querySelectorAll('.custom-color-btn');
+            const options = document.querySelectorAll('.custom-color-option');
+
+            btns.forEach(btn => {
+                btn.style.backgroundColor = color;
+                btn.dataset.color = color;
+            });
+
+            options.forEach(option => {
+                if (option.dataset.color === color) {
+                    option.classList.add('active');
+                } else {
+                    option.classList.remove('active');
+                }
+            });
+        }
+
+        /**
+         * Control 상태 동기화 (Desktop <-> Mobile)
+         */
+        function syncControlsState() {
+            // 현재 라인번호 상태 확인
+            const toggleLineNumbersDt = document.getElementById('toggleLineNumbers');
+            if (toggleLineNumbersDt) {
+                const isMbElement = document.getElementById('toggleLineNumbers-mobile');
+                if (isMbElement) {
+                    isMbElement.checked = toggleLineNumbersDt.checked;
+                }
+            }
+
+            // 현재 줄바꿈 상태 확인
+            const toggleLineWrapDt = document.getElementById('toggleLineWrap');
+            if (toggleLineWrapDt) {
+                const isMbElement = document.getElementById('toggleLineWrap-mobile');
+                if (isMbElement) {
+                    isMbElement.checked = toggleLineWrapDt.checked;
+                }
+            }
+
+            // 현재 폰트 상태 확인
+            const fontFamilyDt = document.getElementById('fontFamily');
+            if (fontFamilyDt) {
+                const fontFamilyMb = document.getElementById('fontFamily-mobile');
+                if (fontFamilyMb) {
+                    fontFamilyMb.value = fontFamilyDt.value;
+                }
+            }
+        }
+
+        /**
+         * 라인번호 상태 동기화
+         */
+        function syncLineNumberState(checked) {
+            const toggleLineNumbersDt = document.getElementById('toggleLineNumbers');
+            const toggleLineNumbersMb = document.getElementById('toggleLineNumbers-mobile');
+
+            if (toggleLineNumbersDt && toggleLineNumbersMb) {
+                if (toggleLineNumbersDt.checked !== checked) {
+                    toggleLineNumbersDt.checked = checked;
+                }
+                if (toggleLineNumbersMb.checked !== checked) {
+                    toggleLineNumbersMb.checked = checked;
+                }
+            }
+        }
+
+        /**
+         * 줄바꿈 상태 동기화
+         */
+        function syncLineWrapState(checked) {
+            const toggleLineWrapDt = document.getElementById('toggleLineWrap');
+            const toggleLineWrapMb = document.getElementById('toggleLineWrap-mobile');
+
+            if (toggleLineWrapDt && toggleLineWrapMb) {
+                if (toggleLineWrapDt.checked !== checked) {
+                    toggleLineWrapDt.checked = checked;
+                }
+                if (toggleLineWrapMb.checked !== checked) {
+                    toggleLineWrapMb.checked = checked;
+                }
+            }
+        }
+
+        /**
+         * 폰트 패밀리 상태 동기화
+         */
+        function syncFontFamilyState(value) {
+            const fontFamilyDt = document.getElementById('fontFamily');
+            const fontFamilyMb = document.getElementById('fontFamily-mobile');
+
+            if (fontFamilyDt && fontFamilyMb) {
+                if (fontFamilyDt.value !== value) {
+                    fontFamilyDt.value = value;
+                }
+                if (fontFamilyMb.value !== value) {
+                    fontFamilyMb.value = value;
+                }
+            }
+        }
+
+        /**
+         * 모바일 드롭다운 메뉴 열기/닫기
+         */
+        function toggleControlsMenu() {
+            const controlsMenu = document.getElementById('controlsMenu');
+            if (controlsMenu) {
+                controlsMenu.classList.toggle('open');
+            }
+        }
+
+        /**
+         * 모바일 드롭다운 메뉴 닫기
+         */
+        function closeControlsMenu() {
+            const controlsMenu = document.getElementById('controlsMenu');
+            if (controlsMenu) {
+                controlsMenu.classList.remove('open');
+            }
+        }
+
+        // ===== 설정 저장/로드/초기화 기능 =====
+
+        /**
+         * 현재 설정을 localStorage에 저장
+         */
+        function saveSettings() {
+            localStorage.setItem('aview-text-settings', JSON.stringify(currentSettings));
+            console.log('💾 설정이 저장되었습니다:', currentSettings);
+        }
+
+        /**
+         * localStorage에서 설정 로드
+         */
+        function loadSettings() {
+            try {
+                const saved = localStorage.getItem('aview-text-settings');
+                if (saved) {
+                    const settings = JSON.parse(saved);
+                    console.log('📂 저장된 설정을 찾았습니다:', settings);
+
+                    // 저장된 설정을 현재 설정에 적용
+                    currentSettings = { ...DEFAULT_SETTINGS, ...settings };
+
+                    // 각 설정 적용
+                    currentFontSize = currentSettings.fontSize;
+                    currentLineHeight = currentSettings.lineHeight;
+
+                    const textContent = document.getElementById('textContent');
+                    if (textContent) {
+                        textContent.style.fontSize = currentSettings.fontSize + 'px';
+                        textContent.style.lineHeight = currentSettings.lineHeight;
+                        textContent.style.fontFamily = currentSettings.fontFamily;
+                        textContent.style.backgroundColor = currentSettings.backgroundColor;
+
+                        // 줄바꿈 적용
+                        if (currentSettings.lineWrap) {
+                            textContent.style.whiteSpace = 'pre-wrap';
+                            textContent.style.overflowWrap = 'break-word';
+                        } else {
+                            textContent.style.whiteSpace = 'pre';
+                            textContent.style.overflowWrap = 'normal';
+                        }
+
+                        console.log('✅ 텍스트 스타일 적용 완료');
+                    }
+
+                    // 다크모드 적용
+                    if (currentSettings.darkMode) {
+                        document.body.classList.add('dark-mode');
+                        console.log('🌙 다크모드 활성화');
+                    } else {
+                        document.body.classList.remove('dark-mode');
+                    }
+
+                    // UI 컨트롤 동기화
+                    syncUIWithSettings();
+
+                    // 배경색 피커 동기화
+                    syncCustomColorPickers(currentSettings.backgroundColor);
+
+                    // 커서 라인 하이라이트 적용
+                    if (currentSettings.lineHighlight) {
+                        const toggleDt = document.getElementById('toggleLineHighlight');
+                        const toggleMb = document.getElementById('toggleLineHighlight-mobile');
+                        if (toggleDt) toggleDt.checked = true;
+                        if (toggleMb) toggleMb.checked = true;
+                        setTimeout(() => {
+                            toggleCursorLineHighlight(true);
+                        }, 100);
+                        console.log('✨ 커서라인 하이라이트 활성화');
+                    }
+
+                    console.log('✅ 설정이 로드되었습니다:', currentSettings);
+                } else {
+                    console.log('ℹ️ 저장된 설정이 없습니다. 기본값 사용.');
+                }
+            } catch (e) {
+                console.error('❌ 설정 로드 오류:', e);
+            }
+        }
+
+        /**
+         * 모든 설정을 기본값으로 초기화
+         */
+        function resetAllSettings() {
+            // 설정 초기화
+            currentSettings = { ...DEFAULT_SETTINGS };
+            currentFontSize = DEFAULT_SETTINGS.fontSize;
+            currentLineHeight = DEFAULT_SETTINGS.lineHeight;
+
+            // localStorage 삭제
+            localStorage.removeItem('aview-text-settings');
+
+            // UI에 기본값 적용
+            const textContent = document.getElementById('textContent');
+            if (textContent) {
+                textContent.style.fontSize = DEFAULT_SETTINGS.fontSize + 'px';
+                textContent.style.lineHeight = DEFAULT_SETTINGS.lineHeight;
+                textContent.style.fontFamily = DEFAULT_SETTINGS.fontFamily;
+                textContent.style.backgroundColor = DEFAULT_SETTINGS.backgroundColor;
+                textContent.style.whiteSpace = 'pre-wrap';
+                textContent.style.overflowWrap = 'break-word';
+
+                // 커서 라인 하이라이트 비활성화
+                textContent.classList.remove('line-highlight-enabled');
+            }
+
+            // 다크모드 비활성화
+            document.body.classList.remove('dark-mode');
+
+            // UI 컨트롤 동기화
+            syncUIWithSettings();
+
+            // 배경색 피커 동기화
+            syncCustomColorPickers(DEFAULT_SETTINGS.backgroundColor);
+
+            console.log('설정이 초기화되었습니다.');
+        }
+
+        /**
+         * UI 컨트롤을 현재 설정과 동기화
+         */
+        function syncUIWithSettings() {
+            // 줄바꿈 체크박스
+            const wrapDt = document.getElementById('toggleLineWrap');
+            const wrapMb = document.getElementById('toggleLineWrap-mobile');
+            if (wrapDt) wrapDt.checked = currentSettings.lineWrap;
+            if (wrapMb) wrapMb.checked = currentSettings.lineWrap;
+
+            // 커서라인 체크박스
+            const hlDt = document.getElementById('toggleLineHighlight');
+            const hlMb = document.getElementById('toggleLineHighlight-mobile');
+            if (hlDt) hlDt.checked = currentSettings.lineHighlight;
+            if (hlMb) hlMb.checked = currentSettings.lineHighlight;
+
+            // 폰트 크기 버튼 텍스트
+            const fontSizeResetBtn = document.getElementById('fontSizeReset');
+            const fontSizeResetBtnMobile = document.getElementById('fontSizeReset-mobile');
+            if (fontSizeResetBtn) fontSizeResetBtn.textContent = currentSettings.fontSize + 'px';
+            if (fontSizeResetBtnMobile) fontSizeResetBtnMobile.textContent = currentSettings.fontSize + 'px';
+
+            // 폰트 패밀리 선택
+            const fontDt = document.getElementById('fontFamily');
+            const fontMb = document.getElementById('fontFamily-mobile');
+            if (fontDt) fontDt.value = currentSettings.fontFamily;
+            if (fontMb) fontMb.value = currentSettings.fontFamily;
+        }
+
+        /**
+         * 버튼 피드백 표시 (저장됨/초기화됨)
+         */
+        function showButtonFeedback(button, text) {
+            const originalHTML = button.innerHTML;
+            button.innerHTML = text;
+            button.style.backgroundColor = '#28a745';
+            button.style.color = 'white';
+
+            setTimeout(() => {
+                button.innerHTML = originalHTML;
+                button.style.backgroundColor = '';
+                button.style.color = '';
+            }, 2000);
+        }
+
+        // ===== 커서 라인 하이라이트 기능 =====
+
+        /**
+         * 커서 라인 하이라이트 토글
+         */
+        function toggleCursorLineHighlight(enabled) {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+
+            currentSettings.lineHighlight = enabled;
+
+            if (enabled) {
+                // 검색이 활성화되어 있으면 비활성화
+                if (searchMatches.length > 0) {
+                    const searchInputDt = document.getElementById('searchInput');
+                    const searchInputMb = document.getElementById('searchInput-mobile');
+                    if (searchInputDt) searchInputDt.value = '';
+                    if (searchInputMb) searchInputMb.value = '';
+                    clearSearch();
+                }
+
+                textContent.classList.add('line-highlight-enabled');
+                // 이벤트 리스너 추가 (마우스 무브)
+                textContent.addEventListener('mousemove', updateCursorLinePosition);
+                textContent.addEventListener('mouseenter', updateCursorLinePosition);
+                // 초기 위치 설정
+                setTimeout(() => updateCursorLinePosition({ target: textContent, clientY: textContent.getBoundingClientRect().top + 20 }), 100);
+            } else {
+                textContent.classList.remove('line-highlight-enabled');
+                // 이벤트 리스너 제거
+                textContent.removeEventListener('mousemove', updateCursorLinePosition);
+                textContent.removeEventListener('mouseenter', updateCursorLinePosition);
+
+                // line-wrapper span 제거하고 원본 텍스트로 복원
+                if (textContent.querySelector('span.line-wrapper')) {
+                    textContent.textContent = textContent.textContent;
+                }
+            }
+        }
+
+        // 마지막 마우스 이벤트 저장 (폰트/줄간 변경 시 재계산용)
+        let lastMouseEvent = null;
+
+        /**
+         * 커서 라인 위치 업데이트 (마우스 위치 기반)
+         */
+        function updateCursorLinePosition(event) {
+            const textContent = document.getElementById('textContent');
+            if (!textContent || !textContent.classList.contains('line-highlight-enabled')) return;
+            if (!event || !event.clientY) return;
+
+            // 마지막 마우스 이벤트 저장
+            lastMouseEvent = event;
+
+            // 실제 계산된 스타일에서 값 가져오기
+            const computedStyle = window.getComputedStyle(textContent);
+            const fontSize = parseFloat(computedStyle.fontSize);
+            const lineHeight = parseFloat(computedStyle.lineHeight);
+
+            // lineHeight가 숫자가 아니면 (예: 'normal') fontSize * currentLineHeight 사용
+            const lineHeightPx = isNaN(lineHeight) ? fontSize * currentLineHeight : lineHeight;
+
+            // textContent의 위치 정보와 패딩
+            const rect = textContent.getBoundingClientRect();
+            const paddingTop = parseFloat(computedStyle.paddingTop) || 0;
+
+            // 마우스의 상대 Y 위치 (패딩과 스크롤 고려)
+            const relativeY = event.clientY - rect.top - paddingTop + textContent.scrollTop;
+
+            // 현재 마우스가 위치한 라인 인덱스 계산
+            const currentLineIndex = Math.floor(relativeY / lineHeightPx);
+
+            // 현재 라인의 top 위치 계산 (패딩 포함)
+            const highlightTop = paddingTop + (currentLineIndex * lineHeightPx);
+
+            // CSS 변수 업데이트
+            textContent.style.setProperty('--highlight-top', highlightTop + 'px');
+            textContent.style.setProperty('--line-height-px', lineHeightPx + 'px');
+
+            // 하이라이트된 라인의 텍스트 강조
+            applyLineTextStyle(currentLineIndex, lineHeightPx);
+        }
+
+        /**
+         * 하이라이트된 라인의 텍스트 스타일 적용
+         */
+        function applyLineTextStyle(lineIndex, lineHeightPx) {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+
+            // 텍스트를 줄 단위로 분리
+            const text = textContent.textContent;
+            const lines = text.split('\n');
+
+            // 이미 span으로 감싸져 있지 않으면 감싸기
+            if (!textContent.querySelector('span.line-wrapper')) {
+                const wrappedHTML = lines.map((line, index) =>
+                    `<span class="line-wrapper" data-line="${index}">${line || '\u00A0'}</span>`
+                ).join('\n');
+                textContent.innerHTML = wrappedHTML;
+            }
+
+            // 모든 라인에서 highlighted-line 클래스 제거
+            const allLines = textContent.querySelectorAll('.line-wrapper');
+            allLines.forEach(span => span.classList.remove('highlighted-line'));
+
+            // 현재 라인에 highlighted-line 클래스 추가
+            const currentLine = textContent.querySelector(`[data-line="${lineIndex}"]`);
+            if (currentLine) {
+                currentLine.classList.add('highlighted-line');
+            }
+        }
+
+        /**
+         * 커서 라인 하이라이트 상태 동기화
+         */
+        function syncLineHighlightState(checked) {
+            const toggleDt = document.getElementById('toggleLineHighlight');
+            const toggleMb = document.getElementById('toggleLineHighlight-mobile');
+
+            if (toggleDt && toggleDt.checked !== checked) {
+                toggleDt.checked = checked;
+            }
+            if (toggleMb && toggleMb.checked !== checked) {
+                toggleMb.checked = checked;
+            }
+        }
+        /*]]>*/
+    </script>
+
+    <!-- Search Feature Script -->
+    <script>
+        // ===== SEARCH FEATURE =====
+
+        let searchMatches = [];
+        let currentMatchIndex = -1;
+        let originalTextContent = '';
+
+        /**
+         * Search for text in the document
+         */
+        function searchText() {
+            const textContent = document.getElementById('textContent');
+            const searchInputDt = document.getElementById('searchInput');
+            const searchInputMb = document.getElementById('searchInput-mobile');
+
+            if (!textContent) return;
+
+            // Get search query from either input
+            const query = (searchInputDt?.value || searchInputMb?.value || '').trim();
+
+            // Clear search if query is empty
+            if (!query) {
+                clearSearch();
+                return;
+            }
+
+            // 커서라인 하이라이트가 활성화되어 있으면 비활성화
+            if (textContent.classList.contains('line-highlight-enabled')) {
+                const toggleDt = document.getElementById('toggleLineHighlight');
+                const toggleMb = document.getElementById('toggleLineHighlight-mobile');
+                if (toggleDt) toggleDt.checked = false;
+                if (toggleMb) toggleMb.checked = false;
+                toggleCursorLineHighlight(false);
+            }
+
+            // Store original content if not already stored
+            if (!originalTextContent) {
+                originalTextContent = textContent.textContent;
+            }
+
+            // Clear previous highlights
+            searchMatches = [];
+            currentMatchIndex = -1;
+
+            // Escape special regex characters
+            const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+            // Create case-insensitive regex
+            const regex = new RegExp(escapedQuery, 'gi');
+
+            // Get all matches
+            let match;
+            while ((match = regex.exec(originalTextContent)) !== null) {
+                searchMatches.push({
+                    index: match.index,
+                    text: match[0]
+                });
+            }
+
+            // Update counter
+            updateSearchCounter();
+
+            // If matches found, highlight and go to first
+            if (searchMatches.length > 0) {
+                currentMatchIndex = 0;
+                highlightMatches(query);
+                scrollToMatch(0);
+                updateSearchCounter();
+            } else {
+                // No matches - restore original content
+                textContent.textContent = originalTextContent;
+                updateSearchCounter();
+            }
+        }
+
+        /**
+         * Highlight all matches in the text
+         */
+        function highlightMatches(query) {
+            const textContent = document.getElementById('textContent');
+            if (!textContent || searchMatches.length === 0) return;
+
+            // Escape special regex characters
+            const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const regex = new RegExp(`(${escapedQuery})`, 'gi');
+
+            // Replace matches with highlighted spans
+            let highlightedText = originalTextContent;
+            let offset = 0;
+
+            searchMatches.forEach((match, index) => {
+                const beforeText = highlightedText.substring(0, match.index + offset);
+                const matchText = highlightedText.substring(match.index + offset, match.index + offset + match.text.length);
+                const afterText = highlightedText.substring(match.index + offset + match.text.length);
+
+                const className = index === currentMatchIndex ? 'search-highlight current' : 'search-highlight';
+                const highlightSpan = `<mark class="${className}" data-match-index="${index}">${matchText}</mark>`;
+
+                highlightedText = beforeText + highlightSpan + afterText;
+                offset += highlightSpan.length - matchText.length;
+            });
+
+            textContent.innerHTML = highlightedText;
+        }
+
+        /**
+         * Find next match
+         */
+        function findNext() {
+            if (searchMatches.length === 0) {
+                searchText();
+                return;
+            }
+
+            // Move to next match (cycle back to 0)
+            currentMatchIndex = (currentMatchIndex + 1) % searchMatches.length;
+
+            // Update highlights
+            updateCurrentHighlight();
+
+            // Scroll to current match
+            scrollToMatch(currentMatchIndex);
+
+            // Update counter
+            updateSearchCounter();
+        }
+
+        /**
+         * Find previous match
+         */
+        function findPrevious() {
+            if (searchMatches.length === 0) {
+                searchText();
+                return;
+            }
+
+            // Move to previous match (cycle back to last)
+            currentMatchIndex = (currentMatchIndex - 1 + searchMatches.length) % searchMatches.length;
+
+            // Update highlights
+            updateCurrentHighlight();
+
+            // Scroll to current match
+            scrollToMatch(currentMatchIndex);
+
+            // Update counter
+            updateSearchCounter();
+        }
+
+        /**
+         * Update which match is currently highlighted
+         */
+        function updateCurrentHighlight() {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+
+            const allHighlights = textContent.querySelectorAll('.search-highlight');
+            allHighlights.forEach((highlight, index) => {
+                if (index === currentMatchIndex) {
+                    highlight.classList.add('current');
+                } else {
+                    highlight.classList.remove('current');
+                }
+            });
+        }
+
+        /**
+         * Scroll to the specified match
+         */
+        function scrollToMatch(matchIndex) {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+
+            const currentHighlight = textContent.querySelector(`[data-match-index="${matchIndex}"]`);
+            if (currentHighlight) {
+                currentHighlight.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+        }
+
+        /**
+         * Update search counter display
+         */
+        function updateSearchCounter() {
+            const counterDt = document.getElementById('searchCounter');
+            const counterMb = document.getElementById('searchCounter-mobile');
+
+            let counterText = '';
+            if (searchMatches.length > 0) {
+                counterText = `${currentMatchIndex + 1}/${searchMatches.length}`;
+            }
+
+            if (counterDt) counterDt.textContent = counterText;
+            if (counterMb) counterMb.textContent = counterText;
+        }
+
+        /**
+         * Clear search and restore original content
+         */
+        function clearSearch() {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+
+            // Restore original content
+            if (originalTextContent) {
+                textContent.textContent = originalTextContent;
+            }
+
+            // Clear state
+            searchMatches = [];
+            currentMatchIndex = -1;
+            originalTextContent = '';
+
+            // Clear counter
+            updateSearchCounter();
+        }
+
+        /**
+         * Sync search state between desktop and mobile
+         */
+        function syncSearchState() {
+            const searchInputDt = document.getElementById('searchInput');
+            const searchInputMb = document.getElementById('searchInput-mobile');
+
+            if (searchInputDt && searchInputMb) {
+                // Sync input values
+                if (document.activeElement === searchInputDt) {
+                    searchInputMb.value = searchInputDt.value;
+                } else if (document.activeElement === searchInputMb) {
+                    searchInputDt.value = searchInputMb.value;
+                }
+            }
+        }
+
+        /**
+         * Initialize search feature
+         */
+        function initializeSearchFeature() {
+            // Desktop search input
+            const searchInputDt = document.getElementById('searchInput');
+            const searchClearBtnDt = document.getElementById('searchClearBtn');
+
+            if (searchInputDt) {
+                searchInputDt.addEventListener('input', function() {
+                    syncSearchState();
+                    // X 버튼 표시/숨김
+                    if (this.value.trim()) {
+                        searchText();
+                        if (searchClearBtnDt) searchClearBtnDt.classList.add('visible');
+                    } else {
+                        clearSearch();
+                        if (searchClearBtnDt) searchClearBtnDt.classList.remove('visible');
+                    }
+                });
+
+                searchInputDt.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (e.shiftKey) {
+                            findPrevious();
+                        } else {
+                            findNext();
+                        }
+                    } else if (e.key === 'Escape' || e.key === 'Delete') {
+                        e.preventDefault();
+                        this.value = '';
+                        syncSearchState();
+                        clearSearch();
+                        if (searchClearBtnDt) searchClearBtnDt.classList.remove('visible');
+                        const searchClearBtnMb = document.getElementById('searchClearBtn-mobile');
+                        if (searchClearBtnMb) searchClearBtnMb.classList.remove('visible');
+                    }
+                });
+            }
+
+            // Desktop clear button
+            if (searchClearBtnDt) {
+                searchClearBtnDt.addEventListener('click', function() {
+                    if (searchInputDt) searchInputDt.value = '';
+                    const searchInputMb = document.getElementById('searchInput-mobile');
+                    if (searchInputMb) searchInputMb.value = '';
+                    clearSearch();
+                    this.classList.remove('visible');
+                    const searchClearBtnMb = document.getElementById('searchClearBtn-mobile');
+                    if (searchClearBtnMb) searchClearBtnMb.classList.remove('visible');
+                });
+            }
+
+            // Desktop search button
+            const searchBtnDt = document.getElementById('searchBtn');
+            if (searchBtnDt) {
+                searchBtnDt.addEventListener('click', findNext);
+            }
+
+            // Mobile search input
+            const searchInputMb = document.getElementById('searchInput-mobile');
+            const searchClearBtnMb = document.getElementById('searchClearBtn-mobile');
+
+            if (searchInputMb) {
+                searchInputMb.addEventListener('input', function() {
+                    syncSearchState();
+                    // X 버튼 표시/숨김
+                    if (this.value.trim()) {
+                        searchText();
+                        if (searchClearBtnMb) searchClearBtnMb.classList.add('visible');
+                    } else {
+                        clearSearch();
+                        if (searchClearBtnMb) searchClearBtnMb.classList.remove('visible');
+                    }
+                });
+
+                searchInputMb.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (e.shiftKey) {
+                            findPrevious();
+                        } else {
+                            findNext();
+                        }
+                    } else if (e.key === 'Escape' || e.key === 'Delete') {
+                        e.preventDefault();
+                        this.value = '';
+                        syncSearchState();
+                        clearSearch();
+                        if (searchClearBtnMb) searchClearBtnMb.classList.remove('visible');
+                        if (searchClearBtnDt) searchClearBtnDt.classList.remove('visible');
+                    }
+                });
+            }
+
+            // Mobile clear button
+            if (searchClearBtnMb) {
+                searchClearBtnMb.addEventListener('click', function() {
+                    if (searchInputMb) searchInputMb.value = '';
+                    if (searchInputDt) searchInputDt.value = '';
+                    clearSearch();
+                    this.classList.remove('visible');
+                    if (searchClearBtnDt) searchClearBtnDt.classList.remove('visible');
+                });
+            }
+
+            // Mobile search button
+            const searchBtnMb = document.getElementById('searchBtn-mobile');
+            if (searchBtnMb) {
+                searchBtnMb.addEventListener('click', findNext);
+            }
+
+            // Global ESC key handler
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && searchMatches.length > 0) {
+                    const searchInputDt = document.getElementById('searchInput');
+                    const searchInputMb = document.getElementById('searchInput-mobile');
+                    if (searchInputDt) searchInputDt.value = '';
+                    if (searchInputMb) searchInputMb.value = '';
+                    clearSearch();
+                }
+            });
+        }
+
+        // Initialize search feature after DOM is loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(initializeSearchFeature, 100);
+            });
+        } else {
+            setTimeout(initializeSearchFeature, 100);
+        }
+
+        // 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Text Viewer loaded');
+            console.log('%c🔍 AView Document Info', 'color: #0066cc; font-weight: bold; font-size: 14px;');
+            console.log('Generated:', /*2025-11-26 16:34:26*/ '');
+            console.log('Hashcode:', globalHashcode);
+            console.log('Filename:', globalFilename);
+            console.log('Template:', 'text.html');
+            console.log('─'.repeat(50));
+        });
+        /*]]>*/
+    </script>
+</body>
+</html>
