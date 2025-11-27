@@ -1,0 +1,1908 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!--
+===========================================
+🔍 AView Document Metadata
+===========================================
+Generated : 2025-11-26 13:26:54
+Hashcode  : 95c5c47d4e9a15585c89175421823eff
+Filename  : utf-1.csv
+Template  : csv.html
+===========================================
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>utf-1.csv</title>
+    <link rel="icon" type="image/png" href="/aview/images/favicon32.png" sizes="32x32">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tabulator CSS -->
+    <link href="https://unpkg.com/tabulator-tables@5.5.0/dist/css/tabulator.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/tabulator-tables@5.5.0/dist/css/tabulator_midnight.min.css" rel="stylesheet" id="tabulator-dark-mode" disabled>
+    
+    <!-- SheetJS (Required for Excel Export) -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f6f8fa;
+            font-family: '맑은 고딕', 'Malgun Gothic', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+        }
+
+        .csv-viewer {
+            width: 100%;
+            height: 700px; /* Increased by 100px */
+            background-color: white;
+            border: 1px solid #e5e7eb;
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
+            border-radius: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .doc-info-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .doc-info-section.collapsed {
+            max-height: 0;
+            padding: 0 20px;
+            margin-bottom: 0;
+            opacity: 0;
+        }
+
+        .toggle-doc-info-btn {
+            background: #0d6efd;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .toggle-doc-info-btn {
+                display: none;
+            }
+        }
+
+        .toggle-doc-info-btn-mobile {
+            background: #0d6efd;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .toggle-doc-info-btn-mobile {
+                display: flex;
+            }
+        }
+
+        .toggle-doc-info-btn-mobile:hover,
+        .toggle-doc-info-btn:hover {
+            background: #0b5ed7;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .toggle-doc-info-btn-mobile.collapsed,
+        .toggle-doc-info-btn.collapsed {
+            background: #28a745;
+            animation: pulseCollapsed 2s ease-in-out infinite;
+        }
+
+        .toggle-doc-info-btn-mobile.collapsed:hover,
+        .toggle-doc-info-btn.collapsed:hover {
+            background: #218838;
+        }
+
+        .toggle-doc-info-btn-mobile svg,
+        .toggle-doc-info-btn svg {
+            color: white;
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-doc-info-btn-mobile.collapsed svg,
+        .toggle-doc-info-btn.collapsed svg {
+            transform: rotate(180deg);
+        }
+
+        @keyframes pulseCollapsed {
+            0%, 100% {
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+            50% {
+                box-shadow: 0 4px 16px rgba(40, 167, 69, 0.4);
+            }
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.875rem;
+            margin-bottom: 0;
+        }
+
+        .info-value {
+            color: #6c757d;
+            font-size: 1.125rem;
+        }
+
+        .csv-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .doc-info-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        @media (max-width: 1024px) {
+            .doc-info-row {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .doc-info-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .info-item {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 0;
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            .doc-info-col:last-child .info-item {
+                border-bottom: none;
+            }
+
+            .info-label {
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+
+            .info-value {
+                text-align: right;
+            }
+        }
+
+        .doc-info-col {
+            padding: 0;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 10;
+            min-width: 200px;
+        }
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+        .mobile-menu button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            transition: background-color 0.2s;
+        }
+
+        .mobile-menu button:hover {
+            background-color: #f3f4f6;
+        }
+
+        .mobile-menu button svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        .doc-info-header {
+            background-color: #f2ebd3;
+            padding: 12px 16px;
+            margin: -20px -20px 16px -20px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .doc-info-header h3 {
+            margin: 0;
+            color: #333;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .viewer-main-wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Control Bar Styles */
+        .text-viewer-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 40px;
+            padding: 0 12px;
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #d0d0d0;
+            gap: 8px;
+        }
+
+        .controls-desktop {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .controls-mobile {
+            display: none;
+            position: relative;
+            margin-left: auto;
+        }
+
+        @media (max-width: 768px) {
+            .controls-desktop {
+                display: none;
+            }
+
+            .controls-mobile {
+                display: flex;
+            }
+        }
+
+        .control-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .control-select {
+            padding: 4px 6px;
+            height: 28px;
+            font-size: 12px;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            background-color: #ffffff;
+            cursor: pointer;
+        }
+        .control-btn {
+            padding: 4px 8px;
+            min-width: 30px;
+            height: 28px;
+            background-color: #e8e8e8;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .control-btn:hover {
+            background-color: #d8d8d8;
+        }
+
+        .control-btn:active {
+            background-color: #c8c8c8;
+        }
+
+        .btn-group {
+            display: inline-flex;
+            gap: 0;
+        }
+
+        .btn-group .control-btn {
+            border-radius: 0;
+            margin-left: -1px;
+        }
+
+        .btn-group .control-btn:first-child {
+            border-radius: 4px 0 0 4px;
+            margin-left: 0;
+        }
+
+        .btn-group .control-btn:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Search input */
+        #tableSearch {
+            padding: 4px 6px;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            height: 28px;
+            width: 150px;
+            font-size: 12px;
+        }
+
+        /* Hidden elements */
+        #appData {
+            display: none;
+        }
+
+        /* Tabulator Custom Styles */
+        .tabulator {
+            font-size: 0.875rem;
+            border: none;
+        }
+        .tabulator .tabulator-header {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            color: #495057;
+            font-weight: 600;
+        }
+        .tabulator .tabulator-header .tabulator-col {
+            background-color: #f8f9fa;
+        }
+        .tabulator .tabulator-row {
+            border-bottom: 1px solid #dee2e6;
+        }
+        .tabulator .tabulator-row:hover {
+            background-color: #f8f9fa;
+        }
+        
+        /* Dark Mode for Tabulator */
+        body.dark-mode .tabulator {
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+        body.dark-mode .tabulator .tabulator-header {
+            background-color: #161b22;
+            border-bottom-color: #30363d;
+            color: #c9d1d9;
+        }
+        body.dark-mode .tabulator .tabulator-header .tabulator-col {
+            background-color: #161b22;
+            border-color: #30363d;
+        }
+        body.dark-mode .tabulator .tabulator-row {
+            background-color: #0d1117;
+            border-bottom-color: #30363d;
+        }
+        body.dark-mode .tabulator .tabulator-row:hover {
+            background-color: #161b22;
+        }
+        body.dark-mode .tabulator .tabulator-footer {
+            background-color: #161b22;
+            border-top-color: #30363d;
+        }
+        body.dark-mode .tabulator .tabulator-footer .tabulator-page {
+            color: #c9d1d9;
+        }
+        body.dark-mode .tabulator .tabulator-footer .tabulator-page.active {
+            color: #0d1117;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+
+        body.dark-mode .text-viewer-controls {
+            background-color: #161b22;
+            border-color: #30363d;
+        }
+
+        body.dark-mode .control-btn, 
+        body.dark-mode .control-select,
+        body.dark-mode .search-box {
+            background-color: #21262d;
+            border-color: #30363d;
+            color: #c9d1d9;
+        }
+
+        body.dark-mode .csv-viewer {
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+
+        body.dark-mode #csvTable thead th {
+            background-color: #161b22;
+            color: #c9d1d9;
+            border-color: #30363d;
+        }
+
+        body.dark-mode #csvTable tbody td {
+            border-color: #30363d;
+        }
+
+        body.dark-mode #csvTable tbody tr:hover {
+            background-color: #161b22;
+        }
+
+        body.dark-mode .doc-info-section {
+            background-color: #161b22;
+            border-color: #30363d;
+        }
+
+        body.dark-mode .doc-info-header {
+            background-color: #21262d;
+        }
+        
+        body.dark-mode .doc-info-header h3 {
+            color: #c9d1d9;
+        }
+        
+        body.dark-mode .doc-info-header svg {
+            color: #8b949e;
+        }
+
+        body.dark-mode .info-label {
+            color: #8b949e;
+        }
+
+        body.dark-mode .info-value {
+            color: #c9d1d9;
+        }
+
+        /* Fullscreen */
+        .csv-container.fullscreen-mode {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 20px;
+            z-index: 9999;
+            background: white;
+            overflow: auto;
+        }
+
+        body.dark-mode .csv-container.fullscreen-mode {
+            background: #0d1117;
+        }
+
+        /* Mobile Menu */
+        .controls-dropdown {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background-color: white;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            min-width: 150px;
+            padding: 8px;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .controls-dropdown.open {
+            display: flex;
+        }
+
+        body.dark-mode .controls-dropdown {
+            background-color: #21262d;
+            border-color: #30363d;
+        }
+
+        body.dark-mode .controls-dropdown .control-btn {
+            background-color: #161b22;
+        }
+
+        /* Search Box */
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background-color: #ffffff;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            padding: 2px 6px;
+            height: 28px;
+        }
+
+        .search-input {
+            border: none;
+            outline: none;
+            font-size: 12px;
+            padding: 4px;
+            width: 120px;
+            background: transparent;
+        }
+
+        .search-btn, .search-clear-btn {
+            background: none;
+            border: none;
+            padding: 2px 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+        }
+        
+        .search-clear-btn {
+            display: none;
+        }
+
+        .search-clear-btn.visible {
+            display: flex;
+        }
+
+        .search-btn svg, .search-clear-btn svg {
+            width: 14px;
+            height: 14px;
+            color: #666;
+        }
+
+        .search-counter {
+            font-size: 11px;
+            color: #666;
+            min-width: 35px;
+            text-align: center;
+            white-space: nowrap;
+            padding: 0 4px;
+        }
+
+        body.dark-mode .search-box {
+            background-color: #21262d;
+            border-color: #30363d;
+            color: #c9d1d9;
+        }
+        
+        body.dark-mode .search-input {
+            color: #c9d1d9;
+        }
+        
+        body.dark-mode .search-btn svg, 
+        body.dark-mode .search-clear-btn svg,
+        body.dark-mode .search-counter {
+            color: #8b949e;
+        }
+
+        /* Tabulator Footer Custom */
+        .tabulator-footer-contents {
+            padding: 5px 10px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        /* Column Selector Panel */
+        .column-selector-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .column-selector-panel {
+            display: none;
+            position: absolute;
+            top: 32px;
+            right: 0;
+            background: white;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            min-width: 500px;
+            max-width: 600px;
+            padding: 12px;
+        }
+
+        .column-selector-panel.open {
+            display: block;
+        }
+
+        .column-selector-header {
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #333;
+        }
+
+        .column-checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 12px;
+            padding: 4px;
+        }
+
+        .column-checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            padding: 4px;
+            border-radius: 3px;
+            transition: background-color 0.2s;
+        }
+
+        .column-checkbox-item:hover {
+            background-color: #f5f5f5;
+        }
+
+        .column-checkbox-item input[type="checkbox"] {
+            cursor: pointer;
+            width: 14px;
+            height: 14px;
+        }
+
+        .column-checkbox-item label {
+            cursor: pointer;
+            user-select: none;
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .column-selector-actions {
+            display: flex;
+            gap: 6px;
+            padding-top: 8px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .column-selector-actions button {
+            flex: 1;
+            padding: 6px 12px;
+            font-size: 12px;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .column-selector-actions button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .column-selector-actions button.primary {
+            background-color: #0d6efd;
+            color: white;
+            border-color: #0d6efd;
+        }
+
+        .column-selector-actions button.primary:hover {
+            background-color: #0b5ed7;
+        }
+
+        body.dark-mode .column-selector-panel {
+            background-color: #21262d;
+            border-color: #30363d;
+        }
+
+        body.dark-mode .column-selector-header {
+            color: #c9d1d9;
+            border-bottom-color: #30363d;
+        }
+
+        body.dark-mode .column-checkbox-item:hover {
+            background-color: #30363d;
+        }
+
+        body.dark-mode .column-checkbox-item label {
+            color: #c9d1d9;
+        }
+
+        body.dark-mode .column-selector-actions {
+            border-top-color: #30363d;
+        }
+
+        body.dark-mode .column-selector-actions button {
+            background-color: #30363d;
+            border-color: #30363d;
+            color: #c9d1d9;
+        }
+
+        body.dark-mode .column-selector-actions button:hover {
+            background-color: #484f58;
+        }
+
+        body.dark-mode .column-selector-actions button.primary {
+            background-color: #238636;
+            border-color: #238636;
+        }
+
+        body.dark-mode .column-selector-actions button.primary:hover {
+            background-color: #2ea043;
+        }
+
+        /* Dark mode for tip/info sections */
+        body.dark-mode .bg-blue-50 {
+            background-color: #1c2d41 !important;
+        }
+
+        body.dark-mode .border-blue-200 {
+            border-color: #2d4a6d !important;
+        }
+
+        body.dark-mode .text-blue-900 {
+            color: #9db4d0 !important;
+        }
+
+        /* Top Button Style */
+        #topBtn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, background-color 0.2s;
+            z-index: 1000;
+        }
+
+        #topBtn.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #topBtn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        body.dark-mode #topBtn {
+            background-color: #238636;
+        }
+
+        body.dark-mode #topBtn:hover {
+            background-color: #2ea043;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header 영역: 전체 너비 (100%) -->
+    <div class="w-full bg-gray-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-start justify-between gap-4">
+                <!-- 왼쪽: 파일명 -->
+                <div class="flex-1 min-w-0">
+                    <h1 class="text-2xl font-bold text-gray-900 truncate">utf-1.csv</h1>
+                </div>
+
+                <!-- 오른쪽: 데스크톱 버튼 그룹 (md 이상에서만 표시) -->
+                <div class="hidden md:flex flex-wrap gap-3 justify-end flex-shrink-0">
+                    <!-- 원본 다운로드 -->
+                    <button type="button"
+                            onclick="downloadOriginal()"
+                            class="inline-flex items-center px-4 py-2 rounded-lg bg-green-600 text-white font-medium text-sm hover:bg-green-700 transition-colors shadow-sm whitespace-nowrap">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        원본 다운로드
+                    </button>
+
+                    <!-- 문서 정보 토글 버튼 -->
+                    <button type="button"
+                            class="toggle-doc-info-btn collapsed"
+                            id="toggleDocInfoBtn"
+                            onclick="toggleDocInfo()"
+                            title="문서 정보 보기"
+                            aria-label="문서 정보 토글">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- 오른쪽: 모바일 영역 (토글 버튼 + 햄버거 메뉴) -->
+                <div class="md:hidden flex gap-2 items-center flex-shrink-0">
+                    <!-- 모바일 토글 버튼 -->
+                    <button type="button"
+                            class="toggle-doc-info-btn-mobile collapsed"
+                            id="toggleDocInfoBtnMobile"
+                            onclick="toggleDocInfo()"
+                            title="문서 정보 보기"
+                            aria-label="문서 정보 토글">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </button>
+
+                    <!-- 햄버거 메뉴 (relative 래퍼) -->
+                    <div class="relative">
+                        <button type="button"
+                                id="mobileMenuBtn"
+                                onclick="toggleMobileMenu()"
+                                title="메뉴"
+                                aria-label="작업 메뉴 열기"
+                                class="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+
+                        <!-- 모바일 드롭다운 메뉴 -->
+                        <div id="mobileMenu" class="mobile-menu">
+                            <button type="button" onclick="downloadOriginal(); toggleMobileMenu();">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                원본 다운로드
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="csv-container" id="csvContainer">
+
+        <!-- 문서 정보 섹션 (초기: 숨김) -->
+        <div id="docInfoSection" class="doc-info-section collapsed">
+            <!-- CSV 정보 헤더 -->
+            <div class="doc-info-header">
+                <h3>
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="text-gray-600">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    CSV 파일 정보
+                </h3>
+            </div>
+
+            <div class="doc-info-row">
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">파일 크기</span>
+                        <span class="info-value">10,445 bytes</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">총 행 수</span>
+                        <span class="info-value" id="totalRowsDisplay">34</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">총 열 수</span>
+                        <span class="info-value">32</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">구분자</span>
+                        <span class="info-value">,</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CSV 뷰어 영역 -->
+        <div class="flex-1 flex flex-col bg-gray-50">
+            <div class="w-full viewer-main-wrapper">
+                
+                <!-- Control Bar -->
+                <div class="text-viewer-controls">
+                    <!-- Desktop Controls -->
+                    <div class="controls-desktop">
+                        <!-- Font Family -->
+                        <select id="fontFamily" class="control-select" title="폰트 선택" style="width: 120px;">
+                            <option value="'Noto Sans KR', sans-serif" selected>Noto Sans KR</option>
+                            <option value="'Malgun Gothic', '맑은 고딕'">맑은 고딕</option>
+                            <option value="'SeoulNamsan', sans-serif">서울 남산체</option>
+                            <option value="'Courier New', monospace">Courier New</option>
+                        </select>
+
+                        <!-- Font Size -->
+                        <div class="control-item btn-group">
+                            <button type="button" id="fontSizeDecrease" class="control-btn" title="폰트 작게">−</button>
+                            <button type="button" id="fontSizeReset" class="control-btn" title="폰트기본(16px)">16px</button>
+                            <button type="button" id="fontSizeIncrease" class="control-btn" title="폰트 크게">+</button>
+                        </div>
+
+                        <!-- Page Size Selector -->
+                        <select id="pageSize" class="control-select" title="페이지 크기">
+                            <option value="10">10줄</option>
+                            <option value="25">25줄</option>
+                            <option value="50">50줄</option>
+                            <option value="100">100줄</option>
+                            <option value="-1">전체</option>
+                        </select>
+
+                        <!-- Search Box -->
+                        <div class="search-box">
+                            <button type="button" id="searchBtn" class="search-btn" title="검색">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            </button>
+                            <input type="text" id="searchInput" class="search-input" placeholder="검색...">
+                            <span id="searchCounter" class="search-counter"></span>
+                            <button type="button" id="searchClearBtn" class="search-clear-btn" title="검색 초기화">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </button>
+                        </div>
+
+                        <!-- Column Selector -->
+                        <div class="column-selector-wrapper">
+                            <button type="button" id="columnSelectorBtn" class="control-btn" title="컬럼 선택">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"></path></svg>
+                            </button>
+                            <div id="columnSelectorPanel" class="column-selector-panel">
+                                <div class="column-selector-header">표시할 컬럼 선택</div>
+                                <div id="columnCheckboxGrid" class="column-checkbox-grid">
+                                    <!-- Checkboxes will be dynamically generated -->
+                                </div>
+                                <div class="column-selector-actions">
+                                    <button type="button" id="selectAllColumns">모두 선택</button>
+                                    <button type="button" id="deselectAllColumns">모두 해제</button>
+                                    <button type="button" id="applyColumnSelection" class="primary">적용</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Auto-fit Column Width -->
+                        <button type="button" id="autoFitColumnsBtn" class="control-btn" title="컬럼 너비 자동 맞춤">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                        </button>
+
+                        <!-- Fullscreen -->
+                        <button type="button" id="toggleFullscreen" class="control-btn" title="전체화면">⛶</button>
+
+                        <!-- Dark Mode -->
+                        <button type="button" id="toggleDarkMode" class="control-btn" title="다크모드">🌙</button>
+
+                        <!-- Settings -->
+                        <div class="control-item btn-group">
+                            <button type="button" id="exportExcel" class="control-btn" title="엑셀로 내보내기">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            </button>
+                            <button type="button" id="saveSettings" class="control-btn" title="설정 저장">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </button>
+                            <button type="button" id="resetSettings" class="control-btn" title="설정 초기화">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Controls Menu -->
+                    <div class="controls-mobile">
+                        <!-- Mobile Settings Menu Button (Right) -->
+                        <button type="button" id="controlsMenuBtn" class="control-btn" title="설정">⋯</button>
+                        <div id="controlsMenu" class="controls-dropdown">
+                            <!-- Mobile Font Family -->
+                            <select id="fontFamily-mobile" class="control-select" title="폰트 선택">
+                                <option value="'Noto Sans KR', sans-serif" selected>Noto Sans KR</option>
+                                <option value="'Malgun Gothic', '맑은 고딕'">맑은 고딕</option>
+                                <option value="'SeoulNamsan', sans-serif">서울 남산체</option>
+                                <option value="'Courier New', monospace">Courier New</option>
+                            </select>
+
+                            <!-- Mobile Font Size -->
+                            <div class="control-item btn-group">
+                                <button type="button" id="fontSizeDecrease-mobile" class="control-btn">−</button>
+                                <button type="button" id="fontSizeReset-mobile" class="control-btn">16px</button>
+                                <button type="button" id="fontSizeIncrease-mobile" class="control-btn">+</button>
+                            </div>
+
+                            <!-- Mobile Page Size -->
+                            <select id="pageSize-mobile" class="control-select" title="페이지 크기">
+                                <option value="10">10줄</option>
+                                <option value="25">25줄</option>
+                                <option value="50">50줄</option>
+                                <option value="100">100줄</option>
+                                <option value="-1">전체</option>
+                            </select>
+
+                            <!-- Mobile Dark Mode -->
+                            <button type="button" id="toggleDarkMode-mobile" class="control-btn">🌙 다크모드</button>
+
+                            <!-- Mobile Settings Save/Reset -->
+                            <div class="control-item btn-group">
+                                <button type="button" id="exportExcel-mobile" class="control-btn" title="엑셀로 내보내기">
+                                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                    엑셀
+                                </button>
+                                <button type="button" id="saveSettings-mobile" class="control-btn" title="설정 저장">
+                                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    저장
+                                </button>
+                                <button type="button" id="resetSettings-mobile" class="control-btn" title="설정 초기화">
+                                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                    초기화
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="csv-viewer">
+                    <!-- CSV 테이블 -->
+                    <div><table class="csv-table" id="csvTable">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>종목명</th>
+      <th>보유수량</th>
+      <th>매도가능</th>
+      <th>매입단가</th>
+      <th>평가손익</th>
+      <th>수익률</th>
+      <th>현재가</th>
+      <th>평가금액</th>
+      <th>매입금액</th>
+      <th>증감</th>
+      <th>잔고비중(%)</th>
+      <th>추정비용</th>
+      <th>신용구분</th>
+      <th>대출일</th>
+      <th>만기일</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td></td>
+      <td>현대차</td>
+      <td>10</td>
+      <td>10</td>
+      <td>180,650</td>
+      <td>69,978</td>
+      <td>3.87</td>
+      <td>188,800</td>
+      <td>1,888,000</td>
+      <td>1,806,500</td>
+      <td>0</td>
+      <td>4.38</td>
+      <td>11,522</td>
+      <td>현금</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td></td>
+      <td>삼성전자</td>
+      <td>35</td>
+      <td>35</td>
+      <td>77,711</td>
+      <td>-784,992</td>
+      <td>-28.86</td>
+      <td>55,650</td>
+      <td>1,947,750</td>
+      <td>2,719,900</td>
+      <td>0</td>
+      <td>6.60</td>
+      <td>12,842</td>
+      <td>현금</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td></td>
+      <td>미래에셋증권2우B</td>
+      <td>2,000</td>
+      <td>2,000</td>
+      <td>5,000</td>
+      <td>-1,160,320</td>
+      <td>-11.60</td>
+      <td>4,440</td>
+      <td>8,880,000</td>
+      <td>10,000,000</td>
+      <td>0</td>
+      <td>24.26</td>
+      <td>40,320</td>
+      <td>현금</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td></td>
+      <td>두산에너빌리티</td>
+      <td>150</td>
+      <td>150</td>
+      <td>19,906</td>
+      <td>1,000,699</td>
+      <td>33.51</td>
+      <td>26,700</td>
+      <td>4,005,000</td>
+      <td>2,985,913</td>
+      <td>0</td>
+      <td>7.24</td>
+      <td>18,388</td>
+      <td>현금</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td></td>
+      <td>한미반도체</td>
+      <td>25</td>
+      <td>25</td>
+      <td>83,020</td>
+      <td>44,461</td>
+      <td>2.14</td>
+      <td>85,300</td>
+      <td>2,132,500</td>
+      <td>2,075,500</td>
+      <td>0</td>
+      <td>5.04</td>
+      <td>12,539</td>
+      <td>현금</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td></td>
+      <td>SK이노베이션</td>
+      <td>43</td>
+      <td>43</td>
+      <td>139,600</td>
+      <td>-1,969,762</td>
+      <td>-32.81</td>
+      <td>94,300</td>
+      <td>4,054,900</td>
+      <td>6,002,800</td>
+      <td>0</td>
+      <td>14.56</td>
+      <td>21,862</td>
+      <td>현금</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td></td>
+      <td>실리콘투</td>
+      <td>90</td>
+      <td>90</td>
+      <td>27,630</td>
+      <td>387,086</td>
+      <td>15.56</td>
+      <td>32,100</td>
+      <td>2,889,000</td>
+      <td>2,486,750</td>
+      <td>0</td>
+      <td>6.03</td>
+      <td>15,164</td>
+      <td>현금</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td></td>
+      <td>진에어</td>
+      <td>572</td>
+      <td>572</td>
+      <td>22,793</td>
+      <td>-8,077,440</td>
+      <td>-61.95</td>
+      <td>8,730</td>
+      <td>4,993,560</td>
+      <td>13,037,600</td>
+      <td>0</td>
+      <td>31.63</td>
+      <td>33,400</td>
+      <td>현금</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td></td>
+      <td>우리금융지주</td>
+      <td>4</td>
+      <td>4</td>
+      <td>26,100</td>
+      <td>-36,593</td>
+      <td>-35.05</td>
+      <td>17,190</td>
+      <td>68,760</td>
+      <td>104,400</td>
+      <td>0</td>
+      <td>0.25</td>
+      <td>953</td>
+      <td>현금</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td></td>
+      <td>우리금융지주1</td>
+      <td>4</td>
+      <td>4</td>
+      <td>26,100</td>
+      <td>-36,593</td>
+      <td>-35.05</td>
+      <td>17,190</td>
+      <td>68,760</td>
+      <td>104,400</td>
+      <td>0</td>
+      <td>0.25</td>
+      <td>953</td>
+      <td>현금</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table></div>
+                </div>
+
+                <!-- 추가 안내 -->
+                <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p class="text-sm text-blue-900">
+                        <strong>팁:</strong> 테이블 상단의 검색창을 사용하여 데이터를 필터링하고, 열 제목을 클릭하여 정렬할 수 있습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabulator JS -->
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.0/dist/js/tabulator.min.js"></script>
+
+    <!-- Data attributes for Thymeleaf variables -->
+    <div id="appData" data-hashcode="95c5c47d4e9a15585c89175421823eff" data-filename="utf-1.csv"></div>
+
+    <script>
+        // Global 변수 (data attributes에서 읽기)
+        const appDataEl = document.getElementById('appData');
+        const globalHashcode = appDataEl ? appDataEl.getAttribute('data-hashcode') : '';
+        const globalFilename = appDataEl ? appDataEl.getAttribute('data-filename') : 'document.csv';
+
+        // 문서 정보 토글
+        function toggleDocInfo() {
+            const docInfoSection = document.getElementById('docInfoSection');
+            const toggleBtnDesktop = document.getElementById('toggleDocInfoBtn');
+            const toggleBtnMobile = document.getElementById('toggleDocInfoBtnMobile');
+
+            docInfoSection.classList.toggle('collapsed');
+            if (toggleBtnDesktop) {
+                toggleBtnDesktop.classList.toggle('collapsed');
+            }
+            if (toggleBtnMobile) {
+                toggleBtnMobile.classList.toggle('collapsed');
+            }
+        }
+
+        // 모바일 메뉴 토글
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('open');
+        }
+
+        // 모바일 메뉴 외부 클릭시 닫기
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const toggleBtnMobile = document.getElementById('toggleDocInfoBtnMobile');
+
+            if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target) && !toggleBtnMobile.contains(event.target)) {
+                mobileMenu.classList.remove('open');
+            }
+        });
+
+        // 원본 다운로드
+        function downloadOriginal() {
+            if (globalHashcode && globalFilename) {
+                // filename에서 확장자 추출
+                const extension = globalFilename.split('.').pop().toLowerCase();
+                // FileController를 통해 캐시된 원본 파일 다운로드
+                const downloadUrl = '/aview/file/' + globalHashcode + '.' + extension +
+                                  '?download=true&name=' + encodeURIComponent(globalFilename);
+                downloadFile(downloadUrl, globalFilename);
+            } else {
+                alert('원본 문서의 정보가 없습니다.');
+            }
+        }
+
+        // 파일 다운로드 헬퍼 함수
+        function downloadFile(url, filename) {
+            const link = document.createElement('a');
+            link.href = url;
+            if (filename) {
+                link.download = filename;
+            }
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // 숫자 천단위 콤마 포맷팅
+        function formatNumber(num) {
+            if (!num || num === '정보 없음') return num;
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        // Control Bar Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const csvContainer = document.getElementById('csvContainer');
+
+            // State
+            let currentFontSize = 16;
+
+            // Dark Mode
+            function toggleDarkMode() {
+                document.body.classList.toggle('dark-mode');
+                const tabulatorDarkModeLink = document.getElementById('tabulator-dark-mode');
+                if (tabulatorDarkModeLink) {
+                    tabulatorDarkModeLink.disabled = !document.body.classList.contains('dark-mode');
+                }
+            }
+            const toggleDarkModeBtn = document.getElementById('toggleDarkMode');
+            if(toggleDarkModeBtn) toggleDarkModeBtn.addEventListener('click', toggleDarkMode);
+
+            const toggleDarkModeBtnMobile = document.getElementById('toggleDarkMode-mobile');
+            if(toggleDarkModeBtnMobile) toggleDarkModeBtnMobile.addEventListener('click', toggleDarkMode);
+
+            // Fullscreen
+            const toggleFullscreenBtn = document.getElementById('toggleFullscreen');
+            if(toggleFullscreenBtn) {
+                toggleFullscreenBtn.addEventListener('click', () => {
+                    csvContainer.classList.toggle('fullscreen-mode');
+                });
+            }
+
+            // Settings Save/Reset (Desktop)
+            const saveSettingsBtn = document.getElementById('saveSettings');
+            if(saveSettingsBtn) saveSettingsBtn.addEventListener('click', () => {
+                const settings = {
+                    fontSize: currentFontSize,
+                    darkMode: document.body.classList.contains('dark-mode')
+                };
+                localStorage.setItem('csvViewerSettings', JSON.stringify(settings));
+                alert('설정이 저장되었습니다.');
+            });
+
+            const resetSettingsBtn = document.getElementById('resetSettings');
+            if(resetSettingsBtn) resetSettingsBtn.addEventListener('click', () => {
+                localStorage.removeItem('csvViewerSettings');
+                location.reload();
+            });
+
+            // Settings Save/Reset (Mobile)
+            const saveSettingsBtnMobile = document.getElementById('saveSettings-mobile');
+            if(saveSettingsBtnMobile) saveSettingsBtnMobile.addEventListener('click', () => {
+                const settings = {
+                    fontSize: currentFontSize,
+                    darkMode: document.body.classList.contains('dark-mode')
+                };
+                localStorage.setItem('csvViewerSettings', JSON.stringify(settings));
+                alert('설정이 저장되었습니다.');
+            });
+
+            const resetSettingsBtnMobile = document.getElementById('resetSettings-mobile');
+            if(resetSettingsBtnMobile) resetSettingsBtnMobile.addEventListener('click', () => {
+                localStorage.removeItem('csvViewerSettings');
+                location.reload();
+            });
+
+            // Mobile Menu
+            const controlsMenuBtn = document.getElementById('controlsMenuBtn');
+            const controlsMenu = document.getElementById('controlsMenu');
+            if(controlsMenuBtn && controlsMenu) {
+                controlsMenuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    controlsMenu.classList.toggle('open');
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!controlsMenuBtn.contains(e.target) && !controlsMenu.contains(e.target)) {
+                        controlsMenu.classList.remove('open');
+                    }
+                });
+            }
+
+            // Load Settings
+            const saved = localStorage.getItem('csvViewerSettings');
+            if (saved) {
+                try {
+                    const settings = JSON.parse(saved);
+                    if (settings.fontSize) currentFontSize = settings.fontSize; // Update currentFontSize
+                    if (settings.darkMode) {
+                        document.body.classList.add('dark-mode');
+                        const tabulatorDarkModeLink = document.getElementById('tabulator-dark-mode');
+                        if (tabulatorDarkModeLink) {
+                            tabulatorDarkModeLink.disabled = false;
+                        }
+                    }
+                } catch(e) {
+                    console.error('Failed to load settings', e);
+                }
+            }
+
+            // 숫자 포맷팅 적용
+            const totalRowsEl = document.getElementById('totalRowsDisplay');
+            if (totalRowsEl && totalRowsEl.textContent !== '정보 없음') {
+                totalRowsEl.textContent = formatNumber(totalRowsEl.textContent);
+            }
+
+            // Tabulator 초기화
+            if (document.getElementById('csvTable')) {
+                var table = new Tabulator("#csvTable", {
+                    height: "100%",
+                    layout: "fitData",
+                    pagination: "local",
+                    paginationSize: 50,
+                    paginationSizeSelector: false, // Footer Page Size Selector 제거
+                    movableColumns: true,
+                    locale: "ko-kr",
+                    footerElement: "<div class='tabulator-footer-contents'>총 <span id='footerTotalCount'>0</span>건</div>", // Footer Total Count 추가
+                    langs: {
+                        "ko-kr": {
+                            "pagination": {
+                                "first": "<<",
+                                "first_title": "첫 페이지",
+                                "last": ">>",
+                                "last_title": "마지막 페이지",
+                                "prev": "<",
+                                "prev_title": "이전 페이지",
+                                "next": ">",
+                                "next_title": "다음 페이지",
+                                "all": "전체",
+                            },
+                            "headerFilters": {
+                                "default": "필터...",
+                            }
+                        }
+                    },
+                });
+
+                // 페이지 사이즈 선택
+                const pageSizeSelect = document.getElementById('pageSize');
+                const pageSizeMobileSelect = document.getElementById('pageSize-mobile');
+                
+                if (pageSizeSelect) {
+                    pageSizeSelect.addEventListener('change', (e) => {
+                        const val = e.target.value;
+                        if (val == -1) table.setPageSize(true);
+                        else table.setPageSize(parseInt(val));
+                    });
+                }
+                
+                if (pageSizeMobileSelect) {
+                    pageSizeMobileSelect.addEventListener('change', (e) => {
+                        const val = e.target.value;
+                        if (val == -1) table.setPageSize(true);
+                        else table.setPageSize(parseInt(val));
+                        if (pageSizeSelect) pageSizeSelect.value = val;
+                    });
+                }
+
+                // 엑셀 내보내기
+                const exportExcelBtn = document.getElementById('exportExcel');
+                const exportExcelMobileBtn = document.getElementById('exportExcel-mobile');
+
+                function downloadExcel() {
+                    // 날짜 포맷팅 (YYYYMMDD_HHMMSS)
+                    const now = new Date();
+                    const yyyy = now.getFullYear();
+                    const mm = String(now.getMonth() + 1).padStart(2, '0');
+                    const dd = String(now.getDate()).padStart(2, '0');
+                    const hh = String(now.getHours()).padStart(2, '0');
+                    const min = String(now.getMinutes()).padStart(2, '0');
+                    const ss = String(now.getSeconds()).padStart(2, '0');
+                    const timestamp = `${yyyy}${mm}${dd}_${hh}${min}${ss}`;
+                    
+                    // 파일명 생성
+                    let filename = globalFilename || 'data';
+                    // 확장자 제거
+                    if (filename.lastIndexOf('.') > -1) {
+                        filename = filename.substring(0, filename.lastIndexOf('.'));
+                    }
+                    const excelFilename = `${filename}_${timestamp}.xlsx`;
+
+                    table.download("xlsx", excelFilename, {sheetName:"My Data"});
+                }
+
+                if (exportExcelBtn) exportExcelBtn.addEventListener('click', downloadExcel);
+                if (exportExcelMobileBtn) exportExcelMobileBtn.addEventListener('click', downloadExcel);
+
+                // 검색 기능 연결
+                const searchInput = document.getElementById('searchInput');
+                const searchCounter = document.getElementById('searchCounter');
+                const searchClearBtn = document.getElementById('searchClearBtn');
+
+                function updateSearchCounter() {
+                    if (!searchCounter) return;
+                    const total = table.getDataCount(); // 전체 데이터 수
+                    const filtered = table.getDataCount("active"); // 필터링된 데이터 수
+                    
+                    if (searchInput.value.trim() === '') {
+                        searchCounter.textContent = '';
+                        if(searchClearBtn) searchClearBtn.classList.remove('visible');
+                    } else {
+                        searchCounter.textContent = `${filtered}/${total}`;
+                        if(searchClearBtn) searchClearBtn.classList.add('visible');
+                    }
+                    
+                    // Footer Total Count 업데이트
+                    const footerTotalCount = document.getElementById('footerTotalCount');
+                    if (footerTotalCount) {
+                        footerTotalCount.textContent = filtered;
+                    }
+                }
+
+                if (searchInput) {
+                    searchInput.addEventListener('keyup', function(e) {
+                        var value = e.target.value;
+                        
+                        if(value){
+                            table.setFilter(function(data){
+                                for(var key in data){
+                                    if(String(data[key]).toLowerCase().indexOf(value.toLowerCase()) > -1){
+                                        return true;
+                                    }
+                                }
+                                return false;
+                            });
+                        } else {
+                            table.clearFilter();
+                        }
+                        updateSearchCounter();
+                    });
+                }
+
+                if (searchClearBtn) {
+                    searchClearBtn.addEventListener('click', () => {
+                        if (searchInput) {
+                            searchInput.value = '';
+                            table.clearFilter();
+                            updateSearchCounter();
+                            searchInput.focus();
+                        }
+                    });
+                }
+                
+                // 폰트 패밀리 조절
+                const fontFamilySelect = document.getElementById('fontFamily');
+                const fontFamilyMobileSelect = document.getElementById('fontFamily-mobile');
+
+                function updateFontFamily(font) {
+                    const tableEl = document.querySelector('.tabulator');
+                    if (tableEl) {
+                        tableEl.style.fontFamily = font;
+                        table.redraw(true); // 레이아웃 재계산 및 컬럼 너비 자동 맞춤
+                    }
+                    if (fontFamilySelect) fontFamilySelect.value = font;
+                    if (fontFamilyMobileSelect) fontFamilyMobileSelect.value = font;
+                }
+
+                if (fontFamilySelect) {
+                    fontFamilySelect.addEventListener('change', (e) => updateFontFamily(e.target.value));
+                }
+                if (fontFamilyMobileSelect) {
+                    fontFamilyMobileSelect.addEventListener('change', (e) => updateFontFamily(e.target.value));
+                }
+                
+                // 폰트 크기 조절 기능 개선
+                function updateTableFontSize(size) {
+                    const tableEl = document.querySelector('.tabulator');
+                    if (tableEl) {
+                        tableEl.style.fontSize = size + 'px';
+                        table.redraw(true); // 레이아웃 재계산 및 컬럼 너비 자동 맞춤
+                    }
+                    // 버튼 텍스트 업데이트
+                    const resetBtn = document.getElementById('fontSizeReset');
+                    const resetBtnMobile = document.getElementById('fontSizeReset-mobile');
+                    if(resetBtn) resetBtn.textContent = size + 'px';
+                    if(resetBtnMobile) resetBtnMobile.textContent = size + 'px';
+                }
+
+                // 초기 로드 시 폰트 및 사이즈 적용
+                // (Tabulator가 생성된 직후에 스타일 적용)
+                setTimeout(() => {
+                    if (fontFamilySelect) updateFontFamily(fontFamilySelect.value);
+                    updateTableFontSize(currentFontSize);
+                    updateSearchCounter(); // 초기 카운터 설정
+                }, 100);
+
+                // 데이터 로드/필터링 시 Footer 업데이트
+                table.on("dataFiltered", updateSearchCounter);
+                table.on("dataLoaded", updateSearchCounter);
+
+                document.getElementById('fontSizeIncrease').addEventListener('click', () => {
+                    currentFontSize += 1;
+                    updateTableFontSize(currentFontSize);
+                });
+                document.getElementById('fontSizeDecrease').addEventListener('click', () => {
+                    if (currentFontSize > 10) {
+                        currentFontSize -= 1;
+                        updateTableFontSize(currentFontSize);
+                    }
+                });
+                document.getElementById('fontSizeReset').addEventListener('click', () => {
+                    currentFontSize = 16;
+                    updateTableFontSize(currentFontSize);
+                });
+
+                // 모바일 폰트 조절
+                const fontSizeIncreaseMobile = document.getElementById('fontSizeIncrease-mobile');
+                if(fontSizeIncreaseMobile) fontSizeIncreaseMobile.addEventListener('click', () => {
+                    currentFontSize += 1;
+                    updateTableFontSize(currentFontSize);
+                });
+                const fontSizeDecreaseMobile = document.getElementById('fontSizeDecrease-mobile');
+                if(fontSizeDecreaseMobile) fontSizeDecreaseMobile.addEventListener('click', () => {
+                    if (currentFontSize > 10) {
+                        currentFontSize -= 1;
+                        updateTableFontSize(currentFontSize);
+                    }
+                });
+                const fontSizeResetMobile = document.getElementById('fontSizeReset-mobile');
+                if(fontSizeResetMobile) fontSizeResetMobile.addEventListener('click', () => {
+                    currentFontSize = 16;
+                    updateTableFontSize(currentFontSize);
+                });
+
+                // Column Selector Logic
+                const columnSelectorBtn = document.getElementById('columnSelectorBtn');
+                const columnSelectorPanel = document.getElementById('columnSelectorPanel');
+                const columnCheckboxGrid = document.getElementById('columnCheckboxGrid');
+                const selectAllColumnsBtn = document.getElementById('selectAllColumns');
+                const deselectAllColumnsBtn = document.getElementById('deselectAllColumns');
+                const applyColumnSelectionBtn = document.getElementById('applyColumnSelection');
+
+                let allColumns = [];
+
+                // Initialize column checkboxes
+                function initializeColumnSelector() {
+                    const columns = table.getColumns();
+                    allColumns = columns.map(col => ({
+                        field: col.getField(),
+                        title: col.getDefinition().title || `컬럼 ${col.getField()}`,
+                        visible: col.isVisible()
+                    }));
+
+                    // Generate checkboxes
+                    columnCheckboxGrid.innerHTML = '';
+                    allColumns.forEach((col, index) => {
+                        const item = document.createElement('div');
+                        item.className = 'column-checkbox-item';
+                        
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.id = `col-checkbox-${index}`;
+                        checkbox.value = col.field;
+                        checkbox.checked = col.visible;
+                        
+                        const label = document.createElement('label');
+                        label.htmlFor = `col-checkbox-${index}`;
+                        label.textContent = col.title;
+                        label.title = col.title; // Tooltip for long names
+                        
+                        item.appendChild(checkbox);
+                        item.appendChild(label);
+                        columnCheckboxGrid.appendChild(item);
+                    });
+                }
+
+                // Toggle panel
+                if (columnSelectorBtn) {
+                    columnSelectorBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        columnSelectorPanel.classList.toggle('open');
+                    });
+                }
+
+                // Close panel when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (columnSelectorPanel && !columnSelectorPanel.contains(e.target) && !columnSelectorBtn.contains(e.target)) {
+                        columnSelectorPanel.classList.remove('open');
+                    }
+                });
+
+                // Select All
+                if (selectAllColumnsBtn) {
+                    selectAllColumnsBtn.addEventListener('click', () => {
+                        const checkboxes = columnCheckboxGrid.querySelectorAll('input[type="checkbox"]');
+                        checkboxes.forEach(cb => cb.checked = true);
+                    });
+                }
+
+                // Deselect All (with validation)
+                if (deselectAllColumnsBtn) {
+                    deselectAllColumnsBtn.addEventListener('click', () => {
+                        const checkboxes = columnCheckboxGrid.querySelectorAll('input[type="checkbox"]');
+                        // Keep at least one checked
+                        let checkedCount = 0;
+                        checkboxes.forEach(cb => {
+                            if (cb.checked) checkedCount++;
+                        });
+                        
+                        if (checkedCount > 1) {
+                            checkboxes.forEach(cb => cb.checked = false);
+                            // Check the first one
+                            if (checkboxes.length > 0) checkboxes[0].checked = true;
+                        } else {
+                            alert('최소 1개의 컬럼은 선택되어야 합니다.');
+                        }
+                    });
+                }
+
+                // Apply Selection
+                if (applyColumnSelectionBtn) {
+                    applyColumnSelectionBtn.addEventListener('click', () => {
+                        const checkboxes = columnCheckboxGrid.querySelectorAll('input[type="checkbox"]');
+                        const selectedFields = [];
+                        
+                        checkboxes.forEach(cb => {
+                            if (cb.checked) selectedFields.push(cb.value);
+                        });
+
+                        // Validation: at least one column must be selected
+                        if (selectedFields.length === 0) {
+                            alert('최소 1개의 컬럼은 선택되어야 합니다.');
+                            return;
+                        }
+
+                        // Apply visibility
+                        allColumns.forEach(col => {
+                            if (selectedFields.includes(col.field)) {
+                                table.showColumn(col.field);
+                            } else {
+                                table.hideColumn(col.field);
+                            }
+                        });
+
+                        // Close panel
+                        columnSelectorPanel.classList.remove('open');
+                    });
+                }
+
+                // Initialize after table is ready
+                table.on("tableBuilt", function(){
+                    initializeColumnSelector();
+                });
+
+                // Auto-fit Column Width
+                const autoFitColumnsBtn = document.getElementById('autoFitColumnsBtn');
+                if (autoFitColumnsBtn) {
+                    autoFitColumnsBtn.addEventListener('click', () => {
+                        // Redraw table with force to recalculate column widths
+                        table.redraw(true);
+                    });
+                }
+
+                console.log('CSV Viewer - Tabulator initialized');
+                console.log('%c🔍 AView Document Info', 'color: #0066cc; font-weight: bold; font-size: 14px;');
+                console.log('Hashcode:', globalHashcode);
+                console.log('Filename:', globalFilename);
+                console.log('Template:', 'csv.html');
+                console.log('─'.repeat(50));
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+S or Cmd+S: 다운로드
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                downloadOriginal();
+            }
+            // Home: 맨위로
+            if (e.key === 'Home') {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            // ESC: 나가기
+            if (e.key === 'Escape') {
+                // 필요시 추가 기능
+            }
+        });
+
+        // Top Button
+        const topBtn = document.getElementById('topBtn');
+
+        function toggleFloatingButtons() {
+            const shouldShow = window.scrollY > 300 || document.documentElement.scrollTop > 300;
+            if (topBtn) {
+                if (shouldShow) topBtn.classList.add('show');
+                else topBtn.classList.remove('show');
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        window.addEventListener('scroll', toggleFloatingButtons);
+        if(topBtn) topBtn.addEventListener('click', scrollToTop);
+    </script>
+</body>
+</html>
