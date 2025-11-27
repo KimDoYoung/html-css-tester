@@ -1,0 +1,3248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!--
+===========================================
+🔍 AView Document Metadata
+===========================================
+Generated : 2025-11-27 15:24:37
+Hashcode  : e22ebf43b0e576248a410997f2ed3c52
+Filename  : 2.csv
+Template  : csv.html
+===========================================
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.csv</title>
+    <link rel="icon" type="image/png" href="/aview/images/favicon32.png" sizes="32x32">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tabulator CSS -->
+    <link href="https://unpkg.com/tabulator-tables@5.5.0/dist/css/tabulator.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/tabulator-tables@5.5.0/dist/css/tabulator_midnight.min.css" rel="stylesheet" id="tabulator-dark-mode" disabled>
+    
+    <!-- SheetJS (Required for Excel Export) -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+    <style>
+        .csv-embed {
+            height: 80vh;
+            min-height: 600px;
+        }
+
+        @media (max-width: 768px) {
+            .csv-embed {
+                height: 70vh;
+                min-height: 400px;
+            }
+        }
+
+        .csv-viewer {
+            width: 100%;
+            height: 750px;
+            background-color: white;
+            border: 1px solid #e5e7eb;
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
+            border-radius: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .doc-info-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .doc-info-section.collapsed {
+            max-height: 0;
+            padding: 0 20px;
+            margin-bottom: 0;
+            opacity: 0;
+        }
+
+        .toggle-doc-info-btn {
+            background: #0d6efd;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .toggle-doc-info-btn {
+                display: none;
+            }
+        }
+
+        .toggle-doc-info-btn-mobile {
+            background: #0d6efd;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .toggle-doc-info-btn-mobile {
+                display: flex;
+            }
+        }
+
+        .toggle-doc-info-btn-mobile:hover,
+        .toggle-doc-info-btn:hover {
+            background: #0b5ed7;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .toggle-doc-info-btn-mobile.collapsed,
+        .toggle-doc-info-btn.collapsed {
+            background: #28a745;
+            animation: pulseCollapsed 2s ease-in-out infinite;
+        }
+
+        .toggle-doc-info-btn-mobile.collapsed:hover,
+        .toggle-doc-info-btn.collapsed:hover {
+            background: #218838;
+        }
+
+        .toggle-doc-info-btn-mobile svg,
+        .toggle-doc-info-btn svg {
+            color: white;
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-doc-info-btn-mobile.collapsed svg,
+        .toggle-doc-info-btn.collapsed svg {
+            transform: rotate(180deg);
+        }
+
+        @keyframes pulseCollapsed {
+            0%, 100% {
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+            50% {
+                box-shadow: 0 4px 16px rgba(40, 167, 69, 0.4);
+            }
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.875rem;
+            margin-bottom: 0;
+        }
+
+        .info-value {
+            color: #6c757d;
+            font-size: 1.125rem;
+        }
+
+        .csv-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .doc-info-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        @media (max-width: 1024px) {
+            .doc-info-row {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .doc-info-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .info-item {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 0;
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            .doc-info-col:last-child .info-item {
+                border-bottom: none;
+            }
+
+            .info-label {
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+
+            .info-value {
+                text-align: right;
+            }
+        }
+
+        .doc-info-col {
+            padding: 0;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 10;
+            min-width: 200px;
+        }
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+        .mobile-menu button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            transition: background-color 0.2s;
+        }
+
+        .mobile-menu button:hover {
+            background-color: #f3f4f6;
+        }
+
+        .mobile-menu button svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        .doc-info-header {
+            background-color: #f2ebd3;
+            padding: 12px 16px;
+            margin: -20px -20px 16px -20px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .doc-info-header h3 {
+            margin: 0;
+            color: #333;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .viewer-main-wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Control Bar Styles */
+        .text-viewer-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 40px;
+            padding: 0 12px;
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #d0d0d0;
+            gap: 8px;
+            position: sticky;
+            top: 0;
+            z-index: 99;
+        }
+
+        .controls-desktop {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .controls-mobile {
+            display: none;
+            position: relative;
+            margin-left: auto;
+        }
+
+        @media (max-width: 768px) {
+            .controls-desktop {
+                display: none;
+            }
+
+            .controls-mobile {
+                display: flex;
+            }
+        }
+
+        .control-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .control-select {
+            padding: 4px 6px;
+            height: 28px;
+            font-size: 12px;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            background-color: #ffffff;
+            cursor: pointer;
+        }
+        .control-btn {
+            padding: 4px 8px;
+            min-width: 30px;
+            height: 28px;
+            background-color: #e8e8e8;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .control-btn:hover {
+            background-color: #d8d8d8;
+        }
+
+        .control-btn:active {
+            background-color: #c8c8c8;
+        }
+
+        .btn-group {
+            display: inline-flex;
+            gap: 0;
+        }
+
+        .btn-group .control-btn {
+            border-radius: 0;
+            margin-left: -1px;
+        }
+
+        .btn-group .control-btn:first-child {
+            border-radius: 4px 0 0 4px;
+            margin-left: 0;
+        }
+
+        .btn-group .control-btn:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* btn-group 내 column-selector-wrapper 스타일 */
+        .btn-group .column-selector-wrapper {
+            border-radius: 0;
+            margin-left: -1px;
+        }
+
+        .btn-group .column-selector-wrapper:first-child {
+            border-radius: 4px 0 0 4px;
+            margin-left: 0;
+        }
+
+        .btn-group .column-selector-wrapper:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Search input */
+        #tableSearch {
+            padding: 4px 6px;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            height: 28px;
+            width: 150px;
+            font-size: 12px;
+        }
+
+        /* Hidden elements */
+        #appData {
+            display: none;
+        }
+
+        /* Tabulator Custom Styles */
+        .tabulator {
+            font-size: 0.875rem;
+            border: none;
+        }
+        .tabulator .tabulator-header {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            color: #495057;
+            font-weight: 600;
+        }
+        .tabulator .tabulator-header .tabulator-col {
+            background-color: #f8f9fa;
+        }
+        .tabulator .tabulator-row {
+            border-bottom: 1px solid #dee2e6;
+        }
+        .tabulator .tabulator-row:hover {
+            background-color: #f8f9fa;
+        }
+        
+        /* Dark Mode for Tabulator */
+        body.dark-mode .tabulator {
+            background-color: #1e272c;
+            color: #eceff1;
+        }
+        body.dark-mode .tabulator .tabulator-header {
+            background-color: #2e3c43;
+            border-bottom-color: #37474f;
+            color: #eceff1;
+        }
+        body.dark-mode .tabulator .tabulator-header .tabulator-col {
+            background-color: #2e3c43;
+            border-color: #37474f;
+        }
+        body.dark-mode .tabulator .tabulator-row {
+            background-color: #1e272c;
+            border-bottom-color: #37474f;
+        }
+        body.dark-mode .tabulator .tabulator-row:hover {
+            background-color: #2e3c43;
+        }
+        body.dark-mode .tabulator .tabulator-footer {
+            background-color: #2e3c43;
+            border-top-color: #37474f;
+        }
+        body.dark-mode .tabulator .tabulator-footer .tabulator-page {
+            color: #eceff1;
+        }
+        body.dark-mode .tabulator .tabulator-footer .tabulator-page.active {
+            color: #1e272c;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #263238;
+            color: #eceff1;
+        }
+
+        body.dark-mode .text-viewer-controls {
+            background-color: #2e3c43;
+            border-color: #37474f;
+            position: sticky;
+            top: 0;
+            z-index: 99;
+        }
+
+        body.dark-mode .control-btn,
+        body.dark-mode .control-select,
+        body.dark-mode .search-box {
+            background-color: #37474f;
+            border-color: #455a64;
+            color: #eceff1;
+        }
+
+        body.dark-mode .control-btn:hover,
+        body.dark-mode .control-select:hover {
+            background-color: #455a64;
+        }
+
+        body.dark-mode .csv-viewer {
+            background-color: #1e272c;
+            color: #eceff1;
+        }
+
+        body.dark-mode #csvTable thead th {
+            background-color: #2e3c43;
+            color: #eceff1;
+            border-color: #37474f;
+        }
+
+        body.dark-mode #csvTable tbody td {
+            border-color: #37474f;
+        }
+
+        body.dark-mode #csvTable tbody tr:hover {
+            background-color: #2e3c43;
+        }
+
+        body.dark-mode .doc-info-section {
+            background-color: #2e3c43;
+            border-color: #37474f;
+        }
+
+        body.dark-mode .doc-info-header {
+            background-color: #324048;
+        }
+
+        body.dark-mode .doc-info-header h3 {
+            color: #eceff1;
+        }
+
+        body.dark-mode .doc-info-header svg {
+            color: #78909c;
+        }
+
+        body.dark-mode .info-label {
+            color: #78909c;
+        }
+
+        body.dark-mode .info-value {
+            color: #eceff1;
+        }
+
+        /* Fullscreen */
+        .csv-container.fullscreen-mode {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 20px;
+            z-index: 9999;
+            background: white;
+            overflow: auto;
+        }
+
+        body.dark-mode .csv-container.fullscreen-mode {
+            background: #0d1117;
+        }
+
+        /* Mobile Menu */
+        .controls-dropdown {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background-color: white;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            min-width: 150px;
+            padding: 8px;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .controls-dropdown.open {
+            display: flex;
+        }
+
+        body.dark-mode .controls-dropdown {
+            background-color: #324048;
+            border-color: #37474f;
+        }
+
+        body.dark-mode .controls-dropdown .control-btn {
+            background-color: #37474f;
+            color: #eceff1;
+        }
+
+        body.dark-mode .controls-dropdown .control-btn:hover {
+            background-color: #455a64;
+        }
+
+        /* Search Box */
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background-color: #ffffff;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            padding: 2px 6px;
+            height: 28px;
+        }
+
+        .search-input {
+            border: none;
+            outline: none;
+            font-size: 12px;
+            padding: 4px;
+            width: 120px;
+            background: transparent;
+        }
+
+        .search-btn, .search-clear-btn {
+            background: none;
+            border: none;
+            padding: 2px 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+        }
+        
+        .search-clear-btn {
+            display: none;
+        }
+
+        .search-clear-btn.visible {
+            display: flex;
+        }
+
+        .search-btn svg, .search-clear-btn svg {
+            width: 14px;
+            height: 14px;
+            color: #666;
+        }
+
+        .search-counter {
+            font-size: 11px;
+            color: #666;
+            min-width: 35px;
+            text-align: center;
+            white-space: nowrap;
+            padding: 0 4px;
+        }
+
+        body.dark-mode .search-box {
+            background-color: #324048;
+            border-color: #37474f;
+            color: #eceff1;
+        }
+
+        body.dark-mode .search-input {
+            color: #eceff1;
+        }
+
+        body.dark-mode .search-btn svg,
+        body.dark-mode .search-clear-btn svg,
+        body.dark-mode .search-counter {
+            color: #78909c;
+        }
+
+        /* Tabulator Footer Custom */
+        .tabulator-footer-contents {
+            padding: 5px 10px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        /* Column Selector Panel */
+        .column-selector-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .column-selector-panel {
+            display: none;
+            position: absolute;
+            top: 32px;
+            right: 0;
+            background: white;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            min-width: 500px;
+            max-width: 600px;
+            padding: 12px;
+        }
+
+        .column-selector-panel.open {
+            display: block;
+        }
+
+        .column-selector-header {
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #333;
+        }
+
+        .column-checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 12px;
+            padding: 4px;
+        }
+
+        .column-checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            padding: 4px;
+            border-radius: 3px;
+            transition: background-color 0.2s;
+        }
+
+        .column-checkbox-item:hover {
+            background-color: #f5f5f5;
+        }
+
+        .column-checkbox-item input[type="checkbox"] {
+            cursor: pointer;
+            width: 14px;
+            height: 14px;
+        }
+
+        .column-checkbox-item label {
+            cursor: pointer;
+            -webkit-user-select: none;
+            user-select: none;
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .column-selector-actions {
+            display: flex;
+            gap: 6px;
+            padding-top: 8px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .column-selector-actions button {
+            flex: 1;
+            padding: 6px 12px;
+            font-size: 12px;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .column-selector-actions button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .column-selector-actions button.primary {
+            background-color: #0d6efd;
+            color: white;
+            border-color: #0d6efd;
+        }
+
+        .column-selector-actions button.primary:hover {
+            background-color: #0b5ed7;
+        }
+
+        body.dark-mode .column-selector-panel {
+            background-color: #324048;
+            border-color: #37474f;
+        }
+
+        body.dark-mode .column-selector-header {
+            color: #eceff1;
+            border-bottom-color: #37474f;
+        }
+
+        body.dark-mode .column-checkbox-item:hover {
+            background-color: #37474f;
+        }
+
+        body.dark-mode .column-checkbox-item label {
+            color: #eceff1;
+        }
+
+        body.dark-mode .column-selector-actions {
+            border-top-color: #37474f;
+        }
+
+        body.dark-mode .column-selector-actions button {
+            background-color: #37474f;
+            border-color: #455a64;
+            color: #eceff1;
+        }
+
+        body.dark-mode .column-selector-actions button:hover {
+            background-color: #455a64;
+        }
+
+        body.dark-mode .column-selector-actions button.primary {
+            background-color: #546e7a;
+            border-color: #546e7a;
+        }
+
+        body.dark-mode .column-selector-actions button.primary:hover {
+            background-color: #607d8b;
+        }
+
+        /* Dark mode for tip/info sections */
+        body.dark-mode .bg-blue-50 {
+            background-color: #1c2d41 !important;
+        }
+
+        body.dark-mode .border-blue-200 {
+            border-color: #2d4a6d !important;
+        }
+
+        body.dark-mode .text-blue-900 {
+            color: #9db4d0 !important;
+        }
+
+        /* Top Button Style */
+        #topBtn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, background-color 0.2s;
+            z-index: 1000;
+        }
+
+        #topBtn.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #topBtn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        body.dark-mode #topBtn {
+            background-color: #546e7a;
+        }
+
+        body.dark-mode #topBtn:hover {
+            background-color: #607d8b;
+        }
+
+        /* Mobile Menu Dark Mode */
+        body.dark-mode .mobile-menu {
+            background-color: #324048;
+            border-color: #37474f;
+        }
+
+        body.dark-mode .mobile-menu button {
+            color: #eceff1;
+        }
+
+        body.dark-mode .mobile-menu button:hover {
+            background-color: #37474f;
+        }
+
+        body.dark-mode .mobile-menu button svg {
+            color: #b0bec5;
+        }
+
+        /* Help Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.open {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .modal-overlay.open .modal-content {
+            transform: translateY(0);
+        }
+        .modal-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .modal-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #111827;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .close-modal-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            color: #6b7280;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .close-modal-btn:hover {
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+        .modal-body {
+            padding: 20px;
+        }
+        .help-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .help-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .help-icon {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #eff6ff;
+            color: #3b82f6;
+            border-radius: 50%;
+        }
+        .help-text h4 {
+            margin: 0 0 4px 0;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #374151;
+        }
+        .help-text p {
+            margin: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+        body.dark-mode .modal-content {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+        }
+        body.dark-mode .modal-header {
+            border-bottom-color: #30363d;
+        }
+        body.dark-mode .modal-title {
+            color: #c9d1d9;
+        }
+        body.dark-mode .close-modal-btn {
+            color: #8b949e;
+        }
+        body.dark-mode .close-modal-btn:hover {
+            background-color: #21262d;
+            color: #c9d1d9;
+        }
+        body.dark-mode .help-icon {
+            background-color: rgba(56, 139, 253, 0.15);
+            color: #58a6ff;
+        }
+        body.dark-mode .help-text h4 {
+            color: #c9d1d9;
+        }
+        body.dark-mode .help-text p {
+            color: #8b949e;
+        }
+        #helpBtn {
+            margin-left: auto;
+            /* margin-right: 10px; */
+        }
+        .modal-footer {
+            padding: 16px 20px;
+            border-top: 1px solid #e5e7eb;
+            text-align: right;
+        }
+        .modal-footer a {
+            color: #0d6efd;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        body.dark-mode .modal-footer {
+            border-top-color: #30363d;
+        }
+        body.dark-mode .modal-footer a {
+            color: #58a6ff;
+        }
+        #fontFamily {
+            width: 120px;
+        }
+    </style>
+</head>
+<body>
+    <!-- SVG Sprite Definitions -->
+    <svg style="display: none;">
+        <defs>
+            <symbol id="icon-download" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+            </symbol>
+            <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+            </symbol>
+            <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </symbol>
+            <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </symbol>
+            <symbol id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </symbol>
+            <symbol id="icon-columns" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"></path>
+            </symbol>
+            <symbol id="icon-sort" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"></path>
+            </symbol>
+            <symbol id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0112 21a9.003 9.003 0 008.354-5.646z"></path>
+            </symbol>
+            <symbol id="icon-help" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </symbol>
+            <symbol id="icon-help-title" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </symbol>
+            <symbol id="icon-external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </symbol>
+        </defs>
+    </svg>
+    <!-- Header 영역: 전체 너비 (100%) -->
+    <header class="w-full bg-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-start justify-between gap-4">
+                <!-- 왼쪽: 파일명 -->
+                <div class="flex-1 min-w-0">
+                    <h1 class="text-2xl font-bold text-gray-900 truncate">2.csv</h1>
+                </div>
+
+                <!-- 오른쪽: 데스크톱 버튼 그룹 (md 이상에서만 표시) -->
+                <div class="hidden md:flex flex-wrap gap-3 justify-end flex-shrink-0">
+                    <!-- 원본 다운로드 -->
+                    <button type="button"
+                            onclick="downloadOriginal()"
+                            class="inline-flex items-center px-4 py-2 rounded-lg bg-green-600 text-white font-medium text-sm hover:bg-green-700 transition-colors shadow-sm whitespace-nowrap">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        원본 다운로드
+                    </button>
+
+                    <!-- 문서 정보 토글 버튼 -->
+                    <button type="button"
+                            class="toggle-doc-info-btn collapsed"
+                            id="toggleDocInfoBtn"
+                            onclick="toggleDocInfo()"
+                            title="문서 정보 보기"
+                            aria-label="문서 정보 토글">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- 오른쪽: 모바일 영역 (토글 버튼 + 햄버거 메뉴) -->
+                <div class="md:hidden flex gap-2 items-center flex-shrink-0">
+                    <!-- 모바일 토글 버튼 -->
+                    <button type="button"
+                            class="toggle-doc-info-btn-mobile collapsed"
+                            id="toggleDocInfoBtnMobile"
+                            onclick="toggleDocInfo()"
+                            title="문서 정보 보기"
+                            aria-label="문서 정보 토글">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </button>
+
+                    <!-- 햄버거 메뉴 (relative 래퍼) -->
+                    <div class="relative">
+                        <button type="button"
+                                id="mobileMenuBtn"
+                                onclick="toggleMobileMenu()"
+                                title="메뉴"
+                                aria-label="작업 메뉴 열기"
+                                class="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+
+                        <!-- 모바일 드롭다운 메뉴 -->
+                        <div id="mobileMenu" class="mobile-menu">
+                            <button type="button" onclick="downloadOriginal(); toggleMobileMenu();">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                원본 다운로드
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="csv-container" id="csvContainer">
+
+        <!-- 문서 정보 섹션 (초기: 숨김) -->
+        <div id="docInfoSection" class="doc-info-section collapsed">
+            <!-- CSV 정보 헤더 -->
+            <div class="doc-info-header">
+                <h3>
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="text-gray-600">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    CSV 파일 정보
+                </h3>
+            </div>
+
+            <div class="doc-info-row">
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">파일 크기</span>
+                        <span class="info-value">9,079</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">총 행 수</span>
+                        <span class="info-value" id="totalRowsDisplay">34</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">총 열 수</span>
+                        <span class="info-value">32</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">구분자</span>
+                        <span class="info-value">,</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CSV 뷰어 영역 -->
+        <div class="flex-1 flex flex-col bg-gray-50">
+            <div class="w-full viewer-main-wrapper">
+                
+                <!-- Control Bar -->
+                <div class="text-viewer-controls">
+                    <!-- Desktop Controls -->
+                    <div class="controls-desktop">
+                        <!-- Font Family -->
+                        <select id="fontFamily" class="control-select" title="폰트 선택">
+                            <option value="'Noto Sans KR', sans-serif" selected>Noto Sans KR</option>
+                            <option value="'Malgun Gothic', '맑은 고딕'">맑은 고딕</option>
+                            <option value="'SeoulNamsan', sans-serif">서울 남산체</option>
+                            <option value="'Courier New', monospace">Courier New</option>
+                        </select>
+
+                        <!-- Font Size -->
+                        <div class="control-item btn-group">
+                            <button type="button" id="fontSizeDecrease" class="control-btn" title="폰트 작게">−</button>
+                            <button type="button" id="fontSizeReset" class="control-btn" title="폰트기본(14px)">14px</button>
+                            <button type="button" id="fontSizeIncrease" class="control-btn" title="폰트 크게">+</button>
+                        </div>
+
+                        <!-- Page Size Selector -->
+                        <select id="pageSize" class="control-select" title="페이지 크기">
+                            <option value="10">10줄</option>
+                            <option value="25" selected>25줄</option>
+                            <option value="50">50줄</option>
+                            <option value="100">100줄</option>
+                            <option value="-1">전체</option>
+                        </select>
+
+                        <!-- Search Box -->
+                        <div class="search-box">
+                            <button type="button" id="searchBtn" class="search-btn" title="검색">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            </button>
+                            <input type="text" id="searchInput" class="search-input" placeholder="검색...">
+                            <span id="searchCounter" class="search-counter"></span>
+                            <button type="button" id="searchClearBtn" class="search-clear-btn" title="검색 초기화">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </button>
+                        </div>
+
+                        <!-- Column Controls Group -->
+                        <div class="control-item btn-group">
+                            <!-- Column Selector -->
+                            <div class="column-selector-wrapper">
+                                <button type="button" id="columnSelectorBtn" class="control-btn" title="컬럼 선택">
+                                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"></path></svg>
+                                </button>
+                                <div id="columnSelectorPanel" class="column-selector-panel">
+                                    <div class="column-selector-header">표시할 컬럼 선택</div>
+                                    <div id="columnCheckboxGrid" class="column-checkbox-grid">
+                                        <!-- Checkboxes will be dynamically generated -->
+                                    </div>
+                                    <div class="column-selector-actions">
+                                        <button type="button" id="selectAllColumns">모두 선택</button>
+                                        <button type="button" id="deselectAllColumns">모두 해제</button>
+                                        <button type="button" id="applyColumnSelection" class="primary">적용</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Auto-fit Column Width -->
+                            <button type="button" id="autoFitColumnsBtn" class="control-btn" title="컬럼 너비 자동 맞춤">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                            </button>
+
+                            <!-- Export Excel -->
+                            <button type="button" id="exportExcel" class="control-btn" title="엑셀로 내보내기">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            </button>
+                        </div>
+
+                        <!-- Display Controls Group (Fullscreen + Dark Mode) -->
+                        <div class="control-item btn-group">
+                            <button type="button" id="toggleFullscreen" class="control-btn" title="전체화면">⛶</button>
+                            <button type="button" id="toggleDarkMode" class="control-btn" title="다크모드">🌙</button>
+                        </div>
+
+                        <!-- Settings -->
+                        <div class="control-item btn-group">
+                            <button type="button" id="saveSettings" class="control-btn" title="설정 저장">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </button>
+                            <button type="button" id="resetSettings" class="control-btn" title="설정 초기화">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                            </button>
+                        </div>
+                        <!-- Help Button -->
+                        <button type="button" id="helpBtn" class="control-btn" title="도움말">
+                            <svg width="14" height="14"><use href="#icon-help"/></svg>
+                        </button>
+                    </div>
+
+                    <!-- Mobile Controls Menu -->
+                    <div class="controls-mobile">
+                        <!-- Mobile Settings Menu Button (Right) -->
+                        <button type="button" id="controlsMenuBtn" class="control-btn" title="설정">⋯</button>
+                        <div id="controlsMenu" class="controls-dropdown">
+                            <!-- Mobile Font Family -->
+                            <select id="fontFamily-mobile" class="control-select" title="폰트 선택">
+                                <option value="'Noto Sans KR', sans-serif" selected>Noto Sans KR</option>
+                                <option value="'Malgun Gothic', '맑은 고딕'">맑은 고딕</option>
+                                <option value="'SeoulNamsan', sans-serif">서울 남산체</option>
+                                <option value="'Courier New', monospace">Courier New</option>
+                            </select>
+
+                            <!-- Mobile Font Size -->
+                            <div class="control-item btn-group">
+                                <button type="button" id="fontSizeDecrease-mobile" class="control-btn">−</button>
+                                <button type="button" id="fontSizeReset-mobile" class="control-btn">16px</button>
+                                <button type="button" id="fontSizeIncrease-mobile" class="control-btn">+</button>
+                            </div>
+
+                            <!-- Mobile Page Size -->
+                            <select id="pageSize-mobile" class="control-select" title="페이지 크기">
+                                <option value="10">10줄</option>
+                                <option value="25">25줄</option>
+                                <option value="50">50줄</option>
+                                <option value="100">100줄</option>
+                                <option value="-1">전체</option>
+                            </select>
+
+                            <!-- Mobile Dark Mode -->
+                            <button type="button" id="toggleDarkMode-mobile" class="control-btn">🌙 다크모드</button>
+
+                            <!-- Mobile Column Controls Group -->
+                            <div class="control-item btn-group">
+                                <button type="button" id="columnSelectorBtn-mobile" class="control-btn" title="컬럼 선택">
+                                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"></path></svg>
+                                </button>
+                                <button type="button" id="autoFitColumnsBtn-mobile" class="control-btn" title="컬럼 너비 자동 맞춤">
+                                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                                </button>
+                                <button type="button" id="exportExcel-mobile" class="control-btn" title="엑셀로 내보내기">
+                                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                </button>
+                            </div>
+
+                            <!-- Mobile Settings Save/Reset -->
+                            <div class="control-item btn-group">
+                                <button type="button" id="saveSettings-mobile" class="control-btn" title="설정 저장">
+                                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    저장
+                                </button>
+                                <button type="button" id="resetSettings-mobile" class="control-btn" title="설정 초기화">
+                                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                    초기화
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="csv-viewer">
+                    <!-- CSV 테이블 -->
+                    <div class="w-full h-full"><table class="csv-table" id="csvTable">
+  <thead>
+    <tr>
+      <th>순번</th>
+      <th>펀드코드</th>
+      <th>종목코드</th>
+      <th>종목명</th>
+      <th>기준일</th>
+      <th>배당분류</th>
+      <th>통화단위</th>
+      <th>청산 분배금차수</th>
+      <th>1좌(주)당 배당액</th>
+      <th>총분배금</th>
+      <th>주식편입 비율</th>
+      <th>지급종류</th>
+      <th>세금구분</th>
+      <th>총회개최 여부</th>
+      <th>분배금지급기간</th>
+      <th></th>
+      <th>결산기준가</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>결산락기준가</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>재투자기준가</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>지급장소</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>시작일(From)</td>
+      <td>종료일(To)</td>
+      <td>기준가</td>
+      <td>과표기준가</td>
+      <td>비거주자과표기준가</td>
+      <td>세금우대과표기준가</td>
+      <td>해외비과세과표기준가</td>
+      <td>기준가</td>
+      <td>과표기준가</td>
+      <td>비거주자과표기준가</td>
+      <td>세금우대과표기준가</td>
+      <td>해외비과세과표기준가</td>
+      <td>기준가</td>
+      <td>과표기준가</td>
+      <td>비거주자과표기준가</td>
+      <td>세금우대과표기준가</td>
+      <td>해외비과세과표기준가</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>1.0</td>
+      <td>031890062001</td>
+      <td>KRZ50114762D</td>
+      <td>이스트스프링 글로벌 이머징 증권자투자신탁 제1호[주식-재간접형] 클래스 A</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>현금</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td>20250217</td>
+      <td>20300216</td>
+      <td>1045.69207248027088118192</td>
+      <td>1010.29042040161718851941</td>
+      <td>1010.29042040161718851941</td>
+      <td>0</td>
+      <td>672.51023172646475839584</td>
+      <td>1045.69207248027088118192</td>
+      <td>1010.29042040161718851941</td>
+      <td>1010.29042040161718851941</td>
+      <td>0</td>
+      <td>672.51023172646475839584</td>
+      <td>1045.64</td>
+      <td>1010.24</td>
+      <td>1010.24</td>
+      <td>0</td>
+      <td>672.46</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>2.0</td>
+      <td>031890062001</td>
+      <td>KRZ500147623</td>
+      <td>이스트스프링 글로벌 이머징 증권자투자신탁 제1호[주식-재간접형] 클래스 C3</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>기타</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td></td>
+      <td></td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>3.0</td>
+      <td>031890062001</td>
+      <td>KRZ501147626</td>
+      <td>이스트스프링 글로벌 이머징 증권자투자신탁 제1호[주식-재간접형] 클래스 A-E</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>기타</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td></td>
+      <td></td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>4.0</td>
+      <td>031890062001</td>
+      <td>KRZ500147620</td>
+      <td>PCA 뉴실크로드 증권투자신탁 제I-1호 [주식-재간접형]</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>기타</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td></td>
+      <td></td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>5.0</td>
+      <td>031890062001</td>
+      <td>KRZ500147622</td>
+      <td>이스트스프링 글로벌 이머징 증권자투자신탁 제1호[주식-재간접형] 클래스 C2</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>기타</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td></td>
+      <td></td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>6.0</td>
+      <td>031890062001</td>
+      <td>KRZ501147627</td>
+      <td>이스트스프링 글로벌 이머징 증권자투자신탁 제1호[주식-재간접형] 클래스 A-G</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>기타</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td></td>
+      <td></td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>7.0</td>
+      <td>031890062001</td>
+      <td>KRZ500147621</td>
+      <td>이스트스프링 글로벌 이머징 증권자투자신탁 제1호[주식-재간접형] 클래스 C</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>기타</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td></td>
+      <td></td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>8.0</td>
+      <td>031890062001</td>
+      <td>KRZ50114762B</td>
+      <td>이스트스프링 글로벌 이머징 증권자투자신탁 제1호[주식-재간접형] 클래스 C-P(퇴직연금)E</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>현금</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td>20250217</td>
+      <td>20300216</td>
+      <td>1074.8907153522297973422</td>
+      <td>1039.21446689809465669455</td>
+      <td>1039.21446689809465669455</td>
+      <td>0</td>
+      <td>701.61285224966794193846</td>
+      <td>1074.8907153522297973422</td>
+      <td>1039.21446689809465669455</td>
+      <td>1039.21446689809465669455</td>
+      <td>0</td>
+      <td>701.61285224966794193846</td>
+      <td>1074.86</td>
+      <td>1039.18</td>
+      <td>1039.18</td>
+      <td>0</td>
+      <td>701.58</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>9.0</td>
+      <td>031890062001</td>
+      <td>KRZ501147625</td>
+      <td>이스트스프링 글로벌 이머징 증권자투자신탁 제1호[주식-재간접형] 클래스 C-E</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>현금</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td>20250217</td>
+      <td>20300216</td>
+      <td>1035.13354178249537110242</td>
+      <td>1000.19984595844958709723</td>
+      <td>1000.19984595844958709723</td>
+      <td>0</td>
+      <td>667.53435585638430816471</td>
+      <td>1035.13354178249537110242</td>
+      <td>1000.19984595844958709723</td>
+      <td>1000.19984595844958709723</td>
+      <td>0</td>
+      <td>667.53435585638430816471</td>
+      <td>1035.09</td>
+      <td>1000.16</td>
+      <td>1000.16</td>
+      <td>0</td>
+      <td>667.49</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>10.0</td>
+      <td>031890062001</td>
+      <td>KRZ501147628</td>
+      <td>이스트스프링 글로벌 이머징 증권자투자신탁 제1호[주식-재간접형] 클래스 C-G</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>기타</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td></td>
+      <td></td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>11.0</td>
+      <td>031890062001</td>
+      <td>KRZ50114762A</td>
+      <td>이스트스프링 글로벌 이머징 증권자투자신탁 제1호[주식-재간접형] 클래스 C-P2(연금저축)</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>기타</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td></td>
+      <td></td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>12.0</td>
+      <td>031890062001</td>
+      <td>KRZ500147624</td>
+      <td>이스트스프링 글로벌 이머징 증권자투자신탁 제1호[주식-재간접형] 클래스 C4</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>현금</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td>20250217</td>
+      <td>20300216</td>
+      <td>1138.45133589896147799091</td>
+      <td>1077.39238248666622787504</td>
+      <td>1077.39238248666622787504</td>
+      <td>0</td>
+      <td>707.61576774992857682782</td>
+      <td>1138.45133589896147799091</td>
+      <td>1077.39238248666622787504</td>
+      <td>1077.39238248666622787504</td>
+      <td>0</td>
+      <td>707.61576774992857682782</td>
+      <td>1138.39</td>
+      <td>1077.33</td>
+      <td>1077.33</td>
+      <td>0</td>
+      <td>707.55</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>13.0</td>
+      <td>031890062001</td>
+      <td>KRZ501147629</td>
+      <td>이스트스프링 글로벌 이머징 증권자투자신탁 제1호[주식-재간접형] 클래스 C-P(퇴직연금)</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>현금</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td>20250217</td>
+      <td>20300216</td>
+      <td>1042.70531991915767481473</td>
+      <td>1007.63788618726789201962</td>
+      <td>1007.63788618726789201962</td>
+      <td>0</td>
+      <td>659.83591736063934075691</td>
+      <td>1042.70531991915767481473</td>
+      <td>1007.63788618726789201962</td>
+      <td>1007.63788618726789201962</td>
+      <td>0</td>
+      <td>659.83591736063934075691</td>
+      <td>1042.65</td>
+      <td>1007.58</td>
+      <td>1007.58</td>
+      <td>0</td>
+      <td>659.78</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>14.0</td>
+      <td>031890062001</td>
+      <td>KRZ50114762E</td>
+      <td>이스트스프링 글로벌 이머징 증권자투자신탁 제1호[주식-재간접형] 클래스 S</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>현금</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td>20250217</td>
+      <td>20300216</td>
+      <td>1067.5673095974885741049</td>
+      <td>1032.00501337272411902284</td>
+      <td>1032.00501337272411902284</td>
+      <td>0</td>
+      <td>712.17408304846764972481</td>
+      <td>1067.5673095974885741049</td>
+      <td>1032.00501337272411902284</td>
+      <td>1032.00501337272411902284</td>
+      <td>0</td>
+      <td>712.17408304846764972481</td>
+      <td>1067.54</td>
+      <td>1031.98</td>
+      <td>1031.98</td>
+      <td>0</td>
+      <td>712.15</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>15.0</td>
+      <td>031890062001</td>
+      <td>KRZ50114762F</td>
+      <td>이스트스프링 글로벌 이머징 증권자투자신탁 제1호[주식-재간접형] 클래스 S-P2(연금저축)</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>현금</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td>20250217</td>
+      <td>20300216</td>
+      <td>1079.06373046778297121623</td>
+      <td>1043.21344221312863792835</td>
+      <td>1043.21344221312863792835</td>
+      <td>0</td>
+      <td>717.64247041665544687072</td>
+      <td>1079.06373046778297121623</td>
+      <td>1043.21344221312863792835</td>
+      <td>1043.21344221312863792835</td>
+      <td>0</td>
+      <td>717.64247041665544687072</td>
+      <td>1079.04</td>
+      <td>1043.19</td>
+      <td>1043.19</td>
+      <td>0</td>
+      <td>717.62</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>16.0</td>
+      <td>031890062001</td>
+      <td>KRZ50114762C</td>
+      <td>이스트스프링 글로벌 이머징 증권자투자신탁 제1호[주식-재간접형] 클래스 C-P2(연금저축)E</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>기타</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td></td>
+      <td></td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>17.0</td>
+      <td>031890062001</td>
+      <td>KRZ50114762G</td>
+      <td>이스트스프링 글로벌 이머징 증권자투자신탁 제1호[주식-재간접형] 클래스 C-W</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>기타</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td></td>
+      <td></td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>18.0</td>
+      <td>031890062001</td>
+      <td>KRZ50114762H</td>
+      <td>이스트스프링 글로벌 이머징 증권자투자신탁 제1호[주식-재간접형] 클래스S-P(퇴직연금)</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>기타</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td></td>
+      <td></td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>19.0</td>
+      <td>030480108611</td>
+      <td>KRZ500217645</td>
+      <td>신한코리아신경제증권자투자신탁제2호[주식](종류C1)</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>현금</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td>20250217</td>
+      <td>20300216</td>
+      <td>1273.54616531042146945725</td>
+      <td>982.68504735723767384526</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1273.54616531042146945725</td>
+      <td>982.68504735723767384526</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1273.43</td>
+      <td>982.57</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>20.0</td>
+      <td>030480108611</td>
+      <td>KRZ500217640</td>
+      <td>신한BNPP좋은아침 코리아 증권 투자신탁 제1호[주식]</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>기타</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td></td>
+      <td></td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>21.0</td>
+      <td>030480108611</td>
+      <td>KRZ501217646</td>
+      <td>신한코리아신경제증권자투자신탁제2호[주식](종류C-w)</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>기타</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td></td>
+      <td></td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>22.0</td>
+      <td>030480108612</td>
+      <td>KRZ500217672</td>
+      <td>신한코리아신경제증권자투자신탁제1호[주식](종류I)</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>기타</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td></td>
+      <td></td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>23.0</td>
+      <td>030480108612</td>
+      <td>KRZ501217677</td>
+      <td>신한코리아신경제증권자투자신탁제1호[주식](종류A-e)</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0.0080974523394295985</td>
+      <td>443639.0</td>
+      <td>0.0</td>
+      <td>현금</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td>20250217</td>
+      <td>20300216</td>
+      <td>1192.85707597533370717788</td>
+      <td>1017.56717077637392295418</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1184.75962363590410867417</td>
+      <td>1009.46971843694432445048</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1184.71</td>
+      <td>1009.42</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>24.0</td>
+      <td>030480108612</td>
+      <td>KRZ500217673</td>
+      <td>신한코리아신경제증권자투자신탁제1호[주식](종류A-H)</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0.01236222556494320887</td>
+      <td>16367988.0</td>
+      <td>0.0</td>
+      <td>현금</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td>20250217</td>
+      <td>20300216</td>
+      <td>1326.79387183546600435098</td>
+      <td>1021.09198506617284111219</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1314.43164627052279547351</td>
+      <td>1008.72975950122963223471</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1314.39</td>
+      <td>1008.69</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>25.0</td>
+      <td>030480108612</td>
+      <td>KRZ501217676</td>
+      <td>신한코리아신경제증권자투자신탁제1호[주식](종류C-e)</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>현금</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td>20250217</td>
+      <td>20300216</td>
+      <td>1233.2601860366795824852</td>
+      <td>1032.35222005161054672811</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1233.2601860366795824852</td>
+      <td>1032.35222005161054672811</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1233.19</td>
+      <td>1032.28</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>26.0</td>
+      <td>030480108612</td>
+      <td>KRZ501217674</td>
+      <td>신한코리아신경제증권자투자신탁제1호[주식](종류S)</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0.00538849962542187205</td>
+      <td>26419.0</td>
+      <td>0.0</td>
+      <td>현금</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td>20250217</td>
+      <td>20300216</td>
+      <td>1360.59870495705660117209</td>
+      <td>1046.11563603121368820455</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1355.21020533163472911362</td>
+      <td>1040.72713640579181614608</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1355.15</td>
+      <td>1040.67</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>27.0</td>
+      <td>030480108612</td>
+      <td>KRZ501217675</td>
+      <td>신한코리아신경제증권자투자신탁제1호[주식](종류C1)</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>기타</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td></td>
+      <td></td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>28.0</td>
+      <td>030480108612</td>
+      <td>KRZ500217670</td>
+      <td>신한BNPP좋은아침 코리아 증권 투자신탁 제2호[주식]</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>기타</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td></td>
+      <td></td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>29.0</td>
+      <td>030480108612</td>
+      <td>KRZ500217671</td>
+      <td>신한코리아신경제증권자투자신탁제1호[주식](종류A)</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0.00467365051008360365</td>
+      <td>8428676.0</td>
+      <td>0.0</td>
+      <td>현금</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td>20250217</td>
+      <td>20300216</td>
+      <td>1312.55333470124792185896</td>
+      <td>1006.51832017329366766954</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1307.87968419116431819926</td>
+      <td>1001.84466966321006400984</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1307.8</td>
+      <td>1001.77</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>30.0</td>
+      <td>030480108612</td>
+      <td>KRZ50121767B</td>
+      <td>신한코리아신경제증권자투자신탁제1호[주식](종류C-p)</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0.00137385821677061247</td>
+      <td>182764.0</td>
+      <td>0.0</td>
+      <td>현금</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td>20250217</td>
+      <td>20300216</td>
+      <td>1026.46303771219155740808</td>
+      <td>1001.37385821677061247185</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1025.08917949542094493623</td>
+      <td>1000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1025.01</td>
+      <td>999.92</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>31.0</td>
+      <td>030480108612</td>
+      <td>KRZ50121767C</td>
+      <td>신한코리아신경제증권자투자신탁제1호[주식](종류C-pe)</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0.00863858340095757999</td>
+      <td>685793.0</td>
+      <td>0.0</td>
+      <td>현금</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td>20250217</td>
+      <td>20300216</td>
+      <td>1063.08904485188709122727</td>
+      <td>1008.63858340095757999091</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1054.45046145092951123636</td>
+      <td>1000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1054.39</td>
+      <td>999.94</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>32.0</td>
+      <td>030480108612</td>
+      <td>KRZ50121767D</td>
+      <td>신한코리아신경제증권자투자신탁제1호[주식](종류C-r)</td>
+      <td>20250214</td>
+      <td>이익분배</td>
+      <td>KRW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>현금</td>
+      <td>배당소득</td>
+      <td>No</td>
+      <td>20250217</td>
+      <td>20300216</td>
+      <td>807.69032541573817006034</td>
+      <td>1012.5826831031475526344</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>807.69032541573817006034</td>
+      <td>1012.5826831031475526344</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>807.63</td>
+      <td>1012.53</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabulator JS -->
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.0/dist/js/tabulator.min.js"></script>
+
+    <!-- Data attributes for Thymeleaf variables -->
+    <div id="appData" data-hashcode="e22ebf43b0e576248a410997f2ed3c52" data-filename="2.csv" data-column-metadata="[{&quot;field&quot;:&quot;순번&quot;,&quot;title&quot;:&quot;순번&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;펀드코드&quot;,&quot;title&quot;:&quot;펀드코드&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;종목코드&quot;,&quot;title&quot;:&quot;종목코드&quot;},{&quot;field&quot;:&quot;종목명&quot;,&quot;title&quot;:&quot;종목명&quot;},{&quot;field&quot;:&quot;기준일&quot;,&quot;title&quot;:&quot;기준일&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;배당분류&quot;,&quot;title&quot;:&quot;배당분류&quot;},{&quot;field&quot;:&quot;통화단위&quot;,&quot;title&quot;:&quot;통화단위&quot;},{&quot;field&quot;:&quot;청산 분배금차수&quot;,&quot;title&quot;:&quot;청산 분배금차수&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;1좌(주)당 배당액&quot;,&quot;title&quot;:&quot;1좌(주)당 배당액&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;총분배금&quot;,&quot;title&quot;:&quot;총분배금&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;주식편입 비율&quot;,&quot;title&quot;:&quot;주식편입 비율&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;지급종류&quot;,&quot;title&quot;:&quot;지급종류&quot;},{&quot;field&quot;:&quot;세금구분&quot;,&quot;title&quot;:&quot;세금구분&quot;},{&quot;field&quot;:&quot;총회개최 여부&quot;,&quot;title&quot;:&quot;총회개최 여부&quot;},{&quot;field&quot;:&quot;분배금지급기간&quot;,&quot;title&quot;:&quot;분배금지급기간&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;col_15&quot;,&quot;title&quot;:&quot;&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;결산기준가&quot;,&quot;title&quot;:&quot;결산기준가&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;col_17&quot;,&quot;title&quot;:&quot;&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;col_18&quot;,&quot;title&quot;:&quot;&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;col_19&quot;,&quot;title&quot;:&quot;&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;col_20&quot;,&quot;title&quot;:&quot;&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;결산락기준가&quot;,&quot;title&quot;:&quot;결산락기준가&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;col_22&quot;,&quot;title&quot;:&quot;&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;col_23&quot;,&quot;title&quot;:&quot;&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;col_24&quot;,&quot;title&quot;:&quot;&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;col_25&quot;,&quot;title&quot;:&quot;&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;재투자기준가&quot;,&quot;title&quot;:&quot;재투자기준가&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;col_27&quot;,&quot;title&quot;:&quot;&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;col_28&quot;,&quot;title&quot;:&quot;&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;col_29&quot;,&quot;title&quot;:&quot;&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;col_30&quot;,&quot;title&quot;:&quot;&quot;,&quot;hozAlign&quot;:&quot;right&quot;,&quot;sorter&quot;:&quot;number&quot;},{&quot;field&quot;:&quot;지급장소&quot;,&quot;title&quot;:&quot;지급장소&quot;}]"></div>
+
+    <script>
+        // Global 변수 (data attributes에서 읽기)
+        const appDataEl = document.getElementById('appData');
+        const globalHashcode = appDataEl ? appDataEl.getAttribute('data-hashcode') : '';
+        const globalFilename = appDataEl ? appDataEl.getAttribute('data-filename') : 'document.csv';
+        const generatedAt = "2025-11-27 15:24:37";
+
+        // 컬럼 메타데이터 로드
+        let globalColumns = [];
+        const columnMetadataJson = appDataEl ? appDataEl.getAttribute('data-column-metadata') : null;
+        if (columnMetadataJson) {
+            try {
+                globalColumns = JSON.parse(columnMetadataJson);
+                // console.log('Column metadata loaded:', globalColumns);
+            } catch(e) {
+                console.error('Failed to parse column metadata', e);
+                globalColumns = [];
+            }
+        }
+
+        // 문서 정보 토글
+        function toggleDocInfo() {
+            const docInfoSection = document.getElementById('docInfoSection');
+            const toggleBtnDesktop = document.getElementById('toggleDocInfoBtn');
+            const toggleBtnMobile = document.getElementById('toggleDocInfoBtnMobile');
+
+            docInfoSection.classList.toggle('collapsed');
+            if (toggleBtnDesktop) {
+                toggleBtnDesktop.classList.toggle('collapsed');
+            }
+            if (toggleBtnMobile) {
+                toggleBtnMobile.classList.toggle('collapsed');
+            }
+        }
+
+        // 모바일 메뉴 토글
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('open');
+        }
+
+        // 모바일 메뉴 외부 클릭시 닫기
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const toggleBtnMobile = document.getElementById('toggleDocInfoBtnMobile');
+
+            if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target) && !toggleBtnMobile.contains(event.target)) {
+                mobileMenu.classList.remove('open');
+            }
+        });
+
+        // 원본 다운로드
+        function downloadOriginal() {
+            if (globalHashcode && globalFilename) {
+                // filename에서 확장자 추출
+                const extension = globalFilename.split('.').pop().toLowerCase();
+                // FileController를 통해 캐시된 원본 파일 다운로드
+                const downloadUrl = '/aview/file/' + globalHashcode + '.' + extension +
+                                  '?download=true&name=' + encodeURIComponent(globalFilename);
+                downloadFile(downloadUrl, globalFilename);
+            } else {
+                alert('원본 문서의 정보가 없습니다.');
+            }
+        }
+
+        // 파일 다운로드 헬퍼 함수
+        function downloadFile(url, filename) {
+            const link = document.createElement('a');
+            link.href = url;
+            if (filename) {
+                link.download = filename;
+            }
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // 숫자 천단위 콤마 포맷팅
+        function formatNumber(num) {
+            if (!num || num === '정보 없음') return num;
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        // Control Bar Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const csvContainer = document.getElementById('csvContainer');
+
+            // ===== 1. 프로그램 기본값 정의 (initValues) =====
+            const initValues = {
+                fontSize: 14,
+                fontFamily: "'Noto Sans KR', sans-serif",
+                pageSize: 25,
+                darkMode: false
+            };
+
+            // ===== 2. localStorage에서 사용자 설정값 로드 (userValues) =====
+            let userValues = {};
+            const savedSettings = localStorage.getItem('csvViewerSettings');
+            if (savedSettings) {
+                try {
+                    userValues = JSON.parse(savedSettings);
+                } catch(e) {
+                    console.error('Failed to load settings', e);
+                    userValues = {};
+                }
+            }
+
+            // ===== 3. userValues와 initValues를 merge (controlBarValues) =====
+            // userValue가 없으면 initValues를 사용
+            const controlBarValues = {
+                fontSize: userValues.fontSize ?? initValues.fontSize,
+                fontFamily: userValues.fontFamily ?? initValues.fontFamily,
+                pageSize: userValues.pageSize ?? initValues.pageSize,
+                darkMode: userValues.darkMode ?? initValues.darkMode
+            };
+
+            // State (controlBarValues에서 초기화)
+            let currentFontSize = controlBarValues.fontSize;
+
+            // Dark Mode
+            function toggleDarkMode() {
+                document.body.classList.toggle('dark-mode');
+                const tabulatorDarkModeLink = document.getElementById('tabulator-dark-mode');
+                if (tabulatorDarkModeLink) {
+                    tabulatorDarkModeLink.disabled = !document.body.classList.contains('dark-mode');
+                }
+            }
+            const toggleDarkModeBtn = document.getElementById('toggleDarkMode');
+            if(toggleDarkModeBtn) toggleDarkModeBtn.addEventListener('click', toggleDarkMode);
+
+            const toggleDarkModeBtnMobile = document.getElementById('toggleDarkMode-mobile');
+            if(toggleDarkModeBtnMobile) toggleDarkModeBtnMobile.addEventListener('click', toggleDarkMode);
+
+            // Fullscreen
+            const toggleFullscreenBtn = document.getElementById('toggleFullscreen');
+            if(toggleFullscreenBtn) {
+                toggleFullscreenBtn.addEventListener('click', () => {
+                    csvContainer.classList.toggle('fullscreen-mode');
+                });
+            }
+
+            // Settings Save/Reset (Desktop)
+            const saveSettingsBtn = document.getElementById('saveSettings');
+            if(saveSettingsBtn) saveSettingsBtn.addEventListener('click', () => {
+                const fontFamilySelect = document.getElementById('fontFamily');
+                const pageSizeSelect = document.getElementById('pageSize');
+
+                const settings = {
+                    fontSize: currentFontSize,
+                    fontFamily: fontFamilySelect ? fontFamilySelect.value : controlBarValues.fontFamily,
+                    pageSize: pageSizeSelect ? parseInt(pageSizeSelect.value) : controlBarValues.pageSize,
+                    darkMode: document.body.classList.contains('dark-mode')
+                };
+                localStorage.setItem('csvViewerSettings', JSON.stringify(settings));
+                alert('설정이 저장되었습니다.');
+            });
+
+            const resetSettingsBtn = document.getElementById('resetSettings');
+            if(resetSettingsBtn) resetSettingsBtn.addEventListener('click', () => {
+                localStorage.removeItem('csvViewerSettings');
+                location.reload();
+            });
+
+            // Settings Save/Reset (Mobile)
+            const saveSettingsBtnMobile = document.getElementById('saveSettings-mobile');
+            if(saveSettingsBtnMobile) saveSettingsBtnMobile.addEventListener('click', () => {
+                const fontFamilyMobileSelect = document.getElementById('fontFamily-mobile');
+                const pageSizeMobileSelect = document.getElementById('pageSize-mobile');
+
+                const settings = {
+                    fontSize: currentFontSize,
+                    fontFamily: fontFamilyMobileSelect ? fontFamilyMobileSelect.value : controlBarValues.fontFamily,
+                    pageSize: pageSizeMobileSelect ? parseInt(pageSizeMobileSelect.value) : controlBarValues.pageSize,
+                    darkMode: document.body.classList.contains('dark-mode')
+                };
+                localStorage.setItem('csvViewerSettings', JSON.stringify(settings));
+                alert('설정이 저장되었습니다.');
+            });
+
+            const resetSettingsBtnMobile = document.getElementById('resetSettings-mobile');
+            if(resetSettingsBtnMobile) resetSettingsBtnMobile.addEventListener('click', () => {
+                localStorage.removeItem('csvViewerSettings');
+                location.reload();
+            });
+
+            // Mobile Menu
+            const controlsMenuBtn = document.getElementById('controlsMenuBtn');
+            const controlsMenu = document.getElementById('controlsMenu');
+            if(controlsMenuBtn && controlsMenu) {
+                controlsMenuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    controlsMenu.classList.toggle('open');
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!controlsMenuBtn.contains(e.target) && !controlsMenu.contains(e.target)) {
+                        controlsMenu.classList.remove('open');
+                    }
+                });
+            }
+
+            // ===== 4. Control-bar UI 초기화 (controlBarValues로 설정) =====
+
+            // Dark Mode 적용
+            if (controlBarValues.darkMode) {
+                document.body.classList.add('dark-mode');
+                const tabulatorDarkModeLink = document.getElementById('tabulator-dark-mode');
+                if (tabulatorDarkModeLink) {
+                    tabulatorDarkModeLink.disabled = false;
+                }
+            }
+
+            // Font Family select 초기화
+            const fontFamilySelect = document.getElementById('fontFamily');
+            const fontFamilyMobileSelect = document.getElementById('fontFamily-mobile');
+            if (fontFamilySelect) fontFamilySelect.value = controlBarValues.fontFamily;
+            if (fontFamilyMobileSelect) fontFamilyMobileSelect.value = controlBarValues.fontFamily;
+
+            // Page Size select 초기화
+            const pageSizeSelect = document.getElementById('pageSize');
+            const pageSizeMobileSelect = document.getElementById('pageSize-mobile');
+            if (pageSizeSelect) pageSizeSelect.value = controlBarValues.pageSize;
+            if (pageSizeMobileSelect) pageSizeMobileSelect.value = controlBarValues.pageSize;
+
+            // 숫자 포맷팅 적용
+            const totalRowsEl = document.getElementById('totalRowsDisplay');
+            if (totalRowsEl && totalRowsEl.textContent !== '정보 없음') {
+                totalRowsEl.textContent = formatNumber(totalRowsEl.textContent);
+            }
+
+            // ===== 5. Tabulator 초기화 (controlBarValues 사용) =====
+            if (document.getElementById('csvTable')) {
+                // 컬럼 옵션 설정
+                const tabulatorOptions = {
+                    headerSortElement: "", // 소팅 아이콘 제거 - 헤더와 데이터 셀 너비 정렬
+                    height: "100%",
+                    layout: "fitData",
+                    pagination: "local",
+                    paginationSize: controlBarValues.pageSize,
+                    paginationSizeSelector: false, // Footer Page Size Selector 제거
+                    movableColumns: true,
+                    locale: "ko-kr",
+                    footerElement: "<div class='tabulator-footer-contents'>총 <span id='footerTotalCount'>0</span>건</div>", // Footer Total Count 추가
+                    langs: {
+                        "ko-kr": {
+                            "pagination": {
+                                "first": "<<",
+                                "first_title": "첫 페이지",
+                                "last": ">>",
+                                "last_title": "마지막 페이지",
+                                "prev": "<",
+                                "prev_title": "이전 페이지",
+                                "next": ">",
+                                "next_title": "다음 페이지",
+                                "all": "전체",
+                            },
+                            "headerFilters": {
+                                "default": "필터...",
+                            }
+                        }
+                    }
+                };
+
+                // 컬럼 메타데이터가 있으면 columns 옵션 추가
+                if (globalColumns && globalColumns.length > 0) {
+                    tabulatorOptions.columns = globalColumns;
+                }
+
+                var table = new Tabulator("#csvTable", tabulatorOptions);
+
+                // 페이지 사이즈 선택 (pageSizeSelect, pageSizeMobileSelect는 이미 선언됨)
+                if (pageSizeSelect) {
+                    pageSizeSelect.addEventListener('change', (e) => {
+                        const val = e.target.value;
+                        if (val == -1) table.setPageSize(true);
+                        else table.setPageSize(parseInt(val));
+                    });
+                }
+                
+                if (pageSizeMobileSelect) {
+                    pageSizeMobileSelect.addEventListener('change', (e) => {
+                        const val = e.target.value;
+                        if (val == -1) table.setPageSize(true);
+                        else table.setPageSize(parseInt(val));
+                        if (pageSizeSelect) pageSizeSelect.value = val;
+                    });
+                }
+
+                // 엑셀 내보내기
+                const exportExcelBtn = document.getElementById('exportExcel');
+                const exportExcelMobileBtn = document.getElementById('exportExcel-mobile');
+
+                function downloadExcel() {
+                    // 날짜 포맷팅 (YYYYMMDD_HHMMSS)
+                    const now = new Date();
+                    const yyyy = now.getFullYear();
+                    const mm = String(now.getMonth() + 1).padStart(2, '0');
+                    const dd = String(now.getDate()).padStart(2, '0');
+                    const hh = String(now.getHours()).padStart(2, '0');
+                    const min = String(now.getMinutes()).padStart(2, '0');
+                    const ss = String(now.getSeconds()).padStart(2, '0');
+                    const timestamp = `${yyyy}${mm}${dd}_${hh}${min}${ss}`;
+                    
+                    // 파일명 생성
+                    let filename = globalFilename || 'data';
+                    // 확장자 제거
+                    if (filename.lastIndexOf('.') > -1) {
+                        filename = filename.substring(0, filename.lastIndexOf('.'));
+                    }
+                    const excelFilename = `${filename}_${timestamp}.xlsx`;
+
+                    table.download("xlsx", excelFilename, {sheetName:"My Data"});
+                }
+
+                if (exportExcelBtn) exportExcelBtn.addEventListener('click', downloadExcel);
+                if (exportExcelMobileBtn) exportExcelMobileBtn.addEventListener('click', downloadExcel);
+
+                // 검색 기능 연결
+                const searchInput = document.getElementById('searchInput');
+                const searchCounter = document.getElementById('searchCounter');
+                const searchClearBtn = document.getElementById('searchClearBtn');
+
+                function updateSearchCounter() {
+                    if (!searchCounter) return;
+                    const total = table.getDataCount(); // 전체 데이터 수
+                    const filtered = table.getDataCount("active"); // 필터링된 데이터 수
+                    
+                    if (searchInput.value.trim() === '') {
+                        searchCounter.textContent = '';
+                        if(searchClearBtn) searchClearBtn.classList.remove('visible');
+                    } else {
+                        searchCounter.textContent = `${filtered}/${total}`;
+                        if(searchClearBtn) searchClearBtn.classList.add('visible');
+                    }
+                    
+                    // Footer Total Count 업데이트
+                    const footerTotalCount = document.getElementById('footerTotalCount');
+                    if (footerTotalCount) {
+                        footerTotalCount.textContent = filtered;
+                    }
+                }
+
+                if (searchInput) {
+                    searchInput.addEventListener('keyup', function(e) {
+                        var value = e.target.value;
+                        
+                        if(value){
+                            table.setFilter(function(data){
+                                for(var key in data){
+                                    if(String(data[key]).toLowerCase().indexOf(value.toLowerCase()) > -1){
+                                        return true;
+                                    }
+                                }
+                                return false;
+                            });
+                        } else {
+                            table.clearFilter();
+                        }
+                        updateSearchCounter();
+                    });
+                }
+
+                if (searchClearBtn) {
+                    searchClearBtn.addEventListener('click', () => {
+                        if (searchInput) {
+                            searchInput.value = '';
+                            table.clearFilter();
+                            updateSearchCounter();
+                            searchInput.focus();
+                        }
+                    });
+                }
+                
+                // 폰트 패밀리 조절 (fontFamilySelect, fontFamilyMobileSelect는 이미 선언됨)
+                function updateFontFamily(font) {
+                    const tableEl = document.querySelector('.tabulator');
+                    if (tableEl) {
+                        tableEl.style.fontFamily = font;
+                        table.redraw(true); // 레이아웃 재계산 및 컬럼 너비 자동 맞춤
+                    }
+                    if (fontFamilySelect) fontFamilySelect.value = font;
+                    if (fontFamilyMobileSelect) fontFamilyMobileSelect.value = font;
+                }
+
+                if (fontFamilySelect) {
+                    fontFamilySelect.addEventListener('change', (e) => updateFontFamily(e.target.value));
+                }
+                if (fontFamilyMobileSelect) {
+                    fontFamilyMobileSelect.addEventListener('change', (e) => updateFontFamily(e.target.value));
+                }
+                
+                // 폰트 크기 조절 기능 개선
+                function updateTableFontSize(size) {
+                    const tableEl = document.querySelector('.tabulator');
+                    if (tableEl) {
+                        tableEl.style.fontSize = size + 'px';
+                        table.redraw(true); // 레이아웃 재계산 및 컬럼 너비 자동 맞춤
+                    }
+                    // 버튼 텍스트 업데이트
+                    const resetBtn = document.getElementById('fontSizeReset');
+                    const resetBtnMobile = document.getElementById('fontSizeReset-mobile');
+                    if(resetBtn) resetBtn.textContent = size + 'px';
+                    if(resetBtnMobile) resetBtnMobile.textContent = size + 'px';
+                }
+
+                // 초기 로드 시 폰트 및 사이즈 적용
+                // (Tabulator가 생성된 직후에 스타일 적용)
+                setTimeout(() => {
+                    updateFontFamily(controlBarValues.fontFamily);
+                    updateTableFontSize(currentFontSize);
+                    updateSearchCounter(); // 초기 카운터 설정
+                }, 100);
+
+                // 데이터 로드/필터링 시 Footer 업데이트
+                table.on("dataFiltered", updateSearchCounter);
+                table.on("dataLoaded", updateSearchCounter);
+
+                document.getElementById('fontSizeIncrease').addEventListener('click', () => {
+                    currentFontSize += 1;
+                    updateTableFontSize(currentFontSize);
+                });
+                document.getElementById('fontSizeDecrease').addEventListener('click', () => {
+                    if (currentFontSize > 10) {
+                        currentFontSize -= 1;
+                        updateTableFontSize(currentFontSize);
+                    }
+                });
+                document.getElementById('fontSizeReset').addEventListener('click', () => {
+                    currentFontSize = 16;
+                    updateTableFontSize(currentFontSize);
+                });
+
+                // 모바일 폰트 조절
+                const fontSizeIncreaseMobile = document.getElementById('fontSizeIncrease-mobile');
+                if(fontSizeIncreaseMobile) fontSizeIncreaseMobile.addEventListener('click', () => {
+                    currentFontSize += 1;
+                    updateTableFontSize(currentFontSize);
+                });
+                const fontSizeDecreaseMobile = document.getElementById('fontSizeDecrease-mobile');
+                if(fontSizeDecreaseMobile) fontSizeDecreaseMobile.addEventListener('click', () => {
+                    if (currentFontSize > 10) {
+                        currentFontSize -= 1;
+                        updateTableFontSize(currentFontSize);
+                    }
+                });
+                const fontSizeResetMobile = document.getElementById('fontSizeReset-mobile');
+                if(fontSizeResetMobile) fontSizeResetMobile.addEventListener('click', () => {
+                    currentFontSize = 16;
+                    updateTableFontSize(currentFontSize);
+                });
+
+                // Column Selector Logic
+                const columnSelectorBtn = document.getElementById('columnSelectorBtn');
+                const columnSelectorPanel = document.getElementById('columnSelectorPanel');
+                const columnCheckboxGrid = document.getElementById('columnCheckboxGrid');
+                const selectAllColumnsBtn = document.getElementById('selectAllColumns');
+                const deselectAllColumnsBtn = document.getElementById('deselectAllColumns');
+                const applyColumnSelectionBtn = document.getElementById('applyColumnSelection');
+
+                let allColumns = [];
+
+                // Initialize column checkboxes
+                function initializeColumnSelector() {
+                    const columns = table.getColumns();
+                    allColumns = columns.map(col => ({
+                        field: col.getField(),
+                        title: col.getDefinition().title || `컬럼 ${col.getField()}`,
+                        visible: col.isVisible()
+                    }));
+
+                    // Generate checkboxes
+                    columnCheckboxGrid.innerHTML = '';
+                    allColumns.forEach((col, index) => {
+                        const item = document.createElement('div');
+                        item.className = 'column-checkbox-item';
+                        
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.id = `col-checkbox-${index}`;
+                        checkbox.value = col.field;
+                        checkbox.checked = col.visible;
+                        
+                        const label = document.createElement('label');
+                        label.htmlFor = `col-checkbox-${index}`;
+                        label.textContent = col.title;
+                        label.title = col.title; // Tooltip for long names
+                        
+                        item.appendChild(checkbox);
+                        item.appendChild(label);
+                        columnCheckboxGrid.appendChild(item);
+                    });
+                }
+
+                // Toggle panel
+                if (columnSelectorBtn) {
+                    columnSelectorBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        columnSelectorPanel.classList.toggle('open');
+                    });
+                }
+
+                // Close panel when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (columnSelectorPanel && !columnSelectorPanel.contains(e.target) && !columnSelectorBtn.contains(e.target)) {
+                        columnSelectorPanel.classList.remove('open');
+                    }
+                });
+
+                // Select All
+                if (selectAllColumnsBtn) {
+                    selectAllColumnsBtn.addEventListener('click', () => {
+                        const checkboxes = columnCheckboxGrid.querySelectorAll('input[type="checkbox"]');
+                        checkboxes.forEach(cb => cb.checked = true);
+                    });
+                }
+
+                // Deselect All (with validation)
+                if (deselectAllColumnsBtn) {
+                    deselectAllColumnsBtn.addEventListener('click', () => {
+                        const checkboxes = columnCheckboxGrid.querySelectorAll('input[type="checkbox"]');
+                        // Keep at least one checked
+                        let checkedCount = 0;
+                        checkboxes.forEach(cb => {
+                            if (cb.checked) checkedCount++;
+                        });
+                        
+                        if (checkedCount > 1) {
+                            checkboxes.forEach(cb => cb.checked = false);
+                            // Check the first one
+                            if (checkboxes.length > 0) checkboxes[0].checked = true;
+                        } else {
+                            alert('최소 1개의 컬럼은 선택되어야 합니다.');
+                        }
+                    });
+                }
+
+                // Apply Selection
+                if (applyColumnSelectionBtn) {
+                    applyColumnSelectionBtn.addEventListener('click', () => {
+                        const checkboxes = columnCheckboxGrid.querySelectorAll('input[type="checkbox"]');
+                        const selectedFields = [];
+                        
+                        checkboxes.forEach(cb => {
+                            if (cb.checked) selectedFields.push(cb.value);
+                        });
+
+                        // Validation: at least one column must be selected
+                        if (selectedFields.length === 0) {
+                            alert('최소 1개의 컬럼은 선택되어야 합니다.');
+                            return;
+                        }
+
+                        // Apply visibility
+                        allColumns.forEach(col => {
+                            if (selectedFields.includes(col.field)) {
+                                table.showColumn(col.field);
+                            } else {
+                                table.hideColumn(col.field);
+                            }
+                        });
+
+                        // Close panel
+                        columnSelectorPanel.classList.remove('open');
+                    });
+                }
+
+                // Initialize after table is ready
+                table.on("tableBuilt", function(){
+                    initializeColumnSelector();
+                });
+
+                // Auto-fit Column Width
+                const autoFitColumnsBtn = document.getElementById('autoFitColumnsBtn');
+                if (autoFitColumnsBtn) {
+                    autoFitColumnsBtn.addEventListener('click', () => {
+                        // Redraw table with force to recalculate column widths
+                        table.redraw(true);
+                    });
+                }
+
+                // Mobile Auto-fit Column Width
+                const autoFitColumnsBtnMobile = document.getElementById('autoFitColumnsBtn-mobile');
+                if (autoFitColumnsBtnMobile) {
+                    autoFitColumnsBtnMobile.addEventListener('click', () => {
+                        table.redraw(true);
+                        if (controlsMenu) controlsMenu.classList.remove('open');
+                    });
+                }
+
+                // Mobile Column Selector Button
+                const columnSelectorBtnMobile = document.getElementById('columnSelectorBtn-mobile');
+                if (columnSelectorBtnMobile) {
+                    columnSelectorBtnMobile.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        columnSelectorPanel.classList.toggle('open');
+                    });
+                }
+
+                console.log('CSV Viewer - Tabulator initialized');
+                console.log('%c🔍 AView Document Info', 'color: #0066cc; font-weight: bold; font-size: 14px;');
+                console.log('Generated At:', generatedAt);
+                console.log('Hashcode:', globalHashcode);
+                console.log('Filename:', globalFilename);
+                console.log('Template:', 'csv.html');
+                console.log('─'.repeat(50));
+
+                // Debug: Control Bar Settings
+                console.log('%c⚙️ Control Bar Settings', 'color: #ff9800; font-weight: bold; font-size: 12px;');
+                console.log('initValues:', initValues);
+                console.log('userValues:', userValues);
+                console.log('controlBarValues:', controlBarValues);
+                console.log('─'.repeat(50));
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+S or Cmd+S: 다운로드
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                downloadOriginal();
+            }
+            // Home: 맨위로
+            if (e.key === 'Home') {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            // ESC: 나가기
+            if (e.key === 'Escape') {
+                // 필요시 추가 기능
+            }
+        });
+
+        // Top Button
+        const topBtn = document.getElementById('topBtn');
+
+        function toggleFloatingButtons() {
+            const shouldShow = window.scrollY > 300 || document.documentElement.scrollTop > 300;
+            if (topBtn) {
+                if (shouldShow) topBtn.classList.add('show');
+                else topBtn.classList.remove('show');
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        window.addEventListener('scroll', toggleFloatingButtons);
+        if(topBtn) topBtn.addEventListener('click', scrollToTop);
+    </script>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <svg width="20" height="20"><use href="#icon-help-title"/></svg>
+                    CSV 뷰어 사용 팁
+                </h3>
+                <button type="button" class="close-modal-btn" id="closeHelpModal" title="닫기">
+                    <svg width="20" height="20"><use href="#icon-close"/></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="help-list" id="helpList"></ul>
+            </div>
+            <div class="modal-footer">
+                <a href="/aview/help/viewer/csv.html" target="_blank">
+                    더 자세한 정보...
+                    <svg width="14" height="14"><use href="#icon-external-link"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const helpData = [{title: "검색 기능",desc: "상단의 검색창을 통해 데이터를 실시간으로 필터링할 수 있습니다.",iconId: "icon-search"},{title: "컬럼 선택",desc: "'컬럼 선택' 버튼을 클릭하여 표시할 컬럼을 선택하세요.",iconId: "icon-columns"},{title: "정렬 기능",desc: "각 컬럼 헤더를 클릭하여 오름차순/내림차순으로 정렬합니다.",iconId: "icon-sort"},{title: "내보내기",desc: "현재 데이터를 Excel, JSON, HTML, CSV 형식으로 다운로드할 수 있습니다.",iconId: "icon-download"},{title: "다크 모드",desc: "달 아이콘을 클릭하여 다크 모드로 전환할 수 있습니다.",iconId: "icon-moon"}];
+        const helpBtn = document.getElementById('helpBtn');
+        const helpModal = document.getElementById('helpModal');
+        const closeHelpModalBtn = document.getElementById('closeHelpModal');
+        const helpList = document.getElementById('helpList');
+        function renderHelpModal() {
+            if (!helpList) return;
+            helpList.innerHTML = helpData.map(item => `<li class="help-item"><div class="help-icon"><svg width="14" height="14"><use href="#${item.iconId}"/></svg></div><div class="help-text"><h4>${item.title}</h4><p>${item.desc}</p></div></li>`).join('');
+        }
+        function openHelpModal() {
+            renderHelpModal();
+            helpModal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeHelpModal() {
+            helpModal.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        if (helpBtn) helpBtn.addEventListener('click', openHelpModal);
+        if (closeHelpModalBtn) closeHelpModalBtn.addEventListener('click', closeHelpModal);
+        if (helpModal) helpModal.addEventListener('click', (e) => e.target === helpModal && closeHelpModal());
+        document.addEventListener('keydown', (e) => e.key === 'Escape' && helpModal.classList.contains('open') && closeHelpModal());
+    </script>
+</body>
+</html>

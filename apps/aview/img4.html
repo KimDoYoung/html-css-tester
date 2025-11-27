@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!-- 
+===========================================
+🔍 AView Document Metadata
+===========================================
+Generated : 2025-11-27 16:05:08
+Hashcode  : 47a4816fee960f5737b3acb6ce4b3f01
+Filename  : 20251011_163500_HDR.jpg
+Template  : image.html
+===========================================
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20251011_163500_HDR.jpg</title>
+    <link rel="icon" type="image/png" href="/aview/images/favicon32.png" sizes="32x32">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Viewer.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css">
+    <style>
+        .image-embed {
+            max-height: 80vh;
+            min-height: 600px;
+        }
+
+        @media (max-width: 768px) {
+            .image-embed {
+                max-height: 70vh;
+                min-height: 400px;
+            }
+        }
+
+        .doc-info-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .doc-info-section.collapsed {
+            max-height: 0;
+            padding: 0 20px;
+            margin-bottom: 0;
+            opacity: 0;
+        }
+
+        .toggle-doc-info-btn {
+            background: #0d6efd;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .toggle-doc-info-btn:hover {
+            background: #0b5ed7;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-doc-info-btn.collapsed {
+            background: #28a745;
+            animation: pulseCollapsed 2s ease-in-out infinite;
+        }
+
+        .toggle-doc-info-btn.collapsed:hover {
+            background: #218838;
+        }
+
+        .toggle-doc-info-btn svg {
+            color: white;
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-doc-info-btn.collapsed svg {
+            transform: rotate(180deg);
+        }
+
+        @keyframes pulseCollapsed {
+
+            0%,
+            100% {
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 4px 16px rgba(40, 167, 69, 0.4);
+            }
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.875rem;
+            margin-bottom: 0;
+        }
+
+        .info-value {
+            color: #6c757d;
+            font-size: 1.125rem;
+        }
+
+        .image-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .doc-info-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        @media (max-width: 1024px) {
+            .doc-info-row {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .doc-info-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .info-item {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 0;
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            .doc-info-col:last-child .info-item {
+                border-bottom: none;
+            }
+
+            .info-label {
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+
+            .info-value {
+                text-align: right;
+            }
+        }
+
+        .doc-info-col {
+            padding: 0;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            min-width: 200px;
+        }
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+        .mobile-menu button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            transition: background-color 0.2s;
+        }
+
+        .mobile-menu button:hover {
+            background-color: #f3f4f6;
+        }
+
+        .mobile-menu button svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        .doc-info-header {
+            background-color: #f2ebd3;
+            padding: 12px 16px;
+            margin: -20px -20px 16px -20px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .doc-info-header h3 {
+            margin: 0;
+            color: #333;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .viewer-container {
+            width: 100% !important;
+            height: 100% !important;
+            background-color: transparent !important;
+            /* 투명하게 설정하여 아래의 격자 무늬가 보이도록 함 */
+        }
+
+        .viewer-backdrop {
+            background-color: transparent !important;
+            /* 백드롭도 투명하게 */
+        }
+
+        /* Grid Pattern Background for Image Viewer */
+        .image-viewer {
+            width: 100%;
+            height: 700px;
+            /* 고정 높이 또는 min-height 설정 */
+            background-color: #f8f9fa;
+            border: 1px solid #e5e7eb;
+            /* 격자 무늬 추가 */
+            background-image:
+                linear-gradient(45deg, #eef0f2 25%, transparent 25%),
+                linear-gradient(-45deg, #eef0f2 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #eef0f2 75%),
+                linear-gradient(-45deg, transparent 75%, #eef0f2 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            overflow: hidden;
+            /* Remove border radius for full width viewer */
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        /* Text Viewer Control Bar Style (from text6.html) */
+        .text-viewer-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 40px;
+            padding: 0 12px;
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #d0d0d0;
+            gap: 8px;
+        }
+
+        .controls-desktop {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .control-btn {
+            padding: 4px 8px;
+            min-width: 30px;
+            height: 28px;
+            background-color: #e8e8e8;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .control-btn:hover {
+            background-color: #d8d8d8;
+        }
+
+        .control-btn:active {
+            background-color: #c8c8c8;
+        }
+
+        .btn-group {
+            display: inline-flex;
+            gap: 0;
+        }
+
+        .btn-group .control-btn {
+            border-radius: 0;
+            margin-left: -1px;
+        }
+
+        .btn-group .control-btn:first-child {
+            border-radius: 4px 0 0 4px;
+            margin-left: 0;
+        }
+
+        .btn-group .control-btn:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Zoom Label Style */
+        .zoom-label {
+            font-size: 12px;
+            color: #555;
+            padding: 0 8px;
+            min-width: 45px;
+            text-align: center;
+            background-color: #f8f9fa;
+            border-top: 1px solid #c0c0c0;
+            border-bottom: 1px solid #c0c0c0;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: -1px;
+            margin-right: -1px;
+            z-index: 0;
+        }
+
+        /* Maximize Mode Styles */
+        body.maximize-mode header,
+        body.maximize-mode .doc-info-section,
+        body.maximize-mode .mt-4 {
+            display: none !important;
+        }
+
+        body.maximize-mode .image-container {
+            max-width: none;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.maximize-mode .flex-1.flex.flex-col.bg-gray-50 {
+            height: 100vh;
+        }
+
+        body.maximize-mode .text-viewer-controls {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #d0d0d0;
+            background-color: #f0f0f0;
+        }
+
+        body.maximize-mode .viewer-main-wrapper {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.maximize-mode .image-viewer {
+            flex: 1;
+            height: auto !important;
+            /* 0 대신 auto 사용해봄, flex-basis가 처리 */
+            min-height: 0 !important;
+            border: none;
+        }
+
+        body.maximize-mode .max-w-7xl {
+            max-width: none;
+            padding: 0;
+        }
+
+        /* Help Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.open {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .modal-overlay.open .modal-content {
+            transform: translateY(0);
+        }
+        .modal-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .modal-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #111827;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .close-modal-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            color: #6b7280;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .close-modal-btn:hover {
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+        .modal-body {
+            padding: 20px;
+        }
+        .help-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .help-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .help-icon {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #eff6ff;
+            color: #3b82f6;
+            border-radius: 50%;
+        }
+        .help-text h4 {
+            margin: 0 0 4px 0;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #374151;
+        }
+        .help-text p {
+            margin: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+        body.dark-mode .modal-content {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+        }
+        body.dark-mode .modal-header {
+            border-bottom-color: #30363d;
+        }
+        body.dark-mode .modal-title {
+            color: #c9d1d9;
+        }
+        body.dark-mode .close-modal-btn {
+            color: #8b949e;
+        }
+        body.dark-mode .close-modal-btn:hover {
+            background-color: #21262d;
+            color: #c9d1d9;
+        }
+        body.dark-mode .help-icon {
+            background-color: rgba(56, 139, 253, 0.15);
+            color: #58a6ff;
+        }
+        body.dark-mode .help-text h4 {
+            color: #c9d1d9;
+        }
+        body.dark-mode .help-text p {
+            color: #8b949e;
+        }
+        #helpBtn {
+            margin-left: auto;
+        }
+        .modal-footer {
+            padding: 16px 20px;
+            border-top: 1px solid #e5e7eb;
+            text-align: right;
+        }
+        .modal-footer a {
+            color: #0d6efd;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        body.dark-mode .modal-footer {
+            border-top-color: #30363d;
+        }
+        body.dark-mode .modal-footer a {
+            color: #58a6ff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- SVG Sprite Definitions -->
+    <svg style="display: none;">
+        <defs>
+            <symbol id="icon-download" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+            </symbol>
+            <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+            </symbol>
+            <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </symbol>
+            <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </symbol>
+            <symbol id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </symbol>
+            <symbol id="icon-columns" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"></path>
+            </symbol>
+            <symbol id="icon-sort" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"></path>
+            </symbol>
+            <symbol id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0112 21a9.003 9.003 0 008.354-5.646z"></path>
+            </symbol>
+            <symbol id="icon-help" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </symbol>
+            <symbol id="icon-help-title" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </symbol>
+            <symbol id="icon-external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </symbol>
+        </defs>
+    </svg>
+
+    <!-- Header 영역: 전체 너비 (100%) -->
+    <header class="w-full bg-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-start justify-between gap-4">
+                <!-- 왼쪽: 파일명 -->
+                <div class="flex-1 min-w-0">
+                    <h1 class="text-2xl font-bold text-gray-900 truncate">20251011_163500_HDR.jpg</h1>
+                </div>
+
+                <!-- 오른쪽: 데스크톱 버튼 그룹 (md 이상에서만 표시) -->
+                <div class="hidden md:flex flex-wrap gap-3 justify-end flex-shrink-0">
+                    <!-- 새 창에서 열기 -->
+                    <button type="button" onclick="openInNewWindow()"
+                        class="inline-flex items-center px-4 py-2 rounded-lg bg-blue-600 text-white font-medium text-sm hover:bg-blue-700 transition-colors shadow-sm whitespace-nowrap">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                        새 창에서 열기
+                    </button>
+
+                    <!-- 원본 다운로드 -->
+                    <button type="button" onclick="downloadOriginal()"
+                        class="inline-flex items-center px-4 py-2 rounded-lg bg-orange-600 text-white font-medium text-sm hover:bg-orange-700 transition-colors shadow-sm whitespace-nowrap">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        원본 다운로드
+                    </button>
+
+                    <!-- 문서 정보 토글 버튼 -->
+                    <button type="button" class="toggle-doc-info-btn collapsed" id="toggleDocInfoBtn"
+                        onclick="toggleDocInfo()" title="이미지 정보 보기" aria-label="이미지 정보 토글">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- 오른쪽: 모바일 영역 (토글 버튼 + 햄버거 메뉴) -->
+                <div class="md:hidden flex gap-2 items-center flex-shrink-0">
+                    <!-- 모바일 토글 버튼 -->
+                    <button type="button" class="toggle-doc-info-btn collapsed" onclick="toggleDocInfo()"
+                        title="이미지 정보 보기" aria-label="이미지 정보 토글">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7">
+                            </path>
+                        </svg>
+                    </button>
+
+                    <!-- 햄버거 메뉴 (relative 래퍼) -->
+                    <div class="relative">
+                        <button type="button" id="mobileMenuBtn" onclick="toggleMobileMenu()" title="메뉴"
+                            aria-label="작업 메뉴 열기"
+                            class="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+
+                        <!-- 모바일 드롭다운 메뉴 -->
+                        <div id="mobileMenu" class="mobile-menu">
+                            <button type="button" onclick="openInNewWindow(); toggleMobileMenu();">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
+                                    </path>
+                                </svg>
+                                새 창에서 열기
+                            </button>
+                            <button type="button" onclick="downloadOriginal(); toggleMobileMenu();">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                원본 다운로드
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="image-container">
+
+        <!-- 이미지 정보 섹션 (초기: 숨김) -->
+        <div id="docInfoSection" class="doc-info-section collapsed">
+            <!-- 이미지 정보 헤더 -->
+            <div class="doc-info-header">
+                <h3>
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        class="text-gray-600">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                        </path>
+                    </svg>
+                    이미지 정보
+                </h3>
+            </div>
+
+            <!-- 통합된 정보 행 -->
+            <div class="doc-info-row">
+                <!-- 1. 파일명 -->
+                <!-- <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">파일명</span>
+                        <span class="info-value" th:text="${filename ?: '정보 없음'}">filename</span>
+                    </div>
+                </div> -->
+                <!-- 2. 파일 크기 -->
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">파일 크기</span>
+                        <span class="info-value">2,766,517 bytes</span>
+                    </div>
+                </div>
+                <!-- 3. 이미지 크기 -->
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">이미지 크기</span>
+                        <span class="info-value">4032 × 1860</span>
+                    </div>
+                </div>
+                <!-- 4. 포맷 -->
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">포맷</span>
+                        <span class="info-value">JPEG</span>
+                    </div>
+                </div>
+                <!-- 5. 색상 모델 -->
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">색상 모델</span>
+                        <span class="info-value">RGB</span>
+                    </div>
+                </div>
+                <!-- 6. 비트 깊이 -->
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">비트 깊이</span>
+                        <span class="info-value">24-bit</span>
+                    </div>
+                </div>
+                <!-- 7. 투명도 -->
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">투명도</span>
+                        <span class="info-value">아니오</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 이미지 뷰어 영역 -->
+        <div class="flex-1 flex flex-col bg-gray-50">
+            <div class="w-full viewer-main-wrapper">
+
+                <!-- Control Bar (New Style) -->
+                <div class="text-viewer-controls">
+                    <div class="controls-desktop">
+                        <!-- Zoom Group -->
+                        <div class="btn-group">
+                            <button type="button" onclick="viewer.zoom(-0.1)" class="control-btn" title="축소">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4">
+                                    </path>
+                                </svg>
+                            </button>
+                            <span id="zoomLevel" class="zoom-label">100%</span>
+                            <button type="button" onclick="viewer.zoom(0.1)" class="control-btn" title="확대">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Rotate Group -->
+                        <div class="btn-group">
+                            <button type="button" onclick="viewer.rotate(-90)" class="control-btn" title="왼쪽으로 회전">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
+                                </svg>
+                            </button>
+                            <button type="button" onclick="viewer.rotate(90)" class="control-btn" title="오른쪽으로 회전">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 10H11a8 8 0 00-8 8v2M21 10l-6 6m6-6l-6-6"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Flip Group -->
+                        <div class="btn-group">
+                            <button type="button" onclick="viewer.scaleX(-viewer.imageData.scaleX || -1)"
+                                class="control-btn" title="좌우 반전">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                                </svg>
+                            </button>
+                            <button type="button" onclick="viewer.scaleY(-viewer.imageData.scaleY || -1)"
+                                class="control-btn" title="상하 반전">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Reset & Original Size Group -->
+                        <div class="btn-group">
+                            <button type="button" onclick="viewer.zoomTo(1)" class="control-btn" title="원본 크기 (1:1)">
+                                <span style="font-weight: bold; font-size: 10px;">1:1</span>
+                            </button>
+                            <button type="button" onclick="viewer.reset()" class="control-btn" title="초기화">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Maximize Button -->
+                        <button type="button" onclick="toggleMaximize()" class="control-btn" id="maximizeBtn"
+                            title="최대화">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4">
+                                </path>
+                            </svg>
+                        </button>
+
+                        <!-- Help Button -->
+                        <button type="button" id="helpBtn" class="control-btn" title="도움말">
+                            <svg width="14" height="14"><use href="#icon-help"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 뷰어 컨테이너 -->
+                <div class="image-viewer">
+                    <img id="image" src="/aview/file/converted/47a4816fee960f5737b3acb6ce4b3f01.jpg" alt="20251011_163500_HDR.jpg" class="hidden">
+                </div>
+
+                <!-- 추가 안내 (숨김 또는 스타일 조정 필요시) -->
+                <!-- <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">...</div> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Viewer.js JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.js"></script>
+    <script>
+        /*<![CDATA[*/
+        // Global 변수
+        const globalHashcode = "47a4816fee960f5737b3acb6ce4b3f01";
+        const globalFilename = "20251011_163500_HDR.jpg";
+        const globalExtension = "jpg";
+        const imageUrl = "\/aview\/file\/converted\/47a4816fee960f5737b3acb6ce4b3f01.jpg";
+        var viewer; // Declare viewer globally
+
+        // 문서 정보 토글
+        function toggleDocInfo() {
+            const docInfoSection = document.getElementById('docInfoSection');
+            const toggleBtns = document.querySelectorAll('.toggle-doc-info-btn');
+
+            docInfoSection.classList.toggle('collapsed');
+            toggleBtns.forEach(btn => {
+                btn.classList.toggle('collapsed');
+            });
+        }
+
+        // 모바일 메뉴 토글
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('open');
+        }
+
+        // 모바일 메뉴 외부 클릭시 닫기
+        document.addEventListener('click', function (event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+
+            if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+                mobileMenu.classList.remove('open');
+            }
+        });
+
+        // 새 창에서 열기
+        function openInNewWindow() {
+            window.open(imageUrl, '_blank');
+        }
+
+        // 원본 다운로드
+        function downloadOriginal() {
+            if (globalHashcode && globalExtension && globalFilename) {
+                const downloadUrl = '/aview/file/' + globalHashcode + '.' + globalExtension +
+                                  '?download=true&name=' + encodeURIComponent(globalFilename);
+                const link = document.createElement('a');
+                link.href = downloadUrl;
+                link.download = globalFilename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                alert('원본 파일 정보가 없습니다.');
+            }
+        }
+
+        // Viewer.js 초기화
+        document.addEventListener('DOMContentLoaded', function () {
+            const imageElement = document.getElementById('image');
+
+            if (imageElement) {
+                // Viewer.js 초기화
+                viewer = new Viewer(imageElement, {
+                    inline: true,
+                    button: false, // 우측 상단 버튼 제거
+                    navbar: false,
+                    title: false,
+                    toolbar: false, // 기본 툴바 숨김 (외부 버튼 사용)
+                    tooltip: false,
+                    movable: true,
+                    zoomable: true,
+                    rotatable: true,
+                    scalable: true,
+                    transition: false, // 인라인 모드에서 부드러운 전환을 위해 끌 수도 있음
+                    backdrop: false, // 백드롭 제거 (CSS로 제어)
+                    viewed() {
+                        // 초기 줌 레벨 표시
+                        updateZoomLevel();
+                    },
+                    zoom(event) {
+                        // 줌 이벤트 발생 시 라벨 업데이트
+                        updateZoomLevel(event.detail.ratio);
+                    },
+                    zoomed(event) {
+                        // 줌 완료 시 라벨 업데이트 (확실하게 하기 위해)
+                        updateZoomLevel(event.detail.ratio);
+                    }
+                });
+
+                // 줌 레벨 업데이트 함수
+                function updateZoomLevel(ratio) {
+                    if (!ratio) {
+                        // ratio가 전달되지 않은 경우 (초기 로드 등)
+                        // Viewer.js의 imageData를 사용하여 현재 비율 계산
+                        const imageData = window.viewer.imageData;
+                        if (imageData && imageData.naturalWidth > 0) {
+                            ratio = imageData.width / imageData.naturalWidth;
+                        }
+                    }
+
+                    // 만약 ratio가 여전히 유효하지 않다면 1로 가정
+                    if (!ratio || isNaN(ratio)) ratio = 1;
+
+                    const percentage = Math.round(ratio * 100);
+                    document.getElementById('zoomLevel').textContent = percentage + '%';
+                }
+            }
+        });
+
+        // 최대화 토글 함수
+        function toggleMaximize() {
+            document.body.classList.toggle('maximize-mode');
+            const btn = document.getElementById('maximizeBtn');
+            const isMaximized = document.body.classList.contains('maximize-mode');
+
+            if (isMaximized) {
+                btn.title = "복원";
+                btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h16v16H4z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 8h8v8H8z"></path></svg>'; // 축소 아이콘 대용
+
+                // 뷰어 리사이즈 및 화면에 꽉 차게(Fit) 줌 설정
+                // 뷰어 리사이즈 및 화면에 꽉 차게(Fit) 줌 설정
+                // 레이아웃 변경(애니메이션 등)이 완료될 시간을 충분히 줌
+                setTimeout(() => {
+                    window.viewer.update();
+
+                    // requestAnimationFrame을 사용하여 레이아웃 업데이트 후 실행 보장
+                    requestAnimationFrame(() => {
+                        const imageData = window.viewer.imageData;
+                        const container = window.viewer.element; // .image-viewer 요소
+
+                        if (imageData && container) {
+                            const naturalWidth = imageData.naturalWidth;
+                            const naturalHeight = imageData.naturalHeight;
+                            // getBoundingClientRect()가 더 정확한 렌더링 크기를 반환함
+                            const containerRect = container.getBoundingClientRect();
+                            let containerWidth = containerRect.width;
+                            let containerHeight = containerRect.height;
+
+
+
+                            // 컨테이너 크기가 유효하지 않으면 window 크기 기반으로 폴백
+                            if (containerWidth === 0 || containerHeight === 0) {
+                                // console.log('Container size is 0, using window fallback');
+                                containerWidth = window.innerWidth;
+                                containerHeight = window.innerHeight - 40; // 컨트롤 바 높이(40px) 제외
+                            }
+
+                            // 컨테이너 크기가 유효하고(0이 아니고), 원본 크기가 있을 때만 계산
+                            if (containerWidth > 0 && containerHeight > 0 && naturalWidth > 0 && naturalHeight > 0) {
+                                // 가로, 세로 비율 중 더 작은 쪽을 기준으로 줌 비율 계산 (Fit to Screen)
+                                const widthRatio = containerWidth / naturalWidth;
+                                const heightRatio = containerHeight / naturalHeight;
+                                const scale = Math.min(widthRatio, heightRatio);
+
+                                console.log('Calculated Scale (Fallback applied):', scale);
+
+                                // 줌 적용 (0.99 등을 곱해 스크롤바 생성을 방지할 수도 있음)
+                                window.viewer.zoomTo(scale * 0.99);
+
+                                // 중앙 정렬을 위해 moveTo 사용
+                                const imageWidth = naturalWidth * scale;
+                                const imageHeight = naturalHeight * scale;
+                                const x = (containerWidth - imageWidth) / 2;
+                                const y = (containerHeight - imageHeight) / 2;
+                                window.viewer.moveTo(x, y);
+                            } else {
+                                console.log('Invalid dimensions even after fallback, resetting');
+                                // 크기 감지 실패 시 기본 리셋
+                                window.viewer.reset();
+                            }
+                        } else {
+                            window.viewer.reset();
+                        }
+                    });
+                }, 300); // 300ms로 늘려 트랜지션/렌더링 완료 대기
+            } else {
+                btn.title = "최대화";
+                btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>';
+                setTimeout(() => {
+                    window.viewer.update();
+                    window.viewer.reset(); // 복원 시에는 초기화
+                }, 100);
+            }
+        }
+
+        // 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Image Viewer loaded');
+            console.log('%c🔍 AView Document Info', 'color: #0066cc; font-weight: bold; font-size: 14px;');
+            console.log('Generated:', "2025-11-27 16:05:08");
+            console.log('Hashcode:', globalHashcode);
+            console.log('Filename:', globalFilename);
+            console.log('Template:', 'image.html');
+            console.log('─'.repeat(50));
+        });
+        /*]]>*/
+    </script>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <svg width="20" height="20"><use href="#icon-help-title"/></svg>
+                    이미지 뷰어 사용 팁
+                </h3>
+                <button type="button" class="close-modal-btn" id="closeHelpModal" title="닫기">
+                    <svg width="20" height="20"><use href="#icon-close"/></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="help-list" id="helpList"></ul>
+            </div>
+            <div class="modal-footer">
+                <a href="/aview/help/viewer/image.html" target="_blank">
+                    더 자세한 정보...
+                    <svg width="14" height="14"><use href="#icon-external-link"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+<script>
+    const helpData = [
+        {
+            title: "줌 기능",
+            desc: "+ / - 버튼을 클릭하여 이미지를 확대/축소할 수 있습니다.",
+            iconId: "icon-sort",
+        },
+        {
+            title: "원본 크기",
+            desc: "1:1 버튼을 클릭하여 원본 크기로 이미지를 보기할 수 있습니다.",
+            iconId: "icon-columns",
+        },
+        {
+            title: "화면에 맞추기",
+            desc: "화면 맞춤 버튼을 클릭하면 이미지가 화면에 맞춰집니다.",
+            iconId: "icon-menu",
+        },
+        {
+            title: "회전 기능",
+            desc: "회전 버튼으로 이미지를 시계방향으로 회전시킬 수 있습니다.",
+            iconId: "icon-download",
+        },
+        {
+            title: "다크 모드",
+            desc: "달 아이콘을 클릭하여 다크 모드로 전환할 수 있습니다.",
+            iconId: "icon-moon",
+        },
+    ];
+
+    const helpBtn            = document.getElementById("helpBtn");
+    const helpModal          = document.getElementById("helpModal");
+    const closeHelpModalBtn  = document.getElementById("closeHelpModal");
+    const helpList           = document.getElementById("helpList");
+
+    function renderHelpModal() {
+        if (!helpList) return;
+
+        helpList.innerHTML = helpData
+            .map(
+                (item) => `
+                <li class="help-item">
+                    <div class="help-icon">
+                        <svg width="14" height="14">
+                            <use href="#${item.iconId}"></use>
+                        </svg>
+                    </div>
+                    <div class="help-text">
+                        <h4>${item.title}</h4>
+                        <p>${item.desc}</p>
+                    </div>
+                </li>
+            `,
+            )
+            .join("");
+    }
+
+    function openHelpModal() {
+        renderHelpModal();
+        if (!helpModal) return;
+
+        helpModal.classList.add("open");
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeHelpModal() {
+        if (!helpModal) return;
+
+        helpModal.classList.remove("open");
+        document.body.style.overflow = "";
+    }
+
+    // 버튼 클릭 이벤트
+    if (helpBtn) {
+        helpBtn.addEventListener("click", openHelpModal);
+    }
+
+    if (closeHelpModalBtn) {
+        closeHelpModalBtn.addEventListener("click", closeHelpModal);
+    }
+
+    // 모달 바깥 클릭 시 닫기
+    if (helpModal) {
+        helpModal.addEventListener("click", (e) => {
+            if (e.target === helpModal) {
+                closeHelpModal();
+            }
+        });
+    }
+
+    // ESC 키로 닫기
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && helpModal?.classList.contains("open")) {
+            closeHelpModal();
+        }
+    });
+</script>
+
+
+</body>
+
+</html>
