@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV 뷰어 도움말</title>
+    <link rel="icon" type="image/png" href="/aview/images/favicon32.png" sizes="32x32">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .section-card {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin-bottom: 2rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .dark .section-card {
+            background-color: #1f2937;
+            border-color: #374151;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #111827;
+        }
+
+        .dark .section-title {
+            color: #f3f4f6;
+        }
+
+        .section-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            background-color: #3b82f6;
+            color: white;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .icon-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: #f3f4f6;
+            border-radius: 8px;
+            color: #4b5563;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .dark .icon-box {
+            background-color: #374151;
+            color: #e5e7eb;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .feature-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200 transition-colors duration-300">
+
+    <!-- Top Navigation -->
+    <nav class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-green-600 rounded flex items-center justify-center text-white font-bold">C
+                    </div>
+                    <span class="text-lg font-bold text-gray-900 dark:text-white">CSV 뷰어 가이드</span>
+                </div>
+                <div class="flex items-center">
+                    <button id="themeToggle"
+                        class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                        <svg id="sunIcon" class="w-5 h-5 text-yellow-500 hidden" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                            </path>
+                        </svg>
+                        <svg id="moonIcon" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0112 21a9.003 9.003 0 008.354-5.646z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <div class="mb-10 text-center">
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">CSV 뷰어 구조 및 사용법</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400">
+                CSV 뷰어는 크게 <strong>4가지 영역</strong>으로 구성되어 있습니다. 각 영역별 기능을 확인해보세요.
+            </p>
+        </div>
+
+        <!-- 1. Header Area -->
+        <section class="section-card">
+            <div class="section-title">
+                <span class="section-number">1</span>
+                <h2>헤더 영역 (Header)</h2>
+            </div>
+            <p class="mb-6 text-gray-600 dark:text-gray-400">
+                화면 최상단에 위치하며, 현재 보고 있는 파일의 이름과 서버 사이드 동작을 수행하는 버튼들이 있습니다.
+            </p>
+            <div class="feature-grid">
+                <div class="flex items-start">
+                    <div class="icon-box">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900 dark:text-white mb-1">파일명 표시</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">현재 열려있는 CSV 파일의 이름(예: data.csv)을 표시합니다.</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="icon-box">
+                        <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900 dark:text-white mb-1">원본 다운로드</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">서버에 저장된 원본 CSV 파일을 내 컴퓨터로 다운로드합니다.</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="icon-box">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900 dark:text-white mb-1">문서 정보 토글</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">문서 정보 섹션(2번 영역)을 접거나 펼칠 수 있는 화살표 버튼입니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Doc Info Section -->
+        <section class="section-card">
+            <div class="section-title">
+                <span class="section-number">2</span>
+                <h2>문서 정보 섹션 (.docInfoSection)</h2>
+            </div>
+            <p class="mb-6 text-gray-600 dark:text-gray-400">
+                헤더 바로 아래에 위치하며, CSV 파일의 메타데이터를 보여줍니다. 필요에 따라 접어둘 수 있습니다.
+            </p>
+            <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                <ul class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                    <li>
+                        <span class="block text-xs text-gray-500 dark:text-gray-500 uppercase">파일 크기</span>
+                        <span class="font-mono font-medium">Bytes 단위</span>
+                    </li>
+                    <li>
+                        <span class="block text-xs text-gray-500 dark:text-gray-500 uppercase">총 행 수</span>
+                        <span class="font-mono font-medium">데이터 건수</span>
+                    </li>
+                    <li>
+                        <span class="block text-xs text-gray-500 dark:text-gray-500 uppercase">총 열 수</span>
+                        <span class="font-mono font-medium">컬럼 개수</span>
+                    </li>
+                    <li>
+                        <span class="block text-xs text-gray-500 dark:text-gray-500 uppercase">구분자</span>
+                        <span class="font-mono font-medium">콤마(,) 등</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 3. Control Bar -->
+        <section class="section-card">
+            <div class="section-title">
+                <span class="section-number">3</span>
+                <h2>컨트롤 바 (Control Bar)</h2>
+            </div>
+            <p class="mb-6 text-gray-600 dark:text-gray-400">
+                데이터를 조작하고 뷰어 설정을 변경하는 핵심 영역입니다. <strong>아이콘 버튼</strong>과 <strong>검색 입력 박스</strong>로 구성되어 있습니다.
+            </p>
+
+            <div class="space-y-6">
+                <!-- Group 1: View Settings -->
+                <div>
+                    <h4 class="text-sm font-bold text-blue-600 dark:text-blue-400 uppercase mb-3">보기 설정</h4>
+                    <div class="feature-grid">
+                        <div class="flex items-center gap-3">
+                            <div class="icon-box text-sm font-bold">Aa</div>
+                            <span class="text-sm">폰트 변경 (Noto Sans, 맑은 고딕 등)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="icon-box text-sm font-bold">14px</div>
+                            <span class="text-sm">글자 크기 조절 (+ / - / 초기화)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="icon-box text-sm font-bold">25줄</div>
+                            <span class="text-sm">페이지 당 표시 행 수 변경</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 2: Search -->
+                <div>
+                    <h4 class="text-sm font-bold text-blue-600 dark:text-blue-400 uppercase mb-3">검색 (Search)</h4>
+                    <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg flex items-center gap-3 max-w-md">
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <div class="flex-1 text-sm text-gray-500">검색어 입력...</div>
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2 ml-1">
+                        * 모든 컬럼의 데이터를 실시간으로 검색합니다. X 버튼으로 검색을 초기화할 수 있습니다.
+                    </p>
+                </div>
+
+                <!-- Group 3: Tools -->
+                <div>
+                    <h4 class="text-sm font-bold text-blue-600 dark:text-blue-400 uppercase mb-3">도구 모음</h4>
+                    <div class="feature-grid">
+                        <div class="flex items-center gap-3">
+                            <div class="icon-box"><svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2">
+                                    </path>
+                                </svg></div>
+                            <span class="text-sm"><strong>컬럼 선택:</strong> 보고 싶은 컬럼만 체크</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="icon-box"><svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                                </svg></div>
+                            <span class="text-sm"><strong>너비 자동 맞춤:</strong> 데이터 길이에 맞게 조절</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="icon-box"><svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg></div>
+                            <span class="text-sm"><strong>엑셀 내보내기:</strong> 현재 데이터를 .xlsx로 저장</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 4: Settings -->
+                <div>
+                    <h4 class="text-sm font-bold text-blue-600 dark:text-blue-400 uppercase mb-3">설정 및 화면</h4>
+                    <div class="flex flex-wrap gap-4">
+                        <span
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded bg-gray-100 dark:bg-gray-800 text-sm">
+                            <span>⛶</span> 전체화면
+                        </span>
+                        <span
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded bg-gray-100 dark:bg-gray-800 text-sm">
+                            <span>🌙</span> 다크모드
+                        </span>
+                        <span
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded bg-gray-100 dark:bg-gray-800 text-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg> 설정 저장
+                        </span>
+                        <span
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded bg-gray-100 dark:bg-gray-800 text-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                </path>
+                            </svg> 설정 초기화
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Viewer Area -->
+        <section class="section-card">
+            <div class="section-title">
+                <span class="section-number">4</span>
+                <h2>실제 뷰어 영역 (.csv-viewer)</h2>
+            </div>
+            <p class="mb-6 text-gray-600 dark:text-gray-400">
+                실제 CSV 데이터가 표(Table) 형태로 표시되는 영역입니다.
+            </p>
+
+            <div class="space-y-4">
+                <div class="flex items-start gap-4">
+                    <div
+                        class="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                        <table class="w-full text-sm text-left">
+                            <thead class="bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
+                                <tr>
+                                    <th
+                                        class="px-4 py-2 border-b dark:border-gray-600 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600">
+                                        이름 ▲
+                                    </th>
+                                    <th
+                                        class="px-4 py-2 border-b dark:border-gray-600 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600">
+                                        나이
+                                    </th>
+                                    <th
+                                        class="px-4 py-2 border-b dark:border-gray-600 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600">
+                                        직업
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                                <tr class="bg-white dark:bg-gray-800">
+                                    <td class="px-4 py-2">홍길동</td>
+                                    <td class="px-4 py-2">30</td>
+                                    <td class="px-4 py-2">개발자</td>
+                                </tr>
+                                <tr class="bg-gray-50 dark:bg-gray-800/50">
+                                    <td class="px-4 py-2">김철수</td>
+                                    <td class="px-4 py-2">25</td>
+                                    <td class="px-4 py-2">디자이너</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4 mt-4">
+                    <div class="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                        <h4 class="font-bold text-blue-700 dark:text-blue-300 mb-1">정렬 (Sorting)</h4>
+                        <p class="text-sm text-blue-600 dark:text-blue-400">
+                            컬럼 헤더(제목)를 클릭하면 해당 컬럼을 기준으로 오름차순/내림차순 정렬됩니다.
+                        </p>
+                    </div>
+                    <div class="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                        <h4 class="font-bold text-blue-700 dark:text-blue-300 mb-1">페이지 이동</h4>
+                        <p class="text-sm text-blue-600 dark:text-blue-400">
+                            데이터가 많을 경우 하단의 페이지 번호를 클릭하여 이동할 수 있습니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Dark Mode Toggle Logic
+        const themeToggle = document.getElementById('themeToggle');
+        const sunIcon = document.getElementById('sunIcon');
+        const moonIcon = document.getElementById('moonIcon');
+        const html = document.documentElement;
+
+        function updateTheme() {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                html.classList.add('dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                html.classList.remove('dark');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        }
+
+        updateTheme();
+
+        themeToggle.addEventListener('click', () => {
+            if (html.classList.contains('dark')) {
+                localStorage.theme = 'light';
+            } else {
+                localStorage.theme = 'dark';
+            }
+            updateTheme();
+        });
+    </script>
+</body>
+
+</html>

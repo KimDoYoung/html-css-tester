@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AView 도움말 센터</title>
+    <title>CSV 뷰어 도움말</title>
     <link rel="icon" type="image/png" href="/aview/images/favicon32.png" sizes="32x32">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
@@ -15,44 +15,38 @@
             scroll-behavior: smooth;
         }
 
-        .gradient-text {
-            background: linear-gradient(to right, #3b82f6, #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .icon-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background-color: #f3f4f6;
+            border-radius: 6px;
+            color: #4b5563;
+            margin-right: 12px;
+            flex-shrink: 0;
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        .dark .icon-box {
+            background-color: #374151;
+            color: #e5e7eb;
         }
 
-        .dark .glass-card {
-            background: rgba(17, 24, 39, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        .control-section {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
         }
 
-        .feature-icon {
-            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
-            color: #2563eb;
+        .dark .control-section {
+            border-color: #374151;
         }
 
-        .dark .feature-icon {
-            background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%);
-            color: #60a5fa;
-        }
-
-        /* Hide scrollbar for Chrome, Safari and Opera */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* Hide scrollbar for IE, Edge and Firefox */
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            /* IE and Edge */
-            scrollbar-width: none;
-            /* Firefox */
+        .control-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
     </style>
     <script>
@@ -62,7 +56,6 @@
                 extend: {
                     colors: {
                         primary: '#3b82f6',
-                        secondary: '#8b5cf6',
                     }
                 }
             }
@@ -72,441 +65,284 @@
 
 <body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200 transition-colors duration-300">
 
-    <!-- Navigation -->
-    <nav
-        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center gap-2">
-                    <div
-                        class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                        A</div>
-                    <span
-                        class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">AView
-                        Help</span>
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center text-white shadow-md">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                        </path>
+                    </svg>
                 </div>
-                <div class="flex items-center gap-4">
-                    <button id="themeToggle"
-                        class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                        <svg id="sunIcon" class="w-5 h-5 text-yellow-500 hidden" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
-                            </path>
-                        </svg>
-                        <svg id="moonIcon" class="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0112 21a9.003 9.003 0 008.354-5.646z">
-                            </path>
-                        </svg>
-                    </button>
-                </div>
+                <h1 class="text-xl font-bold text-gray-900 dark:text-white">CSV 뷰어 가이드</h1>
             </div>
+            <button id="themeToggle"
+                class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                <svg id="sunIcon" class="w-5 h-5 text-yellow-500 hidden" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                    </path>
+                </svg>
+                <svg id="moonIcon" class="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0112 21a9.003 9.003 0 008.354-5.646z">
+                    </path>
+                </svg>
+            </button>
         </div>
-        <!-- Mobile Horizontal Scroll Menu -->
-        <div class="md:hidden border-t border-gray-200 dark:border-gray-800 overflow-x-auto no-scrollbar">
-            <div class="flex px-4 py-2 gap-4 min-w-max">
-                <a href="#csv"
-                    class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 whitespace-nowrap">CSV
-                    뷰어</a>
-                <a href="#image"
-                    class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 whitespace-nowrap">이미지
-                    뷰어</a>
-                <a href="#markdown"
-                    class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 whitespace-nowrap">마크다운</a>
-                <a href="#pdf"
-                    class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 whitespace-nowrap">PDF
-                    뷰어</a>
-                <a href="#source"
-                    class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 whitespace-nowrap">소스코드</a>
-                <a href="#text"
-                    class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 whitespace-nowrap">텍스트</a>
-            </div>
-        </div>
-    </nav>
+    </header>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="flex flex-col md:flex-row gap-8">
+    <main class="max-w-4xl mx-auto px-4 py-8">
 
-            <!-- Sidebar Navigation (Desktop) -->
-            <aside class="hidden md:block w-64 flex-shrink-0">
-                <div class="sticky top-24 space-y-1">
-                    <p class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">뷰어 가이드</p>
-                    <a href="#csv"
-                        class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 rounded-md hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                        <span
-                            class="w-2 h-2 rounded-full bg-green-500 mr-3 group-hover:scale-125 transition-transform"></span>
-                        CSV 뷰어
-                    </a>
-                    <a href="#image"
-                        class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 rounded-md hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                        <span
-                            class="w-2 h-2 rounded-full bg-purple-500 mr-3 group-hover:scale-125 transition-transform"></span>
-                        이미지 뷰어
-                    </a>
-                    <a href="#markdown"
-                        class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 rounded-md hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                        <span
-                            class="w-2 h-2 rounded-full bg-pink-500 mr-3 group-hover:scale-125 transition-transform"></span>
-                        마크다운 뷰어
-                    </a>
-                    <a href="#pdf"
-                        class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 rounded-md hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                        <span
-                            class="w-2 h-2 rounded-full bg-red-500 mr-3 group-hover:scale-125 transition-transform"></span>
-                        PDF 뷰어
-                    </a>
-                    <a href="#source"
-                        class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 rounded-md hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                        <span
-                            class="w-2 h-2 rounded-full bg-yellow-500 mr-3 group-hover:scale-125 transition-transform"></span>
-                        소스코드 뷰어
-                    </a>
-                    <a href="#text"
-                        class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 rounded-md hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                        <span
-                            class="w-2 h-2 rounded-full bg-gray-500 mr-3 group-hover:scale-125 transition-transform"></span>
-                        텍스트 뷰어
-                    </a>
-                </div>
-            </aside>
+        <!-- Intro -->
+        <section class="mb-12 text-center">
+            <p class="text-lg text-gray-600 dark:text-gray-300">
+                CSV 뷰어는 대용량 데이터를 웹에서 빠르고 편리하게 조회, 검색, 필터링할 수 있는 도구입니다.<br>
+                상단 컨트롤 바의 다양한 기능을 활용하여 데이터를 효율적으로 분석하세요.
+            </p>
+        </section>
 
-            <!-- Main Content -->
-            <main class="flex-1 space-y-16">
+        <!-- Control Bar Guide -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold mb-8 border-b border-gray-200 dark:border-gray-700 pb-4">컨트롤 바 기능 상세</h2>
 
-                <!-- Intro -->
-                <section class="text-center md:text-left space-y-4">
-                    <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        AView <span class="gradient-text">사용 가이드</span>
-                    </h1>
-                    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl">
-                        AView는 다양한 파일 형식을 웹에서 바로 미리볼 수 있는 강력한 도구입니다. 각 뷰어별 주요 기능과 사용법을 확인해보세요.
-                    </p>
-                </section>
-
-                <!-- CSV Viewer -->
-                <section id="csv" class="scroll-mt-24">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div
-                            class="p-3 rounded-xl bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z">
-                                </path>
-                            </svg>
+            <!-- 1. Font & View Settings -->
+            <div class="control-section">
+                <h3 class="text-lg font-semibold mb-4 text-blue-600 dark:text-blue-400">1. 보기 설정</h3>
+                <div class="grid gap-6 md:grid-cols-2">
+                    <div class="flex items-start">
+                        <div class="icon-box">
+                            <span class="text-xs font-bold">Aa</span>
                         </div>
-                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">CSV 뷰어</h2>
-                    </div>
-
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div class="glass-card rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                            <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
-                                <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                </svg>
-                                주요 기능
-                            </h3>
-                            <ul class="space-y-3 text-gray-600 dark:text-gray-300 text-sm">
-                                <li class="flex items-start gap-2">
-                                    <span class="mt-1 w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0"></span>
-                                    <span><strong>정렬 및 필터:</strong> 헤더를 클릭하여 정렬하거나, 검색창을 통해 데이터를 실시간으로 필터링할 수
-                                        있습니다.</span>
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="mt-1 w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0"></span>
-                                    <span><strong>컬럼 선택:</strong> '컬럼 선택' 버튼으로 보고 싶은 데이터만 골라서 볼 수 있습니다.</span>
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="mt-1 w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0"></span>
-                                    <span><strong>내보내기:</strong> 현재 보고 있는 데이터를 Excel(.xlsx) 또는 CSV 파일로 다운로드할 수
-                                        있습니다.</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="glass-card rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                            <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
-                                <svg class="w-5 h-5 text-purple-500" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122">
-                                    </path>
-                                </svg>
-                                사용 팁
-                            </h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                                데이터가 많을 때는 <strong>페이지네이션</strong> 기능을 활용하세요. 하단의 페이지 번호를 클릭하여 이동할 수 있습니다.
-                                <br><br>
-                                <span class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">Ctrl +
-                                    F</span> (또는 상단 검색창)를 사용하여 특정 키워드를 빠르게 찾을 수 있습니다.
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Image Viewer -->
-                <section id="image" class="scroll-mt-24">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div
-                            class="p-3 rounded-xl bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                </path>
-                            </svg>
-                        </div>
-                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">이미지 뷰어</h2>
-                    </div>
-
-                    <div class="glass-card rounded-2xl p-8 shadow-sm">
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                            <div class="text-center p-4 rounded-lg bg-gray-50 dark:bg-gray-800/50">
-                                <div class="mb-2 text-2xl">🔍</div>
-                                <div class="text-sm font-medium">확대/축소</div>
-                                <div class="text-xs text-gray-500">마우스 휠</div>
-                            </div>
-                            <div class="text-center p-4 rounded-lg bg-gray-50 dark:bg-gray-800/50">
-                                <div class="mb-2 text-2xl">🔄</div>
-                                <div class="text-sm font-medium">회전</div>
-                                <div class="text-xs text-gray-500">90도 단위</div>
-                            </div>
-                            <div class="text-center p-4 rounded-lg bg-gray-50 dark:bg-gray-800/50">
-                                <div class="mb-2 text-2xl">↔️</div>
-                                <div class="text-sm font-medium">반전</div>
-                                <div class="text-xs text-gray-500">좌우/상하</div>
-                            </div>
-                            <div class="text-center p-4 rounded-lg bg-gray-50 dark:bg-gray-800/50">
-                                <div class="mb-2 text-2xl">⛶</div>
-                                <div class="text-sm font-medium">전체화면</div>
-                                <div class="text-xs text-gray-500">몰입 모드</div>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-300 text-sm text-center">
-                            이미지를 드래그하여 이동할 수 있으며, 상단 툴바를 통해 상세한 제어가 가능합니다. <br>
-                            원본 다운로드 기능을 통해 고화질 이미지를 저장할 수 있습니다.
-                        </p>
-                    </div>
-                </section>
-
-                <!-- Markdown Viewer -->
-                <section id="markdown" class="scroll-mt-24">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="p-3 rounded-xl bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                                </path>
-                            </svg>
-                        </div>
-                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">마크다운 뷰어</h2>
-                    </div>
-
-                    <div
-                        class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 text-white p-8 shadow-lg">
-                        <div
-                            class="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 bg-pink-500 rounded-full blur-3xl opacity-20">
-                        </div>
-                        <div class="relative z-10">
-                            <h3 class="text-xl font-bold mb-4">GitHub 스타일 렌더링</h3>
-                            <p class="text-gray-300 mb-6 text-sm leading-relaxed">
-                                GitHub와 동일한 스타일로 마크다운 문서를 렌더링합니다. 코드 블록은 자동으로 문법이 강조되며, 복사 버튼을 통해 쉽게 코드를 가져올 수 있습니다.
-                            </p>
-                            <div class="flex flex-wrap gap-3">
-                                <span class="px-3 py-1 rounded-full bg-white/10 text-xs border border-white/20">목차(TOC)
-                                    자동 생성</span>
-                                <span class="px-3 py-1 rounded-full bg-white/10 text-xs border border-white/20">PDF
-                                    내보내기</span>
-                                <span class="px-3 py-1 rounded-full bg-white/10 text-xs border border-white/20">구문
-                                    강조</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- PDF Viewer -->
-                <section id="pdf" class="scroll-mt-24">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="p-3 rounded-xl bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z">
-                                </path>
-                            </svg>
-                        </div>
-                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">PDF 뷰어</h2>
-                    </div>
-
-                    <div class="glass-card rounded-2xl p-6 border-l-4 border-red-500 shadow-sm">
-                        <p class="text-gray-700 dark:text-gray-300 mb-4">
-                            웹 브라우저의 기본 PDF 뷰어를 활용하여 빠르고 안정적으로 문서를 표시합니다.
-                        </p>
-                        <div class="flex flex-col sm:flex-row gap-4 text-sm">
-                            <div class="flex-1 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                                <h4 class="font-bold text-gray-900 dark:text-white mb-2">새 창에서 열기</h4>
-                                <p class="text-gray-500 dark:text-gray-400">브라우저의 전체 기능을 사용하여 PDF를 보고 싶다면 '새 창에서 열기'를
-                                    사용하세요.</p>
-                            </div>
-                            <div class="flex-1 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                                <h4 class="font-bold text-gray-900 dark:text-white mb-2">다운로드</h4>
-                                <p class="text-gray-500 dark:text-gray-400">원본 PDF 파일을 기기에 저장할 수 있습니다.</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Source & Text Viewer -->
-                <section id="source" class="scroll-mt-24">
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <!-- Source Code -->
                         <div>
-                            <div class="flex items-center gap-3 mb-6">
-                                <div
-                                    class="p-3 rounded-xl bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-                                    </svg>
-                                </div>
-                                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">소스코드</h2>
-                            </div>
-                            <div class="glass-card rounded-2xl p-6 shadow-sm h-full">
-                                <ul class="space-y-4 text-sm text-gray-600 dark:text-gray-300">
-                                    <li class="flex items-center gap-3">
-                                        <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                        다양한 프로그래밍 언어 구문 강조
-                                    </li>
-                                    <li class="flex items-center gap-3">
-                                        <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                        줄 번호 표시 및 줄 강조
-                                    </li>
-                                    <li class="flex items-center gap-3">
-                                        <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                        Raw 모드로 원본 텍스트 확인
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Text Viewer -->
-                        <div id="text">
-                            <div class="flex items-center gap-3 mb-6">
-                                <div
-                                    class="p-3 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">텍스트</h2>
-                            </div>
-                            <div class="glass-card rounded-2xl p-6 shadow-sm h-full">
-                                <ul class="space-y-4 text-sm text-gray-600 dark:text-gray-300">
-                                    <li class="flex items-center gap-3">
-                                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                        가독성을 위한 폰트 변경 기능
-                                    </li>
-                                    <li class="flex items-center gap-3">
-                                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                        인코딩 문제 해결을 위한 옵션 제공
-                                    </li>
-                                    <li class="flex items-center gap-3">
-                                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                        대용량 텍스트도 부드럽게 스크롤
-                                    </li>
-                                </ul>
-                            </div>
+                            <h4 class="font-medium mb-1">폰트 변경</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">데이터의 가독성을 위해 폰트(Noto Sans, 맑은 고딕 등)를 변경할
+                                수 있습니다.</p>
                         </div>
                     </div>
-                </section>
+                    <div class="flex items-start">
+                        <div class="icon-box">
+                            <span class="text-xs font-bold">14px</span>
+                        </div>
+                        <div>
+                            <h4 class="font-medium mb-1">글자 크기 조절</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">+, - 버튼으로 글자 크기를 조절하거나, 가운데 버튼을 눌러
+                                기본값(14px)으로 초기화합니다.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="icon-box">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-medium mb-1">페이지 당 행 수</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">한 페이지에 표시할 데이터의 개수(10, 25, 50, 100줄)를
+                                선택합니다. '전체'를 선택하면 모든 데이터를 한 번에 표시합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            </main>
-        </div>
-    </div>
+            <!-- 2. Search -->
+            <div class="control-section">
+                <h3 class="text-lg font-semibold mb-4 text-blue-600 dark:text-blue-400">2. 데이터 검색</h3>
+                <div class="flex items-start">
+                    <div class="icon-box">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="font-medium mb-1">실시간 검색</h4>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">
+                            검색어를 입력하면 테이블 내의 모든 컬럼에서 일치하는 데이터를 실시간으로 필터링하여 보여줍니다.
+                        </p>
+                        <ul class="list-disc list-inside text-xs text-gray-400 space-y-1">
+                            <li>검색어 입력 후 엔터 또는 검색 아이콘 클릭</li>
+                            <li>X 아이콘을 클릭하여 검색 초기화</li>
+                            <li>검색 결과 건수가 입력창 옆에 표시됩니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-    <!-- Footer -->
-    <footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 mt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-sm text-gray-500 dark:text-gray-400">
-                    &copy; 2025 AView. All rights reserved.
-                </p>
-                <div class="flex gap-6">
-                    <a href="#"
-                        class="text-sm text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">개인정보처리방침</a>
-                    <a href="#"
-                        class="text-sm text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">이용약관</a>
+            <!-- 3. Data Management -->
+            <div class="control-section">
+                <h3 class="text-lg font-semibold mb-4 text-blue-600 dark:text-blue-400">3. 데이터 관리 도구</h3>
+                <div class="grid gap-6 md:grid-cols-2">
+                    <div class="flex items-start">
+                        <div class="icon-box">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2">
+                                </path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-medium mb-1">컬럼 선택</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                보고 싶은 컬럼만 체크하여 테이블을 간소화할 수 있습니다. '모두 선택/해제' 기능을 지원합니다.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="icon-box">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-medium mb-1">너비 자동 맞춤</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                데이터의 길이에 맞춰 모든 컬럼의 너비를 자동으로 최적화합니다.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="icon-box">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-medium mb-1">엑셀 내보내기</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                현재 보고 있는 데이터(필터링된 결과 포함)를 엑셀 파일(.xlsx)로 다운로드합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Display & Settings -->
+            <div class="control-section">
+                <h3 class="text-lg font-semibold mb-4 text-blue-600 dark:text-blue-400">4. 화면 및 설정</h3>
+                <div class="grid gap-6 md:grid-cols-2">
+                    <div class="flex items-start">
+                        <div class="icon-box">⛶</div>
+                        <div>
+                            <h4 class="font-medium mb-1">전체화면</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">브라우저 전체 화면으로 뷰어를 확장하여 더 많은 데이터를 한눈에 볼 수
+                                있습니다.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="icon-box">🌙</div>
+                        <div>
+                            <h4 class="font-medium mb-1">다크 모드</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">눈의 피로를 줄이기 위해 어두운 테마로 전환합니다.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="icon-box">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-medium mb-1">설정 저장</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">현재 변경한 폰트, 컬럼 너비, 숨김 상태 등의 설정을 브라우저에
+                                저장합니다.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="icon-box">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                </path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-medium mb-1">설정 초기화</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">저장된 설정을 삭제하고 뷰어를 초기 상태로 되돌립니다.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </footer>
+
+        <!-- Additional Features -->
+        <section class="mt-12 grid md:grid-cols-3 gap-6">
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                <h3 class="font-bold mb-2 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"></path>
+                    </svg>
+                    정렬 (Sorting)
+                </h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    테이블의 헤더(제목)를 클릭하면 해당 컬럼을 기준으로 오름차순/내림차순 정렬이 가능합니다.
+                </p>
+            </div>
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                <h3 class="font-bold mb-2 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    문서 정보
+                </h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    좌측 상단의 화살표 버튼을 클릭하면 파일 크기, 총 행/열 수, 구분자 등의 메타데이터를 확인할 수 있습니다.
+                </p>
+            </div>
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                <h3 class="font-bold mb-2 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                    </svg>
+                    원본 다운로드
+                </h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    우측 상단의 '원본 다운로드' 버튼을 통해 CSV 파일을 로컬 PC에 저장할 수 있습니다.
+                </p>
+            </div>
+        </section>
+
+    </main>
 
     <script>
-        // Dark Mode Toggle
+        // Dark Mode Toggle Logic
         const themeToggle = document.getElementById('themeToggle');
         const sunIcon = document.getElementById('sunIcon');
         const moonIcon = document.getElementById('moonIcon');
         const html = document.documentElement;
 
-        // Check local storage or system preference
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            html.classList.add('dark');
-            sunIcon.classList.remove('hidden');
-            moonIcon.classList.add('hidden');
-        } else {
-            html.classList.remove('dark');
-            sunIcon.classList.add('hidden');
-            moonIcon.classList.remove('hidden');
+        function updateTheme() {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                html.classList.add('dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                html.classList.remove('dark');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
         }
+
+        updateTheme();
 
         themeToggle.addEventListener('click', () => {
             if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
                 localStorage.theme = 'light';
-                sunIcon.classList.add('hidden');
-                moonIcon.classList.remove('hidden');
             } else {
-                html.classList.add('dark');
                 localStorage.theme = 'dark';
-                sunIcon.classList.remove('hidden');
-                moonIcon.classList.add('hidden');
             }
-        });
-
-        // Smooth Scroll for Anchor Links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+            updateTheme();
         });
     </script>
 </body>
