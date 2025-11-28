@@ -1,0 +1,3455 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!--
+===========================================
+🔍 AView Document Metadata
+===========================================
+Generated : 2025-11-28 09:10:45
+Hashcode  : 3ca46ba4a1ae4ffa1eafe216437f283e
+Filename  : log1.log
+Template  : log.html
+===========================================
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>log1.log</title>
+    <link rel="icon" type="image/png" href="/aview/images/favicon32.png" sizes="32x32">
+    <!-- Google Fonts: Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @font-face {
+            font-family: 'SeoulNamsan';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulNamsanM.woff') format('woff');
+            font-weight: normal;
+            font-display: swap;
+        }
+        /* D2Coding */
+        @import url('https://cdn.jsdelivr.net/gh/joungkyun/font-d2coding/d2coding.css');
+        /* Nanum Gothic Coding */
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap');
+        /* JetBrains Mono */
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap');
+        /* Fira Code */
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+        /* Cascadia Code */
+        @import url('https://cdn.jsdelivr.net/gh/microsoft/cascadia-code@latest/dist/cascadia-code.css');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f6f8fa;
+            font-family: 'Malgun Gothic', '맑은 고딕', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            transition: background-color 0.3s ease;
+        }
+
+        .text-viewer {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+            min-height: 540px;
+            margin-top: 20px;
+        }
+
+        .doc-info-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .doc-info-section.collapsed {
+            max-height: 0;
+            padding: 0 20px;
+            margin-bottom: 0;
+            opacity: 0;
+        }
+
+        .doc-info-header {
+            background-color: #f2ebd3;
+            padding: 12px 16px;
+            margin: -20px -20px 16px -20px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .doc-info-header h3 {
+            margin: 0;
+            color: #333;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .toggle-doc-info-btn {
+            background: #0d6efd;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .toggle-doc-info-btn:hover {
+            background: #0b5ed7;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .toggle-doc-info-btn.collapsed {
+            background: #28a745;
+            animation: pulseCollapsed 2s ease-in-out infinite;
+        }
+
+        .toggle-doc-info-btn.collapsed:hover {
+            background: #218838;
+        }
+
+        .toggle-doc-info-btn svg {
+            color: white;
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-doc-info-btn.collapsed svg {
+            transform: rotate(180deg);
+        }
+
+        @keyframes pulseCollapsed {
+            0%, 100% {
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+            50% {
+                box-shadow: 0 4px 16px rgba(40, 167, 69, 0.4);
+            }
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.875rem;
+            margin-bottom: 0;
+        }
+
+        .info-value {
+            color: #6c757d;
+            font-size: 1.125rem;
+        }
+
+        .text-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .doc-info-wrapper {
+            margin-bottom: 20px;
+        }
+
+        .doc-info-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        @media (max-width: 1024px) {
+            .doc-info-row {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .doc-info-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .info-item {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 0;
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            .doc-info-col:last-child .info-item {
+                border-bottom: none;
+            }
+
+            .info-label {
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+
+            .info-value {
+                text-align: right;
+            }
+        }
+
+        .doc-info-col {
+            padding: 0;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 10;
+            min-width: 200px;
+        }
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+        .mobile-menu button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            transition: background-color 0.2s;
+        }
+
+        .mobile-menu button:hover {
+            background-color: #f3f4f6;
+        }
+
+        .mobile-menu button svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        /* Text Viewer Control Bar */
+        .text-viewer-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 40px;
+            padding: 0 12px;
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #d0d0d0;
+            gap: 8px;
+        }
+
+        .controls-desktop {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .controls-mobile {
+            display: none;
+            position: relative;
+            margin-left: auto;
+        }
+
+        @media (max-width: 768px) {
+            .controls-desktop {
+                display: none;
+            }
+
+            .controls-mobile {
+                display: flex;
+            }
+        }
+
+        .control-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .control-item input[type="checkbox"] {
+            cursor: pointer;
+        }
+
+        .control-item span {
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .control-btn {
+            padding: 4px 8px;
+            min-width: 30px;
+            height: 28px;
+            background-color: #e8e8e8;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .control-btn:hover {
+            background-color: #d8d8d8;
+        }
+
+        .control-btn:active {
+            background-color: #c8c8c8;
+        }
+
+        .control-select {
+            padding: 4px 6px;
+            height: 28px;
+            font-size: 12px;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            background-color: #ffffff;
+            cursor: pointer;
+        }
+
+        /* 버튼 그룹 */
+        .btn-group {
+            display: inline-flex;
+            gap: 0;
+        }
+
+        .btn-group .control-btn {
+            border-radius: 0;
+            margin-left: -1px;
+        }
+
+        .btn-group .control-btn:first-child {
+            border-radius: 4px 0 0 4px;
+            margin-left: 0;
+        }
+
+        .btn-group .control-btn:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+
+        .btn-group .control-btn:hover {
+            z-index: 1;
+        }
+
+        /* 커스텀 색상 드롭다운 */
+        .custom-color-dropdown {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .custom-color-btn {
+            width: 28px;
+            height: 28px;
+            border: 2px solid #333;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .custom-color-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .custom-color-menu {
+            display: none;
+            position: absolute;
+            top: 32px;
+            left: 0;
+            background: white;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            padding: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+            gap: 6px;
+        }
+
+        .custom-color-menu.open {
+            display: flex;
+        }
+
+        .custom-color-option {
+            width: 24px;
+            height: 24px;
+            border: 1px solid #c0c0c0;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .custom-color-option:hover {
+            transform: scale(1.15);
+            border-width: 2px;
+            border-color: #666;
+        }
+
+        .custom-color-option.active {
+            border: 2px solid #333;
+            box-shadow: 0 0 0 2px white, 0 0 0 3px #333;
+        }
+
+        body.dark-mode .custom-color-btn {
+            border-color: #666;
+        }
+
+        body.dark-mode .custom-color-menu {
+            background-color: #333;
+            border-color: #555;
+        }
+
+        body.dark-mode .custom-color-option {
+            border-color: #666;
+        }
+
+        body.dark-mode .custom-color-option:hover {
+            border-color: #999;
+        }
+
+        .controls-dropdown {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background-color: white;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            min-width: 180px;
+            padding: 8px;
+        }
+
+        .controls-dropdown.open {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .controls-dropdown label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .controls-dropdown .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Color Picker Container */
+        .color-picker-container {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .color-box {
+            width: 24px;
+            height: 24px;
+            border-radius: 3px;
+            border: 1px solid #c0c0c0;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .color-box:hover {
+            transform: scale(1.1);
+            border-color: #666;
+        }
+
+        .color-box:active {
+            transform: scale(0.95);
+        }
+
+        .color-box.active {
+            border: 2px solid #333;
+            box-shadow: 0 0 0 2px white, 0 0 0 3px #333;
+        }
+
+        body.dark-mode .color-box {
+            border-color: #666;
+        }
+
+        body.dark-mode .color-box.active {
+            box-shadow: 0 0 0 2px #1e1e1e, 0 0 0 3px #fff;
+        }
+
+        /* Color Box Color Classes */
+        .color-box.white {
+            background-color: #ffffff;
+        }
+
+        .color-box.gray {
+            background-color: #f5f5f5;
+        }
+
+        .color-box.yellow {
+            background-color: #fffacd;
+        }
+
+        .color-box.blue {
+            background-color: #e6f3ff;
+        }
+
+        .color-box.green {
+            background-color: #f0f8f0;
+        }
+
+        .text-content {
+            background: #fafbfc;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #d1d9e0;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #24292f;
+            overflow-x: auto;
+            min-height: 400px;
+            max-height: calc(100vh - 250px);
+            overflow-y: auto;
+            position: relative;
+            cursor: text;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #0a1929; /* Dark Blue */
+        }
+
+        body.dark-mode .text-viewer-controls {
+            background-color: #161b22;
+            border-bottom-color: #30363d;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body.dark-mode .control-btn {
+            background-color: #444444;
+            border-color: #666666;
+            color: #ffffff;
+        }
+
+        body.dark-mode .control-btn:hover {
+            background-color: #555555;
+        }
+
+        body.dark-mode .control-select {
+            background-color: #444444;
+            border-color: #666666;
+            color: #ffffff;
+        }
+
+        body.dark-mode .controls-dropdown {
+            background-color: #333333;
+            border-color: #555555;
+            color: #ffffff;
+        }
+
+        body.dark-mode .control-item span {
+            color: #e6edf3;
+        }
+
+        /* Search Feature Styles */
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background-color: #ffffff;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            padding: 2px 6px;
+            height: 28px;
+        }
+
+        .search-input {
+            border: none;
+            outline: none;
+            font-size: 12px;
+            padding: 4px;
+            width: 120px;
+            background: transparent;
+        }
+
+        .search-input:focus {
+            outline: none;
+        }
+
+        .search-btn {
+            background: none;
+            border: none;
+            padding: 2px 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            border-radius: 3px;
+        }
+
+        .search-btn:hover {
+            background-color: #e8e8e8;
+        }
+
+        .search-btn:active {
+            background-color: #d0d0d0;
+        }
+
+        .search-btn svg {
+            width: 14px;
+            height: 14px;
+            color: #666;
+        }
+
+        .search-clear-btn {
+            background: none;
+            border: none;
+            padding: 2px 4px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            border-radius: 3px;
+        }
+
+        .search-clear-btn.visible {
+            display: flex;
+        }
+
+        .search-clear-btn:hover {
+            background-color: #ffebee;
+        }
+
+        .search-clear-btn:active {
+            background-color: #ffcdd2;
+        }
+
+        .search-clear-btn svg {
+            width: 14px;
+            height: 14px;
+            color: #999;
+        }
+
+        .search-clear-btn:hover svg {
+            color: #d32f2f;
+        }
+
+        body.dark-mode .search-clear-btn:hover {
+            background-color: #5d2020;
+        }
+
+        body.dark-mode .search-clear-btn svg {
+            color: #999;
+        }
+
+        body.dark-mode .search-clear-btn:hover svg {
+            color: #ff6b6b;
+        }
+
+        .search-counter {
+            font-size: 11px;
+            color: #666;
+            white-space: nowrap;
+            min-width: 35px;
+            text-align: center;
+        }
+
+        /* Search Highlight Styles */
+        .search-highlight {
+            background-color: #ffff00;
+            color: #000;
+            padding: 1px 0;
+        }
+
+        .search-highlight.current {
+            background-color: #ff9500;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* Dark Mode Search Styles */
+        body.dark-mode .search-box {
+            background-color: #444444;
+            border-color: #666666;
+        }
+
+        body.dark-mode .search-input {
+            color: #ffffff;
+        }
+
+        body.dark-mode .search-input::placeholder {
+            color: #999;
+        }
+
+        body.dark-mode .search-btn svg {
+            color: #ccc;
+        }
+
+        body.dark-mode .search-btn:hover {
+            background-color: #555555;
+        }
+
+        body.dark-mode .search-counter {
+            color: #ccc;
+        }
+
+        body.dark-mode .search-highlight {
+            background-color: #ffff00;
+            color: #000;
+        }
+
+        body.dark-mode .search-highlight.current {
+            background-color: #ff9500;
+            color: #fff;
+        }
+
+        /* 로그 레벨 컬러링 스타일 */
+        .log-level-coloring-dropdown {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background-color: white;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            min-width: 220px;
+            padding: 12px;
+            gap: 8px;
+        }
+
+        .log-level-coloring-dropdown.open {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .log-level-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .log-level-item:hover {
+            background-color: #f3f4f6;
+        }
+
+        .log-level-checkbox {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .log-level-label {
+            flex: 1;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .log-level-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .log-level-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .log-level-icon.debug { color: #666; background-color: #d3d3d3; }
+        .log-level-icon.info { color: #0277bd; background-color: #b3e5fc; }
+        .log-level-icon.warn { color: #f57f17; background-color: #fffacd; }
+        .log-level-icon.error { color: #c62828; background-color: #ffcccc; }
+        .log-level-icon.system { color: #2e7d32; background-color: #c8e6c9; }
+
+        /* Log Line Styling */
+        .log-line {
+            display: inline-block;
+            min-width: 100%;
+            padding: 0 2px;
+        }
+
+        /* Light Mode Log Colors */
+        .log-line.debug { background-color: #d3d3d3; }
+        .log-line.info { background-color: #b3e5fc; }
+        .log-line.warn { background-color: #fffacd; }
+        .log-line.error { background-color: #ffcccc; }
+        .log-line.system { background-color: #c8e6c9; }
+
+        /* Dark Mode Log Colors & Icons */
+        body.dark-mode .log-level-icon.debug,
+        body.dark-mode .log-line.debug {
+            background-color: rgba(110, 118, 129, 0.4);
+            color: #c9d1d9;
+        }
+        body.dark-mode .log-level-icon.info,
+        body.dark-mode .log-line.info {
+            background-color: rgba(56, 139, 253, 0.15);
+            color: #58a6ff;
+        }
+        body.dark-mode .log-level-icon.warn,
+        body.dark-mode .log-line.warn {
+            background-color: rgba(187, 128, 9, 0.15);
+            color: #d29922;
+        }
+        body.dark-mode .log-level-icon.error,
+        body.dark-mode .log-line.error {
+            background-color: rgba(248, 81, 73, 0.15);
+            color: #ff7b72;
+        }
+        body.dark-mode .log-level-icon.system,
+        body.dark-mode .log-line.system {
+            background-color: rgba(46, 160, 67, 0.15);
+            color: #3fb950;
+        }
+
+        body.dark-mode .log-level-coloring-dropdown {
+            background-color: #333333;
+            border-color: #555;
+        }
+
+        body.dark-mode .log-level-item {
+            color: #e6edf3;
+        }
+
+        body.dark-mode .log-level-item:hover {
+            background-color: #444444;
+        }
+        
+        /* Dark Mode Coloring Panel Buttons */
+        body.dark-mode #selectAllBtn,
+        body.dark-mode #deselectAllBtn {
+            background-color: #1565c0; /* Dark Blue */
+            border-color: #1e88e5;
+            color: #ffffff;
+        }
+        
+        body.dark-mode #selectAllBtn:hover,
+        body.dark-mode #deselectAllBtn:hover {
+            background-color: #1976d2;
+            border-color: #42a5f5;
+        }
+
+        body.dark-mode .text-content {
+            background-color: #0d1117 !important;
+            border-color: #30363d;
+            color: #e6edf3 !important;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+
+        /* Fullscreen Mode */
+        .text-viewer.fullscreen-mode {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+            margin: 0;
+            padding: 0;
+            z-index: 9999;
+            max-height: 100vh;
+        }
+
+        .text-viewer.fullscreen-mode .text-content {
+            max-height: calc(100vh - 40px);
+            overflow: auto;
+        }
+
+        /* Help Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-overlay.open .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #111827;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .close-modal-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            color: #6b7280;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-modal-btn:hover {
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .help-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .help-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .help-icon {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #eff6ff;
+            color: #3b82f6;
+            border-radius: 50%;
+        }
+
+        .help-text h4 {
+            margin: 0 0 4px 0;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .help-text p {
+            margin: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        /* Dark Mode Modal */
+        body.dark-mode .modal-content {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+        }
+
+        body.dark-mode .modal-header {
+            border-bottom-color: #30363d;
+        }
+
+        body.dark-mode .modal-title {
+            color: #c9d1d9;
+        }
+
+        body.dark-mode .close-modal-btn {
+            color: #8b949e;
+        }
+
+        body.dark-mode .close-modal-btn:hover {
+            background-color: #21262d;
+            color: #c9d1d9;
+        }
+
+        body.dark-mode .help-icon {
+            background-color: rgba(56, 139, 253, 0.15);
+            color: #58a6ff;
+        }
+
+        body.dark-mode .help-text h4 {
+            color: #c9d1d9;
+        }
+
+        body.dark-mode .help-text p {
+            color: #8b949e;
+        }
+    </style>
+</head>
+<body>
+    <!-- SVG Sprite Definitions -->
+    <svg style="display: none;">
+        <defs>
+            <symbol id="icon-download" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+            </symbol>
+            <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+            </symbol>
+            <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </symbol>
+            <symbol id="icon-info" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </symbol>
+            <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </symbol>
+            <symbol id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </symbol>
+            <symbol id="icon-columns" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"></path>
+            </symbol>
+            <symbol id="icon-autofit" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+            </symbol>
+            <symbol id="icon-save" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </symbol>
+            <symbol id="icon-reset" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+            </symbol>
+            <symbol id="icon-help" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </symbol>
+            <symbol id="icon-sort" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"></path>
+            </symbol>
+            <symbol id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </symbol>
+            <symbol id="icon-help-title" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </symbol>
+            <symbol id="icon-external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </symbol>
+            <!-- Log Level Icons -->
+            <symbol id="icon-log-debug" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0a8.1 8.1 0 001-3.5c0-2.7-2-5-5-5s-5 2.3-5 5a8.1 8.1 0 001 3.5m-4 0H5m11-3.5L19 5m-1 11l3 3m-3-3l3-3m-14 0l-3-3m3 3l-3 3m1-11l-3-3"></path>
+            </symbol>
+            <symbol id="icon-log-info" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </symbol>
+            <symbol id="icon-log-warn" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+            </symbol>
+            <symbol id="icon-log-error" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </symbol>
+            <symbol id="icon-log-system" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
+            </symbol>
+        </defs>
+    </svg>
+
+    <!-- Header 영역: 전체 너비 (100%) -->
+    <header class="w-full bg-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between gap-4">
+                <!-- 왼쪽: 파일명 -->
+                <div class="flex-1 min-w-0">
+                    <h1 class="text-2xl font-bold text-gray-900 truncate">log1.log</h1>
+                </div>
+
+                <!-- 오른쪽: 데스크톱 버튼 그룹 (md 이상에서만 표시) -->
+                <div class="hidden md:flex gap-2 items-center flex-shrink-0">
+                    <!-- 원본 다운로드 -->
+                    <button type="button"
+                            onclick="downloadOriginal()"
+                            class="inline-flex items-center px-4 py-2 rounded-lg bg-green-600 text-white font-medium text-sm hover:bg-green-700 transition-colors shadow-sm whitespace-nowrap">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        원본 다운로드
+                    </button>
+
+                    <!-- 문서 정보 토글 버튼 -->
+                    <button type="button"
+                            class="toggle-doc-info-btn collapsed"
+                            id="toggleDocInfoBtn"
+                            onclick="toggleDocInfo()"
+                            title="문서 정보 보기"
+                            aria-label="문서 정보 토글">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- 오른쪽: 모바일 영역 (토글 버튼 + 햄버거 메뉴) -->
+                <div class="md:hidden flex gap-2 items-center flex-shrink-0">
+                    <!-- 모바일 토글 버튼 -->
+                    <button type="button"
+                            class="toggle-doc-info-btn collapsed"
+                            onclick="toggleDocInfo()"
+                            title="문서 정보 보기"
+                            aria-label="문서 정보 토글">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </button>
+
+                    <!-- 햄버거 메뉴 (relative 래퍼) -->
+                    <div class="relative">
+                        <button type="button"
+                                id="mobileMenuBtn"
+                                onclick="toggleMobileMenu()"
+                                title="메뉴"
+                                aria-label="작업 메뉴 열기"
+                                class="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+
+                        <!-- 모바일 드롭다운 메뉴 -->
+                        <div id="mobileMenu" class="mobile-menu">
+                            <button type="button" onclick="copyToClipboard(); toggleMobileMenu();">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                                전체 복사
+                            </button>
+                            <button type="button" onclick="downloadOriginal(); toggleMobileMenu();">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                원본 다운로드
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="text-container">
+
+        <!-- 문서 정보 (헤더 + 섹션, 초기: 숨김) -->
+        <div id="docInfoSection" class="doc-info-section collapsed">
+            <!-- 문서 정보 헤더 -->
+            <div class="doc-info-header">
+                <h3>📋 로그 파일 정보</h3>
+            </div>
+
+            <!-- 문서 정보 row -->
+            <div class="doc-info-row">
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">파일 크기</span>
+                        <span class="info-value">37,343 bytes</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">총 라인 수</span>
+                        <span class="info-value" id="lineCountDisplay">376</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">문자 수</span>
+                        <span class="info-value" id="charCountDisplay">37181</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">단어 수</span>
+                        <span class="info-value" id="wordCountDisplay">2847</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">인코딩</span>
+                        <span class="info-value">UTF-8</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 텍스트 뷰어 -->
+        <div class="text-viewer">
+            <!-- Control Bar -->
+            <div class="text-viewer-controls">
+                <!-- Desktop Controls -->
+                <div class="controls-desktop">
+                    <!-- Search Box -->
+                    <div class="search-box">
+                        <input type="text"
+                               class="search-input"
+                               id="searchInput"
+                               placeholder="검색어 입력"
+                               autocomplete="off">
+                        <button type="button"
+                                class="search-btn"
+                                id="searchBtn"
+                                title="다음 찾기 (Enter), Del (삭제)">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </button>
+                        <button type="button"
+                                class="search-clear-btn"
+                                id="searchClearBtn"
+                                title="검색 지우기 (Delete)">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                        <span class="search-counter" id="searchCounter"></span>
+                    </div>
+
+                    <!-- Line Wrap -->
+                    <label class="control-item">
+                        <input type="checkbox" id="toggleLineWrap" checked>
+                        <span>줄바꿈</span>
+                    </label>
+
+                    <!-- 폰트 크기 -->
+                    <div class="control-item btn-group">
+                        <button type="button" id="fontSizeDecrease" class="control-btn" title="폰트 작게" >−</button>
+                        <button type="button" id="fontSizeReset" class="control-btn" title="폰트기본(14px)">14px</button>
+                        <button type="button" id="fontSizeIncrease" class="control-btn" title="폰트 크게">+</button>
+                    </div>
+
+                    <!-- 폰트 선택 -->
+                    <select id="fontFamily" class="control-select" title="폰트 선택">
+                        <option value="'Noto Sans KR', sans-serif" selected>Noto Sans KR</option>
+                        <option value="'D2Coding', monospace">D2Coding</option>
+                        <option value="'Nanum Gothic Coding', monospace">나눔고딕코딩</option>
+                        <option value="'JetBrains Mono', monospace">JetBrains Mono</option>
+                        <option value="'Cascadia Code', monospace">Cascadia Code</option>
+                        <option value="'Fira Code', monospace">Fira Code</option>
+                    </select>
+
+                    <!-- 배경색 선택 -->
+                    <div class="custom-color-dropdown">
+                        <button type="button" class="custom-color-btn" id="bgColorBtn" data-color="#ffffff" title="배경색 선택" style="background-color: #ffffff;"></button>
+                        <div class="custom-color-menu" id="bgColorMenu">
+                            <button type="button" class="custom-color-option active" data-color="#ffffff" style="background-color: #ffffff;" title="흰색"></button>
+                            <button type="button" class="custom-color-option" data-color="#f5f5f5" style="background-color: #f5f5f5;" title="라이트 그레이"></button>
+                            <button type="button" class="custom-color-option" data-color="#fffacd" style="background-color: #fffacd;" title="라이트 옐로우"></button>
+                            <button type="button" class="custom-color-option" data-color="#e6f3ff" style="background-color: #e6f3ff;" title="라이트 블루"></button>
+                            <button type="button" class="custom-color-option" data-color="#f0f8f0" style="background-color: #f0f8f0;" title="라이트 그린"></button>
+                        </div>
+                    </div>
+
+                    <!-- 줄간 선택 -->
+                    <div class="control-item btn-group">
+                        <button type="button" id="lineHeightDecrease" class="control-btn" title="줄간 작게">−</button>
+                        <button type="button" id="lineHeightReset" class="control-btn" title="줄간 기본">✱</button>
+                        <button type="button" id="lineHeightIncrease" class="control-btn" title="줄간 크게">+</button>
+                    </div>
+
+                    <!-- Copy All + Log Level Coloring + Display Controls Group -->
+                    <div class="control-item btn-group">
+                        <button type="button" id="copyBtn" onclick="copyToClipboard()" class="control-btn" title="전체 복사">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: inline-block; vertical-align: middle;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                            </svg>
+                        </button>
+                        <div style="position: relative;">
+                            <button type="button" id="logLevelColoringBtn" class="control-btn" title="로그 레벨별 컬러링">
+                                <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24" style="display: inline-block; vertical-align: middle;">
+                                    <path d="M3 3h18v2H3V3zm0 4h12v2H3V7zm0 4h18v2H3v-2zm0 4h12v2H3v-2z"></path>
+                                </svg>
+                            </button>
+                            <div class="log-level-coloring-dropdown" id="logLevelColoringDropdown">
+                                <div class="log-level-item">
+                                    <input type="checkbox" class="log-level-checkbox" id="debug-check" data-level="DEBUG">
+                                    <label class="log-level-label" for="debug-check">DEBUG</label>
+                                    <div class="log-level-icon debug"><svg><use href="#icon-log-debug"/></svg></div>
+                                </div>
+                                <div class="log-level-item">
+                                    <input type="checkbox" class="log-level-checkbox" id="info-check" data-level="INFO">
+                                    <label class="log-level-label" for="info-check">INFO</label>
+                                    <div class="log-level-icon info"><svg><use href="#icon-log-info"/></svg></div>
+                                </div>
+                                <div class="log-level-item">
+                                    <input type="checkbox" class="log-level-checkbox" id="warn-check" data-level="WARN">
+                                    <label class="log-level-label" for="warn-check">WARN</label>
+                                    <div class="log-level-icon warn"><svg><use href="#icon-log-warn"/></svg></div>
+                                </div>
+                                <div class="log-level-item">
+                                    <input type="checkbox" class="log-level-checkbox" id="error-check" data-level="ERROR">
+                                    <label class="log-level-label" for="error-check">ERROR</label>
+                                    <div class="log-level-icon error"><svg><use href="#icon-log-error"/></svg></div>
+                                </div>
+                                <div class="log-level-item">
+                                    <input type="checkbox" class="log-level-checkbox" id="system-check" data-level="SYSTEM">
+                                    <label class="log-level-label" for="system-check">SYSTEM</label>
+                                    <div class="log-level-icon system"><svg><use href="#icon-log-system"/></svg></div>
+                                </div>
+                                <hr style="margin: 8px 0; border: none; border-top: 1px solid #e0e0e0;">
+                                <div style="display: flex; gap: 6px; justify-content: space-between;">
+                                    <button type="button" id="selectAllBtn" class="control-btn" style="flex: 1; padding: 4px 8px; font-size: 11px; background-color: #7d67eb; color: white; border: 1px solid white; border-radius: 3px; cursor: pointer;">모두선택</button>
+                                    <button type="button" id="deselectAllBtn" class="control-btn" style="flex: 1; padding: 4px 8px; font-size: 11px; background-color: #7d67eb; color: white; border: 1px solid white; border-radius: 3px; cursor: pointer;">모두해제</button>
+                                </div>
+                                <button type="button" id="applyColoringBtn" class="control-btn" style="width: 100%; padding: 6px 8px; font-size: 11px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer; margin-top: 6px;">적용</button>
+                            </div>
+                        </div>
+                        <button type="button" id="toggleFullscreen" class="control-btn" title="전체화면">⛶</button>
+                        <button type="button" id="toggleDarkMode" class="control-btn" title="다크모드">🌙</button>
+                    </div>
+
+                    <!-- 설정 저장/초기화 버튼 그룹 -->
+                    <div class="control-item btn-group">
+                        <button type="button" id="saveSettings" class="control-btn" title="현재 설정 저장">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: inline-block; vertical-align: middle;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </button>
+                        <button type="button" id="resetSettings" class="control-btn" title="설정 초기화">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: inline-block; vertical-align: middle;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Help Button -->
+                    <button type="button" id="helpBtn" class="control-btn" title="도움말" style="margin-left: auto;">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="controls-mobile">
+                    <button type="button" id="controlsMenuBtn" class="control-btn" title="설정">⋯</button>
+                    <div id="controlsMenu" class="controls-dropdown">
+                        <!-- Search Box Mobile -->
+                        <div class="search-box">
+                            <input type="text"
+                                   class="search-input"
+                                   id="searchInput-mobile"
+                                   placeholder="검색어 입력"
+                                   autocomplete="off">
+                            <button type="button"
+                                    class="search-btn"
+                                    id="searchBtn-mobile"
+                                    title="다음 찾기">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </button>
+                            <button type="button"
+                                    class="search-clear-btn"
+                                    id="searchClearBtn-mobile"
+                                    title="검색 지우기">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                            <span class="search-counter" id="searchCounter-mobile"></span>
+                        </div>
+                        <label>
+                            <input type="checkbox" id="toggleLineWrap-mobile" checked>
+                            줄바꿈
+                        </label>
+                        <div class="dropdown-item btn-group">
+                            <button type="button" id="fontSizeDecrease-mobile" class="control-btn">−</button>
+                            <button type="button" id="fontSizeReset-mobile" class="control-btn" title="14px">14px</button>
+                            <button type="button" id="fontSizeIncrease-mobile" class="control-btn">+</button>
+                        </div>
+                        <select id="fontFamily-mobile" class="control-select" title="폰트 선택">
+                            <option value="'Noto Sans KR', sans-serif" selected>Noto Sans KR</option>
+                            <option value="'Malgun Gothic', '맑은 고딕'">맑은 고딕</option>
+                            <option value="'SeoulNamsan', sans-serif">서울 남산체</option>
+                            <option value="'D2Coding', monospace">D2Coding</option>
+                            <option value="'Nanum Gothic Coding', monospace">나눔고딕코딩</option>
+                            <option value="'JetBrains Mono', monospace">JetBrains Mono</option>
+                            <option value="'Cascadia Code', monospace">Cascadia Code</option>
+                            <option value="'Fira Code', monospace">Fira Code</option>
+                            <option value="'Courier New', monospace">Courier New</option>
+                            <option value="'Monaco', monospace">Monaco</option>
+                        </select>
+                        <!-- 모바일 배경색 선택 -->
+                        <div class="custom-color-dropdown">
+                            <button type="button" class="custom-color-btn" id="bgColorBtn-mobile" data-color="#ffffff" title="배경색 선택" style="background-color: #ffffff;"></button>
+                            <div class="custom-color-menu" id="bgColorMenu-mobile">
+                                <button type="button" class="custom-color-option active" data-color="#ffffff" style="background-color: #ffffff;" title="흰색"></button>
+                                <button type="button" class="custom-color-option" data-color="#f5f5f5" style="background-color: #f5f5f5;" title="라이트 그레이"></button>
+                                <button type="button" class="custom-color-option" data-color="#fffacd" style="background-color: #fffacd;" title="라이트 옐로우"></button>
+                                <button type="button" class="custom-color-option" data-color="#e6f3ff" style="background-color: #e6f3ff;" title="라이트 블루"></button>
+                                <button type="button" class="custom-color-option" data-color="#f0f8f0" style="background-color: #f0f8f0;" title="라이트 그린"></button>
+                            </div>
+                        </div>
+                        <!-- 모바일 줄간 선택 -->
+                        <div class="dropdown-item btn-group">
+                            <button type="button" id="lineHeightDecrease-mobile" class="control-btn" title="줄간 작게">−</button>
+                            <button type="button" id="lineHeightReset-mobile" class="control-btn" title="줄간 기본">✱</button>
+                            <button type="button" id="lineHeightIncrease-mobile" class="control-btn" title="줄간 크게">+</button>
+                        </div>
+                        <button type="button" id="toggleFullscreen-mobile" class="control-btn">⛶ 전체화면</button>
+                        <button type="button" id="toggleDarkMode-mobile" class="control-btn">🌙 다크모드</button>
+                        <hr style="margin: 8px 0; border: none; border-top: 1px solid #e0e0e0;">
+                        <!-- 모바일 설정 저장/초기화 -->
+                        <div class="dropdown-item btn-group">
+                            <button type="button" id="saveSettings-mobile" class="control-btn" title="현재 설정 저장">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: inline-block; vertical-align: middle; margin-right: 4px;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                저장
+                            </button>
+                            <button type="button" id="resetSettings-mobile" class="control-btn" title="설정 초기화">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: inline-block; vertical-align: middle; margin-right: 4px;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                </svg>
+                                초기화
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <pre class="text-content" id="textContent">2025-09-29 09:58:18.204 [http-nio-9090-exec-8] INFO  k.c.k.h.s.CustomUserDetailsService - Password Hash from DB: $2a$10$LvvEzcPS6d/j1Jtz52fLIOTcDCMnrMVMukOf3tLWAr1zbIl7i9W3S
+2025-09-29 09:58:18.204 [http-nio-9090-exec-8] INFO  k.c.k.h.s.CustomUserDetailsService - Password Hash length: 60
+2025-09-29 09:58:18.204 [http-nio-9090-exec-8] INFO  k.c.k.h.c.JwtAuthenticationFilter - UserDetails loaded for user: admin, authorities: [ROLE_ADMIN]
+2025-09-29 09:58:18.207 [http-nio-9090-exec-8] DEBUG kr.co.kfs.homepage.util.JwtUtil - Token validation for user admin: true
+2025-09-29 09:58:18.207 [http-nio-9090-exec-8] INFO  k.c.k.h.c.JwtAuthenticationFilter - JWT token is valid for user: admin
+2025-09-29 09:58:18.207 [http-nio-9090-exec-8] INFO  k.c.k.h.c.JwtAuthenticationFilter - Authentication set in SecurityContext for user: admin, authorities: [ROLE_ADMIN]
+2025-09-29 09:58:18.207 [http-nio-9090-exec-8] DEBUG o.s.s.w.a.i.FilterSecurityInterceptor - Authorized filter invocation [GET /.well-known/appspecific/com.chrome.devtools.json] with attributes [permitAll]
+2025-09-29 09:58:18.208 [http-nio-9090-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /.well-known/appspecific/com.chrome.devtools.json
+2025-09-29 09:58:18.208 [http-nio-9090-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - GET &amp;quot;/.well-known/appspecific/com.chrome.devtools.json&amp;quot;, parameters={}
+2025-09-29 09:58:18.209 [http-nio-9090-exec-8] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], ServletContext [/]]
+2025-09-29 09:58:18.209 [http-nio-9090-exec-8] DEBUG o.s.w.s.r.ResourceHttpRequestHandler - Resource not found
+2025-09-29 09:58:18.209 [http-nio-9090-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+2025-09-29 09:58:18.210 [http-nio-9090-exec-8] DEBUG o.s.s.w.c.SecurityContextPersistenceFilter - Cleared SecurityContextHolder to complete request
+2025-09-29 09:58:18.210 [http-nio-9090-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2025-09-29 09:58:18.210 [http-nio-9090-exec-8] DEBUG o.s.s.w.c.SecurityContextPersistenceFilter - Set SecurityContextHolder to empty SecurityContext
+2025-09-29 09:58:18.210 [http-nio-9090-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-09-29 09:58:18.210 [http-nio-9090-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2025-09-29 09:58:18.210 [http-nio-9090-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - &amp;quot;ERROR&amp;quot; dispatch for GET &amp;quot;/error&amp;quot;, parameters={}
+2025-09-29 09:58:18.212 [http-nio-9090-exec-8] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to kr.co.kfs.homepage.controller.CustomErrorController#handleError(HttpServletRequest, Model)
+2025-09-29 09:58:18.212 [http-nio-9090-exec-8] WARN  k.c.k.h.c.CustomErrorController - Error occurred - Status: 404, URI: /.well-known/appspecific/com.chrome.devtools.json, Message: , Exception: null
+2025-09-29 09:58:18.213 [http-nio-9090-exec-8] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected &amp;#39;*/*&amp;#39; given [*/*]
+2025-09-29 09:58:18.213 [http-nio-9090-exec-8] DEBUG o.s.w.s.view.InternalResourceView - View [InternalResourceView], model {statusCode=404, errorMessage=, requestUri=/.well-known/appspecific/com.chrome.devtools.json, errorTitle=페이지를 찾을 수 없습니다, errorDescription=요청하신 페이지가 존재하지 않습니다.}
+2025-09-29 09:58:18.213 [http-nio-9090-exec-8] DEBUG o.s.w.s.view.InternalResourceView - Forwarding to [/error.html]
+2025-09-29 09:58:18.213 [http-nio-9090-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error.html
+2025-09-29 09:58:18.213 [http-nio-9090-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error.html
+2025-09-29 09:58:18.213 [http-nio-9090-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - &amp;quot;ERROR&amp;quot; dispatch for GET &amp;quot;/error.html&amp;quot;, parameters={}
+2025-09-29 09:58:18.214 [http-nio-9090-exec-8] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], ServletContext [/]]
+2025-09-29 09:58:18.215 [http-nio-9090-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Exiting from &amp;quot;ERROR&amp;quot; dispatch, status 404
+2025-09-29 09:58:18.216 [http-nio-9090-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Exiting from &amp;quot;ERROR&amp;quot; dispatch, status 404
+2025-09-29 09:58:18.216 [http-nio-9090-exec-8] DEBUG o.s.s.w.c.SecurityContextPersistenceFilter - Cleared SecurityContextHolder to complete request
+2025-09-29 09:58:18.322 [http-nio-9090-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /admin/login
+2025-09-29 09:58:18.322 [http-nio-9090-exec-9] DEBUG o.s.s.w.c.SecurityContextPersistenceFilter - Set SecurityContextHolder to empty SecurityContext
+2025-09-29 09:58:18.323 [http-nio-9090-exec-9] DEBUG k.c.k.h.c.JwtAuthenticationFilter - Processing request: GET /admin/login
+2025-09-29 09:58:18.324 [http-nio-9090-exec-9] INFO  k.c.k.h.c.JwtAuthenticationFilter - JWT token found for user: admin
+2025-09-29 09:58:18.324 [http-nio-9090-exec-9] DEBUG k.c.k.h.s.CustomUserDetailsService - Loading user by username: admin
+2025-09-29 09:58:18.325 [http-nio-9090-exec-9] DEBUG org.hibernate.SQL -
+    select
+        adminuser0_.id as id1_0_,
+        adminuser0_.created_at as created_2_0_,
+        adminuser0_.email as email3_0_,
+        adminuser0_.enabled as enabled4_0_,
+        adminuser0_.password as password5_0_,
+        adminuser0_.updated_at as updated_6_0_,
+        adminuser0_.username as username7_0_
+    from
+        admin_users adminuser0_
+    where
+        adminuser0_.username=?
+Hibernate:
+    select
+        adminuser0_.id as id1_0_,
+        adminuser0_.created_at as created_2_0_,
+        adminuser0_.email as email3_0_,
+        adminuser0_.enabled as enabled4_0_,
+        adminuser0_.password as password5_0_,
+        adminuser0_.updated_at as updated_6_0_,
+        adminuser0_.username as username7_0_
+    from
+        admin_users adminuser0_
+    where
+        adminuser0_.username=?
+2025-09-29 09:58:18.325 [http-nio-9090-exec-9] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [1] as [VARCHAR] - [admin]
+2025-09-29 09:58:18.328 [http-nio-9090-exec-9] DEBUG k.c.k.h.s.CustomUserDetailsService - User found: admin, enabled: 1
+2025-09-29 09:58:18.329 [http-nio-9090-exec-9] INFO  k.c.k.h.s.CustomUserDetailsService - === DB Password Hash ===
+2025-09-29 09:58:18.329 [http-nio-9090-exec-9] INFO  k.c.k.h.s.CustomUserDetailsService - Username: admin
+2025-09-29 09:58:18.329 [http-nio-9090-exec-9] INFO  k.c.k.h.s.CustomUserDetailsService - Password Hash from DB: $2a$10$LvvEzcPS6d/j1Jtz52fLIOTcDCMnrMVMukOf3tLWAr1zbIl7i9W3S
+2025-09-29 09:58:18.329 [http-nio-9090-exec-9] INFO  k.c.k.h.s.CustomUserDetailsService - Password Hash length: 60
+2025-09-29 09:58:18.329 [http-nio-9090-exec-9] INFO  k.c.k.h.c.JwtAuthenticationFilter - UserDetails loaded for user: admin, authorities: [ROLE_ADMIN]
+2025-09-29 09:58:18.331 [http-nio-9090-exec-9] DEBUG kr.co.kfs.homepage.util.JwtUtil - Token validation for user admin: true
+2025-09-29 09:58:18.332 [http-nio-9090-exec-9] INFO  k.c.k.h.c.JwtAuthenticationFilter - JWT token is valid for user: admin
+2025-09-29 09:58:18.332 [http-nio-9090-exec-9] INFO  k.c.k.h.c.JwtAuthenticationFilter - Authentication set in SecurityContext for user: admin, authorities: [ROLE_ADMIN]
+2025-09-29 09:58:18.332 [http-nio-9090-exec-9] DEBUG o.s.s.w.a.i.FilterSecurityInterceptor - Authorized filter invocation [GET /admin/login] with attributes [permitAll]
+2025-09-29 09:58:18.332 [http-nio-9090-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /admin/login
+2025-09-29 09:58:18.332 [http-nio-9090-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET &amp;quot;/admin/login&amp;quot;, parameters={}
+2025-09-29 09:58:18.333 [http-nio-9090-exec-9] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to kr.co.kfs.homepage.controller.AdminController#adminLogin(HttpServletRequest)
+2025-09-29 09:58:18.335 [http-nio-9090-exec-9] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected &amp;#39;text/html&amp;#39; given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, application/signed-exchange;v=b3;q=0.7, */*;q=0.8]
+2025-09-29 09:58:18.335 [http-nio-9090-exec-9] DEBUG o.s.w.s.view.InternalResourceView - View [InternalResourceView], model {}
+2025-09-29 09:58:18.335 [http-nio-9090-exec-9] DEBUG o.s.w.s.view.InternalResourceView - Forwarding to [/admin/index.html]
+2025-09-29 09:58:18.336 [http-nio-9090-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - &amp;quot;FORWARD&amp;quot; dispatch for GET &amp;quot;/admin/index.html&amp;quot;, parameters={}
+2025-09-29 09:58:18.336 [http-nio-9090-exec-9] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], ServletContext [/]]
+2025-09-29 09:58:18.339 [http-nio-9090-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Exiting from &amp;quot;FORWARD&amp;quot; dispatch, status 200
+2025-09-29 09:58:18.339 [http-nio-9090-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-09-29 09:58:18.339 [http-nio-9090-exec-9] DEBUG o.s.s.w.c.SecurityContextPersistenceFilter - Cleared SecurityContextHolder to complete request
+2025-09-29 09:58:18.378 [http-nio-9090-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /.well-known/appspecific/com.chrome.devtools.json
+2025-09-29 09:58:18.378 [http-nio-9090-exec-10] DEBUG o.s.s.w.c.SecurityContextPersistenceFilter - Set SecurityContextHolder to empty SecurityContext
+2025-09-29 09:58:18.378 [http-nio-9090-exec-10] DEBUG k.c.k.h.c.JwtAuthenticationFilter - Processing request: GET /.well-known/appspecific/com.chrome.devtools.json
+2025-09-29 09:58:18.379 [http-nio-9090-exec-10] INFO  k.c.k.h.c.JwtAuthenticationFilter - JWT token found for user: admin
+2025-09-29 09:58:18.379 [http-nio-9090-exec-10] DEBUG k.c.k.h.s.CustomUserDetailsService - Loading user by username: admin
+2025-09-29 09:58:18.381 [http-nio-9090-exec-10] DEBUG org.hibernate.SQL -
+    select
+        adminuser0_.id as id1_0_,
+        adminuser0_.created_at as created_2_0_,
+        adminuser0_.email as email3_0_,
+        adminuser0_.enabled as enabled4_0_,
+        adminuser0_.password as password5_0_,
+        adminuser0_.updated_at as updated_6_0_,
+        adminuser0_.username as username7_0_
+    from
+        admin_users adminuser0_
+    where
+        adminuser0_.username=?
+Hibernate:
+    select
+        adminuser0_.id as id1_0_,
+        adminuser0_.created_at as created_2_0_,
+        adminuser0_.email as email3_0_,
+        adminuser0_.enabled as enabled4_0_,
+        adminuser0_.password as password5_0_,
+        adminuser0_.updated_at as updated_6_0_,
+        adminuser0_.username as username7_0_
+    from
+        admin_users adminuser0_
+    where
+        adminuser0_.username=?
+2025-09-29 09:58:18.382 [http-nio-9090-exec-10] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [1] as [VARCHAR] - [admin]
+2025-09-29 09:58:18.386 [http-nio-9090-exec-10] DEBUG k.c.k.h.s.CustomUserDetailsService - User found: admin, enabled: 1
+2025-09-29 09:58:18.390 [http-nio-9090-exec-10] INFO  k.c.k.h.s.CustomUserDetailsService - === DB Password Hash ===
+2025-09-29 09:58:18.390 [http-nio-9090-exec-10] INFO  k.c.k.h.s.CustomUserDetailsService - Username: admin
+2025-09-29 09:58:18.390 [http-nio-9090-exec-10] INFO  k.c.k.h.s.CustomUserDetailsService - Password Hash from DB: $2a$10$LvvEzcPS6d/j1Jtz52fLIOTcDCMnrMVMukOf3tLWAr1zbIl7i9W3S
+2025-09-29 09:58:18.391 [http-nio-9090-exec-10] INFO  k.c.k.h.s.CustomUserDetailsService - Password Hash length: 60
+2025-09-29 09:58:18.391 [http-nio-9090-exec-10] INFO  k.c.k.h.c.JwtAuthenticationFilter - UserDetails loaded for user: admin, authorities: [ROLE_ADMIN]
+2025-09-29 09:58:18.393 [http-nio-9090-exec-10] DEBUG kr.co.kfs.homepage.util.JwtUtil - Token validation for user admin: true
+2025-09-29 09:58:18.394 [http-nio-9090-exec-10] INFO  k.c.k.h.c.JwtAuthenticationFilter - JWT token is valid for user: admin
+2025-09-29 09:58:18.394 [http-nio-9090-exec-10] INFO  k.c.k.h.c.JwtAuthenticationFilter - Authentication set in SecurityContext for user: admin, authorities: [ROLE_ADMIN]
+2025-09-29 09:58:18.394 [http-nio-9090-exec-10] DEBUG o.s.s.w.a.i.FilterSecurityInterceptor - Authorized filter invocation [GET /.well-known/appspecific/com.chrome.devtools.json] with attributes [permitAll]
+2025-09-29 09:58:18.394 [http-nio-9090-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /.well-known/appspecific/com.chrome.devtools.json
+2025-09-29 09:58:18.394 [http-nio-9090-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - GET &amp;quot;/.well-known/appspecific/com.chrome.devtools.json&amp;quot;, parameters={}
+2025-09-29 09:58:18.395 [http-nio-9090-exec-10] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], ServletContext [/]]
+2025-09-29 09:58:18.396 [http-nio-9090-exec-10] DEBUG o.s.w.s.r.ResourceHttpRequestHandler - Resource not found
+2025-09-29 09:58:18.396 [http-nio-9090-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+2025-09-29 09:58:18.396 [http-nio-9090-exec-10] DEBUG o.s.s.w.c.SecurityContextPersistenceFilter - Cleared SecurityContextHolder to complete request
+2025-09-29 09:58:18.397 [http-nio-9090-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2025-09-29 09:58:18.397 [http-nio-9090-exec-10] DEBUG o.s.s.w.c.SecurityContextPersistenceFilter - Set SecurityContextHolder to empty SecurityContext
+2025-09-29 09:58:18.398 [http-nio-9090-exec-10] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-09-29 09:58:18.399 [http-nio-9090-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2025-09-29 09:58:18.399 [http-nio-9090-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - &amp;quot;ERROR&amp;quot; dispatch for GET &amp;quot;/error&amp;quot;, parameters={}
+2025-09-29 09:58:18.399 [http-nio-9090-exec-10] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to kr.co.kfs.homepage.controller.CustomErrorController#handleError(HttpServletRequest, Model)
+2025-09-29 09:58:18.399 [http-nio-9090-exec-10] WARN  k.c.k.h.c.CustomErrorController - Error occurred - Status: 404, URI: /.well-known/appspecific/com.chrome.devtools.json, Message: , Exception: null
+2025-09-29 09:58:18.400 [http-nio-9090-exec-10] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected &amp;#39;*/*&amp;#39; given [*/*]
+2025-09-29 09:58:18.400 [http-nio-9090-exec-10] DEBUG o.s.w.s.view.InternalResourceView - View [InternalResourceView], model {statusCode=404, errorMessage=, requestUri=/.well-known/appspecific/com.chrome.devtools.json, errorTitle=페이지를 찾을 수 없습니다, errorDescription=요청하신 페이지가 존재하지 않습니다.}
+2025-09-29 09:58:18.400 [http-nio-9090-exec-10] DEBUG o.s.w.s.view.InternalResourceView - Forwarding to [/error.html]
+2025-09-29 09:58:18.400 [http-nio-9090-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error.html
+2025-09-29 09:58:18.402 [http-nio-9090-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error.html
+2025-09-29 09:58:18.408 [http-nio-9090-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - &amp;quot;ERROR&amp;quot; dispatch for GET &amp;quot;/error.html&amp;quot;, parameters={}
+2025-09-29 09:58:18.410 [http-nio-9090-exec-10] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], ServletContext [/]]
+2025-09-29 09:58:18.413 [http-nio-9090-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Exiting from &amp;quot;ERROR&amp;quot; dispatch, status 404
+2025-09-29 09:58:18.414 [http-nio-9090-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Exiting from &amp;quot;ERROR&amp;quot; dispatch, status 404
+2025-09-29 09:58:18.414 [http-nio-9090-exec-10] DEBUG o.s.s.w.c.SecurityContextPersistenceFilter - Cleared SecurityContextHolder to complete request
+2025-09-29 09:58:18.528 [http-nio-9090-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /admin/login
+2025-09-29 09:58:18.529 [http-nio-9090-exec-1] DEBUG o.s.s.w.c.SecurityContextPersistenceFilter - Set SecurityContextHolder to empty SecurityContext
+2025-09-29 09:58:18.529 [http-nio-9090-exec-1] DEBUG k.c.k.h.c.JwtAuthenticationFilter - Processing request: GET /admin/login
+2025-09-29 09:58:18.530 [http-nio-9090-exec-1] INFO  k.c.k.h.c.JwtAuthenticationFilter - JWT token found for user: admin
+2025-09-29 09:58:18.530 [http-nio-9090-exec-1] DEBUG k.c.k.h.s.CustomUserDetailsService - Loading user by username: admin
+2025-09-29 09:58:18.530 [http-nio-9090-exec-1] DEBUG org.hibernate.SQL -
+    select
+        adminuser0_.id as id1_0_,
+        adminuser0_.created_at as created_2_0_,
+        adminuser0_.email as email3_0_,
+        adminuser0_.enabled as enabled4_0_,
+        adminuser0_.password as password5_0_,
+        adminuser0_.updated_at as updated_6_0_,
+        adminuser0_.username as username7_0_
+    from
+        admin_users adminuser0_
+    where
+        adminuser0_.username=?
+Hibernate:
+    select
+        adminuser0_.id as id1_0_,
+        adminuser0_.created_at as created_2_0_,
+        adminuser0_.email as email3_0_,
+        adminuser0_.enabled as enabled4_0_,
+        adminuser0_.password as password5_0_,
+        adminuser0_.updated_at as updated_6_0_,
+        adminuser0_.username as username7_0_
+    from
+        admin_users adminuser0_
+    where
+        adminuser0_.username=?
+2025-09-29 09:58:18.532 [http-nio-9090-exec-1] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [1] as [VARCHAR] - [admin]
+2025-09-29 09:58:18.536 [http-nio-9090-exec-1] DEBUG k.c.k.h.s.CustomUserDetailsService - User found: admin, enabled: 1
+2025-09-29 09:58:18.536 [http-nio-9090-exec-1] INFO  k.c.k.h.s.CustomUserDetailsService - === DB Password Hash ===
+2025-09-29 09:58:18.536 [http-nio-9090-exec-1] INFO  k.c.k.h.s.CustomUserDetailsService - Username: admin
+2025-09-29 09:58:18.536 [http-nio-9090-exec-1] INFO  k.c.k.h.s.CustomUserDetailsService - Password Hash from DB: $2a$10$LvvEzcPS6d/j1Jtz52fLIOTcDCMnrMVMukOf3tLWAr1zbIl7i9W3S
+2025-09-29 09:58:18.536 [http-nio-9090-exec-1] INFO  k.c.k.h.s.CustomUserDetailsService - Password Hash length: 60
+2025-09-29 09:58:18.536 [http-nio-9090-exec-1] INFO  k.c.k.h.c.JwtAuthenticationFilter - UserDetails loaded for user: admin, authorities: [ROLE_ADMIN]
+2025-09-29 09:58:18.538 [http-nio-9090-exec-1] DEBUG kr.co.kfs.homepage.util.JwtUtil - Token validation for user admin: true
+2025-09-29 09:58:18.539 [http-nio-9090-exec-1] INFO  k.c.k.h.c.JwtAuthenticationFilter - JWT token is valid for user: admin
+2025-09-29 09:58:18.539 [http-nio-9090-exec-1] INFO  k.c.k.h.c.JwtAuthenticationFilter - Authentication set in SecurityContext for user: admin, authorities: [ROLE_ADMIN]
+2025-09-29 09:58:18.539 [http-nio-9090-exec-1] DEBUG o.s.s.w.a.i.FilterSecurityInterceptor - Authorized filter invocation [GET /admin/login] with attributes [permitAll]
+2025-09-29 09:58:18.540 [http-nio-9090-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /admin/login
+2025-09-29 09:58:18.540 [http-nio-9090-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET &amp;quot;/admin/login&amp;quot;, parameters={}
+2025-09-29 09:58:18.547 [http-nio-9090-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to kr.co.kfs.homepage.controller.AdminController#adminLogin(HttpServletRequest)
+2025-09-29 09:58:18.548 [http-nio-9090-exec-1] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected &amp;#39;text/html&amp;#39; given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, application/signed-exchange;v=b3;q=0.7, */*;q=0.8]
+2025-09-29 09:58:18.551 [http-nio-9090-exec-1] DEBUG o.s.w.s.view.InternalResourceView - View [InternalResourceView], model {}
+2025-09-29 09:58:18.551 [http-nio-9090-exec-1] DEBUG o.s.w.s.view.InternalResourceView - Forwarding to [/admin/index.html]
+2025-09-29 09:58:18.551 [http-nio-9090-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - &amp;quot;FORWARD&amp;quot; dispatch for GET &amp;quot;/admin/index.html&amp;quot;, parameters={}
+2025-09-29 09:58:18.551 [http-nio-9090-exec-1] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], ServletContext [/]]
+2025-09-29 09:58:18.554 [http-nio-9090-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Exiting from &amp;quot;FORWARD&amp;quot; dispatch, status 200
+2025-09-29 09:58:18.555 [http-nio-9090-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-09-29 09:58:18.555 [http-nio-9090-exec-1] DEBUG o.s.s.w.c.SecurityContextPersistenceFilter - Cleared SecurityContextHolder to complete request
+2025-09-29 09:58:18.578 [http-nio-9090-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /.well-known/appspecific/com.chrome.devtools.json
+2025-09-29 09:58:18.578 [http-nio-9090-exec-2] DEBUG o.s.s.w.c.SecurityContextPersistenceFilter - Set SecurityContextHolder to empty SecurityContext
+2025-09-29 09:58:18.578 [http-nio-9090-exec-2] DEBUG k.c.k.h.c.JwtAuthenticationFilter - Processing request: GET /.well-known/appspecific/com.chrome.devtools.json
+2025-09-29 09:58:18.580 [http-nio-9090-exec-2] INFO  k.c.k.h.c.JwtAuthenticationFilter - JWT token found for user: admin
+2025-09-29 09:58:18.580 [http-nio-9090-exec-2] DEBUG k.c.k.h.s.CustomUserDetailsService - Loading user by username: admin
+2025-09-29 09:58:18.581 [http-nio-9090-exec-2] DEBUG org.hibernate.SQL -
+    select
+        adminuser0_.id as id1_0_,
+        adminuser0_.created_at as created_2_0_,
+        adminuser0_.email as email3_0_,
+        adminuser0_.enabled as enabled4_0_,
+        adminuser0_.password as password5_0_,
+        adminuser0_.updated_at as updated_6_0_,
+        adminuser0_.username as username7_0_
+    from
+        admin_users adminuser0_
+    where
+        adminuser0_.username=?
+Hibernate:
+    select
+        adminuser0_.id as id1_0_,
+        adminuser0_.created_at as created_2_0_,
+        adminuser0_.email as email3_0_,
+        adminuser0_.enabled as enabled4_0_,
+        adminuser0_.password as password5_0_,
+        adminuser0_.updated_at as updated_6_0_,
+        adminuser0_.username as username7_0_
+    from
+        admin_users adminuser0_
+    where
+        adminuser0_.username=?
+2025-09-29 09:58:18.582 [http-nio-9090-exec-2] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [1] as [VARCHAR] - [admin]
+2025-09-29 09:58:18.587 [http-nio-9090-exec-2] DEBUG k.c.k.h.s.CustomUserDetailsService - User found: admin, enabled: 1
+2025-09-29 09:58:18.590 [http-nio-9090-exec-2] INFO  k.c.k.h.s.CustomUserDetailsService - === DB Password Hash ===
+2025-09-29 09:58:18.591 [http-nio-9090-exec-2] INFO  k.c.k.h.s.CustomUserDetailsService - Username: admin
+2025-09-29 09:58:18.591 [http-nio-9090-exec-2] INFO  k.c.k.h.s.CustomUserDetailsService - Password Hash from DB: $2a$10$LvvEzcPS6d/j1Jtz52fLIOTcDCMnrMVMukOf3tLWAr1zbIl7i9W3S
+2025-09-29 09:58:18.591 [http-nio-9090-exec-2] INFO  k.c.k.h.s.CustomUserDetailsService - Password Hash length: 60
+2025-09-29 09:58:18.591 [http-nio-9090-exec-2] INFO  k.c.k.h.c.JwtAuthenticationFilter - UserDetails loaded for user: admin, authorities: [ROLE_ADMIN]
+2025-09-29 09:58:18.593 [http-nio-9090-exec-2] DEBUG kr.co.kfs.homepage.util.JwtUtil - Token validation for user admin: true
+2025-09-29 09:58:18.594 [http-nio-9090-exec-2] INFO  k.c.k.h.c.JwtAuthenticationFilter - JWT token is valid for user: admin
+2025-09-29 09:58:18.594 [http-nio-9090-exec-2] INFO  k.c.k.h.c.JwtAuthenticationFilter - Authentication set in SecurityContext for user: admin, authorities: [ROLE_ADMIN]
+2025-09-29 09:58:18.594 [http-nio-9090-exec-2] DEBUG o.s.s.w.a.i.FilterSecurityInterceptor - Authorized filter invocation [GET /.well-known/appspecific/com.chrome.devtools.json] with attributes [permitAll]
+2025-09-29 09:58:18.594 [http-nio-9090-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /.well-known/appspecific/com.chrome.devtools.json
+2025-09-29 09:58:18.594 [http-nio-9090-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET &amp;quot;/.well-known/appspecific/com.chrome.devtools.json&amp;quot;, parameters={}
+2025-09-29 09:58:18.595 [http-nio-9090-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], ServletContext [/]]
+2025-09-29 09:58:18.596 [http-nio-9090-exec-2] DEBUG o.s.w.s.r.ResourceHttpRequestHandler - Resource not found
+2025-09-29 09:58:18.596 [http-nio-9090-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+2025-09-29 09:58:18.596 [http-nio-9090-exec-2] DEBUG o.s.s.w.c.SecurityContextPersistenceFilter - Cleared SecurityContextHolder to complete request
+2025-09-29 09:58:18.596 [http-nio-9090-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2025-09-29 09:58:18.596 [http-nio-9090-exec-2] DEBUG o.s.s.w.c.SecurityContextPersistenceFilter - Set SecurityContextHolder to empty SecurityContext
+2025-09-29 09:58:18.597 [http-nio-9090-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-09-29 09:58:18.597 [http-nio-9090-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2025-09-29 09:58:18.597 [http-nio-9090-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - &amp;quot;ERROR&amp;quot; dispatch for GET &amp;quot;/error&amp;quot;, parameters={}
+2025-09-29 09:58:18.597 [http-nio-9090-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to kr.co.kfs.homepage.controller.CustomErrorController#handleError(HttpServletRequest, Model)
+2025-09-29 09:58:18.597 [http-nio-9090-exec-2] WARN  k.c.k.h.c.CustomErrorController - Error occurred - Status: 404, URI: /.well-known/appspecific/com.chrome.devtools.json, Message: , Exception: null
+2025-09-29 09:58:18.598 [http-nio-9090-exec-2] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected &amp;#39;*/*&amp;#39; given [*/*]
+2025-09-29 09:58:18.598 [http-nio-9090-exec-2] DEBUG o.s.w.s.view.InternalResourceView - View [InternalResourceView], model {statusCode=404, errorMessage=, requestUri=/.well-known/appspecific/com.chrome.devtools.json, errorTitle=페이지를 찾을 수 없습니다, errorDescription=요청하신 페이지가 존재하지 않습니다.}
+2025-09-29 09:58:18.598 [http-nio-9090-exec-2] DEBUG o.s.w.s.view.InternalResourceView - Forwarding to [/error.html]
+2025-09-29 09:58:18.598 [http-nio-9090-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error.html
+2025-09-29 09:58:18.598 [http-nio-9090-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error.html
+2025-09-29 09:58:18.598 [http-nio-9090-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - &amp;quot;ERROR&amp;quot; dispatch for GET &amp;quot;/error.html&amp;quot;, parameters={}
+2025-09-29 09:58:18.599 [http-nio-9090-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], ServletContext [/]]
+2025-09-29 09:58:18.601 [http-nio-9090-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Exiting from &amp;quot;ERROR&amp;quot; dispatch, status 404
+2025-09-29 09:58:18.603 [http-nio-9090-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Exiting from &amp;quot;ERROR&amp;quot; dispatch, status 404
+2025-09-29 09:58:18.604 [http-nio-9090-exec-2] DEBUG o.s.s.w.c.SecurityContextPersistenceFilter - Cleared SecurityContextHolder to complete request
+2025-09-29 09:58:18.697 [http-nio-9090-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /admin/login
+2025-09-29 09:58:18.698 [http-nio-9090-exec-4] DEBUG o.s.s.w.c.SecurityContextPersistenceFilter - Set SecurityContextHolder to empty SecurityContext
+2025-09-29 09:58:18.698 [http-nio-9090-exec-4] DEBUG k.c.k.h.c.JwtAuthenticationFilter - Processing request: GET /admin/login
+2025-09-29 09:58:18.700 [http-nio-9090-exec-4] INFO  k.c.k.h.c.JwtAuthenticationFilter - JWT token found for user: admin
+2025-09-29 09:58:18.700 [http-nio-9090-exec-4] DEBUG k.c.k.h.s.CustomUserDetailsService - Loading user by username: admin
+2025-09-29 09:58:18.701 [http-nio-9090-exec-4] DEBUG org.hibernate.SQL -
+    select
+        adminuser0_.id as id1_0_,
+        adminuser0_.created_at as created_2_0_,
+        adminuser0_.email as email3_0_,
+        adminuser0_.enabled as enabled4_0_,
+        adminuser0_.password as password5_0_,
+        adminuser0_.updated_at as updated_6_0_,
+        adminuser0_.username as username7_0_
+    from
+        admin_users adminuser0_
+    where
+        adminuser0_.username=?
+Hibernate:
+    select
+        adminuser0_.id as id1_0_,
+        adminuser0_.created_at as created_2_0_,
+        adminuser0_.email as email3_0_,
+        adminuser0_.enabled as enabled4_0_,
+        adminuser0_.password as password5_0_,
+        adminuser0_.updated_at as updated_6_0_,
+        adminuser0_.username as username7_0_
+    from
+        admin_users adminuser0_
+    where
+        adminuser0_.username=?
+2025-09-29 09:58:18.701 [http-nio-9090-exec-4] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [1] as [VARCHAR] - [admin]
+2025-09-29 09:58:18.704 [http-nio-9090-exec-4] DEBUG k.c.k.h.s.CustomUserDetailsService - User found: admin, enabled: 1
+2025-09-29 09:58:18.704 [http-nio-9090-exec-4] INFO  k.c.k.h.s.CustomUserDetailsService - === DB Password Hash ===
+2025-09-29 09:58:18.704 [http-nio-9090-exec-4] INFO  k.c.k.h.s.CustomUserDetailsService - Username: admin
+2025-09-29 09:58:18.704 [http-nio-9090-exec-4] INFO  k.c.k.h.s.CustomUserDetailsService - Password Hash from DB: $2a$10$LvvEzcPS6d/j1Jtz52fLIOTcDCMnrMVMukOf3tLWAr1zbIl7i9W3S
+2025-09-29 09:58:18.704 [http-nio-9090-exec-4] INFO  k.c.k.h.s.CustomUserDetailsService - Password Hash length: 60
+2025-09-29 09:58:18.704 [http-nio-9090-exec-4] INFO  k.c.k.h.c.JwtAuthenticationFilter - UserDetails loaded for user: admin, authorities: [ROLE_ADMIN]
+2025-09-29 09:58:18.707 [http-nio-9090-exec-4] DEBUG kr.co.kfs.homepage.util.JwtUtil - Token validation for user admin: true
+2025-09-29 09:58:18.707 [http-nio-9090-exec-4] INFO  k.c.k.h.c.JwtAuthenticationFilter - JWT token is valid for user: admin
+2025-09-29 09:58:18.707 [http-nio-9090-exec-4] INFO  k.c.k.h.c.JwtAuthenticationFilter - Authentication set in SecurityContext for user: admin, authorities: [ROLE_ADMIN]
+2025-09-29 09:58:18.708 [http-nio-9090-exec-4] DEBUG o.s.s.w.a.i.FilterSecurityInterceptor - Authorized filter invocation [GET /admin/login] with attributes [permitAll]
+2025-09-29 09:58:18.708 [http-nio-9090-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /admin/login
+2025-09-29 09:58:18.708 [http-nio-9090-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET &amp;quot;/admin/login&amp;quot;, parameters={}
+2025-09-29 09:58:18.708 [http-nio-9090-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to kr.co.kfs.homepage.controller.AdminController#adminLogin(HttpServletRequest)
+2025-09-29 09:58:18.709 [http-nio-9090-exec-4] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected &amp;#39;text/html&amp;#39; given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, application/signed-exchange;v=b3;q=0.7, */*;q=0.8]
+2025-09-29 09:58:18.709 [http-nio-9090-exec-4] DEBUG o.s.w.s.view.InternalResourceView - View [InternalResourceView], model {}
+2025-09-29 09:58:18.709 [http-nio-9090-exec-4] DEBUG o.s.w.s.view.InternalResourceView - Forwarding to [/admin/index.html]
+2025-09-29 09:58:18.709 [http-nio-9090-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - &amp;quot;FORWARD&amp;quot; dispatch for GET &amp;quot;/admin/index.html&amp;quot;, parameters={}
+2025-09-29 09:58:18.709 [http-nio-9090-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], ServletContext [/]]
+2025-09-29 09:58:18.711 [http-nio-9090-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Exiting from &amp;quot;FORWARD&amp;quot; dispatch, status 200
+2025-09-29 09:58:18.711 [http-nio-9090-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-09-29 09:58:18.711 [http-nio-9090-exec-4] DEBUG o.s.s.w.c.SecurityContextPersistenceFilter - Cleared SecurityContextHolder to complete request
+2025-09-29 09:58:18.728 [http-nio-9090-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /.well-known/appspecific/com.chrome.devtools.json
+2025-09-29 09:58:18.729 [http-nio-9090-exec-3] DEBUG o.s.s.w.c.SecurityContextPersistenceFilter - Set SecurityContextHolder to empty SecurityContext
+2025-09-29 09:58:18.729 [http-nio-9090-exec-3] DEBUG k.c.k.h.c.JwtAuthenticationFilter - Processing request: GET /.well-known/appspecific/com.chrome.devtools.json
+2025-09-29 09:58:18.730 [http-nio-9090-exec-3] INFO  k.c.k.h.c.JwtAuthenticationFilter - JWT token found for user: admin
+2025-09-29 09:58:18.730 [http-nio-9090-exec-3] DEBUG k.c.k.h.s.CustomUserDetailsService - Loading user by username: admin
+2025-09-29 09:58:18.731 [http-nio-9090-exec-3] DEBUG org.hibernate.SQL -
+    select
+        adminuser0_.id as id1_0_,
+        adminuser0_.created_at as created_2_0_,
+        adminuser0_.email as email3_0_,
+        adminuser0_.enabled as enabled4_0_,
+        adminuser0_.password as password5_0_,
+        adminuser0_.updated_at as updated_6_0_,
+        adminuser0_.username as username7_0_
+    from
+        admin_users adminuser0_
+    where
+        adminuser0_.username=?
+Hibernate:
+    select
+        adminuser0_.id as id1_0_,
+        adminuser0_.created_at as created_2_0_,
+        adminuser0_.email as email3_0_,
+        adminuser0_.enabled as enabled4_0_,
+        adminuser0_.password as password5_0_,
+        adminuser0_.updated_at as updated_6_0_,
+        adminuser0_.username as username7_0_
+    from
+        admin_users adminuser0_
+    where
+        adminuser0_.username=?
+2025-09-29 09:58:18.734 [http-nio-9090-exec-3] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [1] as [VARCHAR] - [admin]
+2025-09-29 09:58:18.738 [http-nio-9090-exec-3] DEBUG k.c.k.h.s.CustomUserDetailsService - User found: admin, enabled: 1
+2025-09-29 09:58:18.738 [http-nio-9090-exec-3] INFO  k.c.k.h.s.CustomUserDetailsService - === DB Password Hash ===
+2025-09-29 09:58:18.738 [http-nio-9090-exec-3] INFO  k.c.k.h.s.CustomUserDetailsService - Username: admin
+2025-09-29 09:58:18.738 [http-nio-9090-exec-3] INFO  k.c.k.h.s.CustomUserDetailsService - Password Hash from DB: $2a$10$LvvEzcPS6d/j1Jtz52fLIOTcDCMnrMVMukOf3tLWAr1zbIl7i9W3S
+2025-09-29 09:58:18.738 [http-nio-9090-exec-3] INFO  k.c.k.h.s.CustomUserDetailsService - Password Hash length: 60
+2025-09-29 09:58:18.739 [http-nio-9090-exec-3] INFO  k.c.k.h.c.JwtAuthenticationFilter - UserDetails loaded for user: admin, authorities: [ROLE_ADMIN]
+2025-09-29 09:58:18.741 [http-nio-9090-exec-3] DEBUG kr.co.kfs.homepage.util.JwtUtil - Token validation for user admin: true
+2025-09-29 09:58:18.741 [http-nio-9090-exec-3] INFO  k.c.k.h.c.JwtAuthenticationFilter - JWT token is valid for user: admin
+2025-09-29 09:58:18.741 [http-nio-9090-exec-3] INFO  k.c.k.h.c.JwtAuthenticationFilter - Authentication set in SecurityContext for user: admin, authorities: [ROLE_ADMIN]
+2025-09-29 09:58:18.741 [http-nio-9090-exec-3] DEBUG o.s.s.w.a.i.FilterSecurityInterceptor - Authorized filter invocation [GET /.well-known/appspecific/com.chrome.devtools.json] with attributes [permitAll]
+2025-09-29 09:58:18.741 [http-nio-9090-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /.well-known/appspecific/com.chrome.devtools.json
+2025-09-29 09:58:18.741 [http-nio-9090-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET &amp;quot;/.well-known/appspecific/com.chrome.devtools.json&amp;quot;, parameters={}
+2025-09-29 09:58:18.742 [http-nio-9090-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], ServletContext [/]]
+2025-09-29 09:58:18.743 [http-nio-9090-exec-3] DEBUG o.s.w.s.r.ResourceHttpRequestHandler - Resource not found
+2025-09-29 09:58:18.743 [http-nio-9090-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+2025-09-29 09:58:18.743 [http-nio-9090-exec-3] DEBUG o.s.s.w.c.SecurityContextPersistenceFilter - Cleared SecurityContextHolder to complete request
+2025-09-29 09:58:18.744 [http-nio-9090-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2025-09-29 09:58:18.744 [http-nio-9090-exec-3] DEBUG o.s.s.w.c.SecurityContextPersistenceFilter - Set SecurityContextHolder to empty SecurityContext
+2025-09-29 09:58:18.744 [http-nio-9090-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-09-29 09:58:18.744 [http-nio-9090-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /error
+2025-09-29 09:58:18.744 [http-nio-9090-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - &amp;quot;ERROR&amp;quot; dispatch for GET &amp;quot;/error&amp;quot;, parameters={}
+2025-09-29 09:58:18.745 [http-nio-9090-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to kr.co.kfs.homepage.controller.CustomErrorController#handleError(HttpServletRequest, Model)
+2025-09-29 09:58:18.745 [http-nio-9090-exec-3] WARN  k.c.k.h.c.CustomErrorController - Error occurred - Status: 404, URI: /.well-known/appspecific/com.chrome.devtools.json, Message: , Exception: null
+2025-09-29 09:58:18.745 [http-nio-9090-exec-3] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected &amp;#39;*/*&amp;#39; given [*/*]
+2025-09-29 09:58:18.745 [http-nio-9090-exec-3] DEBUG o.s.w.s.view.InternalResourceView - View [InternalResourceView], model {statusCode=404, errorMessage=, requestUri=</pre>
+    </div>
+
+    <script>
+        /*<![CDATA[*/
+        // Global 변수
+        const globalHashcode = "3ca46ba4a1ae4ffa1eafe216437f283e";
+        const globalFilename = "log1.log";
+
+        // 문서 정보 토글
+        function toggleDocInfo() {
+            const docInfoSection = document.getElementById('docInfoSection');
+            const toggleBtns = document.querySelectorAll('.toggle-doc-info-btn');
+
+            docInfoSection.classList.toggle('collapsed');
+            toggleBtns.forEach(btn => {
+                btn.classList.toggle('collapsed');
+            });
+        }
+
+        // 모바일 메뉴 토글
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('open');
+        }
+
+        // 모바일 메뉴 외부 클릭시 닫기
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const toggleBtn = document.querySelector('.toggle-doc-info-btn');
+
+            if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target) && !toggleBtn.contains(event.target)) {
+                mobileMenu.classList.remove('open');
+            }
+        });
+
+        // 전체 복사
+        function copyToClipboard() {
+            const textContent = document.getElementById('textContent');
+            const text = textContent.textContent;
+
+            navigator.clipboard.writeText(text).then(() => {
+                // 성공 알림 (버튼이 있다면 텍스트 변경)
+                const btns = document.querySelectorAll('button');
+                btns.forEach(btn => {
+                    if (btn.textContent.includes('전체 복사')) {
+                        const originalText = btn.innerHTML;
+                        btn.innerHTML = btn.innerHTML.replace('전체 복사', '✅ 복사됨');
+                        setTimeout(() => {
+                            btn.innerHTML = originalText;
+                        }, 2000);
+                    }
+                });
+            }).catch(err => {
+                console.error('복사 실패:', err);
+                alert('클립보드 복사에 실패했습니다.');
+            });
+        }
+
+        // 원본 다운로드
+        function downloadOriginal() {
+            if (globalHashcode && globalFilename) {
+                // filename에서 확장자 추출
+                const extension = globalFilename.split('.').pop().toLowerCase();
+                // FileController를 통해 캐시된 원본 파일 다운로드
+                const downloadUrl = '/aview/file/' + globalHashcode + '.' + extension +
+                                  '?download=true&name=' + encodeURIComponent(globalFilename);
+                downloadFile(downloadUrl, globalFilename);
+            } else {
+                alert('원본 문서의 정보가 없습니다.');
+            }
+        }
+
+        // 파일 다운로드 헬퍼 함수
+        function downloadFile(url, filename) {
+            const link = document.createElement('a');
+            link.href = url;
+            if (filename) {
+                link.download = filename;
+            }
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // 키보드 단축키
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+S or Cmd+S 다운로드
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                downloadOriginal();
+            }
+        });
+
+        // 숫자 천단위 콤마 포맷팅
+        function formatNumber(num) {
+            if (!num || num === '정보 없음') return num;
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        // 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Text Viewer loaded');
+
+            // 숫자 포맷팅 적용
+            const lineCountEl = document.getElementById('lineCountDisplay');
+            const charCountEl = document.getElementById('charCountDisplay');
+            const wordCountEl = document.getElementById('wordCountDisplay');
+
+            if (lineCountEl && lineCountEl.textContent !== '정보 없음') {
+                lineCountEl.textContent = formatNumber(lineCountEl.textContent);
+            }
+            if (charCountEl && charCountEl.textContent !== '정보 없음') {
+                charCountEl.textContent = formatNumber(charCountEl.textContent);
+            }
+            if (wordCountEl && wordCountEl.textContent !== '정보 없음') {
+                wordCountEl.textContent = formatNumber(wordCountEl.textContent);
+            }
+
+            // Text Viewer Control Bar 초기화
+            initializeTextViewerControls();
+        });
+
+        // ===== TEXT VIEWER CONTROL BAR 기능 =====
+
+        // 1. 초기값 정의 (initValues)
+        const initValues = {
+            fontSize: 14,
+            lineHeight: 1.6,
+            fontFamily: "'Noto Sans KR', sans-serif",
+            backgroundColor: '#ffffff',
+            darkMode: false,
+            lineWrap: true
+        };
+
+        // 현재 설정 상태 (전역 변수)
+        let currentSettings = { ...initValues };
+
+        // 현재 폰트 크기 상태 (하위 호환성)
+        let currentFontSize = 14;
+        // 현재 줄간 상태 (하위 호환성)
+        let currentLineHeight = 1.6;
+
+        /**
+         * Text Viewer Control Bar 초기화
+         */
+        function initializeTextViewerControls() {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+
+            // Desktop 컨트롤 이벤트 리스너 (먼저 설정)
+            setupDesktopControls();
+
+            // Mobile 컨트롤 이벤트 리스너 (먼저 설정)
+            setupMobileControls();
+
+            // 설정 초기화 및 적용 (Refactored Logic)
+            initializeSettings();
+
+            // 상태 동기화
+            syncControlsState();
+        }
+
+        /**
+         * Desktop 컨트롤 설정
+         */
+        function setupDesktopControls() {
+            const textContent = document.getElementById('textContent');
+
+            // 라인번호 토글
+            const toggleLineNumbers = document.getElementById('toggleLineNumbers');
+            if (toggleLineNumbers) {
+                toggleLineNumbers.addEventListener('change', function() {
+                    updateLineNumbers(this.checked);
+                    syncLineNumberState(this.checked);
+                });
+            }
+
+            // 줄바꿈 토글
+            const toggleLineWrap = document.getElementById('toggleLineWrap');
+            if (toggleLineWrap) {
+                toggleLineWrap.addEventListener('change', function() {
+                    updateLineWrap(this.checked);
+                    syncLineWrapState(this.checked);
+                });
+            }
+
+            // 폰트 크기 감소
+            const fontSizeDecrease = document.getElementById('fontSizeDecrease');
+            if (fontSizeDecrease) {
+                fontSizeDecrease.addEventListener('click', function() {
+                    decreaseFontSize();
+                });
+            }
+
+            // 폰트 크기 리셋
+            const fontSizeReset = document.getElementById('fontSizeReset');
+            if (fontSizeReset) {
+                fontSizeReset.addEventListener('click', function() {
+                    resetFontSize();
+                });
+            }
+
+            // 폰트 크기 증가
+            const fontSizeIncrease = document.getElementById('fontSizeIncrease');
+            if (fontSizeIncrease) {
+                fontSizeIncrease.addEventListener('click', function() {
+                    increaseFontSize();
+                });
+            }
+
+            // 폰트 패밀리 선택
+            const fontFamily = document.getElementById('fontFamily');
+            if (fontFamily) {
+                fontFamily.addEventListener('change', function() {
+                    updateFontFamily(this.value);
+                    syncFontFamilyState(this.value);
+                });
+            }
+
+            // 전체화면 토글
+            const toggleFullscreen = document.getElementById('toggleFullscreen');
+            if (toggleFullscreen) {
+                toggleFullscreen.addEventListener('click', function() {
+                    toggleFullscreenMode();
+                });
+            }
+
+            // 다크모드 토글
+            const toggleDarkMode = document.getElementById('toggleDarkMode');
+            if (toggleDarkMode) {
+                toggleDarkMode.addEventListener('click', function() {
+                    toggleDarkModeStyle();
+                });
+            }
+
+            // 배경색 선택 (custom dropdown)
+            setupCustomColorPicker('bgColorBtn', 'bgColorMenu');
+
+            // 줄간 감소
+            const lineHeightDecrease = document.getElementById('lineHeightDecrease');
+            if (lineHeightDecrease) {
+                lineHeightDecrease.addEventListener('click', function() {
+                    decreaseLineHeight();
+                });
+            }
+
+            // 줄간 리셋
+            const lineHeightReset = document.getElementById('lineHeightReset');
+            if (lineHeightReset) {
+                lineHeightReset.addEventListener('click', function() {
+                    resetLineHeight();
+                });
+            }
+
+            // 줄간 증가
+            const lineHeightIncrease = document.getElementById('lineHeightIncrease');
+            if (lineHeightIncrease) {
+                lineHeightIncrease.addEventListener('click', function() {
+                    increaseLineHeight();
+                });
+            }
+
+            // 설정 저장 버튼
+            const saveSettingsBtn = document.getElementById('saveSettings');
+            if (saveSettingsBtn) {
+                saveSettingsBtn.addEventListener('click', function() {
+                    saveSettings();
+                    showButtonFeedback(this, '✓');
+                });
+            }
+
+            // 설정 초기화 버튼
+            const resetSettingsBtn = document.getElementById('resetSettings');
+            if (resetSettingsBtn) {
+                resetSettingsBtn.addEventListener('click', function() {
+                    if (confirm('모든 설정을 초기값으로 되돌리시겠습니까?')) {
+                        resetAllSettings();
+                        showButtonFeedback(this, '✓');
+                    }
+                });
+            }
+        }
+
+        /**
+         * Mobile 컨트롤 설정
+         */
+        function setupMobileControls() {
+            // 모바일 메뉴 버튼
+            const controlsMenuBtn = document.getElementById('controlsMenuBtn');
+            if (controlsMenuBtn) {
+                controlsMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    toggleControlsMenu();
+                });
+            }
+
+            // 모바일 라인번호 토글
+            const toggleLineNumbersMobile = document.getElementById('toggleLineNumbers-mobile');
+            if (toggleLineNumbersMobile) {
+                toggleLineNumbersMobile.addEventListener('change', function() {
+                    updateLineNumbers(this.checked);
+                    syncLineNumberState(this.checked);
+                });
+            }
+
+            // 모바일 줄바꿈 토글
+            const toggleLineWrapMobile = document.getElementById('toggleLineWrap-mobile');
+            if (toggleLineWrapMobile) {
+                toggleLineWrapMobile.addEventListener('change', function() {
+                    updateLineWrap(this.checked);
+                    syncLineWrapState(this.checked);
+                });
+            }
+
+            // 모바일 폰트 크기 감소
+            const fontSizeDecreaseMobile = document.getElementById('fontSizeDecrease-mobile');
+            if (fontSizeDecreaseMobile) {
+                fontSizeDecreaseMobile.addEventListener('click', function() {
+                    decreaseFontSize();
+                });
+            }
+
+            // 모바일 폰트 크기 리셋
+            const fontSizeResetMobile = document.getElementById('fontSizeReset-mobile');
+            if (fontSizeResetMobile) {
+                fontSizeResetMobile.addEventListener('click', function() {
+                    resetFontSize();
+                });
+            }
+
+            // 모바일 폰트 크기 증가
+            const fontSizeIncreaseMobile = document.getElementById('fontSizeIncrease-mobile');
+            if (fontSizeIncreaseMobile) {
+                fontSizeIncreaseMobile.addEventListener('click', function() {
+                    increaseFontSize();
+                });
+            }
+
+            // 모바일 폰트 패밀리 선택
+            const fontFamilyMobile = document.getElementById('fontFamily-mobile');
+            if (fontFamilyMobile) {
+                fontFamilyMobile.addEventListener('change', function() {
+                    updateFontFamily(this.value);
+                    syncFontFamilyState(this.value);
+                });
+            }
+
+            // 모바일 전체화면 토글
+            const toggleFullscreenMobile = document.getElementById('toggleFullscreen-mobile');
+            if (toggleFullscreenMobile) {
+                toggleFullscreenMobile.addEventListener('click', function() {
+                    toggleFullscreenMode();
+                    closeControlsMenu();
+                });
+            }
+
+            // 모바일 다크모드 토글
+            const toggleDarkModeMobile = document.getElementById('toggleDarkMode-mobile');
+            if (toggleDarkModeMobile) {
+                toggleDarkModeMobile.addEventListener('click', function() {
+                    toggleDarkModeStyle();
+                    closeControlsMenu();
+                });
+            }
+
+            // 모바일 배경색 선택 (custom dropdown)
+            setupCustomColorPicker('bgColorBtn-mobile', 'bgColorMenu-mobile');
+
+            // 모바일 줄간 감소
+            const lineHeightDecreaseMobile = document.getElementById('lineHeightDecrease-mobile');
+            if (lineHeightDecreaseMobile) {
+                lineHeightDecreaseMobile.addEventListener('click', function() {
+                    decreaseLineHeight();
+                });
+            }
+
+            // 모바일 줄간 리셋
+            const lineHeightResetMobile = document.getElementById('lineHeightReset-mobile');
+            if (lineHeightResetMobile) {
+                lineHeightResetMobile.addEventListener('click', function() {
+                    resetLineHeight();
+                });
+            }
+
+            // 모바일 줄간 증가
+            const lineHeightIncreaseMobile = document.getElementById('lineHeightIncrease-mobile');
+            if (lineHeightIncreaseMobile) {
+                lineHeightIncreaseMobile.addEventListener('click', function() {
+                    increaseLineHeight();
+                });
+            }
+
+            // 모바일 설정 저장 버튼
+            const saveSettingsMobile = document.getElementById('saveSettings-mobile');
+            if (saveSettingsMobile) {
+                saveSettingsMobile.addEventListener('click', function() {
+                    saveSettings();
+                    showButtonFeedback(this, '저장됨');
+                    setTimeout(() => closeControlsMenu(), 1500);
+                });
+            }
+
+            // 모바일 설정 초기화 버튼
+            const resetSettingsMobile = document.getElementById('resetSettings-mobile');
+            if (resetSettingsMobile) {
+                resetSettingsMobile.addEventListener('click', function() {
+                    if (confirm('모든 설정을 초기값으로 되돌리시겠습니까?')) {
+                        resetAllSettings();
+                        showButtonFeedback(this, '초기화됨');
+                        setTimeout(() => closeControlsMenu(), 1500);
+                    }
+                });
+            }
+
+            // 모바일 메뉴 외부 클릭시 닫기
+            document.addEventListener('click', function(event) {
+                const controlsMenu = document.getElementById('controlsMenu');
+                const controlsMenuBtn = document.getElementById('controlsMenuBtn');
+                if (controlsMenu && controlsMenuBtn &&
+                    !controlsMenu.contains(event.target) &&
+                    !controlsMenuBtn.contains(event.target)) {
+                    closeControlsMenu();
+                }
+            });
+        }
+
+        /**
+         * 라인번호 업데이트 (현재 미지원 - pre 태그의 특성상 구현 불가)
+         */
+        function updateLineNumbers(show) {
+            // 라인번호 기능은 <pre> 태그의 특성상 구현이 복잡하여 미지원
+            console.log('라인번호 기능은 현재 미지원입니다.');
+        }
+
+        /**
+         * 줄바꿈 업데이트
+         */
+        function updateLineWrap(wrap) {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+
+            currentSettings.lineWrap = wrap;
+
+            if (wrap) {
+                textContent.style.whiteSpace = 'pre-wrap';
+                textContent.style.overflowWrap = 'break-word';
+            } else {
+                textContent.style.whiteSpace = 'pre';
+                textContent.style.overflowWrap = 'normal';
+            }
+        }
+
+        /**
+         * 폰트 크기 증가
+         */
+        function increaseFontSize() {
+            currentFontSize += 2;
+            if (currentFontSize > 28) currentFontSize = 28;
+            currentSettings.fontSize = currentFontSize;
+            applyFontSize();
+        }
+
+        /**
+         * 폰트 크기 감소
+         */
+        function decreaseFontSize() {
+            currentFontSize -= 2;
+            if (currentFontSize < 8) currentFontSize = 8;
+            currentSettings.fontSize = currentFontSize;
+            applyFontSize();
+        }
+
+        /**
+         * 폰트 크기 리셋 (14px로 복원)
+         */
+        function resetFontSize() {
+            currentFontSize = 14;
+            currentSettings.fontSize = currentFontSize;
+            applyFontSize();
+        }
+
+        /**
+         * 폰트 크기 적용
+         */
+        function applyFontSize() {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+
+            textContent.style.fontSize = currentFontSize + 'px';
+
+            // 버튼 텍스트 업데이트 (desktop + mobile)
+            const fontSizeResetBtn = document.getElementById('fontSizeReset');
+            const fontSizeResetBtnMobile = document.getElementById('fontSizeReset-mobile');
+            if (fontSizeResetBtn) fontSizeResetBtn.textContent = currentFontSize + 'px';
+            if (fontSizeResetBtnMobile) fontSizeResetBtnMobile.textContent = currentFontSize + 'px';
+
+            // 하이라이트가 활성화되어 있고 마지막 마우스 위치가 있으면 재계산
+            if (lastMouseEvent && textContent.classList.contains('line-highlight-enabled')) {
+                updateCursorLinePosition(lastMouseEvent);
+            }
+        }
+
+        /**
+         * 폰트 패밀리 업데이트
+         */
+        function updateFontFamily(fontValue) {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+
+            currentSettings.fontFamily = fontValue;
+            textContent.style.fontFamily = fontValue;
+        }
+
+        /**
+         * 줄간 높이 업데이트
+         */
+        function updateLineHeight(height) {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+
+            currentLineHeight = parseFloat(height);
+            currentSettings.lineHeight = currentLineHeight;
+            textContent.style.lineHeight = currentLineHeight;
+        }
+
+        /**
+         * 줄간 감소 (현재값 - 0.2)
+         */
+        function decreaseLineHeight() {
+            currentLineHeight -= 0.2;
+            if (currentLineHeight < 1.0) currentLineHeight = 1.0;
+            updateLineHeight(currentLineHeight);
+        }
+
+        /**
+         * 줄간 리셋 (1.6)
+         */
+        function resetLineHeight() {
+            updateLineHeight(1.6);
+        }
+
+        /**
+         * 줄간 증가 (현재값 + 0.2)
+         */
+        function increaseLineHeight() {
+            currentLineHeight += 0.2;
+            if (currentLineHeight > 3.0) currentLineHeight = 3.0;
+            updateLineHeight(currentLineHeight);
+        }
+
+        /**
+         * 전체화면 토글
+         */
+        function toggleFullscreenMode() {
+            const textViewer = document.querySelector('.text-viewer');
+            if (!textViewer) return;
+
+            textViewer.classList.toggle('fullscreen-mode');
+
+            if (textViewer.classList.contains('fullscreen-mode')) {
+                // 전체화면 모드 활성화
+                document.body.style.overflow = 'hidden';
+            } else {
+                // 전체화면 모드 비활성화
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        /**
+         * 다크모드 토글
+         */
+        function toggleDarkModeStyle() {
+            document.body.classList.toggle('dark-mode');
+
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            currentSettings.darkMode = isDarkMode;
+        }
+
+        /**
+         * 배경색 업데이트
+         */
+        function updateBackgroundColor(color) {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+
+            currentSettings.backgroundColor = color;
+            textContent.style.backgroundColor = color;
+        }
+
+        /**
+         * 커스텀 색상 피커 설정
+         */
+        function setupCustomColorPicker(btnId, menuId) {
+            const btn = document.getElementById(btnId);
+            const menu = document.getElementById(menuId);
+
+            if (!btn || !menu) return;
+
+            // 버튼 클릭 시 메뉴 토글
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                menu.classList.toggle('open');
+            });
+
+            // 색상 옵션 클릭
+            const options = menu.querySelectorAll('.custom-color-option');
+            options.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const color = this.dataset.color;
+
+                    // 배경색 업데이트
+                    updateBackgroundColor(color);
+
+                    // 버튼 색상 업데이트
+                    btn.style.backgroundColor = color;
+                    btn.dataset.color = color;
+
+                    // Active 상태 업데이트
+                    options.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // 다른 피커와 동기화
+                    syncCustomColorPickers(color);
+
+                    // 메뉴 닫기
+                    menu.classList.remove('open');
+                });
+            });
+
+            // 외부 클릭 시 메뉴 닫기
+            document.addEventListener('click', function(e) {
+                if (!btn.contains(e.target) && !menu.contains(e.target)) {
+                    menu.classList.remove('open');
+                }
+            });
+        }
+
+        /**
+         * 모든 커스텀 색상 피커 동기화
+         */
+        function syncCustomColorPickers(color) {
+            const btns = document.querySelectorAll('.custom-color-btn');
+            const options = document.querySelectorAll('.custom-color-option');
+
+            btns.forEach(btn => {
+                btn.style.backgroundColor = color;
+                btn.dataset.color = color;
+            });
+
+            options.forEach(option => {
+                if (option.dataset.color === color) {
+                    option.classList.add('active');
+                } else {
+                    option.classList.remove('active');
+                }
+            });
+        }
+
+        /**
+         * Control 상태 동기화 (Desktop <-> Mobile)
+         */
+        function syncControlsState() {
+            // 현재 라인번호 상태 확인
+            const toggleLineNumbersDt = document.getElementById('toggleLineNumbers');
+            if (toggleLineNumbersDt) {
+                const isMbElement = document.getElementById('toggleLineNumbers-mobile');
+                if (isMbElement) {
+                    isMbElement.checked = toggleLineNumbersDt.checked;
+                }
+            }
+
+            // 현재 줄바꿈 상태 확인
+            const toggleLineWrapDt = document.getElementById('toggleLineWrap');
+            if (toggleLineWrapDt) {
+                const isMbElement = document.getElementById('toggleLineWrap-mobile');
+                if (isMbElement) {
+                    isMbElement.checked = toggleLineWrapDt.checked;
+                }
+            }
+
+            // 현재 폰트 상태 확인
+            const fontFamilyDt = document.getElementById('fontFamily');
+            if (fontFamilyDt) {
+                const fontFamilyMb = document.getElementById('fontFamily-mobile');
+                if (fontFamilyMb) {
+                    fontFamilyMb.value = fontFamilyDt.value;
+                }
+            }
+        }
+
+        /**
+         * 라인번호 상태 동기화
+         */
+        function syncLineNumberState(checked) {
+            const toggleLineNumbersDt = document.getElementById('toggleLineNumbers');
+            const toggleLineNumbersMb = document.getElementById('toggleLineNumbers-mobile');
+
+            if (toggleLineNumbersDt && toggleLineNumbersMb) {
+                if (toggleLineNumbersDt.checked !== checked) {
+                    toggleLineNumbersDt.checked = checked;
+                }
+                if (toggleLineNumbersMb.checked !== checked) {
+                    toggleLineNumbersMb.checked = checked;
+                }
+            }
+        }
+
+        /**
+         * 줄바꿈 상태 동기화
+         */
+        function syncLineWrapState(checked) {
+            const toggleLineWrapDt = document.getElementById('toggleLineWrap');
+            const toggleLineWrapMb = document.getElementById('toggleLineWrap-mobile');
+
+            if (toggleLineWrapDt && toggleLineWrapMb) {
+                if (toggleLineWrapDt.checked !== checked) {
+                    toggleLineWrapDt.checked = checked;
+                }
+                if (toggleLineWrapMb.checked !== checked) {
+                    toggleLineWrapMb.checked = checked;
+                }
+            }
+        }
+
+        /**
+         * 폰트 패밀리 상태 동기화
+         */
+        function syncFontFamilyState(value) {
+            const fontFamilyDt = document.getElementById('fontFamily');
+            const fontFamilyMb = document.getElementById('fontFamily-mobile');
+
+            if (fontFamilyDt && fontFamilyMb) {
+                if (fontFamilyDt.value !== value) {
+                    fontFamilyDt.value = value;
+                }
+                if (fontFamilyMb.value !== value) {
+                    fontFamilyMb.value = value;
+                }
+            }
+        }
+
+        /**
+         * 모바일 드롭다운 메뉴 열기/닫기
+         */
+        function toggleControlsMenu() {
+            const controlsMenu = document.getElementById('controlsMenu');
+            if (controlsMenu) {
+                controlsMenu.classList.toggle('open');
+            }
+        }
+
+        /**
+         * 모바일 드롭다운 메뉴 닫기
+         */
+        function closeControlsMenu() {
+            const controlsMenu = document.getElementById('controlsMenu');
+            if (controlsMenu) {
+                controlsMenu.classList.remove('open');
+            }
+        }
+
+        // ===== 설정 저장/로드/초기화 기능 =====
+
+        /**
+         * 현재 설정을 localStorage에 저장
+         */
+        function saveSettings() {
+            localStorage.setItem('aview-text-settings', JSON.stringify(currentSettings));
+            console.log('💾 설정이 저장되었습니다:', currentSettings);
+        }
+
+        /**
+         * 설정 초기화 및 적용 (Refactored)
+         * Flow: initValues -> userValues -> controlBarValues -> UI & Viewer
+         */
+        function initializeSettings() {
+            try {
+                // 2. localStorage에서 값 가져오기 (userValues)
+                let userValues = {};
+                const saved = localStorage.getItem('aview-text-settings');
+                if (saved) {
+                    userValues = JSON.parse(saved);
+                    console.log('📂 저장된 설정을 찾았습니다 (userValues):', userValues);
+                }
+
+                // 3. 값 병합 (controlBarValues)
+                // userValues에 없는 키는 initValues의 값을 사용
+                const controlBarValues = { ...initValues, ...userValues };
+                
+                // lineHighlight는 무조건 false (사용자 요청)
+                // controlBarValues.lineHighlight = false; // initValues에서 이미 제외됨
+
+                console.log('🔄 병합된 설정 (controlBarValues):', controlBarValues);
+
+                // 전역 설정 변수 업데이트
+                currentSettings = controlBarValues;
+                currentFontSize = currentSettings.fontSize;
+                currentLineHeight = currentSettings.lineHeight;
+
+                // 4. Control-bar UI 설정
+                updateControlBarUI(controlBarValues);
+
+                // 5. Viewer UI 셋팅
+                applySettingsToViewer(controlBarValues);
+
+            } catch (e) {
+                console.error('❌ 설정 초기화 오류:', e);
+                // 오류 발생 시 기본값으로 복구 시도
+                currentSettings = { ...initValues };
+                applySettingsToViewer(currentSettings);
+            }
+        }
+
+        /**
+         * Control Bar UI 요소를 설정값으로 업데이트
+         */
+        function updateControlBarUI(values) {
+            // 줄바꿈 체크박스
+            const wrapDt = document.getElementById('toggleLineWrap');
+            const wrapMb = document.getElementById('toggleLineWrap-mobile');
+            if (wrapDt) wrapDt.checked = values.lineWrap;
+            if (wrapMb) wrapMb.checked = values.lineWrap;
+
+            // 폰트 크기 버튼 텍스트 (현재 크기 표시용이 있다면)
+            const fontSizeResetBtn = document.getElementById('fontSizeReset');
+            const fontSizeResetBtnMobile = document.getElementById('fontSizeReset-mobile');
+            if (fontSizeResetBtn) fontSizeResetBtn.textContent = values.fontSize + 'px';
+            if (fontSizeResetBtnMobile) fontSizeResetBtnMobile.textContent = values.fontSize + 'px';
+
+            // 폰트 패밀리 선택
+            const fontDt = document.getElementById('fontFamily');
+            const fontMb = document.getElementById('fontFamily-mobile');
+            if (fontDt) fontDt.value = values.fontFamily;
+            if (fontMb) fontMb.value = values.fontFamily;
+            
+            // 배경색 (커스텀 컬러 피커 동기화)
+            syncCustomColorPickers(values.backgroundColor);
+        }
+
+        /**
+         * Viewer 및 Body 스타일 적용
+         */
+        function applySettingsToViewer(values) {
+            const textContent = document.getElementById('textContent');
+            if (textContent) {
+                textContent.style.fontSize = values.fontSize + 'px';
+                textContent.style.lineHeight = values.lineHeight;
+                textContent.style.fontFamily = values.fontFamily;
+                textContent.style.backgroundColor = values.backgroundColor;
+
+                // 줄바꿈 적용
+                if (values.lineWrap) {
+                    textContent.style.whiteSpace = 'pre-wrap';
+                    textContent.style.overflowWrap = 'break-word';
+                } else {
+                    textContent.style.whiteSpace = 'pre';
+                    textContent.style.overflowWrap = 'normal';
+                }
+            }
+
+            // 다크모드 적용
+            if (values.darkMode) {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+            
+            console.log('✅ 뷰어 스타일 적용 완료');
+        }
+
+        /**
+         * 모든 설정을 기본값으로 초기화
+         */
+        function resetAllSettings() {
+            // 설정 초기화
+            currentSettings = { ...initValues };
+            currentFontSize = initValues.fontSize;
+            currentLineHeight = initValues.lineHeight;
+
+            // localStorage 삭제
+            localStorage.removeItem('aview-text-settings');
+
+            // UI에 기본값 적용
+            const textContent = document.getElementById('textContent');
+            if (textContent) {
+                textContent.style.fontSize = initValues.fontSize + 'px';
+                textContent.style.lineHeight = initValues.lineHeight;
+                textContent.style.fontFamily = initValues.fontFamily;
+                textContent.style.backgroundColor = initValues.backgroundColor;
+                textContent.style.whiteSpace = 'pre-wrap';
+                textContent.style.overflowWrap = 'break-word';
+
+                // 커서 라인 하이라이트 비활성화
+                textContent.classList.remove('line-highlight-enabled');
+            }
+
+            // 다크모드 비활성화
+            document.body.classList.remove('dark-mode');
+
+            // UI 컨트롤 동기화
+            updateControlBarUI(initValues);
+
+            // 배경색 피커 동기화
+            syncCustomColorPickers(initValues.backgroundColor);
+
+            console.log('설정이 초기화되었습니다.');
+        }
+
+        /**
+         * 버튼 피드백 표시 (저장됨/초기화됨)
+         */
+        function showButtonFeedback(button, text) {
+            const originalHTML = button.innerHTML;
+            button.innerHTML = text;
+            button.style.backgroundColor = '#28a745';
+            button.style.color = 'white';
+
+            setTimeout(() => {
+                button.innerHTML = originalHTML;
+                button.style.backgroundColor = '';
+                button.style.color = '';
+            }, 2000);
+        }
+
+        // ===== SEARCH FEATURE =====
+
+        let searchMatches = [];
+        let currentMatchIndex = -1;
+
+        /**
+         * Search for text in the document
+         */
+        function searchText() {
+            const textContent = document.getElementById('textContent');
+            const searchInputDt = document.getElementById('searchInput');
+            const searchInputMb = document.getElementById('searchInput-mobile');
+
+            if (!textContent) return;
+
+            // Get search query from either input
+            const query = (searchInputDt?.value || searchInputMb?.value || '').trim();
+
+            // Clear search if query is empty
+            if (!query) {
+                clearSearch();
+                return;
+            }
+
+            // 커서라인 하이라이트가 활성화되어 있으면 비활성화
+            if (textContent.classList.contains('line-highlight-enabled')) {
+                const toggleDt = document.getElementById('toggleLineHighlight');
+                const toggleMb = document.getElementById('toggleLineHighlight-mobile');
+                if (toggleDt) toggleDt.checked = false;
+                if (toggleMb) toggleMb.checked = false;
+                toggleCursorLineHighlight(false);
+            }
+
+            // Store original content if not already stored
+            if (!originalTextContent) {
+                originalTextContent = textContent.textContent;
+            }
+
+            // Clear previous highlights
+            searchMatches = [];
+            currentMatchIndex = -1;
+
+            // Escape special regex characters
+            const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+            // Create case-insensitive regex
+            const regex = new RegExp(escapedQuery, 'gi');
+
+            // Get all matches
+            let match;
+            while ((match = regex.exec(originalTextContent)) !== null) {
+                searchMatches.push({
+                    index: match.index,
+                    text: match[0]
+                });
+            }
+
+            // Update counter
+            updateSearchCounter();
+
+            // If matches found, highlight and go to first
+            if (searchMatches.length > 0) {
+                currentMatchIndex = 0;
+                highlightMatches(query);
+                scrollToMatch(0);
+                updateSearchCounter();
+            } else {
+                // No matches - restore original content
+                textContent.textContent = originalTextContent;
+                updateSearchCounter();
+            }
+        }
+
+        /**
+         * Highlight all matches in the text
+         */
+        function highlightMatches(query) {
+            const textContent = document.getElementById('textContent');
+            if (!textContent || searchMatches.length === 0) return;
+
+            // Escape special regex characters
+            const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const regex = new RegExp(`(${escapedQuery})`, 'gi');
+
+            // Replace matches with highlighted spans
+            let highlightedText = originalTextContent;
+            let offset = 0;
+
+            searchMatches.forEach((match, index) => {
+                const beforeText = highlightedText.substring(0, match.index + offset);
+                const matchText = highlightedText.substring(match.index + offset, match.index + offset + match.text.length);
+                const afterText = highlightedText.substring(match.index + offset + match.text.length);
+
+                const className = index === currentMatchIndex ? 'search-highlight current' : 'search-highlight';
+                const highlightSpan = `<mark class="${className}" data-match-index="${index}">${matchText}</mark>`;
+
+                highlightedText = beforeText + highlightSpan + afterText;
+                offset += highlightSpan.length - matchText.length;
+            });
+
+            textContent.innerHTML = highlightedText;
+        }
+
+        /**
+         * Find next match
+         */
+        function findNext() {
+            if (searchMatches.length === 0) {
+                searchText();
+                return;
+            }
+
+            // Move to next match (cycle back to 0)
+            currentMatchIndex = (currentMatchIndex + 1) % searchMatches.length;
+
+            // Update highlights
+            updateCurrentHighlight();
+
+            // Scroll to current match
+            scrollToMatch(currentMatchIndex);
+
+            // Update counter
+            updateSearchCounter();
+        }
+
+        /**
+         * Find previous match
+         */
+        function findPrevious() {
+            if (searchMatches.length === 0) {
+                searchText();
+                return;
+            }
+
+            // Move to previous match (cycle back to last)
+            currentMatchIndex = (currentMatchIndex - 1 + searchMatches.length) % searchMatches.length;
+
+            // Update highlights
+            updateCurrentHighlight();
+
+            // Scroll to current match
+            scrollToMatch(currentMatchIndex);
+
+            // Update counter
+            updateSearchCounter();
+        }
+
+        /**
+         * Update which match is currently highlighted
+         */
+        function updateCurrentHighlight() {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+
+            const allHighlights = textContent.querySelectorAll('.search-highlight');
+            allHighlights.forEach((highlight, index) => {
+                if (index === currentMatchIndex) {
+                    highlight.classList.add('current');
+                } else {
+                    highlight.classList.remove('current');
+                }
+            });
+        }
+
+        /**
+         * Scroll to the specified match
+         */
+        function scrollToMatch(matchIndex) {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+
+            const currentHighlight = textContent.querySelector(`[data-match-index="${matchIndex}"]`);
+            if (currentHighlight) {
+                currentHighlight.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+        }
+
+        /**
+         * Update search counter display
+         */
+        function updateSearchCounter() {
+            const counterDt = document.getElementById('searchCounter');
+            const counterMb = document.getElementById('searchCounter-mobile');
+
+            let counterText = '';
+            if (searchMatches.length > 0) {
+                counterText = `${currentMatchIndex + 1}/${searchMatches.length}`;
+            }
+
+            if (counterDt) counterDt.textContent = counterText;
+            if (counterMb) counterMb.textContent = counterText;
+        }
+
+        /**
+         * Clear search and restore original content
+         */
+        function clearSearch() {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+
+            // Restore original content
+            if (originalTextContent) {
+                textContent.textContent = originalTextContent;
+            }
+
+            // Clear state
+            searchMatches = [];
+            currentMatchIndex = -1;
+            originalTextContent = '';
+
+            // Clear counter
+            updateSearchCounter();
+        }
+
+        /**
+         * Sync search state between desktop and mobile
+         */
+        function syncSearchState() {
+            const searchInputDt = document.getElementById('searchInput');
+            const searchInputMb = document.getElementById('searchInput-mobile');
+
+            if (searchInputDt && searchInputMb) {
+                // Sync input values
+                if (document.activeElement === searchInputDt) {
+                    searchInputMb.value = searchInputDt.value;
+                } else if (document.activeElement === searchInputMb) {
+                    searchInputDt.value = searchInputMb.value;
+                }
+            }
+        }
+
+        /**
+         * Initialize search feature
+         */
+        function initializeSearchFeature() {
+            // Desktop search input
+            const searchInputDt = document.getElementById('searchInput');
+            const searchClearBtnDt = document.getElementById('searchClearBtn');
+
+            if (searchInputDt) {
+                searchInputDt.addEventListener('input', function() {
+                    syncSearchState();
+                    // X 버튼 표시/숨김
+                    if (this.value.trim()) {
+                        searchText();
+                        if (searchClearBtnDt) searchClearBtnDt.classList.add('visible');
+                    } else {
+                        clearSearch();
+                        if (searchClearBtnDt) searchClearBtnDt.classList.remove('visible');
+                    }
+                });
+
+                searchInputDt.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (e.shiftKey) {
+                            findPrevious();
+                        } else {
+                            findNext();
+                        }
+                    } else if (e.key === 'Escape' || e.key === 'Delete') {
+                        e.preventDefault();
+                        this.value = '';
+                        syncSearchState();
+                        clearSearch();
+                        if (searchClearBtnDt) searchClearBtnDt.classList.remove('visible');
+                        const searchClearBtnMb = document.getElementById('searchClearBtn-mobile');
+                        if (searchClearBtnMb) searchClearBtnMb.classList.remove('visible');
+                    }
+                });
+            }
+
+            // Desktop clear button
+            if (searchClearBtnDt) {
+                searchClearBtnDt.addEventListener('click', function() {
+                    if (searchInputDt) searchInputDt.value = '';
+                    const searchInputMb = document.getElementById('searchInput-mobile');
+                    if (searchInputMb) searchInputMb.value = '';
+                    clearSearch();
+                    this.classList.remove('visible');
+                    const searchClearBtnMb = document.getElementById('searchClearBtn-mobile');
+                    if (searchClearBtnMb) searchClearBtnMb.classList.remove('visible');
+                });
+            }
+
+            // Desktop search button
+            const searchBtnDt = document.getElementById('searchBtn');
+            if (searchBtnDt) {
+                searchBtnDt.addEventListener('click', findNext);
+            }
+
+            // Mobile search input
+            const searchInputMb = document.getElementById('searchInput-mobile');
+            const searchClearBtnMb = document.getElementById('searchClearBtn-mobile');
+
+            if (searchInputMb) {
+                searchInputMb.addEventListener('input', function() {
+                    syncSearchState();
+                    // X 버튼 표시/숨김
+                    if (this.value.trim()) {
+                        searchText();
+                        if (searchClearBtnMb) searchClearBtnMb.classList.add('visible');
+                    } else {
+                        clearSearch();
+                        if (searchClearBtnMb) searchClearBtnMb.classList.remove('visible');
+                    }
+                });
+
+                searchInputMb.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (e.shiftKey) {
+                            findPrevious();
+                        } else {
+                            findNext();
+                        }
+                    } else if (e.key === 'Escape' || e.key === 'Delete') {
+                        e.preventDefault();
+                        this.value = '';
+                        syncSearchState();
+                        clearSearch();
+                        if (searchClearBtnMb) searchClearBtnMb.classList.remove('visible');
+                        if (searchClearBtnDt) searchClearBtnDt.classList.remove('visible');
+                    }
+                });
+            }
+
+            // Mobile clear button
+            if (searchClearBtnMb) {
+                searchClearBtnMb.addEventListener('click', function() {
+                    if (searchInputMb) searchInputMb.value = '';
+                    if (searchInputDt) searchInputDt.value = '';
+                    clearSearch();
+                    this.classList.remove('visible');
+                    if (searchClearBtnDt) searchClearBtnDt.classList.remove('visible');
+                });
+            }
+
+            // Mobile search button
+            const searchBtnMb = document.getElementById('searchBtn-mobile');
+            if (searchBtnMb) {
+                searchBtnMb.addEventListener('click', findNext);
+            }
+
+            // Global ESC key handler
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && searchMatches.length > 0) {
+                    const searchInputDt = document.getElementById('searchInput');
+                    const searchInputMb = document.getElementById('searchInput-mobile');
+                    if (searchInputDt) searchInputDt.value = '';
+                    if (searchInputMb) searchInputMb.value = '';
+                    clearSearch();
+                }
+            });
+        }
+
+        // Initialize search feature after DOM is loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(initializeSearchFeature, 100);
+            });
+        } else {
+            setTimeout(initializeSearchFeature, 100);
+        }
+
+        // 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            const generatedAt = "2025-11-28 09:10:45";
+            
+            console.log('Text Viewer loaded');
+            console.log('%c🔍 AView Document Info', 'color: #0066cc; font-weight: bold; font-size: 14px;');
+            console.log('Generated:', generatedAt);
+            console.log('Hashcode:', globalHashcode);
+            console.log('Filename:', globalFilename);
+            console.log('Template:', 'log.html');
+            console.log('─'.repeat(50));
+        });
+        /*]]>*/
+    </script>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <svg width="20" height="20"><use href="#icon-help-title"/></svg>
+                    로그 뷰어 사용 팁
+                </h3>
+                <button type="button" class="close-modal-btn" id="closeHelpModal" title="닫기">
+                    <svg width="20" height="20"><use href="#icon-close"/></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="help-list" id="helpList"></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Modal Script -->
+    <script>
+        // ===== 로그 레벨 컬러링 기능 =====
+
+        const LOG_LEVEL_COLORS = {
+            DEBUG: '#d3d3d3',
+            INFO: '#b3e5fc',
+            WARN: '#fffacd',
+            ERROR: '#ffcccc',
+            SYSTEM: '#c8e6c9'
+        };
+
+        const LOG_LEVEL_REGEX = {
+            DEBUG: /\bDEBUG\b/,
+            INFO: /\bINFO\b/,
+            WARN: /\bWARN(?:ING)?\b/,
+            ERROR: /\bERROR\b/,
+            SYSTEM: /\bSYSTEM\b/
+        };
+
+        let activatedLogLevels = {
+            DEBUG: false,
+            INFO: false,
+            WARN: false,
+            ERROR: false,
+            SYSTEM: false
+        };
+
+        let logLevelColoringEnabled = false;
+        let originalTextContent = '';
+
+        /**
+         * 로그 레벨 컬러링 초기화
+         */
+        function initializeLogLevelColoring() {
+            const logLevelColoringBtn = document.getElementById('logLevelColoringBtn');
+            if (!logLevelColoringBtn) return;
+
+            // 원본 텍스트 저장
+            const textContent = document.getElementById('textContent');
+            if (textContent) {
+                originalTextContent = textContent.textContent;
+            }
+
+            // 버튼 클릭 시 드롭다운 토글
+            logLevelColoringBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const dropdown = document.getElementById('logLevelColoringDropdown');
+                dropdown.classList.toggle('open');
+            });
+
+            // 체크박스 변경 시
+            const checkboxes = document.querySelectorAll('.log-level-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', (e) => {
+                    const level = e.target.dataset.level;
+                    activatedLogLevels[level] = e.target.checked;
+                });
+            });
+
+            // 모두선택 버튼
+            const selectAllBtn = document.getElementById('selectAllBtn');
+            if (selectAllBtn) {
+                selectAllBtn.addEventListener('click', () => {
+                    checkboxes.forEach(checkbox => {
+                        checkbox.checked = true;
+                        activatedLogLevels[checkbox.dataset.level] = true;
+                    });
+                });
+            }
+
+            // 모두해제 버튼
+            const deselectAllBtn = document.getElementById('deselectAllBtn');
+            if (deselectAllBtn) {
+                deselectAllBtn.addEventListener('click', () => {
+                    checkboxes.forEach(checkbox => {
+                        checkbox.checked = false;
+                        activatedLogLevels[checkbox.dataset.level] = false;
+                    });
+                });
+            }
+
+            // 적용 버튼
+            const applyColoringBtn = document.getElementById('applyColoringBtn');
+            if (applyColoringBtn) {
+                applyColoringBtn.addEventListener('click', () => {
+                    applyLogLevelColoring();
+                    saveLogLevelColoringSettings();
+                    // 드롭다운 닫기
+                    const dropdown = document.getElementById('logLevelColoringDropdown');
+                    dropdown.classList.remove('open');
+                });
+            }
+
+            // 외부 클릭 시 드롭다운 닫기
+            document.addEventListener('click', (e) => {
+                const dropdown = document.getElementById('logLevelColoringDropdown');
+                const btn = document.getElementById('logLevelColoringBtn');
+                if (dropdown && !dropdown.contains(e.target) && !btn.contains(e.target)) {
+                    dropdown.classList.remove('open');
+                }
+            });
+
+            // 저장된 설정 로드 (사용자 요청으로 로딩 시에는 모두 해제된 상태 유지)
+            // loadLogLevelColoringSettings();
+        }
+
+        /**
+         * 로그 레벨 컬러링 적용
+         */
+        function applyLogLevelColoring() {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+
+            const lines = originalTextContent.split('\n');
+            let highlightedHTML = '';
+
+            lines.forEach((line, index) => {
+                let highlightedLine = line;
+                let matched = false;
+
+                // 각 로그 레벨 확인 (우선순위: ERROR > WARN > INFO > DEBUG > SYSTEM)
+                const levels = ['ERROR', 'WARN', 'INFO', 'DEBUG', 'SYSTEM'];
+                for (let level of levels) {
+                    if (activatedLogLevels[level] && LOG_LEVEL_REGEX[level].test(line)) {
+                        // CSS 클래스 사용
+                        highlightedLine = `<span class="log-line ${level.toLowerCase()}">${escapeHtml(line)}</span>`;
+                        matched = true;
+                        break;
+                    }
+                }
+
+                if (!matched) {
+                    highlightedLine = `<span>${escapeHtml(line)}</span>`;
+                }
+
+                highlightedHTML += highlightedLine;
+                if (index < lines.length - 1) {
+                    highlightedHTML += '\n';
+                }
+            });
+
+            textContent.innerHTML = highlightedHTML;
+            logLevelColoringEnabled = true;
+        }
+
+        /**
+         * HTML 특수문자 이스케이프
+         */
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+
+        /**
+         * 로그 레벨 컬러링 제거
+         */
+        function removeLogLevelColoring() {
+            const textContent = document.getElementById('textContent');
+            if (!textContent) return;
+            textContent.textContent = originalTextContent;
+            logLevelColoringEnabled = false;
+        }
+
+        /**
+         * 로그 레벨 컬러링 설정 저장
+         */
+        function saveLogLevelColoringSettings() {
+            localStorage.setItem('aview-log-level-coloring', JSON.stringify({
+                enabled: logLevelColoringEnabled,
+                levels: activatedLogLevels
+            }));
+        }
+
+        /**
+         * 로그 레벨 컬러링 설정 로드
+         */
+        function loadLogLevelColoringSettings() {
+            try {
+                const saved = localStorage.getItem('aview-log-level-coloring');
+                if (saved) {
+                    const settings = JSON.parse(saved);
+                    activatedLogLevels = settings.levels || activatedLogLevels;
+                    
+                    // 체크박스 상태 동기화
+                    Object.entries(activatedLogLevels).forEach(([level, enabled]) => {
+                        const checkbox = document.querySelector(`[data-level="${level}"]`);
+                        if (checkbox) {
+                            checkbox.checked = enabled;
+                        }
+                    });
+                }
+            } catch (e) {
+                console.error('로그 레벨 컬러링 설정 로드 실패:', e);
+            }
+        }
+
+        // 로그 레벨 컬러링 초기화
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(() => {
+                    initializeLogLevelColoring();
+                }, 100);
+            });
+        } else {
+            setTimeout(() => {
+                initializeLogLevelColoring();
+            }, 100);
+        }
+
+        // ===== Help Modal Data =====
+        const helpData = [
+            {title: "검색 기능", desc: "Ctrl+F로 로그에서 텍스트를 검색할 수 있습니다.", iconId: "icon-search"},
+            {title: "폰트 크기", desc: "버튼으로 폰트 크기를 조절할 수 있습니다.", iconId: "icon-columns"},
+            {title: "다크 모드", desc: "달 아이콘으로 다크 모드를 전환할 수 있습니다.", iconId: "icon-moon"},
+            {title: "전체화면", desc: "전체화면 버튼으로 로그를 최대 크기로 볼 수 있습니다.", iconId: "icon-autofit"},
+            {title: "설정 저장", desc: "현재 설정을 저장하여 다음 방문 시에도 유지됩니다.", iconId: "icon-save"}
+        ];
+
+        const helpBtn = document.getElementById('helpBtn');
+        const helpModal = document.getElementById('helpModal');
+        const closeHelpModalBtn = document.getElementById('closeHelpModal');
+        const helpList = document.getElementById('helpList');
+
+        function renderHelpModal() {
+            if (!helpList) return;
+            helpList.innerHTML = helpData.map(item => 
+                `<li class="help-item"><div class="help-icon"><svg width="14" height="14"><use href="#${item.iconId}"/></svg></div><div class="help-text"><h4>${item.title}</h4><p>${item.desc}</p></div></li>`
+            ).join('');
+        }
+
+        function openHelpModal() {
+            renderHelpModal();
+            helpModal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeHelpModal() {
+            helpModal.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        if (helpBtn) helpBtn.addEventListener('click', openHelpModal);
+        if (closeHelpModalBtn) closeHelpModalBtn.addEventListener('click', closeHelpModal);
+        if (helpModal) helpModal.addEventListener('click', (e) => e.target === helpModal && closeHelpModal());
+        document.addEventListener('keydown', (e) => e.key === 'Escape' && helpModal.classList.contains('open') && closeHelpModal());
+    </script>
+</body>
+</html>
