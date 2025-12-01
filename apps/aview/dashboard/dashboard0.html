@@ -1,0 +1,372 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - AView Admin</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/aview/static/images/favicon16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/aview/static/images/favicon32.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen">
+        <!-- Navigation Fragment -->
+        <div><header class="bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-4">
+            <!-- Left: Logo/Brand -->
+            <div class="flex items-center space-x-3">
+                <img src="/aview/images/favicon32.png" alt="AView Logo" class="h-8 w-8 rounded">
+                <a href="/aview/" class="text-lg font-bold text-white hover:text-blue-100 transition whitespace-nowrap">
+                    AView<span> - Document viewer for AssetERP</span>
+                </a>
+            </div>
+
+            <!-- Center: Navigation Links -->
+            <nav class="hidden lg:flex space-x-1">
+                <a href="/aview/admin/dashboard"
+                   class="text-blue-100 hover:bg-blue-500 px-4 py-2 rounded-lg text-base font-medium transition duration-200">
+                    Dashboard
+                </a>
+                <a href="/aview/admin/run-test"
+                   class="text-blue-100 hover:bg-blue-500 px-4 py-2 rounded-lg text-base font-medium transition duration-200">
+                    Test
+                </a>
+
+                <!-- Management Dropdown -->
+                <div class="relative group" x-data="{ open: false }">
+                    <button type="button" @click="open = !open" @click.away="open = false"
+                            class="text-blue-100 hover:bg-blue-500 px-4 py-2 rounded-lg text-base font-medium transition duration-200 flex items-center gap-1">
+                        Management
+                        <svg class="h-4 w-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                        </svg>
+                    </button>
+                    <!-- Dropdown Menu -->
+                    <div x-show="open" x-transition
+                         class="absolute left-0 mt-0 w-48 bg-white rounded-lg shadow-xl py-2 z-50">
+                        <a href="/aview/admin/manage/cache-folder"
+                           class="block px-4 py-2 text-gray-700 hover:bg-blue-50 transition text-base">
+                            📁 Cache Folder
+                        </a>
+                        <a href="/aview/admin/manage/history-db"
+                           class="block px-4 py-2 text-gray-700 hover:bg-blue-50 transition text-base">
+                            🗄️ History DB
+                        </a>
+                        <a href="/aview/admin/manage/log-view"
+                           class="block px-4 py-2 text-gray-700 hover:bg-blue-50 transition text-base">
+                            📋 Log View
+                        </a>
+                    </div>
+                </div>
+
+                <a href="/aview/admin/about"
+                   class="text-blue-100 hover:bg-blue-500 px-4 py-2 rounded-lg text-base font-medium transition duration-200">
+                    About
+                </a>
+            </nav>
+
+            <!-- Right: User & Actions -->
+            <div class="flex items-center space-x-4">
+                <!-- Version Badge -->
+                <span class="hidden md:inline-block bg-blue-500 text-white text-sm font-semibold px-3 py-1 rounded-full">
+                    v<span>1.0.0</span>
+                </span>
+
+                <!-- Logout Button -->
+                <a href="/aview/admin/logout"
+                   class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition duration-200 text-base font-medium shadow-md hover:shadow-lg">
+                    Logout
+                </a>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu (hidden on larger screens) -->
+        <div class="lg:hidden pb-4 space-y-2" x-data="{ mobileOpen: false }">
+            <a href="/aview/admin/dashboard"
+               class="block text-blue-100 hover:bg-blue-500 px-4 py-2 rounded-lg text-base font-medium transition">
+                Dashboard
+            </a>
+            <a href="/aview/admin/run-test"
+               class="block text-blue-100 hover:bg-blue-500 px-4 py-2 rounded-lg text-base font-medium transition">
+                Test
+            </a>
+            <!-- Mobile Management Dropdown -->
+            <div>
+                <button type="button" @click="mobileOpen = !mobileOpen"
+                        class="w-full text-left text-blue-100 hover:bg-blue-500 px-4 py-2 rounded-lg text-base font-medium transition flex items-center gap-1">
+                    Management
+                    <svg class="h-4 w-4 ml-auto transition-transform" :class="mobileOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                    </svg>
+                </button>
+                <div x-show="mobileOpen" x-transition class="pl-4 space-y-1 mt-1">
+                    <a href="/aview/admin/manage/cache-folder"
+                       class="block text-blue-100 hover:bg-blue-500 px-4 py-2 rounded-lg text-base transition">
+                        📁 Cache Folder
+                    </a>
+                    <a href="/aview/admin/manage/history-db"
+                       class="block text-blue-100 hover:bg-blue-500 px-4 py-2 rounded-lg text-base transition">
+                        📊 History DB
+                    </a>
+                    <a href="/aview/admin/manage/log-view"
+                       class="block text-blue-100 hover:bg-blue-500 px-4 py-2 rounded-lg text-base transition">
+                        📋 Log View
+                    </a>
+                </div>
+            </div>
+            <a href="/aview/admin/about"
+               class="block text-blue-100 hover:bg-blue-500 px-4 py-2 rounded-lg text-base font-medium transition">
+                About
+            </a>
+        </div>
+    </div>
+</header></div>
+
+        <!-- Main Content -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- System Environment -->
+            <div class="bg-white rounded-lg shadow p-6 mb-8">
+                <h3 class="text-lg font-semibold text-blue-900 mb-4 bg-blue-100 p-3 rounded-lg">System Environment</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-500">Profile</p>
+                        <p class="text-xl font-semibold">local</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">OS</p>
+                        <p class="text-xl font-semibold">Windows 11</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Host</p>
+                        <p class="text-xl font-semibold">KDY-3560</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">IP Address</p>
+                        <p class="text-xl font-semibold">192.168.0.5</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+                    <div>
+                        <p class="text-sm text-gray-500">CPU Cores</p>
+                        <p class="text-xl font-semibold">8</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Memory Usage</p>
+                        <p class="text-xl font-semibold">41.84%</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Memory Used</p>
+                        <p class="text-xl font-semibold">26.67 GB</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Disk Usage</p>
+                        <p class="text-xl font-semibold">64.37%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JVM Memory Status -->
+            <div class="bg-white rounded-lg shadow p-6 mb-8">
+                <h3 class="text-lg font-semibold text-green-900 mb-4 bg-green-100 p-3 rounded-lg">JVM Memory</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-500">Used</p>
+                        <p class="text-xl font-semibold">261.40 MB</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Total</p>
+                        <p class="text-xl font-semibold">1.27 GB</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Max</p>
+                        <p class="text-xl font-semibold">14.17 GB</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Usage</p>
+                        <p class="text-xl font-semibold">20.11%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LibreOffice Status -->
+            <div class="bg-white rounded-lg shadow p-6 mb-8">
+                <h3 class="text-lg font-semibold text-orange-900 mb-4 bg-orange-100 p-3 rounded-lg">LibreOffice Configuration</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-500">Status</p>
+                        <p class="text-xl font-semibold">AVAILABLE</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Pool Size</p>
+                        <p class="text-xl font-semibold">2</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Running</p>
+                        <p class="text-xl font-semibold">true</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Port Range</p>
+                        <p class="text-lg font-semibold">
+                            <span>2000</span>
+                            ~
+                            <span>2001</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <p class="text-sm text-gray-600">
+                        Ports:
+                        <span>2000, </span><span>2001, </span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Folders of AView -->
+            <div class="bg-white rounded-lg shadow p-6 mb-8">
+                <h3 class="text-lg font-semibold text-purple-900 mb-4 bg-purple-100 p-3 rounded-lg">Folders of AView</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-500">Base Folder</p>
+                        <p class="text-xs font-mono text-gray-700">c:/tmp/aview-with-java</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Cache Dir</p>
+                        <p class="text-xs font-mono text-gray-700">c:/tmp/aview-with-java/cache</p>
+                        <p class="text-xs text-gray-600 mt-1">7 files, 17.20 KB</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Converted Dir</p>
+                        <p class="text-xs font-mono text-gray-700">c:/tmp/aview-with-java/cache/converted</p>
+                        <p class="text-xs text-gray-600 mt-1">8 files, 456.73 KB</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">DB Dir</p>
+                        <p class="text-xs font-mono text-gray-700">c:/tmp/aview-with-java/db</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Logs Dir</p>
+                        <p class="text-xs font-mono text-gray-700">c:/tmp/aview-with-java/logs</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Uploads Dir</p>
+                        <p class="text-xs font-mono text-gray-700">c:/tmp/aview-with-java/uploads</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Section -->
+            <div class="bg-white rounded-lg shadow p-6 mb-8">
+                <h3 class="text-lg font-semibold text-indigo-900 mb-6 bg-indigo-100 p-3 rounded-lg">Statistics</h3>
+
+                <!-- Basic Statistics -->
+                <div class="mb-6">
+                    <h4 class="text-md font-semibold text-gray-800 mb-3">Operation Overview</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <p class="text-sm text-gray-600">First Operation</p>
+                            <p class="text-sm font-semibold text-gray-900">2025-12-01 10:44:06.48</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <p class="text-sm text-gray-600">Latest Operation</p>
+                            <p class="text-sm font-semibold text-gray-900">2025-12-01 14:48:49.477</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <p class="text-sm text-gray-600">Operation Period</p>
+                            <p class="text-sm font-semibold text-gray-900">0일 4시간</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <p class="text-sm text-gray-600">Avg. Daily Workload</p>
+                            <p class="text-sm font-semibold text-gray-900">10 건</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Request Statistics -->
+                <div class="mb-6">
+                    <h4 class="text-md font-semibold text-gray-800 mb-3">Request Statistics</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <p class="text-sm text-gray-600">View Requests</p>
+                            <p class="text-lg font-bold text-green-700">6</p>
+                            <p class="text-xs text-gray-600 mt-1">
+                                <span>6</span> ✓
+                                <span>0</span> ✗
+                            </p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <p class="text-sm text-gray-600">Convert Requests</p>
+                            <p class="text-lg font-bold text-green-700">4</p>
+                            <p class="text-xs text-gray-600 mt-1">
+                                <span>1</span> ✓
+                                <span>3</span> ✗
+                            </p>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg">
+                            <p class="text-sm text-gray-600">Total Errors</p>
+                            <p class="text-lg font-bold text-red-700">3</p>
+                        </div>
+                        <div class="bg-indigo-50 p-4 rounded-lg">
+                            <p class="text-sm text-gray-600">Total Requests</p>
+                            <p class="text-lg font-bold text-indigo-700">10</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- File Type Statistics -->
+                <div class="mb-6">
+                    <h4 class="text-md font-semibold text-gray-800 mb-3">File Type Distribution</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                            <div class="font-semibold text-blue-900 mb-2">📊 Office</div>
+                            <p class="text-lg font-bold text-blue-700">0</p>
+                            <p class="text-sm text-gray-600">0.0%</p>
+                        </div>
+                        <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                            <div class="font-semibold text-green-900 mb-2">🖼️ Image</div>
+                            <p class="text-lg font-bold text-green-700">0</p>
+                            <p class="text-sm text-gray-600">0.0%</p>
+                        </div>
+                        <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                            <div class="font-semibold text-red-900 mb-2">📄 Document</div>
+                            <p class="text-lg font-bold text-red-700">0</p>
+                            <p class="text-sm text-gray-600">0.0%</p>
+                        </div>
+                        <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded">
+                            <div class="font-semibold text-purple-900 mb-2">💻 SourceCode</div>
+                            <p class="text-lg font-bold text-purple-700">0</p>
+                            <p class="text-sm text-gray-600">0.0%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Metrics -->
+                <div>
+                    <h4 class="text-md font-semibold text-gray-800 mb-3">Performance Metrics</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-yellow-50 p-4 rounded-lg">
+                            <p class="text-sm text-gray-600">Cache Hit Rate</p>
+                            <p class="text-xl font-bold text-yellow-700">계산 중...</p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg">
+                            <p class="text-sm text-gray-600">Avg. Convert Time</p>
+                            <p class="text-xl font-bold text-yellow-700">7.80 초</p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg">
+                            <p class="text-sm text-gray-600">Avg. Document Size</p>
+                            <p class="text-xl font-bold text-yellow-700">계산 중...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Info -->
+            <div class="mt-8 text-center text-gray-500 text-sm">
+                <p>AView v1.0.0 - Document Viewer Service</p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
