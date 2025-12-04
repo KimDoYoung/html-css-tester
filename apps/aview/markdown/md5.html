@@ -1,0 +1,3914 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!-- 
+===========================================
+🔍 AView Document Metadata
+===========================================
+Generated : 2025-12-04 14:12:56
+Hashcode  : 798739d8e1f3abbf0d04e573db046e46
+Filename  : ansi_markdown_3.md
+Template  : markdown.html
+===========================================
+-->    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ansi_markdown_3.md</title>
+    <link rel="icon" type="image/png" href="/aview/images/favicon32.png" sizes="32x32">
+    <!-- Google Fonts: Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- GitHub Markdown CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css">
+    
+    <!-- Highlight.js for code syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    
+    <!-- html2pdf.js for PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .markdown-container {
+            min-height: 70vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .doc-info-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .doc-info-section.collapsed {
+            max-height: 0;
+            padding: 0 20px;
+            margin-bottom: 0;
+            opacity: 0;
+        }
+
+        .toggle-doc-info-btn {
+            background: #0d6efd;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .toggle-doc-info-btn {
+                display: none;
+            }
+        }
+
+        .toggle-doc-info-btn-mobile {
+            background: #0d6efd;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .toggle-doc-info-btn-mobile {
+                display: flex;
+            }
+        }
+
+        .toggle-doc-info-btn-mobile:hover {
+            background: #0b5ed7;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .toggle-doc-info-btn-mobile.collapsed {
+            background: #28a745;
+            animation: pulseCollapsed 2s ease-in-out infinite;
+        }
+
+        .toggle-doc-info-btn-mobile.collapsed:hover {
+            background: #218838;
+        }
+
+        .toggle-doc-info-btn-mobile svg {
+            color: white;
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-doc-info-btn-mobile.collapsed svg {
+            transform: rotate(180deg);
+        }
+
+        .toggle-doc-info-btn:hover {
+            background: #0b5ed7;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .toggle-doc-info-btn:active {
+            transform: scale(0.95);
+            transition: all 0.1s ease;
+        }
+
+        .toggle-doc-info-btn svg {
+            color: white;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .toggle-doc-info-btn.collapsed {
+            background: #28a745;
+            animation: pulseCollapsed 2s ease-in-out infinite;
+        }
+
+        .toggle-doc-info-btn.collapsed:hover {
+            background: #218838;
+        }
+
+        .toggle-doc-info-btn.collapsed svg {
+            transform: rotate(180deg);
+        }
+
+        @keyframes pulseCollapsed {
+            0%, 100% {
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+            50% {
+                box-shadow: 0 4px 16px rgba(40, 167, 69, 0.4);
+            }
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.875rem;
+            margin-bottom: 0;
+        }
+
+        .info-value {
+            color: #6c757d;
+            font-size: 1.125rem;
+        }
+
+        .doc-info-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        @media (max-width: 1024px) {
+            .doc-info-row {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .doc-info-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .info-item {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 0;
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            .doc-info-col:last-child .info-item {
+                border-bottom: none;
+            }
+
+            .info-label {
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+
+            .info-value {
+                text-align: right;
+            }
+        }
+
+        .doc-info-col {
+            padding: 0;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 10;
+            min-width: 200px;
+        }
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+        .mobile-menu button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            transition: background-color 0.2s;
+        }
+
+        .mobile-menu button:hover {
+            background-color: #f3f4f6;
+        }
+
+        .mobile-menu button svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        .doc-info-header {
+            background-color: #f2ebd3;
+            padding: 12px 16px;
+            margin: -20px -20px 16px -20px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .doc-info-header h3 {
+            margin: 0;
+            color: #333;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* Markdown content styling */
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 45px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .markdown-body {
+                padding: 20px;
+            }
+        }
+
+        /* Code block styling */
+        .markdown-body pre {
+            background-color: #f6f8fa;
+            border-radius: 6px;
+            padding: 16px;
+            overflow: auto;
+        }
+
+        .markdown-body code {
+            background-color: rgba(110,118,129,0.1);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 85%;
+        }
+
+        .markdown-body pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+
+        /* Table styling */
+        .markdown-body table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+
+        .markdown-body table th,
+        .markdown-body table td {
+            border: 1px solid #d0d7de;
+            padding: 6px 13px;
+        }
+
+        .markdown-body table tr:nth-child(2n) {
+            background-color: #f6f8fa;
+        }
+
+        /* Heading anchor links */
+        .markdown-body h1,
+        .markdown-body h2,
+        .markdown-body h3,
+        .markdown-body h4,
+        .markdown-body h5,
+        .markdown-body h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            line-height: 1.25;
+        }
+
+        .markdown-body h1 {
+            font-size: 2em;
+            border-bottom: 1px solid #d0d7de;
+            padding-bottom: 0.3em;
+        }
+
+        .markdown-body h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #d0d7de;
+            padding-bottom: 0.3em;
+        }
+
+        /* Control Bar Styles */
+        .text-viewer-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 40px;
+            padding: 0 12px;
+            background-color: #f0f0f0;
+            border: 1px solid #d0d0d0;
+            border-bottom: none;
+            gap: 8px;
+            margin-bottom: 0;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .controls-desktop {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .controls-mobile {
+            display: none;
+            position: relative;
+            margin-left: auto;
+        }
+
+        @media (max-width: 768px) {
+            .controls-desktop {
+                display: none;
+            }
+
+            .controls-mobile {
+                display: flex;
+            }
+        }
+
+        .control-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .control-btn {
+            padding: 4px 8px;
+            min-width: 30px;
+            height: 28px;
+            background-color: #e8e8e8;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .control-btn:hover {
+            background-color: #d8d8d8;
+        }
+
+        .control-btn:active {
+            background-color: #c8c8c8;
+        }
+
+        .control-select {
+            padding: 4px 6px;
+            height: 28px;
+            font-size: 12px;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            background-color: #ffffff;
+            cursor: pointer;
+        }
+
+        .btn-group {
+            display: inline-flex;
+            gap: 0;
+        }
+
+        .btn-group .control-btn {
+            border-radius: 0;
+            margin-left: -1px;
+        }
+
+        .btn-group .control-btn:first-child {
+            border-radius: 4px 0 0 4px;
+            margin-left: 0;
+        }
+
+        .btn-group .control-btn:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Custom Color Dropdown */
+        .custom-color-dropdown {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .custom-color-btn {
+            width: 28px;
+            height: 28px;
+            border: 2px solid #333;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .custom-color-menu {
+            display: none;
+            position: absolute;
+            top: 32px;
+            left: 0;
+            background: white;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            padding: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+            gap: 6px;
+        }
+
+        .custom-color-menu.open {
+            display: flex;
+        }
+
+        .custom-color-option {
+            width: 24px;
+            height: 24px;
+            border: 1px solid #c0c0c0;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .custom-color-option:hover {
+            transform: scale(1.15);
+            border-width: 2px;
+            border-color: #666;
+        }
+
+        .custom-color-option.active {
+            border: 2px solid #333;
+            box-shadow: 0 0 0 2px white, 0 0 0 3px #333;
+        }
+
+        /* Search Box */
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background-color: #ffffff;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            padding: 2px 6px;
+            height: 28px;
+        }
+
+        .search-input {
+            border: none;
+            outline: none;
+            font-size: 12px;
+            padding: 4px;
+            width: 120px;
+            background: transparent;
+        }
+
+        .search-btn, .search-clear-btn {
+            background: none;
+            border: none;
+            padding: 2px 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+        }
+        
+        .search-clear-btn {
+            display: none;
+        }
+
+        .search-clear-btn.visible {
+            display: flex;
+        }
+
+        .search-btn svg, .search-clear-btn svg {
+            width: 14px;
+            height: 14px;
+            color: #666;
+        }
+
+        .search-counter {
+            font-size: 11px;
+            color: #666;
+            min-width: 35px;
+            text-align: center;
+        }
+
+        .search-highlight {
+            background-color: #ffff00;
+            color: #000;
+        }
+
+        .search-highlight.current {
+            background-color: #ff9500;
+            color: #fff;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+
+        body.dark-mode .markdown-body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            border-color: #30363d;
+        }
+        
+        body.dark-mode .text-viewer-controls {
+            background-color: #161b22;
+            border-color: #30363d;
+        }
+
+        body.dark-mode .control-btn, 
+        body.dark-mode .control-select,
+        body.dark-mode .search-box {
+            background-color: #21262d;
+            border-color: #30363d;
+            color: #c9d1d9;
+        }
+
+        body.dark-mode .doc-info-section {
+            background-color: #161b22;
+            border-color: #30363d;
+        }
+        
+        body.dark-mode .doc-info-header {
+            background-color: #21262d;
+        }
+        
+        body.dark-mode .info-label {
+            color: #8b949e;
+        }
+        
+        body.dark-mode .info-value {
+            color: #c9d1d9;
+        }
+
+        /* Fullscreen */
+        .markdown-container.fullscreen-mode {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 20px;
+            z-index: 9999;
+            background: white;
+            overflow: auto;
+        }
+        
+        body.dark-mode .markdown-container.fullscreen-mode {
+            background: #0d1117;
+        }
+
+        /* Mobile Menu */
+        .controls-dropdown {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background-color: white;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            min-width: 200px;
+            padding: 8px;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .controls-dropdown.open {
+            display: flex;
+        }
+        /* Top Button Style */
+        #topBtn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, background-color 0.2s;
+            z-index: 1000;
+        }
+
+        #topBtn.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #topBtn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        body.dark-mode #topBtn {
+            background-color: #238636;
+        }
+
+        body.dark-mode #topBtn:hover {
+            background-color: #2ea043;
+        }
+
+        /* Floating TOC Button */
+        #tocFloatingBtn {
+            position: fixed;
+            bottom: 80px; /* Above Top Button */
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, background-color 0.2s;
+            z-index: 1000;
+        }
+
+        #tocFloatingBtn.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #tocFloatingBtn:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        body.dark-mode #tocFloatingBtn {
+            background-color: #30363d;
+        }
+
+        body.dark-mode #tocFloatingBtn:hover {
+            background-color: #484f58;
+        }
+
+        /* Table of Contents (TOC) Drawer */
+        .toc-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .toc-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .toc-drawer {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: white;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 1002;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .toc-drawer.open {
+            right: 0;
+        }
+
+        .toc-drawer.left {
+            right: auto;
+            left: -300px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            transition: left 0.3s ease;
+        }
+
+        .toc-drawer.left.open {
+            left: 0;
+            right: auto;
+        }
+
+        .toc-header {
+            padding: 16px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .toc-header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .toc-position-selector {
+            display: flex;
+            gap: 12px;
+            font-size: 0.85rem;
+            font-weight: normal;
+        }
+
+        .toc-position-selector label {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .toc-close-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .toc-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-item {
+            margin-bottom: 8px;
+        }
+
+        .toc-link {
+            text-decoration: none;
+            color: #333;
+            display: block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .toc-link:hover {
+            background-color: #f5f5f5;
+            color: #0366d6;
+        }
+
+        .toc-item.h1 { margin-left: 0; font-weight: 600; }
+        .toc-item.h2 { margin-left: 12px; }
+        .toc-item.h3 { margin-left: 24px; }
+        .toc-item.h4 { margin-left: 36px; }
+        .toc-item.h5 { margin-left: 48px; }
+        .toc-item.h6 { margin-left: 60px; }
+
+        body.dark-mode .toc-drawer {
+            background-color: #1e1e1e;
+            color: #c9d1d9;
+        }
+
+        body.dark-mode .toc-header {
+            border-bottom-color: #30363d;
+        }
+
+        body.dark-mode .toc-close-btn {
+            color: #8b949e;
+        }
+
+        body.dark-mode .toc-link {
+            color: #c9d1d9;
+        }
+
+        body.dark-mode .toc-link:hover {
+            background-color: #30363d;
+            color: #58a6ff;
+        }
+
+        /* Code Block Copy Button */
+        .markdown-body pre {
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 12px;
+            color: #666;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s, background-color 0.2s;
+            z-index: 10;
+        }
+
+        .markdown-body pre:hover .copy-btn {
+            opacity: 1;
+        }
+
+        .copy-btn:hover {
+            background-color: #fff;
+            color: #0366d6;
+        }
+
+        body.dark-mode .copy-btn {
+            background-color: rgba(30, 30, 30, 0.8);
+            border-color: #444;
+            color: #aaa;
+        }
+
+        body.dark-mode .copy-btn:hover {
+            background-color: #333;
+            color: #58a6ff;
+        }
+
+        /* Raw Markdown Display in Dark Mode */
+        body.dark-mode .markdown-body pre {
+            background-color: #1e1e1e !important;
+            color: #e6edf3 !important;
+            border-color: #30363d;
+        }
+
+        body.dark-mode .markdown-body pre code {
+            background-color: #1e1e1e !important;
+            color: #e6edf3 !important;
+        }
+
+        /* Export Dropdown */
+        .export-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .export-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 4px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            min-width: 150px;
+            z-index: 1000;
+        }
+
+        .export-menu.show {
+            display: block;
+        }
+
+        .export-menu button {
+            display: block;
+            width: 100%;
+            padding: 8px 16px;
+            border: none;
+            background: none;
+            text-align: left;
+            cursor: pointer;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .export-menu button:hover {
+            background-color: #f5f5f5;
+        }
+
+        body.dark-mode .export-menu {
+            background-color: #2d2d2d;
+            border-color: #444;
+        }
+
+        body.dark-mode .export-menu button {
+            color: #e6e6e6;
+        }
+
+        body.dark-mode .export-menu button:hover {
+            background-color: #3d3d3d;
+        }
+
+        /* Image Lightbox */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            cursor: default;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            line-height: 1;
+            transition: opacity 0.2s;
+        }
+
+        .lightbox-close:hover {
+            opacity: 0.7;
+        }
+
+        .markdown-body img {
+            cursor: zoom-in;
+            transition: opacity 0.2s;
+        }
+
+        .markdown-body img:hover {
+            opacity: 0.9;
+        }
+
+        /* Help Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.open {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .modal-overlay.open .modal-content {
+            transform: translateY(0);
+        }
+        .modal-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .modal-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #111827;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .close-modal-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            color: #6b7280;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .close-modal-btn:hover {
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+        .modal-body {
+            padding: 20px;
+        }
+        .help-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .help-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .help-icon {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #eff6ff;
+            color: #3b82f6;
+            border-radius: 50%;
+        }
+        .help-text h4 {
+            margin: 0 0 4px 0;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #374151;
+        }
+        .help-text p {
+            margin: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+        body.dark-mode .modal-content {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+        }
+        body.dark-mode .modal-header {
+            border-bottom-color: #30363d;
+        }
+        body.dark-mode .modal-title {
+            color: #c9d1d9;
+        }
+        body.dark-mode .close-modal-btn {
+            color: #8b949e;
+        }
+        body.dark-mode .close-modal-btn:hover {
+            background-color: #21262d;
+            color: #c9d1d9;
+        }
+        body.dark-mode .help-icon {
+            background-color: rgba(56, 139, 253, 0.15);
+            color: #58a6ff;
+        }
+        body.dark-mode .help-text h4 {
+            color: #c9d1d9;
+        }
+        body.dark-mode .help-text p {
+            color: #8b949e;
+        }
+        #helpBtn {
+            margin-left: auto;
+            margin-right: 10px;
+        }
+        .modal-footer {
+            padding: 16px 20px;
+            border-top: 1px solid #e5e7eb;
+            text-align: right;
+        }
+        .modal-footer a {
+            color: #0d6efd;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        body.dark-mode .modal-footer {
+            border-top-color: #30363d;
+        }
+        body.dark-mode .modal-footer a {
+            color: #58a6ff;
+        }
+    </style>
+</head>
+<body>
+    <!-- SVG Sprite Definitions -->
+    <svg  style="display: none;">
+        <defs>
+            <symbol id="icon-download" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+            </symbol>
+            <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+            </symbol>
+            <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </symbol>
+            <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </symbol>
+            <symbol id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </symbol>
+            <symbol id="icon-columns" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"></path>
+            </symbol>
+            <symbol id="icon-sort" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"></path>
+            </symbol>
+            <symbol id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0112 21a9.003 9.003 0 008.354-5.646z"></path>
+            </symbol>
+            <symbol id="icon-help" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </symbol>
+            <symbol id="icon-help-title" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </symbol>
+            <symbol id="icon-external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </symbol>
+        </defs>
+    </svg>
+
+    <!-- Header 영역: 전체 너비 (100%) -->
+    <div class="w-full bg-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between gap-4">
+                <!-- 왼쪽: 파일명 -->
+                <div class="flex-1 min-w-0">
+                    <h1 class="text-2xl font-bold text-gray-900 truncate">ansi_markdown_3.md</h1>
+                </div>
+
+                <!-- 오른쪽: 데스크톱 버튼 (md 이상에서만 표시) -->
+                <div class="hidden md:flex gap-3 flex-shrink-0">
+                    <!-- HTML로 다운로드 (클라이언트 사이드 타임스탬프) -->
+                    <button type="button"
+                            onclick="downloadMarkdownHtml()"
+                            class="inline-flex items-center px-4 py-2 rounded-lg bg-purple-600 text-white font-medium text-sm hover:bg-purple-700 transition-colors shadow-sm whitespace-nowrap"
+                            title="마크다운을 HTML로 다운로드합니다">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                        HTML로 다운로드
+                    </button>
+
+                    <!-- PDF로 다운로드 (서버 사이드 변환) -->
+                    <button type="button"
+                            onclick="downloadMarkdownPdf()"
+                            class="inline-flex items-center px-4 py-2 rounded-lg bg-blue-600 text-white font-medium text-sm hover:bg-blue-700 transition-colors shadow-sm whitespace-nowrap"
+                            title="마크다운을 PDF로 변환하여 다운로드합니다">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                        PDF로 다운로드
+                    </button>
+
+                    <!-- 원본 다운로드 -->
+                    <button type="button"
+                            onclick="downloadOriginal()"
+                            class="inline-flex items-center px-4 py-2 rounded-lg bg-green-600 text-white font-medium text-sm hover:bg-green-700 transition-colors shadow-sm whitespace-nowrap">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        원본 다운로드
+                    </button>
+
+                    <!-- 문서 정보 토글 버튼 -->
+                    <button type="button"
+                            class="toggle-doc-info-btn collapsed"
+                            id="toggleDocInfoBtn"
+                            onclick="toggleDocInfo()"
+                            title="문서 정보 보기"
+                            aria-label="문서 정보 토글">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- 오른쪽: 모바일 영역 (토글 버튼 + 햄버거 메뉴) -->
+                <div class="md:hidden flex gap-2 items-center flex-shrink-0">
+                    <!-- 모바일 토글 버튼 -->
+                    <button type="button"
+                            class="toggle-doc-info-btn-mobile collapsed"
+                            id="toggleDocInfoBtnMobile"
+                            onclick="toggleDocInfo()"
+                            title="문서 정보 보기"
+                            aria-label="문서 정보 토글">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </button>
+
+                    <!-- 햄버거 메뉴 (relative 래퍼) -->
+                    <div class="relative">
+                        <button type="button"
+                                id="mobileMenuBtn"
+                                onclick="toggleMobileMenu()"
+                                title="메뉴"
+                                aria-label="작업 메뉴 열기"
+                                class="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+
+                        <!-- 모바일 드롭다운 메뉴 -->
+                        <div id="mobileMenu" class="mobile-menu">
+                            <button type="button" onclick="downloadMarkdownHtml(); toggleMobileMenu();">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                </svg>
+                                HTML로 다운로드
+                            </button>
+                            <button type="button" onclick="downloadMarkdownPdf(); toggleMobileMenu();">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                </svg>
+                                PDF로 다운로드
+                            </button>
+                            <button type="button" onclick="downloadOriginal(); toggleMobileMenu();">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                원본 다운로드
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="markdown-container px-4 sm:px-6 lg:px-8 py-6" id="markdownContainer">
+        
+        <!-- 문서 정보 섹션 (초기: 숨김) -->
+        <div id="docInfoSection" class="doc-info-section collapsed">
+            <!-- Markdown 정보 헤더 -->
+            <div class="doc-info-header">
+                <h3>Markdown 정보</h3>
+            </div>
+
+            <div class="doc-info-row">
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">파일 크기</span>
+                        <span class="info-value">15,707 bytes</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">총 라인 수</span>
+                        <span class="info-value" id="lineCountValue">555</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">총 문자 수</span>
+                        <span class="info-value" id="charCountValue">15,675</span>
+                    </div>
+                </div>
+                <div class="doc-info-col">
+                    <div class="info-item">
+                        <span class="info-label">인코딩</span>
+                        <span class="info-value">UTF-8</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control Bar -->
+        <div class="text-viewer-controls">
+            <!-- Desktop Controls -->
+            <div class="controls-desktop">
+                <!-- Search Box -->
+                <div class="search-box">
+                    <input type="text" class="search-input" id="searchInput" placeholder="검색어 입력" autocomplete="off">
+                    <button type="button" class="search-btn" id="searchBtn" title="다음 찾기 (Enter)">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </button>
+                    <button type="button" class="search-clear-btn" id="searchClearBtn" title="검색 지우기">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                    <span class="search-counter" id="searchCounter"></span>
+                </div>
+
+                <!-- Font Size -->
+                <div class="control-item btn-group">
+                    <button type="button" id="fontSizeDecrease" class="control-btn" title="폰트 작게">−</button>
+                    <button type="button" id="fontSizeReset" class="control-btn" title="폰트기본(16px)">16px</button>
+                    <button type="button" id="fontSizeIncrease" class="control-btn" title="폰트 크게">+</button>
+                </div>
+
+                <!-- Font Family -->
+                <select id="fontFamily" class="control-select" title="폰트 선택">
+                    <option value="'Noto Sans KR', sans-serif" selected>Noto Sans KR</option>
+                    <option value="'Malgun Gothic', '맑은 고딕'">맑은 고딕</option>
+                    <option value="'SeoulNamsan', sans-serif">서울 남산체</option>
+                    <option value="'Courier New', monospace">Courier New</option>
+                </select>
+
+                <!-- Background Color -->
+                <div class="custom-color-dropdown">
+                    <button type="button" class="custom-color-btn" id="bgColorBtn" data-color="#ffffff" title="배경색 선택" style="background-color: #ffffff;"></button>
+                    <div class="custom-color-menu" id="bgColorMenu">
+                        <button type="button" class="custom-color-option active" data-color="#ffffff" style="background-color: #ffffff;" title="흰색"></button>
+                        <button type="button" class="custom-color-option" data-color="#f5f5f5" style="background-color: #f5f5f5;" title="라이트 그레이"></button>
+                        <button type="button" class="custom-color-option" data-color="#fffacd" style="background-color: #fffacd;" title="라이트 옐로우"></button>
+                        <button type="button" class="custom-color-option" data-color="#e6f3ff" style="background-color: #e6f3ff;" title="라이트 블루"></button>
+                        <button type="button" class="custom-color-option" data-color="#f0f8f0" style="background-color: #f0f8f0;" title="라이트 그린"></button>
+                    </div>
+                </div>
+
+                <!-- Line Height -->
+                <div class="control-item btn-group">
+                    <button type="button" id="lineHeightDecrease" class="control-btn" title="줄간 작게">−</button>
+                    <button type="button" id="lineHeightReset" class="control-btn" title="줄간 기본">✱</button>
+                    <button type="button" id="lineHeightIncrease" class="control-btn" title="줄간 크게">+</button>
+                </div>
+
+                <!-- Display Controls Group (Fullscreen + Dark Mode) -->
+                <div class="control-item btn-group">
+                    <button type="button" id="toggleFullscreen" class="control-btn" title="전체화면">⛶</button>
+                    <button type="button" id="toggleDarkMode" class="control-btn" title="다크모드">🌙</button>
+                </div>
+
+                <!-- TOC Position -->
+                <div class="control-item" style="display: flex; align-items: center; gap: 4px; font-size: 12px;">
+                    <span style="margin-right: 4px;">메뉴:</span>
+                    <label style="display: flex; align-items: center; gap: 2px; cursor: pointer;">
+                        <input type="radio" name="tocPosition" value="left" id="tocPosLeft">
+                        <span>왼쪽</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 2px; cursor: pointer;">
+                        <input type="radio" name="tocPosition" value="right" id="tocPosRight" checked>
+                        <span>오른쪽</span>
+                    </label>
+                </div>
+
+                <!-- TOC Toggle (Icon Only) -->
+                <button type="button" class="control-btn" id="tocToggleBtnDesktop" title="목차">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+
+                <!-- Raw Markdown Toggle -->
+                <button type="button" class="control-btn" id="rawToggleBtn" title="Raw Markdown">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                    </svg>
+                </button>
+
+                <!-- Export Dropdown -->
+                <div class="export-dropdown">
+                    <button type="button" class="control-btn" id="exportBtn" title="내보내기">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                    </button>
+                    <div class="export-menu" id="exportMenu">
+                        <button type="button" id="exportHTML">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: inline-block; vertical-align: middle; margin-right: 4px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                            HTML 내보내기
+                        </button>
+                        <button type="button" id="exportPDF">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: inline-block; vertical-align: middle; margin-right: 4px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6"></path>
+                            </svg>
+                            PDF 내보내기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Settings -->
+                <div class="control-item btn-group">
+                    <button type="button" id="saveSettings" class="control-btn" title="설정 저장">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </button>
+                    <button type="button" id="resetSettings" class="control-btn" title="설정 초기화">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </button>
+                </div>
+                <!-- Help Button -->
+                <button type="button" id="helpBtn" class="control-btn" title="도움말">
+                    <svg width="14" height="14"><use href="#icon-help"/></svg>
+                </button>
+
+            </div>
+
+            <!-- Mobile Controls Menu -->
+            <div class="controls-mobile">
+                <!-- Mobile TOC Button (Left) -->
+                <button type="button" id="tocToggleBtnMobile" class="control-btn" title="목차">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                
+                <!-- Mobile Settings Menu Button (Right) -->
+                <button type="button" id="controlsMenuBtn" class="control-btn" title="설정">⋯</button>
+                <div id="controlsMenu" class="controls-dropdown">
+                    <!-- Mobile Search -->
+                    <div class="search-box">
+                        <input type="text" class="search-input" id="searchInput-mobile" placeholder="검색" autocomplete="off">
+                        <button type="button" class="search-btn" id="searchBtn-mobile"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
+                    </div>
+                    
+                    <!-- Mobile Font Size -->
+                    <div class="control-item btn-group">
+                        <button type="button" id="fontSizeDecrease-mobile" class="control-btn">−</button>
+                        <button type="button" id="fontSizeReset-mobile" class="control-btn">16px</button>
+                        <button type="button" id="fontSizeIncrease-mobile" class="control-btn">+</button>
+                    </div>
+                    
+                    <!-- Mobile Font Family -->
+                    <select id="fontFamily-mobile" class="control-select" title="폰트 선택">
+                        <option value="'Noto Sans KR', sans-serif" selected>Noto Sans KR</option>
+                        <option value="'Malgun Gothic', '맑은 고딕'">맑은 고딕</option>
+                        <option value="'SeoulNamsan', sans-serif">서울 남산체</option>
+                        <option value="'Courier New', monospace">Courier New</option>
+                    </select>
+                    
+                    <!-- Mobile Line Height -->
+                    <div class="control-item btn-group">
+                        <button type="button" id="lineHeightDecrease-mobile" class="control-btn" title="줄간 작게">−</button>
+                        <button type="button" id="lineHeightReset-mobile" class="control-btn" title="줄간 기본">✱</button>
+                        <button type="button" id="lineHeightIncrease-mobile" class="control-btn" title="줄간 크게">+</button>
+                    </div>
+                    
+                    <!-- Mobile Dark Mode -->
+                    <button type="button" id="toggleDarkMode-mobile" class="control-btn">🌙 다크모드</button>
+                    
+                    <!-- Mobile Settings Save/Reset -->
+                    <div class="control-item btn-group">
+                        <button type="button" id="saveSettings-mobile" class="control-btn" title="설정 저장">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            저장
+                        </button>
+                        <button type="button" id="resetSettings-mobile" class="control-btn" title="설정 초기화">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                            초기화
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Markdown 렌더링 영역 -->
+        <div class="markdown-body"><!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body {
+            font-family: 'Noto Serif CJK KR', 'Malgun Gothic', 'Segoe UI', sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+            margin: 20px;
+            font-weight: 400;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif CJK KR', 'Malgun Gothic', sans-serif;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        h1 { font-size: 28px; }
+        h2 { font-size: 24px; }
+        h3 { font-size: 20px; }
+        h4 { font-size: 18px; }
+        h5 { font-size: 16px; }
+        h6 { font-size: 14px; }
+        p {
+            margin: 10px 0;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Noto Serif CJK KR', 'Courier New', monospace;
+            font-size: 13px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 12px;
+            border-radius: 3px;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-family: 'Noto Serif CJK KR', 'Courier New', monospace;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+            font-family: 'Noto Serif CJK KR', 'Courier New', monospace;
+        }
+        blockquote {
+            border-left: 4px solid #ddd;
+            margin: 10px 0;
+            padding-left: 12px;
+            color: #666;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+<h1>Large Markdown Document</h1>
+<h2>Introduction</h2>
+<div>모든 국민은 인간으로서의 존엄과 가치를 가지며, <span style='color:blue'>행복을 추구할 권리</span>를 가진다.</div>
+<h3>Section 1</h3>
+<ul>
+<li>Item 0-A: <span>Detail A</span></li>
+<li>Item 0-B: <strong>Detail B</strong></li>
+<li>Item 0-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-0&quot;&gt;
+  Content for section 0
+&lt;/div&gt;
+</code></pre>
+<h3>Section 2</h3>
+<ul>
+<li>Item 1-A: <span>Detail A</span></li>
+<li>Item 1-B: <strong>Detail B</strong></li>
+<li>Item 1-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-1&quot;&gt;
+  Content for section 1
+&lt;/div&gt;
+</code></pre>
+<h3>Section 3</h3>
+<ul>
+<li>Item 2-A: <span>Detail A</span></li>
+<li>Item 2-B: <strong>Detail B</strong></li>
+<li>Item 2-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-2&quot;&gt;
+  Content for section 2
+&lt;/div&gt;
+</code></pre>
+<h3>Section 4</h3>
+<ul>
+<li>Item 3-A: <span>Detail A</span></li>
+<li>Item 3-B: <strong>Detail B</strong></li>
+<li>Item 3-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-3&quot;&gt;
+  Content for section 3
+&lt;/div&gt;
+</code></pre>
+<h3>Section 5</h3>
+<ul>
+<li>Item 4-A: <span>Detail A</span></li>
+<li>Item 4-B: <strong>Detail B</strong></li>
+<li>Item 4-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-4&quot;&gt;
+  Content for section 4
+&lt;/div&gt;
+</code></pre>
+<h3>Section 6</h3>
+<ul>
+<li>Item 5-A: <span>Detail A</span></li>
+<li>Item 5-B: <strong>Detail B</strong></li>
+<li>Item 5-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-5&quot;&gt;
+  Content for section 5
+&lt;/div&gt;
+</code></pre>
+<h3>Section 7</h3>
+<ul>
+<li>Item 6-A: <span>Detail A</span></li>
+<li>Item 6-B: <strong>Detail B</strong></li>
+<li>Item 6-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-6&quot;&gt;
+  Content for section 6
+&lt;/div&gt;
+</code></pre>
+<h3>Section 8</h3>
+<ul>
+<li>Item 7-A: <span>Detail A</span></li>
+<li>Item 7-B: <strong>Detail B</strong></li>
+<li>Item 7-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-7&quot;&gt;
+  Content for section 7
+&lt;/div&gt;
+</code></pre>
+<h3>Section 9</h3>
+<ul>
+<li>Item 8-A: <span>Detail A</span></li>
+<li>Item 8-B: <strong>Detail B</strong></li>
+<li>Item 8-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-8&quot;&gt;
+  Content for section 8
+&lt;/div&gt;
+</code></pre>
+<h3>Section 10</h3>
+<ul>
+<li>Item 9-A: <span>Detail A</span></li>
+<li>Item 9-B: <strong>Detail B</strong></li>
+<li>Item 9-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-9&quot;&gt;
+  Content for section 9
+&lt;/div&gt;
+</code></pre>
+<h3>Section 11</h3>
+<ul>
+<li>Item 10-A: <span>Detail A</span></li>
+<li>Item 10-B: <strong>Detail B</strong></li>
+<li>Item 10-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-10&quot;&gt;
+  Content for section 10
+&lt;/div&gt;
+</code></pre>
+<h3>Section 12</h3>
+<ul>
+<li>Item 11-A: <span>Detail A</span></li>
+<li>Item 11-B: <strong>Detail B</strong></li>
+<li>Item 11-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-11&quot;&gt;
+  Content for section 11
+&lt;/div&gt;
+</code></pre>
+<h3>Section 13</h3>
+<ul>
+<li>Item 12-A: <span>Detail A</span></li>
+<li>Item 12-B: <strong>Detail B</strong></li>
+<li>Item 12-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-12&quot;&gt;
+  Content for section 12
+&lt;/div&gt;
+</code></pre>
+<h3>Section 14</h3>
+<ul>
+<li>Item 13-A: <span>Detail A</span></li>
+<li>Item 13-B: <strong>Detail B</strong></li>
+<li>Item 13-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-13&quot;&gt;
+  Content for section 13
+&lt;/div&gt;
+</code></pre>
+<h3>Section 15</h3>
+<ul>
+<li>Item 14-A: <span>Detail A</span></li>
+<li>Item 14-B: <strong>Detail B</strong></li>
+<li>Item 14-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-14&quot;&gt;
+  Content for section 14
+&lt;/div&gt;
+</code></pre>
+<h3>Section 16</h3>
+<ul>
+<li>Item 15-A: <span>Detail A</span></li>
+<li>Item 15-B: <strong>Detail B</strong></li>
+<li>Item 15-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-15&quot;&gt;
+  Content for section 15
+&lt;/div&gt;
+</code></pre>
+<h3>Section 17</h3>
+<ul>
+<li>Item 16-A: <span>Detail A</span></li>
+<li>Item 16-B: <strong>Detail B</strong></li>
+<li>Item 16-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-16&quot;&gt;
+  Content for section 16
+&lt;/div&gt;
+</code></pre>
+<h3>Section 18</h3>
+<ul>
+<li>Item 17-A: <span>Detail A</span></li>
+<li>Item 17-B: <strong>Detail B</strong></li>
+<li>Item 17-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-17&quot;&gt;
+  Content for section 17
+&lt;/div&gt;
+</code></pre>
+<h3>Section 19</h3>
+<ul>
+<li>Item 18-A: <span>Detail A</span></li>
+<li>Item 18-B: <strong>Detail B</strong></li>
+<li>Item 18-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-18&quot;&gt;
+  Content for section 18
+&lt;/div&gt;
+</code></pre>
+<h3>Section 20</h3>
+<ul>
+<li>Item 19-A: <span>Detail A</span></li>
+<li>Item 19-B: <strong>Detail B</strong></li>
+<li>Item 19-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-19&quot;&gt;
+  Content for section 19
+&lt;/div&gt;
+</code></pre>
+<h3>Section 21</h3>
+<ul>
+<li>Item 20-A: <span>Detail A</span></li>
+<li>Item 20-B: <strong>Detail B</strong></li>
+<li>Item 20-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-20&quot;&gt;
+  Content for section 20
+&lt;/div&gt;
+</code></pre>
+<h3>Section 22</h3>
+<ul>
+<li>Item 21-A: <span>Detail A</span></li>
+<li>Item 21-B: <strong>Detail B</strong></li>
+<li>Item 21-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-21&quot;&gt;
+  Content for section 21
+&lt;/div&gt;
+</code></pre>
+<h3>Section 23</h3>
+<ul>
+<li>Item 22-A: <span>Detail A</span></li>
+<li>Item 22-B: <strong>Detail B</strong></li>
+<li>Item 22-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-22&quot;&gt;
+  Content for section 22
+&lt;/div&gt;
+</code></pre>
+<h3>Section 24</h3>
+<ul>
+<li>Item 23-A: <span>Detail A</span></li>
+<li>Item 23-B: <strong>Detail B</strong></li>
+<li>Item 23-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-23&quot;&gt;
+  Content for section 23
+&lt;/div&gt;
+</code></pre>
+<h3>Section 25</h3>
+<ul>
+<li>Item 24-A: <span>Detail A</span></li>
+<li>Item 24-B: <strong>Detail B</strong></li>
+<li>Item 24-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-24&quot;&gt;
+  Content for section 24
+&lt;/div&gt;
+</code></pre>
+<h3>Section 26</h3>
+<ul>
+<li>Item 25-A: <span>Detail A</span></li>
+<li>Item 25-B: <strong>Detail B</strong></li>
+<li>Item 25-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-25&quot;&gt;
+  Content for section 25
+&lt;/div&gt;
+</code></pre>
+<h3>Section 27</h3>
+<ul>
+<li>Item 26-A: <span>Detail A</span></li>
+<li>Item 26-B: <strong>Detail B</strong></li>
+<li>Item 26-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-26&quot;&gt;
+  Content for section 26
+&lt;/div&gt;
+</code></pre>
+<h3>Section 28</h3>
+<ul>
+<li>Item 27-A: <span>Detail A</span></li>
+<li>Item 27-B: <strong>Detail B</strong></li>
+<li>Item 27-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-27&quot;&gt;
+  Content for section 27
+&lt;/div&gt;
+</code></pre>
+<h3>Section 29</h3>
+<ul>
+<li>Item 28-A: <span>Detail A</span></li>
+<li>Item 28-B: <strong>Detail B</strong></li>
+<li>Item 28-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-28&quot;&gt;
+  Content for section 28
+&lt;/div&gt;
+</code></pre>
+<h3>Section 30</h3>
+<ul>
+<li>Item 29-A: <span>Detail A</span></li>
+<li>Item 29-B: <strong>Detail B</strong></li>
+<li>Item 29-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-29&quot;&gt;
+  Content for section 29
+&lt;/div&gt;
+</code></pre>
+<h3>Section 31</h3>
+<ul>
+<li>Item 30-A: <span>Detail A</span></li>
+<li>Item 30-B: <strong>Detail B</strong></li>
+<li>Item 30-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-30&quot;&gt;
+  Content for section 30
+&lt;/div&gt;
+</code></pre>
+<h3>Section 32</h3>
+<ul>
+<li>Item 31-A: <span>Detail A</span></li>
+<li>Item 31-B: <strong>Detail B</strong></li>
+<li>Item 31-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-31&quot;&gt;
+  Content for section 31
+&lt;/div&gt;
+</code></pre>
+<h3>Section 33</h3>
+<ul>
+<li>Item 32-A: <span>Detail A</span></li>
+<li>Item 32-B: <strong>Detail B</strong></li>
+<li>Item 32-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-32&quot;&gt;
+  Content for section 32
+&lt;/div&gt;
+</code></pre>
+<h3>Section 34</h3>
+<ul>
+<li>Item 33-A: <span>Detail A</span></li>
+<li>Item 33-B: <strong>Detail B</strong></li>
+<li>Item 33-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-33&quot;&gt;
+  Content for section 33
+&lt;/div&gt;
+</code></pre>
+<h3>Section 35</h3>
+<ul>
+<li>Item 34-A: <span>Detail A</span></li>
+<li>Item 34-B: <strong>Detail B</strong></li>
+<li>Item 34-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-34&quot;&gt;
+  Content for section 34
+&lt;/div&gt;
+</code></pre>
+<h3>Section 36</h3>
+<ul>
+<li>Item 35-A: <span>Detail A</span></li>
+<li>Item 35-B: <strong>Detail B</strong></li>
+<li>Item 35-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-35&quot;&gt;
+  Content for section 35
+&lt;/div&gt;
+</code></pre>
+<h3>Section 37</h3>
+<ul>
+<li>Item 36-A: <span>Detail A</span></li>
+<li>Item 36-B: <strong>Detail B</strong></li>
+<li>Item 36-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-36&quot;&gt;
+  Content for section 36
+&lt;/div&gt;
+</code></pre>
+<h3>Section 38</h3>
+<ul>
+<li>Item 37-A: <span>Detail A</span></li>
+<li>Item 37-B: <strong>Detail B</strong></li>
+<li>Item 37-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-37&quot;&gt;
+  Content for section 37
+&lt;/div&gt;
+</code></pre>
+<h3>Section 39</h3>
+<ul>
+<li>Item 38-A: <span>Detail A</span></li>
+<li>Item 38-B: <strong>Detail B</strong></li>
+<li>Item 38-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-38&quot;&gt;
+  Content for section 38
+&lt;/div&gt;
+</code></pre>
+<h3>Section 40</h3>
+<ul>
+<li>Item 39-A: <span>Detail A</span></li>
+<li>Item 39-B: <strong>Detail B</strong></li>
+<li>Item 39-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-39&quot;&gt;
+  Content for section 39
+&lt;/div&gt;
+</code></pre>
+<h3>Section 41</h3>
+<ul>
+<li>Item 40-A: <span>Detail A</span></li>
+<li>Item 40-B: <strong>Detail B</strong></li>
+<li>Item 40-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-40&quot;&gt;
+  Content for section 40
+&lt;/div&gt;
+</code></pre>
+<h3>Section 42</h3>
+<ul>
+<li>Item 41-A: <span>Detail A</span></li>
+<li>Item 41-B: <strong>Detail B</strong></li>
+<li>Item 41-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-41&quot;&gt;
+  Content for section 41
+&lt;/div&gt;
+</code></pre>
+<h3>Section 43</h3>
+<ul>
+<li>Item 42-A: <span>Detail A</span></li>
+<li>Item 42-B: <strong>Detail B</strong></li>
+<li>Item 42-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-42&quot;&gt;
+  Content for section 42
+&lt;/div&gt;
+</code></pre>
+<h3>Section 44</h3>
+<ul>
+<li>Item 43-A: <span>Detail A</span></li>
+<li>Item 43-B: <strong>Detail B</strong></li>
+<li>Item 43-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-43&quot;&gt;
+  Content for section 43
+&lt;/div&gt;
+</code></pre>
+<h3>Section 45</h3>
+<ul>
+<li>Item 44-A: <span>Detail A</span></li>
+<li>Item 44-B: <strong>Detail B</strong></li>
+<li>Item 44-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-44&quot;&gt;
+  Content for section 44
+&lt;/div&gt;
+</code></pre>
+<h3>Section 46</h3>
+<ul>
+<li>Item 45-A: <span>Detail A</span></li>
+<li>Item 45-B: <strong>Detail B</strong></li>
+<li>Item 45-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-45&quot;&gt;
+  Content for section 45
+&lt;/div&gt;
+</code></pre>
+<h3>Section 47</h3>
+<ul>
+<li>Item 46-A: <span>Detail A</span></li>
+<li>Item 46-B: <strong>Detail B</strong></li>
+<li>Item 46-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-46&quot;&gt;
+  Content for section 46
+&lt;/div&gt;
+</code></pre>
+<h3>Section 48</h3>
+<ul>
+<li>Item 47-A: <span>Detail A</span></li>
+<li>Item 47-B: <strong>Detail B</strong></li>
+<li>Item 47-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-47&quot;&gt;
+  Content for section 47
+&lt;/div&gt;
+</code></pre>
+<h3>Section 49</h3>
+<ul>
+<li>Item 48-A: <span>Detail A</span></li>
+<li>Item 48-B: <strong>Detail B</strong></li>
+<li>Item 48-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-48&quot;&gt;
+  Content for section 48
+&lt;/div&gt;
+</code></pre>
+<h3>Section 50</h3>
+<ul>
+<li>Item 49-A: <span>Detail A</span></li>
+<li>Item 49-B: <strong>Detail B</strong></li>
+<li>Item 49-C: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
+</ul>
+<pre><code class="language-html">&lt;div id=&quot;section-49&quot;&gt;
+  Content for section 49
+&lt;/div&gt;
+</code></pre>
+
+</body>
+</html>
+</div>
+
+        <!-- 추가 안내 -->
+        <div style="background-color: #f0f9ff; border-left: 4px solid #0ea5e9; padding: 8px 12px; margin-top: 16px; font-size: 13px; color: #0c4a6e;">
+            <p style="margin: 0;">
+                <strong>⌨️ 단축키:</strong> Home(맨위로) | PgUp/PgDn(페이지 이동) | F2(목차) | Enter/Shift+Enter(검색 이동) | ESC(닫기)
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Global 변수
+        const globalHashcode = "798739d8e1f3abbf0d04e573db046e46";
+        const globalFilename = "ansi_markdown_3.md";
+
+        // 문서 정보 토글
+        function toggleDocInfo() {
+            const docInfoSection = document.getElementById('docInfoSection');
+            const toggleBtnDesktop = document.getElementById('toggleDocInfoBtn');
+            const toggleBtnMobile = document.getElementById('toggleDocInfoBtnMobile');
+
+            docInfoSection.classList.toggle('collapsed');
+            if (toggleBtnDesktop) {
+                toggleBtnDesktop.classList.toggle('collapsed');
+            }
+            if (toggleBtnMobile) {
+                toggleBtnMobile.classList.toggle('collapsed');
+            }
+        }
+
+        // 모바일 메뉴 토글
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('open');
+        }
+
+        // 모바일 메뉴 외부 클릭시 닫기
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const toggleBtnMobile = document.getElementById('toggleDocInfoBtnMobile');
+
+            if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target) && !toggleBtnMobile.contains(event.target)) {
+                mobileMenu.classList.remove('open');
+            }
+        });
+
+        // 원본 다운로드
+        function downloadOriginal() {
+            if (globalHashcode && globalFilename) {
+                // filename에서 확장자 추출
+                const extension = globalFilename.split('.').pop().toLowerCase();
+                // FileController를 통해 캐시된 원본 파일 다운로드
+                const downloadUrl = '/aview/file/' + globalHashcode + '.' + extension +
+                                  '?download=true&name=' + encodeURIComponent(globalFilename);
+                downloadFile(downloadUrl, globalFilename);
+            } else {
+                alert('원본 문서의 정보가 없습니다.');
+            }
+        }
+
+        // 마크다운을 HTML로 다운로드 (클라이언트 사이드 타임스탬프)
+        function downloadMarkdownHtml() {
+            if (globalHashcode) {
+                // 타임스탬프 생성: yyyyMMdd_HHmmss (PDF와 동일 형식)
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                const date = String(now.getDate()).padStart(2, '0');
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                const timestamp = `${year}${month}${date}_${hours}${minutes}${seconds}`;
+
+                // 원본 파일명에서 확장자 제거
+                let baseFileName = globalFilename;
+                if (globalFilename.includes('.')) {
+                    baseFileName = globalFilename.replace(/\.[^.]+$/, '');
+                }
+
+                // HTML 파일명 생성: baseFileName_yyyyMMdd_HHmmss.html
+                const htmlFileName = baseFileName + '_' + timestamp + '.html';
+
+                // FileController의 /file/converted/{hashcode}.html API 호출
+                // ?download=true&name=... 파라미터로 다운로드 파일명 지정
+                let downloadUrl = '/aview/file/converted/' + globalHashcode + '-md.html' +
+                                '?download=true&name=' + encodeURIComponent(htmlFileName);
+                downloadFile(downloadUrl);
+            } else {
+                alert('문서의 정보가 없습니다.');
+            }
+        }
+
+        // 마크다운을 PDF로 변환하여 다운로드 (서버 사이드)
+        function downloadMarkdownPdf() {
+            if (!globalHashcode) {
+                alert('문서의 정보가 없습니다.');
+                return;
+            }
+
+            // 사용자 확인 (50% 실패율이 있으므로 안내)
+            if (!confirm('마크다운을 PDF로 변환합니다.\n변환 중에는 시간이 소요될 수 있으며, 복잡한 마크다운의 경우 변환에 실패할 수 있습니다.\n계속하시겠습니까?')) {
+                return;
+            }
+
+            const downloadUrl = '/aview/markdown/pdf/' + globalHashcode +
+                              (globalFilename ? '?fileName=' + encodeURIComponent(globalFilename) : '');
+
+            // Fetch API로 요청 (에러 처리 가능)
+            fetch(downloadUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    return response.blob();
+                })
+                .then(blob => {
+                    // 변환된 PDF를 파일로 다운로드
+                    const blobUrl = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = blobUrl;
+
+                    // 파일명 설정
+                    const baseFileName = globalFilename
+                        ? globalFilename.replace(/\.[^.]+$/, '')
+                        : 'document';
+                    const now = new Date();
+                    const timestamp = [
+                        now.getFullYear(),
+                        String(now.getMonth() + 1).padStart(2, '0'),
+                        String(now.getDate()).padStart(2, '0')
+                    ].join('') + '_' + [
+                        String(now.getHours()).padStart(2, '0'),
+                        String(now.getMinutes()).padStart(2, '0'),
+                        String(now.getSeconds()).padStart(2, '0')
+                    ].join('');
+                    link.download = baseFileName + '_' + timestamp + '.pdf';
+
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(blobUrl);
+                })
+                .catch(error => {
+                    console.error('PDF 변환 실패:', error);
+                    alert('마크다운을 PDF로 변환하는 중 오류가 발생했습니다.\n\n오류: ' + error.message + '\n\n복잡한 형식이나 특수 문자가 포함된 경우 변환이 실패할 수 있습니다.');
+                });
+        }
+
+        // 파일 다운로드 헬퍼 함수
+        function downloadFile(url, filename) {
+            const link = document.createElement('a');
+            link.href = url;
+            if (filename) {
+                link.download = filename;
+            }
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // 키보드 단축키 (Ctrl+S / Cmd+S: 다운로드)
+        document.addEventListener('keydown', function(event) {
+            if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+                event.preventDefault();
+                downloadOriginal();
+            }
+        });
+
+        // 초기화 및 코드 하이라이팅
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Markdown Viewer loaded');
+            
+            // Highlight.js 초기화
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+        });
+    </script>
+    
+    <!-- Debug Info Console Log -->
+    <script>
+        console.log('%c🔍 AView Document Info', 'color: #0066cc; font-weight: bold; font-size: 14px;');
+        console.log('Generated:', "2025-12-04 14:12:56");
+        console.log('Hashcode:', "798739d8e1f3abbf0d04e573db046e46");
+        console.log('Filename:', "ansi_markdown_3.md");
+        console.log('Template:', 'markdown.html');
+        console.log('─'.repeat(50));
+    </script>    
+    
+    <!-- Raw Markdown Content (hidden) -->
+    <script type="text/plain" id="rawMarkdownSource"># Large Markdown Document
+## Introduction
+&lt;div&gt;모든 국민은 인간으로서의 존엄과 가치를 가지며, &lt;span style=&#39;color:blue&#39;&gt;행복을 추구할 권리&lt;/span&gt;를 가진다.&lt;/div&gt;
+
+### Section 1
+* Item 0-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 0-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 0-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-0&quot;&gt;
+  Content for section 0
+&lt;/div&gt;
+```
+
+### Section 2
+* Item 1-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 1-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 1-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-1&quot;&gt;
+  Content for section 1
+&lt;/div&gt;
+```
+
+### Section 3
+* Item 2-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 2-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 2-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-2&quot;&gt;
+  Content for section 2
+&lt;/div&gt;
+```
+
+### Section 4
+* Item 3-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 3-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 3-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-3&quot;&gt;
+  Content for section 3
+&lt;/div&gt;
+```
+
+### Section 5
+* Item 4-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 4-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 4-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-4&quot;&gt;
+  Content for section 4
+&lt;/div&gt;
+```
+
+### Section 6
+* Item 5-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 5-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 5-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-5&quot;&gt;
+  Content for section 5
+&lt;/div&gt;
+```
+
+### Section 7
+* Item 6-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 6-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 6-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-6&quot;&gt;
+  Content for section 6
+&lt;/div&gt;
+```
+
+### Section 8
+* Item 7-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 7-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 7-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-7&quot;&gt;
+  Content for section 7
+&lt;/div&gt;
+```
+
+### Section 9
+* Item 8-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 8-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 8-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-8&quot;&gt;
+  Content for section 8
+&lt;/div&gt;
+```
+
+### Section 10
+* Item 9-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 9-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 9-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-9&quot;&gt;
+  Content for section 9
+&lt;/div&gt;
+```
+
+### Section 11
+* Item 10-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 10-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 10-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-10&quot;&gt;
+  Content for section 10
+&lt;/div&gt;
+```
+
+### Section 12
+* Item 11-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 11-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 11-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-11&quot;&gt;
+  Content for section 11
+&lt;/div&gt;
+```
+
+### Section 13
+* Item 12-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 12-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 12-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-12&quot;&gt;
+  Content for section 12
+&lt;/div&gt;
+```
+
+### Section 14
+* Item 13-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 13-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 13-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-13&quot;&gt;
+  Content for section 13
+&lt;/div&gt;
+```
+
+### Section 15
+* Item 14-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 14-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 14-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-14&quot;&gt;
+  Content for section 14
+&lt;/div&gt;
+```
+
+### Section 16
+* Item 15-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 15-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 15-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-15&quot;&gt;
+  Content for section 15
+&lt;/div&gt;
+```
+
+### Section 17
+* Item 16-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 16-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 16-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-16&quot;&gt;
+  Content for section 16
+&lt;/div&gt;
+```
+
+### Section 18
+* Item 17-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 17-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 17-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-17&quot;&gt;
+  Content for section 17
+&lt;/div&gt;
+```
+
+### Section 19
+* Item 18-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 18-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 18-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-18&quot;&gt;
+  Content for section 18
+&lt;/div&gt;
+```
+
+### Section 20
+* Item 19-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 19-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 19-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-19&quot;&gt;
+  Content for section 19
+&lt;/div&gt;
+```
+
+### Section 21
+* Item 20-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 20-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 20-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-20&quot;&gt;
+  Content for section 20
+&lt;/div&gt;
+```
+
+### Section 22
+* Item 21-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 21-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 21-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-21&quot;&gt;
+  Content for section 21
+&lt;/div&gt;
+```
+
+### Section 23
+* Item 22-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 22-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 22-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-22&quot;&gt;
+  Content for section 22
+&lt;/div&gt;
+```
+
+### Section 24
+* Item 23-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 23-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 23-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-23&quot;&gt;
+  Content for section 23
+&lt;/div&gt;
+```
+
+### Section 25
+* Item 24-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 24-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 24-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-24&quot;&gt;
+  Content for section 24
+&lt;/div&gt;
+```
+
+### Section 26
+* Item 25-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 25-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 25-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-25&quot;&gt;
+  Content for section 25
+&lt;/div&gt;
+```
+
+### Section 27
+* Item 26-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 26-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 26-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-26&quot;&gt;
+  Content for section 26
+&lt;/div&gt;
+```
+
+### Section 28
+* Item 27-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 27-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 27-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-27&quot;&gt;
+  Content for section 27
+&lt;/div&gt;
+```
+
+### Section 29
+* Item 28-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 28-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 28-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-28&quot;&gt;
+  Content for section 28
+&lt;/div&gt;
+```
+
+### Section 30
+* Item 29-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 29-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 29-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-29&quot;&gt;
+  Content for section 29
+&lt;/div&gt;
+```
+
+### Section 31
+* Item 30-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 30-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 30-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-30&quot;&gt;
+  Content for section 30
+&lt;/div&gt;
+```
+
+### Section 32
+* Item 31-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 31-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 31-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-31&quot;&gt;
+  Content for section 31
+&lt;/div&gt;
+```
+
+### Section 33
+* Item 32-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 32-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 32-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-32&quot;&gt;
+  Content for section 32
+&lt;/div&gt;
+```
+
+### Section 34
+* Item 33-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 33-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 33-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-33&quot;&gt;
+  Content for section 33
+&lt;/div&gt;
+```
+
+### Section 35
+* Item 34-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 34-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 34-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-34&quot;&gt;
+  Content for section 34
+&lt;/div&gt;
+```
+
+### Section 36
+* Item 35-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 35-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 35-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-35&quot;&gt;
+  Content for section 35
+&lt;/div&gt;
+```
+
+### Section 37
+* Item 36-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 36-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 36-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-36&quot;&gt;
+  Content for section 36
+&lt;/div&gt;
+```
+
+### Section 38
+* Item 37-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 37-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 37-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-37&quot;&gt;
+  Content for section 37
+&lt;/div&gt;
+```
+
+### Section 39
+* Item 38-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 38-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 38-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-38&quot;&gt;
+  Content for section 38
+&lt;/div&gt;
+```
+
+### Section 40
+* Item 39-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 39-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 39-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-39&quot;&gt;
+  Content for section 39
+&lt;/div&gt;
+```
+
+### Section 41
+* Item 40-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 40-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 40-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-40&quot;&gt;
+  Content for section 40
+&lt;/div&gt;
+```
+
+### Section 42
+* Item 41-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 41-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 41-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-41&quot;&gt;
+  Content for section 41
+&lt;/div&gt;
+```
+
+### Section 43
+* Item 42-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 42-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 42-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-42&quot;&gt;
+  Content for section 42
+&lt;/div&gt;
+```
+
+### Section 44
+* Item 43-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 43-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 43-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-43&quot;&gt;
+  Content for section 43
+&lt;/div&gt;
+```
+
+### Section 45
+* Item 44-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 44-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 44-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-44&quot;&gt;
+  Content for section 44
+&lt;/div&gt;
+```
+
+### Section 46
+* Item 45-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 45-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 45-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-45&quot;&gt;
+  Content for section 45
+&lt;/div&gt;
+```
+
+### Section 47
+* Item 46-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 46-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 46-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-46&quot;&gt;
+  Content for section 46
+&lt;/div&gt;
+```
+
+### Section 48
+* Item 47-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 47-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 47-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-47&quot;&gt;
+  Content for section 47
+&lt;/div&gt;
+```
+
+### Section 49
+* Item 48-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 48-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 48-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-48&quot;&gt;
+  Content for section 48
+&lt;/div&gt;
+```
+
+### Section 50
+* Item 49-A: &lt;span&gt;Detail A&lt;/span&gt;
+* Item 49-B: &lt;strong&gt;Detail B&lt;/strong&gt;
+* Item 49-C: &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+
+```html
+&lt;div id=&quot;section-49&quot;&gt;
+  Content for section 49
+&lt;/div&gt;
+```
+
+</script>
+    
+    <!-- Floating TOC Button -->
+    <button id="tocFloatingBtn" title="목차">
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </button>
+
+    <!-- Top Button -->
+    <button id="topBtn" title="맨 위로 이동 (Home)">
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
+    <!-- Image Lightbox -->
+    <div class="lightbox-overlay" id="lightboxOverlay">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <img class="lightbox-content" id="lightboxImage" src="" alt="">
+    </div>
+
+    <!-- TOC Drawer -->
+    <div class="toc-overlay" id="tocOverlay"></div>
+    <div class="toc-drawer" id="tocDrawer">
+        <div class="toc-header">
+            <div class="toc-header-top">
+                <span>목차</span>
+                <button class="toc-close-btn" id="tocCloseBtn">&times;</button>
+            </div>
+        </div>
+        <div class="toc-content">
+            <ul class="toc-list" id="tocList"></ul>
+        </div>
+    </div>
+
+    <script>
+        // --- Control Box Logic ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const markdownBody = document.querySelector('.markdown-body');
+            const markdownContainer = document.getElementById('markdownContainer');
+            
+            // State
+            let currentFontSize = 16;
+            let currentLineHeight = 1.6;
+            let searchMatches = [];
+            let currentMatchIndex = -1;
+            let lastSearchQuery = '';
+            
+            // Font Size
+            function updateFontSize(size) {
+                currentFontSize = size;
+                markdownBody.style.fontSize = `${size}px`;
+                const resetBtn = document.getElementById('fontSizeReset');
+                if(resetBtn) resetBtn.textContent = `${size}px`;
+                const resetBtnMobile = document.getElementById('fontSizeReset-mobile');
+                if(resetBtnMobile) resetBtnMobile.textContent = `${size}px`;
+            }
+            
+            const fontSizeIncrease = document.getElementById('fontSizeIncrease');
+            if(fontSizeIncrease) fontSizeIncrease.addEventListener('click', () => updateFontSize(currentFontSize + 1));
+            
+            const fontSizeDecrease = document.getElementById('fontSizeDecrease');
+            if(fontSizeDecrease) fontSizeDecrease.addEventListener('click', () => updateFontSize(Math.max(10, currentFontSize - 1)));
+            
+            const fontSizeReset = document.getElementById('fontSizeReset');
+            if(fontSizeReset) fontSizeReset.addEventListener('click', () => updateFontSize(16));
+
+            // Mobile Font Size
+            const fontSizeIncreaseMobile = document.getElementById('fontSizeIncrease-mobile');
+            if(fontSizeIncreaseMobile) fontSizeIncreaseMobile.addEventListener('click', () => updateFontSize(currentFontSize + 1));
+            
+            const fontSizeDecreaseMobile = document.getElementById('fontSizeDecrease-mobile');
+            if(fontSizeDecreaseMobile) fontSizeDecreaseMobile.addEventListener('click', () => updateFontSize(Math.max(10, currentFontSize - 1)));
+            
+            const fontSizeResetMobile = document.getElementById('fontSizeReset-mobile');
+            if(fontSizeResetMobile) fontSizeResetMobile.addEventListener('click', () => updateFontSize(16));
+
+            // Font Family
+            const fontFamilySelect = document.getElementById('fontFamily');
+            if(fontFamilySelect) {
+                fontFamilySelect.addEventListener('change', (e) => {
+                    document.body.style.fontFamily = e.target.value;
+                    markdownBody.style.fontFamily = e.target.value;
+                });
+            }
+
+            // Background Color
+            const bgColorBtn = document.getElementById('bgColorBtn');
+            const bgColorMenu = document.getElementById('bgColorMenu');
+            
+            if(bgColorBtn && bgColorMenu) {
+                bgColorBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    bgColorMenu.classList.toggle('open');
+                });
+                
+                document.addEventListener('click', (e) => {
+                    if (!bgColorBtn.contains(e.target) && !bgColorMenu.contains(e.target)) {
+                        bgColorMenu.classList.remove('open');
+                    }
+                });
+            }
+            
+            document.querySelectorAll('.custom-color-option').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const color = e.target.dataset.color;
+                    document.body.classList.remove('dark-mode'); // Disable dark mode if specific color selected
+                    markdownBody.style.backgroundColor = color;
+                    if(bgColorBtn) bgColorBtn.style.backgroundColor = color;
+                    if(bgColorMenu) bgColorMenu.classList.remove('open');
+                    
+                    // Update active state
+                    document.querySelectorAll('.custom-color-option').forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                });
+            });
+
+            // Dark Mode
+            function toggleDarkMode() {
+                document.body.classList.toggle('dark-mode');
+                const isDark = document.body.classList.contains('dark-mode');
+                if (isDark) {
+                    document.body.style.backgroundColor = '';
+                    markdownBody.style.backgroundColor = '';
+                } else {
+                    // Restore selected background color
+                    const activeColorBtn = document.querySelector('.custom-color-option.active');
+                    if (activeColorBtn) {
+                        const color = activeColorBtn.dataset.color;
+                        document.body.style.backgroundColor = color;
+                        markdownBody.style.backgroundColor = color;
+                    }
+                }
+            }
+            const toggleDarkModeBtn = document.getElementById('toggleDarkMode');
+            if(toggleDarkModeBtn) toggleDarkModeBtn.addEventListener('click', toggleDarkMode);
+            
+            const toggleDarkModeBtnMobile = document.getElementById('toggleDarkMode-mobile');
+            if(toggleDarkModeBtnMobile) toggleDarkModeBtnMobile.addEventListener('click', toggleDarkMode);
+
+            // Line Height
+            function updateLineHeight(val) {
+                currentLineHeight = val;
+                markdownBody.style.lineHeight = val;
+            }
+            const lineHeightIncrease = document.getElementById('lineHeightIncrease');
+            if(lineHeightIncrease) lineHeightIncrease.addEventListener('click', () => updateLineHeight(currentLineHeight + 0.1));
+            
+            const lineHeightDecrease = document.getElementById('lineHeightDecrease');
+            if(lineHeightDecrease) lineHeightDecrease.addEventListener('click', () => updateLineHeight(Math.max(1.0, currentLineHeight - 0.1)));
+            
+            const lineHeightReset = document.getElementById('lineHeightReset');
+            if(lineHeightReset) lineHeightReset.addEventListener('click', () => updateLineHeight(1.6));
+
+            // Fullscreen
+            const toggleFullscreenBtn = document.getElementById('toggleFullscreen');
+            if(toggleFullscreenBtn) {
+                toggleFullscreenBtn.addEventListener('click', () => {
+                    markdownContainer.classList.toggle('fullscreen-mode');
+                    // 전체화면 토글 시 버튼 위치 업데이트
+                    setTimeout(updateTopBtnPosition, 100);
+                });
+            }
+
+            // Search
+            function performSearch(query) {
+                // Remove existing highlights
+                const marks = markdownBody.querySelectorAll('mark.search-highlight');
+                marks.forEach(mark => {
+                    const parent = mark.parentNode;
+                    parent.replaceChild(document.createTextNode(mark.textContent), mark);
+                    parent.normalize();
+                });
+                
+                searchMatches = [];
+                currentMatchIndex = -1;
+                lastSearchQuery = query;
+                
+                if (!query) {
+                    const counter = document.getElementById('searchCounter');
+                    if(counter) counter.textContent = '';
+                    const clearBtn = document.getElementById('searchClearBtn');
+                    if(clearBtn) clearBtn.classList.remove('visible');
+                    return;
+                }
+
+                // Recursive text node search
+                function getTextNodes(node) {
+                    let textNodes = [];
+                    if (node.nodeType === 3) {
+                        textNodes.push(node);
+                    } else {
+                        // Skip scripts and styles
+                        if (node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
+                            for (let child of node.childNodes) {
+                                textNodes = textNodes.concat(getTextNodes(child));
+                            }
+                        }
+                    }
+                    return textNodes;
+                }
+
+                const textNodes = getTextNodes(markdownBody);
+                let count = 0;
+                
+                textNodes.forEach(node => {
+                    const text = node.nodeValue;
+                    if (!text) return;
+                    
+                    const regex = new RegExp(query, 'gi');
+                    let match;
+                    const matches = [];
+                    while ((match = regex.exec(text)) !== null) {
+                        matches.push({ index: match.index, length: match[0].length, text: match[0] });
+                    }
+
+                    if (matches.length > 0) {
+                        const fragment = document.createDocumentFragment();
+                        let lastIndex = 0;
+                        matches.forEach(m => {
+                            fragment.appendChild(document.createTextNode(text.slice(lastIndex, m.index)));
+                            const mark = document.createElement('mark');
+                            mark.className = 'search-highlight';
+                            mark.textContent = m.text;
+                            fragment.appendChild(mark);
+                            searchMatches.push(mark); // Store match reference
+                            lastIndex = m.index + m.length;
+                            count++;
+                        });
+                        fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+                        node.parentNode.replaceChild(fragment, node);
+                    }
+                });
+
+                const counter = document.getElementById('searchCounter');
+                if(counter) counter.textContent = count > 0 ? `${count}건` : '0';
+                
+                // Show clear button
+                const clearBtn = document.getElementById('searchClearBtn');
+                if(clearBtn) clearBtn.classList.add('visible');
+
+                // Scroll to first match
+                if (searchMatches.length > 0) {
+                    currentMatchIndex = 0;
+                    scrollToMatch(0);
+                    updateCurrentHighlight();
+                }
+            }
+
+            function scrollToMatch(index) {
+                if (index >= 0 && index < searchMatches.length) {
+                    const match = searchMatches[index];
+                    match.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+
+            function updateCurrentHighlight() {
+                searchMatches.forEach((match, idx) => {
+                    if (idx === currentMatchIndex) {
+                        match.classList.add('current');
+                    } else {
+                        match.classList.remove('current');
+                    }
+                });
+                
+                const counter = document.getElementById('searchCounter');
+                if(counter && searchMatches.length > 0) {
+                    counter.textContent = `${currentMatchIndex + 1}/${searchMatches.length}`;
+                }
+            }
+
+            function findNext() {
+                if (searchMatches.length === 0) return;
+                currentMatchIndex = (currentMatchIndex + 1) % searchMatches.length;
+                scrollToMatch(currentMatchIndex);
+                updateCurrentHighlight();
+            }
+
+            function findPrevious() {
+                if (searchMatches.length === 0) return;
+                currentMatchIndex = (currentMatchIndex - 1 + searchMatches.length) % searchMatches.length;
+                scrollToMatch(currentMatchIndex);
+                updateCurrentHighlight();
+            }
+
+            const searchBtn = document.getElementById('searchBtn');
+            if(searchBtn) searchBtn.addEventListener('click', () => {
+                performSearch(document.getElementById('searchInput').value);
+            });
+            
+            const searchInput = document.getElementById('searchInput');
+            if(searchInput) {
+                searchInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (searchInput.value !== lastSearchQuery) {
+                            performSearch(searchInput.value);
+                        } else {
+                            if (e.shiftKey) {
+                                findPrevious();
+                            } else {
+                                findNext();
+                            }
+                        }
+                    } else if (e.key === 'Delete') {
+                        // Clear search on Delete key
+                        searchInput.value = '';
+                        performSearch('');
+                    }
+                });
+            }
+            
+            const searchClearBtn = document.getElementById('searchClearBtn');
+            if(searchClearBtn) searchClearBtn.addEventListener('click', () => {
+                document.getElementById('searchInput').value = '';
+                performSearch('');
+            });
+            
+            // Mobile Search
+            const searchBtnMobile = document.getElementById('searchBtn-mobile');
+            if(searchBtnMobile) searchBtnMobile.addEventListener('click', () => {
+                performSearch(document.getElementById('searchInput-mobile').value);
+            });
+            
+            const searchInputMobile = document.getElementById('searchInput-mobile');
+            if(searchInputMobile) searchInputMobile.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') performSearch(e.target.value);
+            });
+
+            // Mobile Font Family
+            const fontFamilySelectMobile = document.getElementById('fontFamily-mobile');
+            if(fontFamilySelectMobile) {
+                fontFamilySelectMobile.addEventListener('change', (e) => {
+                    document.body.style.fontFamily = e.target.value;
+                    markdownBody.style.fontFamily = e.target.value;
+                });
+            }
+
+            // Mobile Line Height
+            const lineHeightIncreaseMobile = document.getElementById('lineHeightIncrease-mobile');
+            if(lineHeightIncreaseMobile) lineHeightIncreaseMobile.addEventListener('click', () => updateLineHeight(currentLineHeight + 0.1));
+            
+            const lineHeightDecreaseMobile = document.getElementById('lineHeightDecrease-mobile');
+            if(lineHeightDecreaseMobile) lineHeightDecreaseMobile.addEventListener('click', () => updateLineHeight(Math.max(1.0, currentLineHeight - 0.1)));
+            
+            const lineHeightResetMobile = document.getElementById('lineHeightReset-mobile');
+            if(lineHeightResetMobile) lineHeightResetMobile.addEventListener('click', () => updateLineHeight(1.6));
+
+            // Settings Save/Reset (Desktop)
+            const saveSettingsBtn = document.getElementById('saveSettings');
+            if(saveSettingsBtn) saveSettingsBtn.addEventListener('click', () => {
+                const settings = {
+                    fontSize: currentFontSize,
+                    lineHeight: currentLineHeight,
+                    fontFamily: document.getElementById('fontFamily').value,
+                    darkMode: document.body.classList.contains('dark-mode'),
+                    bgColor: document.querySelector('.custom-color-option.active')?.dataset.color || '#ffffff',
+                    tocPosition: document.querySelector('input[name="tocPosition"]:checked')?.value || 'right'
+                };
+                localStorage.setItem('mdViewerSettings', JSON.stringify(settings));
+                alert('설정이 저장되었습니다.');
+            });
+
+            const resetSettingsBtn = document.getElementById('resetSettings');
+            if(resetSettingsBtn) resetSettingsBtn.addEventListener('click', () => {
+                localStorage.removeItem('mdViewerSettings');
+                location.reload();
+            });
+
+            // Settings Save/Reset (Mobile)
+            const saveSettingsBtnMobile = document.getElementById('saveSettings-mobile');
+            if(saveSettingsBtnMobile) saveSettingsBtnMobile.addEventListener('click', () => {
+                const settings = {
+                    fontSize: currentFontSize,
+                    lineHeight: currentLineHeight,
+                    fontFamily: document.getElementById('fontFamily-mobile').value,
+                    darkMode: document.body.classList.contains('dark-mode'),
+                    bgColor: document.querySelector('.custom-color-option.active')?.dataset.color || '#ffffff',
+                    tocPosition: document.querySelector('input[name="tocPosition"]:checked')?.value || 'right'
+                };
+                localStorage.setItem('mdViewerSettings', JSON.stringify(settings));
+                alert('설정이 저장되었습니다.');
+            });
+
+            const resetSettingsBtnMobile = document.getElementById('resetSettings-mobile');
+            if(resetSettingsBtnMobile) resetSettingsBtnMobile.addEventListener('click', () => {
+                localStorage.removeItem('mdViewerSettings');
+                location.reload();
+            });
+
+            // Mobile Menu
+            const controlsMenuBtn = document.getElementById('controlsMenuBtn');
+            const controlsMenu = document.getElementById('controlsMenu');
+            if(controlsMenuBtn && controlsMenu) {
+                controlsMenuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    controlsMenu.classList.toggle('open');
+                });
+                
+                document.addEventListener('click', (e) => {
+                    if (!controlsMenuBtn.contains(e.target) && !controlsMenu.contains(e.target)) {
+                        controlsMenu.classList.remove('open');
+                    }
+                });
+            }
+
+            // --- Table of Contents (TOC) Logic ---
+            const tocToggleBtnDesktop = document.getElementById('tocToggleBtnDesktop'); // Desktop
+            const tocToggleBtnMobile = document.getElementById('tocToggleBtnMobile'); // Mobile
+            const tocFloatingBtn = document.getElementById('tocFloatingBtn'); // Floating
+            const tocDrawer = document.getElementById('tocDrawer');
+            const tocOverlay = document.getElementById('tocOverlay');
+            const tocCloseBtn = document.getElementById('tocCloseBtn');
+            const tocList = document.getElementById('tocList');
+            const tocPosLeft = document.getElementById('tocPosLeft');
+            const tocPosRight = document.getElementById('tocPosRight');
+
+            function generateTOC() {
+                const headers = markdownBody.querySelectorAll('h1, h2, h3, h4, h5, h6');
+                tocList.innerHTML = '';
+
+                headers.forEach((header, index) => {
+                    // Assign ID if not present
+                    if (!header.id) {
+                        header.id = `header-${index}`;
+                    }
+
+                    const li = document.createElement('li');
+                    li.className = `toc-item ${header.tagName.toLowerCase()}`;
+                    
+                    const link = document.createElement('a');
+                    link.className = 'toc-link';
+                    link.href = `#${header.id}`;
+                    link.textContent = header.textContent;
+                    
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        header.scrollIntoView({ behavior: 'smooth' });
+                        closeTOC();
+                    });
+
+                    li.appendChild(link);
+                    tocList.appendChild(li);
+                });
+            }
+
+            function openTOC() {
+                tocDrawer.classList.add('open');
+                tocOverlay.classList.add('open');
+            }
+
+            function closeTOC() {
+                tocDrawer.classList.remove('open');
+                tocOverlay.classList.remove('open');
+            }
+            
+            function toggleTOC() {
+                if (tocDrawer.classList.contains('open')) {
+                    closeTOC();
+                } else {
+                    openTOC();
+                }
+            }
+
+            if(tocToggleBtnDesktop) {
+                tocToggleBtnDesktop.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleTOC();
+                });
+            }
+            
+            if(tocToggleBtnMobile) {
+                tocToggleBtnMobile.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleTOC();
+                });
+            }
+            
+            if(tocFloatingBtn) {
+                tocFloatingBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleTOC();
+                });
+            }
+            
+            if(tocCloseBtn) tocCloseBtn.addEventListener('click', closeTOC);
+            if(tocOverlay) tocOverlay.addEventListener('click', closeTOC);
+            
+            // TOC Position Change
+            function setTOCPosition(position) {
+                if (position === 'left') {
+                    tocDrawer.classList.add('left');
+                } else {
+                    tocDrawer.classList.remove('left');
+                }
+            }
+
+            if(tocPosLeft) {
+                tocPosLeft.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        setTOCPosition('left');
+                    }
+                });
+            }
+
+            if(tocPosRight) {
+                tocPosRight.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        setTOCPosition('right');
+                    }
+                });
+            }
+            
+            // Load Settings (after TOC variables and functions are defined)
+            const saved = localStorage.getItem('mdViewerSettings');
+            if (saved) {
+                try {
+                    const settings = JSON.parse(saved);
+                    if (settings.fontSize) updateFontSize(settings.fontSize);
+                    if (settings.lineHeight) updateLineHeight(settings.lineHeight);
+                    if (settings.fontFamily) {
+                        const fontSelect = document.getElementById('fontFamily');
+                        if(fontSelect) fontSelect.value = settings.fontFamily;
+                        const fontSelectMobile = document.getElementById('fontFamily-mobile');
+                        if(fontSelectMobile) fontSelectMobile.value = settings.fontFamily;
+                        document.body.style.fontFamily = settings.fontFamily;
+                        markdownBody.style.fontFamily = settings.fontFamily;
+                    }
+                    if (settings.bgColor) {
+                        const btn = document.querySelector(`.custom-color-option[data-color="${settings.bgColor}"]`);
+                        if (btn) btn.click();
+                    }
+                    if (settings.darkMode) toggleDarkMode();
+                    if (settings.tocPosition) {
+                        if (settings.tocPosition === 'left') {
+                            if(tocPosLeft) tocPosLeft.checked = true;
+                            setTOCPosition('left');
+                        } else {
+                            if(tocPosRight) tocPosRight.checked = true;
+                            setTOCPosition('right');
+                        }
+                    } else {
+                        // Default to right if not saved
+                        if(tocPosRight) tocPosRight.checked = true;
+                        setTOCPosition('right');
+                    }
+                } catch(e) {
+                    console.error('Failed to load settings', e);
+                }
+            } else {
+                // No saved settings - set default to right
+                if (tocPosRight) {
+                    tocPosRight.checked = true;
+                    setTOCPosition('right');
+                }
+            }
+            
+            // F2 Shortcut for TOC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'F2') {
+                    e.preventDefault();
+                    toggleTOC();
+                }
+            });
+
+            // Generate TOC on load
+            generateTOC();
+
+            // --- Code Block Copy Logic ---
+            function addCopyButtons() {
+                const preBlocks = markdownBody.querySelectorAll('pre');
+                preBlocks.forEach(pre => {
+                    // Check if it already has a button
+                    if (pre.querySelector('.copy-btn')) return;
+
+                    const button = document.createElement('button');
+                    button.className = 'copy-btn';
+                    button.title = 'Copy code';
+                    // Icon for copy
+                    button.innerHTML = `<svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>`;
+
+                    button.addEventListener('click', async () => {
+                        const code = pre.querySelector('code');
+                        if (!code) return;
+
+                        try {
+                            await navigator.clipboard.writeText(code.innerText);
+                            // Change to Check icon temporarily
+                            const originalHTML = button.innerHTML;
+                            button.innerHTML = `<svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+                            setTimeout(() => {
+                                button.innerHTML = originalHTML;
+                            }, 2000);
+                        } catch (err) {
+                            console.error('Failed to copy:', err);
+                        }
+                    });
+
+                    pre.appendChild(button);
+                });
+            }
+
+            addCopyButtons();
+            
+            // --- Top Button & Floating TOC Logic ---
+            const topBtn = document.getElementById('topBtn');
+            
+            function toggleFloatingButtons() {
+                const shouldShow = window.scrollY > 300 || document.documentElement.scrollTop > 300;
+                
+                if (topBtn) {
+                    if (shouldShow) topBtn.classList.add('show');
+                    else topBtn.classList.remove('show');
+                }
+                
+                if (tocFloatingBtn) {
+                    if (shouldShow) tocFloatingBtn.classList.add('show');
+                    else tocFloatingBtn.classList.remove('show');
+                }
+            }
+            
+            function scrollToTop() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+
+            // 버튼 위치 동적 조정 함수
+            function updateBtnPosition() {
+                const container = document.querySelector('.markdown-container');
+                if (!container) return;
+                
+                const rect = container.getBoundingClientRect();
+                // 컨테이너 내부 우측에 위치하도록 계산
+                // 화면 우측 끝에서 컨테이너 우측 끝까지의 거리 + 30px (내부 여백)
+                let rightPos = window.innerWidth - rect.right + 30;
+                
+                // 화면이 좁을 때 최소 여백 20px 유지
+                if (rightPos < 20) rightPos = 20;
+                
+                if (topBtn) topBtn.style.right = `${rightPos}px`;
+                if (tocFloatingBtn) tocFloatingBtn.style.right = `${rightPos}px`;
+            }
+
+            window.addEventListener('scroll', () => {
+                toggleFloatingButtons();
+                updateBtnPosition();
+            });
+            window.addEventListener('resize', updateBtnPosition);
+            
+            if(topBtn) topBtn.addEventListener('click', scrollToTop);
+
+            // 초기 상태 설정 (페이지 로드 시)
+            toggleFloatingButtons();
+            updateBtnPosition();
+            
+            // Home key to scroll to top
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Home') {
+                    // Ignore if focus is in input
+                    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+                    e.preventDefault();
+                    scrollToTop();
+                }
+            });
+
+            // --- Image Lightbox Logic ---
+            const lightboxOverlay = document.getElementById('lightboxOverlay');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxClose = document.getElementById('lightboxClose');
+
+            function openLightbox(imageSrc, imageAlt) {
+                lightboxImage.src = imageSrc;
+                lightboxImage.alt = imageAlt;
+                lightboxOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightboxOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+                lightboxImage.src = '';
+            }
+
+            // Add click event to all images in markdown body
+            const images = markdownBody.querySelectorAll('img');
+            images.forEach(img => {
+                img.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openLightbox(img.src, img.alt);
+                });
+            });
+
+            // Close lightbox on close button click
+            if(lightboxClose) {
+                lightboxClose.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    closeLightbox();
+                });
+            }
+
+            // Close lightbox on overlay click
+            if(lightboxOverlay) {
+                lightboxOverlay.addEventListener('click', closeLightbox);
+            }
+
+            // Prevent closing when clicking on image itself
+            if(lightboxImage) {
+                lightboxImage.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+            }
+
+            // Close lightbox on ESC key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightboxOverlay.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+
+            // --- Raw Markdown View Logic ---
+            const rawToggleBtn = document.getElementById('rawToggleBtn');
+            let isRawView = false;
+            let savedHtmlContent = '';
+            let rawMarkdownContent = '';
+            let isFetchingRaw = false;
+
+            async function displayRaw() {
+                // Toggle between rendered and raw view
+                if (!isRawView) {
+                    // Switch to Raw view
+                    if (!rawMarkdownContent && !isFetchingRaw) {
+                        // Get markdown from hidden script tag
+                        const rawSource = document.getElementById('rawMarkdownSource');
+                        if (rawSource) {
+                            rawMarkdownContent = rawSource.textContent;
+                        } else {
+                            alert('마크다운 소스를 찾을 수 없습니다.');
+                            return;
+                        }
+                    }
+
+                    // Save current HTML content
+                    savedHtmlContent = markdownBody.innerHTML;
+
+                    // Get current font family from control box
+                    const currentFont = document.getElementById('fontFamily')?.value || "'Noto Sans KR', sans-serif";
+
+                    // Display raw markdown with current font settings and copy button
+                    markdownBody.innerHTML = `
+                        <div style="position: relative;">
+                            <button id="rawCopyBtn" style="position: absolute; top: 12px; right: 12px; background-color: rgba(255, 255, 255, 0.9); border: 1px solid #ddd; border-radius: 4px; padding: 6px 12px; font-size: 12px; color: #666; cursor: pointer; z-index: 10; display: flex; align-items: center; gap: 4px;" title="전체 복사">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                <span>복사</span>
+                            </button>
+                            <pre style="white-space: pre-wrap; word-wrap: break-word; font-family: ${currentFont}; font-size: 14px; line-height: 1.6; padding: 16px; margin: 0; background-color: #f6f8fa; border-radius: 6px; overflow-x: auto;"><code>${escapeHtml(rawMarkdownContent)}</code></pre>
+                        </div>
+                    `;
+                    
+                    // Add copy button event listener
+                    const rawCopyBtn = document.getElementById('rawCopyBtn');
+                    if (rawCopyBtn) {
+                        rawCopyBtn.addEventListener('click', async () => {
+                            try {
+                                await navigator.clipboard.writeText(rawMarkdownContent);
+                                const originalHTML = rawCopyBtn.innerHTML;
+                                rawCopyBtn.innerHTML = `<svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>복사됨!</span>`;
+                                rawCopyBtn.style.backgroundColor = '#d4edda';
+                                rawCopyBtn.style.color = '#155724';
+                                setTimeout(() => {
+                                    rawCopyBtn.innerHTML = originalHTML;
+                                    rawCopyBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+                                    rawCopyBtn.style.color = '#666';
+                                }, 2000);
+                            } catch (err) {
+                                console.error('Failed to copy:', err);
+                                alert('복사에 실패했습니다.');
+                            }
+                        });
+                    }
+                    
+                    isRawView = true;
+                    rawToggleBtn.style.backgroundColor = '#0ea5e9';
+                    rawToggleBtn.style.color = 'white';
+                } else {
+                    // Switch back to rendered view
+                    markdownBody.innerHTML = savedHtmlContent;
+                    
+                    // Re-attach image lightbox listeners
+                    const images = markdownBody.querySelectorAll('img');
+                    images.forEach(img => {
+                        img.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            openLightbox(img.src, img.alt);
+                        });
+                    });
+
+                    // Re-attach copy buttons to code blocks
+                    addCopyButtons();
+
+                    // Re-generate TOC
+                    generateTOC();
+                    
+                    isRawView = false;
+                    rawToggleBtn.style.backgroundColor = '';
+                    rawToggleBtn.style.color = '';
+                }
+            }
+
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            if (rawToggleBtn) {
+                rawToggleBtn.addEventListener('click', displayRaw);
+            }
+
+            // --- Export Functionality ---
+            const exportBtn = document.getElementById('exportBtn');
+            const exportMenu = document.getElementById('exportMenu');
+            const exportHTMLBtn = document.getElementById('exportHTML');
+            const exportPDFBtn = document.getElementById('exportPDF');
+
+            // Toggle export menu
+            if (exportBtn) {
+                exportBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    exportMenu.classList.toggle('show');
+                });
+            }
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (exportMenu && !exportMenu.contains(e.target) && e.target !== exportBtn) {
+                    exportMenu.classList.remove('show');
+                }
+            });
+
+            // Generate filename with timestamp
+            function generateFilename(extension) {
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                const day = String(now.getDate()).padStart(2, '0');
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                // Extract filename without extension (use 'document' if filename is null or empty)
+                const filename = globalFilename && globalFilename.trim() ? globalFilename : 'document';
+                const nameWithoutExt = filename.split('.').slice(0, -1).join('.') || filename;
+                return `${nameWithoutExt}_${year}${month}${day}_${hours}${minutes}${seconds}.${extension}`;
+            }
+
+            // Export as HTML
+            if (exportHTMLBtn) {
+                exportHTMLBtn.addEventListener('click', () => {
+                    exportMenu.classList.remove('show');
+                    
+                    // Get all styles
+                    let styles = '';
+                    for (let sheet of document.styleSheets) {
+                        try {
+                            for (let rule of sheet.cssRules) {
+                                styles += rule.cssText + '\n';
+                            }
+                        } catch (e) {
+                            // Skip external stylesheets due to CORS
+                        }
+                    }
+
+                    const html = `<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Export</title>
+    <style>
+${styles}
+    </style>
+</head>
+<body>
+    <div class="markdown-body">
+${markdownBody.innerHTML}
+    </div>
+</body>
+</html>`;
+
+                    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = generateFilename('html');
+                    a.click();
+                    URL.revokeObjectURL(url);
+                });
+            }
+
+            // Export as PDF
+            if (exportPDFBtn) {
+                exportPDFBtn.addEventListener('click', async () => {
+                    exportMenu.classList.remove('show');
+                    
+                    // Show loading indicator
+                    const originalText = exportPDFBtn.innerHTML;
+                    exportPDFBtn.innerHTML = '⏳ PDF 생성 중...';
+                    exportPDFBtn.disabled = true;
+
+                    try {
+                        const element = markdownBody.cloneNode(true);
+                        
+                        // PDF export options
+                        const opt = {
+                            margin: 10,
+                            filename: generateFilename('pdf'),
+                            image: { type: 'jpeg', quality: 0.98 },
+                            html2canvas: { scale: 2, useCORS: true },
+                            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                        };
+
+                        await html2pdf().set(opt).from(element).save();
+                    } catch (error) {
+                        console.error('PDF export failed:', error);
+                        alert('PDF 내보내기에 실패했습니다.');
+                    } finally {
+                        exportPDFBtn.innerHTML = originalText;
+                        exportPDFBtn.disabled = false;
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <svg width="20" height="20"><use href="#icon-help-title"/></svg>
+                    마크다운 뷰어 사용 팁
+                </h3>
+                <button type="button" class="close-modal-btn" id="closeHelpModal" title="닫기">
+                    <svg width="20" height="20"><use href="#icon-close"/></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="help-list" id="helpList"></ul>
+            </div>
+            <div class="modal-footer">
+                <a href="/aview/help/viewer/markdown.html" target="_blank">
+                    더 자세한 정보...
+                    <svg width="14" height="14"><use href="#icon-external-link"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const helpData = [{title: "마크다운 렌더링",desc: "마크다운 문법이 자동으로 HTML로 변환되어 표시됩니다.",iconId: "icon-menu"},{title: "검색 기능",desc: "상단의 검색창을 통해 문서 내용을 실시간으로 검색할 수 있습니다.",iconId: "icon-search"},{title: "목차 네비게이션",desc: "제목을 기반으로 자동 생성된 목차로 빠르게 이동할 수 있습니다.",iconId: "icon-columns"},{title: "코드 강조",desc: "코드 블록이 구문 강조와 함께 표시됩니다.",iconId: "icon-sort"},{title: "다크 모드",desc: "달 아이콘을 클립하여 다크 모드로 전환할 수 있습니다.",iconId: "icon-moon"}];
+        const helpBtn = document.getElementById('helpBtn');
+        const helpModal = document.getElementById('helpModal');
+        const closeHelpModalBtn = document.getElementById('closeHelpModal');
+        const helpList = document.getElementById('helpList');
+        function renderHelpModal() {
+            if (!helpList) return;
+            helpList.innerHTML = helpData.map(item => `<li class="help-item"><div class="help-icon"><svg width="14" height="14"><use href="#${item.iconId}"/></svg></div><div class="help-text"><h4>${item.title}</h4><p>${item.desc}</p></div></li>`).join('')
+        }
+        function openHelpModal() {
+            renderHelpModal();
+            helpModal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeHelpModal() {
+            helpModal.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        if (helpBtn) helpBtn.addEventListener('click', openHelpModal);
+        if (closeHelpModalBtn) closeHelpModalBtn.addEventListener('click', closeHelpModal);
+        if (helpModal) helpModal.addEventListener('click', (e) => e.target === helpModal && closeHelpModal());
+        document.addEventListener('keydown', (e) => e.key === 'Escape' && helpModal.classList.contains('open') && closeHelpModal());
+
+        // F4: 전체화면 토글
+        const markdownContainer = document.getElementById('markdownContainer');
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'F4') {
+                e.preventDefault();
+                markdownContainer.classList.toggle('fullscreen-mode');
+            }
+        });
+    </script>
+</body>
+</html>
