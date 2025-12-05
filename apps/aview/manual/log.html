@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그 뷰어 매뉴얼</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --accent: #0ea5e9;
+            --accent-hover: #0284c7;
+            --border: #e2e8f0;
+            --code-bg: #f1f5f9;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        /* Markdown Content Styles */
+        #content {
+            animation: fadeIn 0.5s ease-out;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-primary);
+            font-weight: 700;
+            margin-top: 2.5em;
+            margin-bottom: 1em;
+            line-height: 1.3;
+        }
+        h1 { font-size: 2.5rem; margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
+        h2 { font-size: 1.75rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { font-size: 1.5rem; }
+        p { margin-bottom: 1.5em; color: var(--text-secondary); }
+        a { color: var(--accent); text-decoration: none; transition: all 0.2s; }
+        a:hover { color: var(--accent-hover); text-decoration: underline; }
+        ul, ol { margin-bottom: 1.5em; padding-left: 1.5em; color: var(--text-secondary); }
+        li { margin-bottom: 0.5em; }
+        blockquote {
+            border-left: 4px solid var(--accent);
+            background-color: rgba(14, 165, 233, 0.05);
+            padding: 1rem 1.5rem;
+            margin: 2em 0;
+            border-radius: 0 8px 8px 0;
+            color: var(--text-secondary);
+        }
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: rgba(0, 0, 0, 0.05);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-size: 0.875em;
+            color: #0f172a;
+        }
+        pre {
+            background-color: var(--code-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 2em 0;
+            border: 1px solid var(--border);
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: inherit;
+            font-size: 0.9em;
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 2em 0;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background-color: var(--bg-secondary);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background-color: rgba(0,0,0,0.02); }
+        hr { border: 0; border-top: 1px solid var(--border); margin: 3em 0; }
+        
+        .icon-inline {
+            width: 1.2em;
+            height: 1.2em;
+            vertical-align: text-bottom;
+            margin-right: 0.5em;
+            display: inline-block;
+            stroke: currentColor;
+            fill: none;
+            color: var(--accent);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body>
+    <svg style="display: none;">
+        <defs>
+            <symbol id="icon-download" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+            </symbol>
+            <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+            </symbol>
+            <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </symbol>
+            <symbol id="icon-filter" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+            </symbol>
+            <symbol id="icon-save" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </symbol>
+            <symbol id="icon-reset" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+            </symbol>
+            <symbol id="icon-help" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </symbol>
+        </defs>
+    </svg>
+
+    <div class="container">
+        <div id="content"></div>
+    </div>
+
+    <script id="markdown-source" type="text/markdown">
+# 로그 뷰어 (log.html)
+
+## 개요
+
+대용량 로그 파일 뷰어입니다. 가상 스크롤 기술을 사용하여 수백 MB 이상의 로그 파일도 부드럽게 열람할 수 있으며, 로그 레벨 필터링, 검색, 하이라이팅, 실시간 테일링(Tailing) 등의 기능을 제공합니다.
+
+**주요 특징:**
+
+- 대용량 파일 지원 (가상 스크롤)
+- 로그 레벨(INFO, ERROR, WARN 등) 자동 감지 및 컬러링
+- 실시간 검색 및 정규식 지원
+- 로그 레벨 필터링
+- 자동 스크롤 (Tail 모드)
+- 사용자 선호도 저장
+
+---
+
+## Header 버튼들 (상단 우측)
+
+> 데스크톱 화면에서 파일명 우측에 표시됩니다.
+
+| 버튼 | 설명 |
+|------|------|
+| **<svg class="icon-inline"><use href="#icon-download"/></svg> 원본 다운로드** | 원본 로그 파일을 다운로드합니다. |
+| **<svg class="icon-inline"><use href="#icon-chevron-down"/></svg> 문서 정보 토글** | 파일 크기, 총 라인 수, 인코딩 정보를 표시/숨김합니다. |
+
+---
+
+## Control Bar 버튼들 (로그 위)
+
+> 로그 상단에 위치한 제어 바에서 다양한 설정을 조절할 수 있습니다.
+
+### 필터링 및 검색
+
+| 버튼 | 설명 |
+|------|------|
+| **<svg class="icon-inline"><use href="#icon-filter"/></svg> 레벨 필터** | 특정 로그 레벨(ERROR, WARN, INFO, DEBUG 등)만 필터링하여 표시합니다. |
+| **<svg class="icon-inline"><use href="#icon-search"/></svg> 검색** | 로그 내에서 텍스트를 검색합니다. 정규식 사용이 가능합니다. |
+
+### 보기 설정
+
+| 버튼 | 설명 |
+|------|------|
+| **줄바꿈** | 긴 로그 라인을 줄바꿈하여 표시할지 여부를 토글합니다. |
+| **폰트 작게 / 기본 / 크게** | 폰트 크기를 조정합니다. |
+| **테마 선택** | 로그 뷰어의 색상 테마를 변경합니다.<br/>- Default (Dark)<br/>- Light<br/>- High Contrast |
+
+### 추가 기능
+
+| 버튼 | 설명 |
+|------|------|
+| **Tail** | 새로운 로그가 추가될 때마다 자동으로 맨 아래로 스크롤합니다 (실시간 로그 확인용). |
+| **⛶ 전체화면** | 전체 화면 모드로 전환합니다. |
+| **<svg class="icon-inline"><use href="#icon-save"/></svg> 설정 저장** | 현재 설정(필터, 테마, 폰트 등)을 localStorage에 저장합니다. |
+| **<svg class="icon-inline"><use href="#icon-reset"/></svg> 설정 초기화** | 저장된 설정을 초기값으로 리셋합니다. |
+| **<svg class="icon-inline"><use href="#icon-help"/></svg> 도움말** | 사용 팁을 표시하는 모달을 엽니다. |
+
+---
+
+## Hotkey (키보드 단축키)
+
+| 단축키 | 설명 |
+|--------|------|
+| **Home** | 맨 위로 스크롤 |
+| **End** | 맨 아래로 스크롤 |
+| **PageUp / PageDown** | 페이지 단위 스크롤 |
+| **Ctrl+F** | 검색창 포커스 |
+| **F4** | 전체화면 모드 토글 |
+| **T** | Tail 모드 토글 |
+
+---
+
+## 팁
+
+- **로그 레벨 컬러링**: 로그 라인에 포함된 키워드(ERROR, WARN 등)를 자동으로 인식하여 색상을 입힙니다. 이를 통해 중요한 오류를 빠르게 식별할 수 있습니다.
+- **정규식 검색**: 검색창에서 `/pattern/` 형식으로 입력하면 정규식 검색이 가능합니다.
+- **성능**: 가상 스크롤을 사용하므로 파일 크기가 커도 브라우저 메모리를 적게 사용하고 스크롤이 부드럽습니다.
+    </script>
+
+    <script>
+        const markdown = document.getElementById('markdown-source').textContent;
+        // Configure marked
+        marked.setOptions({
+            highlight: function(code, lang) {
+                const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+                return hljs.highlight(code, { language }).value;
+            },
+            langPrefix: 'hljs language-',
+            breaks: true,
+            gfm: true
+        });
+        document.getElementById('content').innerHTML = marked.parse(markdown);
+    </script>
+</body>
+</html>

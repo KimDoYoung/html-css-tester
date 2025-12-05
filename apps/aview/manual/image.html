@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지 뷰어 매뉴얼</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --accent: #0ea5e9;
+            --accent-hover: #0284c7;
+            --border: #e2e8f0;
+            --code-bg: #f1f5f9;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        /* Markdown Content Styles */
+        #content {
+            animation: fadeIn 0.5s ease-out;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-primary);
+            font-weight: 700;
+            margin-top: 2.5em;
+            margin-bottom: 1em;
+            line-height: 1.3;
+        }
+        h1 { font-size: 2.5rem; margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
+        h2 { font-size: 1.75rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { font-size: 1.5rem; }
+        p { margin-bottom: 1.5em; color: var(--text-secondary); }
+        a { color: var(--accent); text-decoration: none; transition: all 0.2s; }
+        a:hover { color: var(--accent-hover); text-decoration: underline; }
+        ul, ol { margin-bottom: 1.5em; padding-left: 1.5em; color: var(--text-secondary); }
+        li { margin-bottom: 0.5em; }
+        blockquote {
+            border-left: 4px solid var(--accent);
+            background-color: rgba(14, 165, 233, 0.05);
+            padding: 1rem 1.5rem;
+            margin: 2em 0;
+            border-radius: 0 8px 8px 0;
+            color: var(--text-secondary);
+        }
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: rgba(0, 0, 0, 0.05);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-size: 0.875em;
+            color: #0f172a;
+        }
+        pre {
+            background-color: var(--code-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 2em 0;
+            border: 1px solid var(--border);
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: inherit;
+            font-size: 0.9em;
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 2em 0;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background-color: var(--bg-secondary);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background-color: rgba(0,0,0,0.02); }
+        hr { border: 0; border-top: 1px solid var(--border); margin: 3em 0; }
+        
+        .icon-inline {
+            width: 1.2em;
+            height: 1.2em;
+            vertical-align: text-bottom;
+            margin-right: 0.5em;
+            display: inline-block;
+            stroke: currentColor;
+            fill: none;
+            color: var(--accent);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body>
+    <svg style="display: none;">
+        <defs>
+            <symbol id="icon-download" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+            </symbol>
+            <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+            </symbol>
+            <symbol id="icon-zoom-in" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+            </symbol>
+            <symbol id="icon-zoom-out" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM13 10H7"></path>
+            </symbol>
+            <symbol id="icon-rotate-cw" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+            </symbol>
+            <symbol id="icon-save" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </symbol>
+            <symbol id="icon-reset" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+            </symbol>
+            <symbol id="icon-help" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </symbol>
+        </defs>
+    </svg>
+
+    <div class="container">
+        <div id="content"></div>
+    </div>
+
+    <script id="markdown-source" type="text/markdown">
+# 이미지 뷰어 (image.html)
+
+## 개요
+
+이미지 파일 뷰어입니다. 다양한 이미지 포맷을 지원하며, 줌, 회전, 반전, 배경색 변경, EXIF 정보 확인 등의 기능을 제공합니다.
+
+**주요 특징:**
+
+- 줌 인/아웃 및 팬(Pan) 기능
+- 이미지 회전 및 좌우/상하 반전
+- 배경색 변경 (투명 이미지 확인용)
+- EXIF 메타데이터 표시
+- 실제 크기 보기 및 화면 맞춤
+
+---
+
+## Header 버튼들 (상단 우측)
+
+> 데스크톱 화면에서 파일명 우측에 표시됩니다.
+
+| 버튼 | 설명 |
+|------|------|
+| **<svg class="icon-inline"><use href="#icon-download"/></svg> 원본 다운로드** | 원본 이미지 파일을 다운로드합니다. |
+| **<svg class="icon-inline"><use href="#icon-chevron-down"/></svg> 문서 정보 토글** | 이미지 크기(픽셀), 파일 크기, 형식을 표시/숨김합니다. |
+
+---
+
+## Control Bar 버튼들 (이미지 위)
+
+> 이미지 상단에 위치한 제어 바에서 다양한 조작을 할 수 있습니다.
+
+### 줌 및 이동
+
+| 버튼 | 설명 |
+|------|------|
+| **<svg class="icon-inline"><use href="#icon-zoom-in"/></svg> 확대 (+)** | 이미지를 확대합니다. (마우스 휠로도 가능) |
+| **<svg class="icon-inline"><use href="#icon-zoom-out"/></svg> 축소 (-)** | 이미지를 축소합니다. (마우스 휠로도 가능) |
+| **1:1** | 이미지를 실제 픽셀 크기(100%)로 표시합니다. |
+| **Fit** | 이미지를 화면 크기에 맞게 조정합니다. |
+
+### 회전 및 반전
+
+| 버튼 | 설명 |
+|------|------|
+| **<svg class="icon-inline"><use href="#icon-rotate-cw"/></svg> 회전** | 시계 방향으로 90도씩 회전합니다. |
+| **좌우 반전** | 이미지를 좌우로 뒤집습니다. |
+| **상하 반전** | 이미지를 상하로 뒤집습니다. |
+
+### 배경 및 보기 설정
+
+| 버튼 | 설명 |
+|------|------|
+| **배경색** | 이미지 배경색을 변경합니다 (체커보드, 흰색, 검은색 등). 투명 배경 이미지를 확인할 때 유용합니다. |
+
+### 추가 기능
+
+| 버튼 | 설명 |
+|------|------|
+| **⛶ 전체화면** | 전체 화면 모드로 전환합니다. |
+| **ℹ EXIF** | 이미지에 포함된 메타데이터(카메라 정보, 촬영 일시 등)를 표시합니다. |
+| **<svg class="icon-inline"><use href="#icon-help"/></svg> 도움말** | 사용 팁을 표시하는 모달을 엽니다. |
+
+---
+
+## Hotkey (키보드 단축키)
+
+| 단축키 | 설명 |
+|--------|------|
+| **+ / -** | 확대 / 축소 |
+| **0** | 화면 맞춤 (Fit) |
+| **1** | 실제 크기 (1:1) |
+| **R** | 회전 (90도) |
+| **H** | 좌우 반전 |
+| **V** | 상하 반전 |
+| **Arrow Keys** | 이미지 이동 (확대 상태일 때) |
+| **Ctrl+S** | 원본 이미지 다운로드 |
+
+---
+
+## 팁
+
+- **마우스 휠**: 마우스 휠을 사용하여 빠르고 부드럽게 확대/축소할 수 있습니다.
+- **드래그**: 확대된 상태에서 마우스로 드래그하여 이미지를 이동할 수 있습니다.
+- **투명 이미지**: PNG나 GIF 같은 투명 배경 이미지는 배경색을 '체커보드'로 설정하면 투명한 부분을 쉽게 구별할 수 있습니다.
+    </script>
+
+    <script>
+        const markdown = document.getElementById('markdown-source').textContent;
+        // Configure marked
+        marked.setOptions({
+            highlight: function(code, lang) {
+                const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+                return hljs.highlight(code, { language }).value;
+            },
+            langPrefix: 'hljs language-',
+            breaks: true,
+            gfm: true
+        });
+        document.getElementById('content').innerHTML = marked.parse(markdown);
+    </script>
+</body>
+</html>
