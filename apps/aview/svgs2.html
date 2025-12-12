@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Subway, Bus, Parking Icons</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+        }
+        .icon-container {
+            display: inline-block;
+            margin: 20px;
+        }
+        .icon-label {
+            margin-top: 8px;
+            font-size: 16px;
+            color: #333;
+        }
+        svg {
+            width: 100px;
+            height: 100px;
+            stroke: #222;
+            fill: none;
+            stroke-width: 2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="icon-container">
+        <!-- Subway Icon -->
+        <svg viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="14" rx="2" ry="2"></rect>
+            <circle cx="8" cy="9" r="1.5"></circle>
+            <circle cx="16" cy="9" r="1.5"></circle>
+            <path d="M7 16 L5 18"></path>
+            <path d="M17 16 L19 18"></path>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+        </svg>
+        <div class="icon-label">Subway</div>
+    </div>
+
+    <div class="icon-container">
+        <!-- Bus Icon -->
+        <svg viewBox="0 0 24 24">
+            <rect x="3" y="5" width="18" height="12" rx="2" ry="2"></rect>
+            <line x1="3" y1="9" x2="21" y2="9"></line>
+            <circle cx="7" cy="17" r="2"></circle>
+            <circle cx="17" cy="17" r="2"></circle>
+            <rect x="7" y="7" width="3" height="3"></rect>
+            <rect x="14" y="7" width="3" height="3"></rect>
+        </svg>
+        <div class="icon-label">Bus</div>
+    </div>
+
+    <div class="icon-container">
+        <!-- Parking Icon -->
+        <svg viewBox="0 0 24 24">
+            <rect x="2" y="2" width="20" height="20" rx="3" ry="3"></rect>
+            <text x="12" y="16" font-size="12" text-anchor="middle" fill="#222">P</text>
+        </svg>
+        <div class="icon-label">Parking</div>
+    </div>
+
+</body>
+</html>
