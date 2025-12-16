@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Communication & AI Icons - Messenger, Chatbot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 1200px;
+            width: 100%;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+        
+        .icons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .icon-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .icon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .icon-wrapper {
+            background: white;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .icon-card h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .icon-card p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .size-examples {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 2px solid #eee;
+        }
+        
+        .size-examples h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .size-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .size-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .size-label {
+            font-size: 12px;
+            color: #666;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💬 커뮤니케이션 & AI 아이콘</h1>
+        
+        <div class="icons-grid">
+            <!-- 메신저 아이콘 -->
+            <div class="icon-card">
+                <div class="icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100" height="100">
+                        <!-- 배경 메인 말풍선 -->
+                        <path d="M 8 30 C 8 16 18 6 36 6 C 52 6 60 16 60 28 C 60 40 50 50 36 50 C 32 50 28 49 25 47 L 12 52 L 14 40 C 10 37 8 34 8 30 Z" 
+                              fill="#4ADE80" stroke="#059669" stroke-width="2"/>
+                        
+                        <!-- 내부 두번째 말풍선 (답장 느낌) -->
+                        <path d="M 32 42 L 32 48 L 24 45 C 22 46 20 46 18 46 C 10 46 4 40 4 32 C 4 30 4.5 28 5 26" 
+                              fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
+                        
+                        <!-- 텍스트/내용 라인 -->
+                        <line x1="20" y1="20" x2="50" y2="20" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="20" y1="28" x2="42" y2="28" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="20" y1="36" x2="46" y2="36" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                        
+                        <!-- 장식용 점 (온라인 상태) -->
+                        <circle cx="54" cy="12" r="4" fill="#EF4444" stroke="white" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h2>메신저 (Messenger)</h2>
+                <p>채팅, 대화, 메시지 아이콘</p>
+            </div>
+            
+            <!-- AI 챗봇 아이콘 -->
+            <div class="icon-card">
+                <div class="icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100" height="100">
+                        <!-- 배경 그라데이션 정의 -->
+                        <defs>
+                            <linearGradient id="robotGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#6366F1;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#A855F7;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- 로봇 얼굴 형태 -->
+                        <rect x="12" y="16" width="40" height="36" rx="10" ry="10" 
+                              fill="url(#robotGrad)" stroke="#4338CA" stroke-width="2"/>
+                        
+                        <!-- 안테나 -->
+                        <line x1="32" y1="16" x2="32" y2="8" stroke="#4338CA" stroke-width="2"/>
+                        <circle cx="32" cy="6" r="4" fill="#F43F5E" stroke="#4338CA" stroke-width="1.5"/>
+                        
+                        <!-- 귀 (좌우) -->
+                        <path d="M 12 28 L 8 28 C 6 28 6 36 8 36 L 12 36" fill="#818CF8" stroke="#4338CA" stroke-width="1.5"/>
+                        <path d="M 52 28 L 56 28 C 58 28 58 36 56 36 L 52 36" fill="#818CF8" stroke="#4338CA" stroke-width="1.5"/>
+                        
+                        <!-- 눈 부분 (검은 화면) -->
+                        <rect x="20" y="24" width="24" height="14" rx="4" ry="4" fill="#1E1B4B"/>
+                        
+                        <!-- 눈 (디지털 느낌) -->
+                        <circle cx="26" cy="31" r="2.5" fill="#22D3EE" class="eye-blink"/>
+                        <circle cx="38" cy="31" r="2.5" fill="#22D3EE" class="eye-blink"/>
+                        
+                        <!-- 입 (스마일) -->
+                        <path d="M 28 44 Q 32 47 36 44" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        
+                        <!-- Sparkles (AI Intellignence feel) -->
+                        <path d="M 46 12 L 48 16 L 52 18 L 48 20 L 46 24 L 44 20 L 40 18 L 44 16 Z" fill="#FACC15" />
+                    </svg>
+                </div>
+                <h2>AI 챗봇 (AI Chatbot)</h2>
+                <p>인공지능 상담, 자동 응답 아이콘</p>
+            </div>
+        </div>
+        
+        <!-- 다양한 크기 예시 -->
+        <div class="size-examples">
+            <h2>다양한 크기로 사용하기</h2>
+            
+            <div class="size-row">
+                <div class="size-item">
+                    <span class="size-label">Messenger</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="32" height="32">
+                        <path d="M 8 30 C 8 16 18 6 36 6 C 52 6 60 16 60 28 C 60 40 50 50 36 50 C 32 50 28 49 25 47 L 12 52 L 14 40 C 10 37 8 34 8 30 Z" fill="#4ADE80" stroke="#059669" stroke-width="2"/>
+                        <line x1="20" y1="20" x2="50" y2="20" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="20" y1="28" x2="42" y2="28" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="20" y1="36" x2="46" y2="36" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                
+                <div class="size-item">
+                    <span class="size-label">AI Chatbot</span>
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="32" height="32">
+                        <rect x="12" y="16" width="40" height="36" rx="10" ry="10" fill="#6366F1" stroke="#4338CA" stroke-width="2"/>
+                        <line x1="32" y1="16" x2="32" y2="8" stroke="#4338CA" stroke-width="2"/>
+                        <circle cx="32" cy="6" r="4" fill="#F43F5E" stroke="#4338CA" stroke-width="1.5"/>
+                        <rect x="20" y="24" width="24" height="14" rx="4" ry="4" fill="#1E1B4B"/>
+                        <circle cx="26" cy="31" r="2.5" fill="#22D3EE"/>
+                        <circle cx="38" cy="31" r="2.5" fill="#22D3EE"/>
+                        <path d="M 28 44 Q 32 47 36 44" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
