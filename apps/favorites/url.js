@@ -1,0 +1,36 @@
+window.FAVORITES_DATA = {
+    "groups": [
+        {
+            "id": "local",
+            "title": "Local Environment",
+            "icon": "computer-desktop",
+            "items": [
+                {
+                    "name": "PCMS-SV Local",
+                    "url": "http://localhost:5173/main",
+                    "description": "Local development server running on port 5173.",
+                    "icon": "code-bracket"
+                },
+                {
+                    "name": "Lucy",
+                    "url": "http://localhost:8000/",
+                    "description": "Local Lucy server",
+                    "icon": "beaker"
+                }
+            ]
+        },
+        {
+            "id": "remote-114",
+            "title": "Remote Servers",
+            "icon": "server",
+            "items": [
+                {
+                    "name": "PCMS-SV (114)",
+                    "url": "http://172.20.200.114:5173/main",
+                    "description": "Deployment on the 114 network node.",
+                    "icon": "cloud"
+                }
+            ]
+        }
+    ]
+};
