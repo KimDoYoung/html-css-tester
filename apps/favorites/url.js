@@ -72,6 +72,12 @@ window.FAVORITES_DATA = {
                     "url": "https://jskn.iptime.org/PCMS/",
                     "description": "PCMS External Access",
                     "icon": "cloud"
+                },
+                {
+                    "name": "K-FS",
+                    "url": "http://www.k-fs.co.kr",
+                    "description": "한국펀드서비스(주) 홈페이지",
+                    "icon": "cloud"
                 }
             ]
         }
