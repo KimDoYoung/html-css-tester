@@ -16,18 +16,61 @@ window.FAVORITES_DATA = {
                     "url": "http://localhost:8000/",
                     "description": "Local Lucy server",
                     "icon": "beaker"
+                },
+                {
+                    "name": "KFS홈페이지",
+                    "url": "http://localhost:9090",
+                    "description": "KFS Homepage Local",
+                    "icon": "computer-desktop"
+                },
+                {
+                    "name": "aview",
+                    "url": "http://localhost:8080/aview/",
+                    "description": "AView Application",
+                    "icon": "code-bracket"
                 }
             ]
         },
         {
             "id": "remote-114",
-            "title": "Remote Servers",
+            "title": "Remote 114 Servers",
             "icon": "server",
             "items": [
                 {
                     "name": "PCMS-SV (114)",
-                    "url": "http://172.20.200.114:5173/main",
+                    "url": "http://172.20.100.114:5173/main",
                     "description": "Deployment on the 114 network node.",
+                    "icon": "cloud"
+                },
+                {
+                    "name": "Lucy",
+                    "url": "http://172.20.100.114:8000/login",
+                    "description": "Lucy application",
+                    "icon": "beaker"
+                },
+                {
+                    "name": "kiwi",
+                    "url": "http://172.20.100.114:8001/login",
+                    "description": "Kiwi System Login",
+                    "icon": "server"
+                },
+                {
+                    "name": "KFS홈페이지",
+                    "url": "http://172.20.100.114:8080/user1/index1",
+                    "description": "Remote KFS Homepage",
+                    "icon": "server"
+                }
+            ]
+        },
+        {
+            "id": "external",
+            "title": "External Links",
+            "icon": "link",
+            "items": [
+                {
+                    "name": "PCMS",
+                    "url": "https://jskn.iptime.org/PCMS/",
+                    "description": "PCMS External Access",
                     "icon": "cloud"
                 }
             ]
