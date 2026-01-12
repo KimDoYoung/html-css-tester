@@ -80,6 +80,43 @@ window.FAVORITES_DATA = {
                     "icon": "cloud"
                 }
             ]
+        },
+        {
+            "id": "ai",
+            "title": "인공지능",
+            "icon": "computer-desktop",
+            "items": [
+                {
+                    "name": "Gemini",
+                    "url": "https://gemini.google.com/app?hl=ko",
+                    "description": "Google Gemini",
+                    "icon": "cloud"
+                },
+                {
+                    "name": "DeepSeek",
+                    "url": "https://chat.deepseek.com/",
+                    "description": "DeepSeek Chat",
+                    "icon": "cloud"
+                },
+                {
+                    "name": "NotebookLM",
+                    "url": "https://notebooklm.google.com/",
+                    "description": "Google NotebookLM",
+                    "icon": "beaker"
+                },
+                {
+                    "name": "Perplexity",
+                    "url": "https://www.perplexity.ai/",
+                    "description": "Perplexity AI",
+                    "icon": "cloud"
+                },
+                {
+                    "name": "Grok",
+                    "url": "https://grok.com/",
+                    "description": "xAI Grok",
+                    "icon": "server"
+                }
+            ]
         }
     ]
 };
