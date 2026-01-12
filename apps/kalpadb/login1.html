@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - KalpaDB</title>
+    <!-- Tailwind CSS (Using CDN for styling consistency in this demo) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    </style>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <!-- Logo -->
+        <div class="flex justify-center mb-6">
+            <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-2xl shadow-lg shadow-blue-200">
+                K
+            </div>
+        </div>
+        <h2 class="mt-2 text-center text-3xl font-extrabold text-gray-900 tracking-tight">
+            KalpaDB
+        </h2>
+        <p class="mt-2 text-center text-sm text-gray-600">
+            Sign in to access your dashboard
+        </p>
+    </div>
+
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div class="bg-white py-8 px-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-gray-100 sm:rounded-2xl sm:px-10">
+            <form class="space-y-6" action="/login" method="POST">
+                
+                <!-- ID Input -->
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700 mb-1.5">
+                        Username
+                    </label>
+                    <div class="relative rounded-md shadow-sm">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <input id="username" name="username" type="text" required class="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-blue-500 focus:border-blue-500 sm:text-sm placeholder-gray-400 transition-all bg-gray-50 focus:bg-white" placeholder="Enter your ID">
+                    </div>
+                </div>
+
+                <!-- Password Input -->
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1.5">
+                        Password
+                    </label>
+                    <div class="relative rounded-md shadow-sm">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <input id="password" name="password" type="password" required class="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-blue-500 focus:border-blue-500 sm:text-sm placeholder-gray-400 transition-all bg-gray-50 focus:bg-white" placeholder="Enter your password">
+                    </div>
+                </div>
+
+                <!-- Styled Numpad -->
+                <div class="pt-2">
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 text-center">
+                        Secure Keypad
+                    </label>
+                    <div class="grid grid-cols-5 gap-2 select-none">
+                        <!-- Row 1 -->
+                        <button type="button" onclick="addToPassword(event, '1')" class="h-12 w-full bg-white border border-gray-200 rounded-lg shadow-sm text-lg font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 active:bg-blue-100 transition-all">1</button>
+                        <button type="button" onclick="addToPassword(event, '2')" class="h-12 w-full bg-white border border-gray-200 rounded-lg shadow-sm text-lg font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 active:bg-blue-100 transition-all">2</button>
+                        <button type="button" onclick="addToPassword(event, '3')" class="h-12 w-full bg-white border border-gray-200 rounded-lg shadow-sm text-lg font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 active:bg-blue-100 transition-all">3</button>
+                        <button type="button" onclick="addToPassword(event, '4')" class="h-12 w-full bg-white border border-gray-200 rounded-lg shadow-sm text-lg font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 active:bg-blue-100 transition-all">4</button>
+                        <button type="button" onclick="addToPassword(event, '5')" class="h-12 w-full bg-white border border-gray-200 rounded-lg shadow-sm text-lg font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 active:bg-blue-100 transition-all">5</button>
+                        
+                        <!-- Row 2 -->
+                        <button type="button" onclick="addToPassword(event, '6')" class="h-12 w-full bg-white border border-gray-200 rounded-lg shadow-sm text-lg font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 active:bg-blue-100 transition-all">6</button>
+                        <button type="button" onclick="addToPassword(event, '7')" class="h-12 w-full bg-white border border-gray-200 rounded-lg shadow-sm text-lg font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 active:bg-blue-100 transition-all">7</button>
+                        <button type="button" onclick="addToPassword(event, '8')" class="h-12 w-full bg-white border border-gray-200 rounded-lg shadow-sm text-lg font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 active:bg-blue-100 transition-all">8</button>
+                        <button type="button" onclick="addToPassword(event, '9')" class="h-12 w-full bg-white border border-gray-200 rounded-lg shadow-sm text-lg font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 active:bg-blue-100 transition-all">9</button>
+                        <button type="button" onclick="addToPassword(event, '0')" class="h-12 w-full bg-white border border-gray-200 rounded-lg shadow-sm text-lg font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 active:bg-blue-100 transition-all">0</button>
+                    </div>
+                     <!-- Action Row: Clear & Backspace -->
+                    <div class="grid grid-cols-2 gap-2 mt-2">
+                        <button type="button" onclick="clearPassword(event)" class="h-12 flex items-center justify-center gap-2 w-full bg-red-50 border border-red-100 rounded-lg text-sm font-semibold text-red-600 hover:bg-red-100 hover:border-red-200 transition-all">
+                            <span>Clear All</span>
+                        </button>
+                         <button type="button" onclick="deleteLastPassword(event)" class="h-12 flex items-center justify-center gap-2 w-full bg-gray-50 border border-gray-200 rounded-lg text-sm font-semibold text-gray-600 hover:bg-gray-100 hover:border-gray-300 transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" opacity="0" /> <!-- Fallback invisible -->
+                                <path fill-rule="evenodd" d="M6.707 4.879A3 3 0 018.828 4H15a3 3 0 013 3v6a3 3 0 01-3 3H8.828a3 3 0 01-2.12-.879l-4.415-4.414a1 1 0 010-1.414l4.414-4.414zm4 2.414a1 1 0 00-1.414 1.414L10.586 10l-1.293 1.293a1 1 0 101.414 1.414L12 11.414l1.293 1.293a1 1 0 001.414-1.414L13.414 10l1.293-1.293a1 1 0 00-1.414-1.414L12 8.586l-1.293-1.293z" clip-rule="evenodd" />
+                            </svg>
+                            <span>Backspace</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" class="w-full flex justify-center py-3.5 px-4 border border-transparent rounded-xl shadow-sm text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all hover:shadow-lg hover:shadow-blue-200">
+                        Sign in
+                    </button>
+                </div>
+            </form>
+
+             <!-- Home Link -->
+             <div class="mt-6 text-center">
+                <a href="/" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">
+                    &larr; Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Background Decoration -->
+    <div class="fixed inset-0 -z-10 pointer-events-none">
+        <div class="absolute inset-0 bg-gray-50"></div>
+        <div class="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-blue-100 mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+        <div class="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-indigo-100 mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+    </div>
+
+    <script>
+        // Password keypad functions
+        function addToPassword(event, number) {
+            // Prevent button focus to keep it on the keypad (optional UX choice)
+            // But we do want input to update
+            event.preventDefault();
+            const passwordField = document.getElementById('password');
+            passwordField.value += number;
+            
+            // Optional: visual feedback trigger if needed
+        }
+
+        function deleteLastPassword(event) {
+            event.preventDefault();
+            const passwordField = document.getElementById('password');
+            passwordField.value = passwordField.value.slice(0, -1);
+        }
+
+        function clearPassword(event) {
+            event.preventDefault();
+            const passwordField = document.getElementById('password');
+            passwordField.value = '';
+        }
+    </script>
+</body>
+</html>

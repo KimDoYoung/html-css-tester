@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>KalpaDB</title>
+    <link rel="stylesheet" href="./css/output.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+</head>
+<body class="bg-gray-50">
+    <!-- 헤더 -->
+    <header class="bg-white shadow">
+    <!-- 통합 상단 바 -->
+    <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+        <!-- 로고 -->
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold">
+                K
+            </div>
+            <h1 class="text-2xl font-bold text-gray-800">
+                <a href="/">KalpaDB</a>
+            </h1>
+        </div>
+
+        <!-- 메뉴 (로그인한 사용자만 표시) -->
+        <div class="flex items-center gap-2" x-data="{ diaryOpen: false, boardOpen: false, techOpen: false }">
+            <!-- 일지 메뉴 -->
+            <div class="relative">
+                <button type="button" 
+                    @click="diaryOpen = !diaryOpen" 
+                    class="group flex items-center gap-1.5 px-3 py-2 rounded-lg text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 font-medium outline-none focus:ring-2 focus:ring-blue-100">
+                    <span>📔 일지</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform duration-200" :class="diaryOpen ? 'rotate-180' : ''" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+                <div x-show="diaryOpen" 
+                    @click.outside="diaryOpen = false"
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                    x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                    x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                    class="absolute left-0 mt-2 w-48 bg-white/95 backdrop-blur-sm rounded-xl shadow-xl border border-gray-100 overflow-hidden z-50 origin-top-left ring-1 ring-black/5"
+                    style="display: none;">
+                    <div class="py-1">
+                        <a href="/diary/new" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                            <span>✏️</span> 일지기록
+                        </a>
+                        <a href="/diary" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                            <span>🔍</span> 일지찾기
+                        </a>
+                        <a href="/calendar" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                            <span>📅</span> 달력
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 게시판 메뉴 -->
+            <div class="relative">
+                <button type="button" 
+                    @click="boardOpen = !boardOpen" 
+                    class="group flex items-center gap-1.5 px-3 py-2 rounded-lg text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 font-medium outline-none focus:ring-2 focus:ring-blue-100">
+                    <span>📝 게시판</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform duration-200" :class="boardOpen ? 'rotate-180' : ''" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+                <div x-show="boardOpen" 
+                    @click.outside="boardOpen = false"
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                    x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                    x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                    class="absolute left-0 mt-2 w-48 bg-white/95 backdrop-blur-sm rounded-xl shadow-xl border border-gray-100 overflow-hidden z-50 origin-top-left ring-1 ring-black/5"
+                    style="display: none;">
+                    <div class="py-1">
+                        <a href="/essay" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                            <span>✍️</span> Essay
+                        </a>
+                        <a href="/notes" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                            <span>💡</span> 기술노트
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tech 메뉴 -->
+            <div class="relative">
+                <button type="button" 
+                    @click="techOpen = !techOpen" 
+                    class="group flex items-center gap-1.5 px-3 py-2 rounded-lg text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 font-medium outline-none focus:ring-2 focus:ring-blue-100">
+                    <span>🔧 Tech</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform duration-200" :class="techOpen ? 'rotate-180' : ''" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+                <div x-show="techOpen" 
+                    @click.outside="techOpen = false"
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                    x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                    x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                    class="absolute left-0 mt-2 w-48 bg-white/95 backdrop-blur-sm rounded-xl shadow-xl border border-gray-100 overflow-hidden z-50 origin-top-left ring-1 ring-black/5"
+                    style="display: none;">
+                    <div class="py-1">
+                        <a href="/jangbi" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                            <span>🖥️</span> 장비
+                        </a>
+                        <a href="/files" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                            <span>📂</span> 파일관리
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 우측: 사용자 정보 및 버튼 -->
+        <div class="flex items-center gap-4">
+            <!-- 사용자 정보 (로그인 상태일 때만 표시) -->
+            <div class="text-sm">
+                <span class="text-gray-700">
+                    <span>anonymousUser</span>님
+                </span>
+            </div>
+
+            <!-- 로그인/로그아웃 버튼 -->
+            <div>
+                <form action="/logout" method="post" class="inline">
+                    <button type="submit" class="btn-secondary text-sm">로그아웃</button>
+                </form>
+            </div>
+            
+        </div>
+    </nav>
+</header>
+
+
+    <!-- 메인 콘텐츠 -->
+    <main>
+        <div class="container mx-auto p-6">
+            <layout:fragment name="content">
+                <!-- 페이지별 콘텐츠가 여기에 들어옴 -->
+            </layout:fragment>
+        </div>
+    </main>
+</body>
+</html>

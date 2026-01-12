@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 - KalpaDB</title>
+    <link rel="stylesheet" href="./css/output.css">
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
+            <!-- 로고 -->
+            <div class="text-center mb-8">
+               <h1 class="text-3xl font-bold text-gray-800">KalpaDB</h1>
+                <p class="text-gray-600 mt-2">개인 정보 관리 시스템</p>
+            </div>
+
+            <!-- 에러 메시지 -->
+            
+
+            <!-- 로그인 폼 -->
+            <form action="/login" method="post" class="space-y-4">
+                <!-- 사용자 ID -->
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700 mb-1">
+                        사용자 ID
+                    </label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="아이디를 입력하세요"
+                    >
+                </div>
+
+                <!-- 비밀번호 -->
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
+                        비밀번호
+                    </label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="비밀번호를 입력하세요"
+                    >
+                </div>
+
+                <!-- 숫자 패드 (수평 배치) -->
+                <div class="mt-6 p-2 bg-gray-100 rounded-lg flex justify-center">
+                    <div style="display: flex; flex-wrap: nowrap; gap: 1px;">
+                        <button type="button" style="flex-shrink: 0; width: 32px; height: 32px; background-color: #3b82f6; color: white; border-radius: 4px; border: none; cursor: pointer; font-size: 12px; font-weight: bold;" onclick="addToPassword(event, '1')">1</button>
+                        <button type="button" style="flex-shrink: 0; width: 32px; height: 32px; background-color: #3b82f6; color: white; border-radius: 4px; border: none; cursor: pointer; font-size: 12px; font-weight: bold;" onclick="addToPassword(event, '2')">2</button>
+                        <button type="button" style="flex-shrink: 0; width: 32px; height: 32px; background-color: #3b82f6; color: white; border-radius: 4px; border: none; cursor: pointer; font-size: 12px; font-weight: bold;" onclick="addToPassword(event, '3')">3</button>
+                        <button type="button" style="flex-shrink: 0; width: 32px; height: 32px; background-color: #3b82f6; color: white; border-radius: 4px; border: none; cursor: pointer; font-size: 12px; font-weight: bold;" onclick="addToPassword(event, '4')">4</button>
+                        <button type="button" style="flex-shrink: 0; width: 32px; height: 32px; background-color: #3b82f6; color: white; border-radius: 4px; border: none; cursor: pointer; font-size: 12px; font-weight: bold;" onclick="addToPassword(event, '5')">5</button>
+                        <button type="button" style="flex-shrink: 0; width: 32px; height: 32px; background-color: #3b82f6; color: white; border-radius: 4px; border: none; cursor: pointer; font-size: 12px; font-weight: bold;" onclick="addToPassword(event, '6')">6</button>
+                        <button type="button" style="flex-shrink: 0; width: 32px; height: 32px; background-color: #3b82f6; color: white; border-radius: 4px; border: none; cursor: pointer; font-size: 12px; font-weight: bold;" onclick="addToPassword(event, '7')">7</button>
+                        <button type="button" style="flex-shrink: 0; width: 32px; height: 32px; background-color: #3b82f6; color: white; border-radius: 4px; border: none; cursor: pointer; font-size: 12px; font-weight: bold;" onclick="addToPassword(event, '8')">8</button>
+                        <button type="button" style="flex-shrink: 0; width: 32px; height: 32px; background-color: #3b82f6; color: white; border-radius: 4px; border: none; cursor: pointer; font-size: 12px; font-weight: bold;" onclick="addToPassword(event, '9')">9</button>
+                        <button type="button" style="flex-shrink: 0; width: 32px; height: 32px; background-color: #3b82f6; color: white; border-radius: 4px; border: none; cursor: pointer; font-size: 12px; font-weight: bold;" onclick="addToPassword(event, '0')">0</button>
+                        <button type="button" style="flex-shrink: 0; width: 32px; height: 32px; background-color: #eab308; color: white; border-radius: 4px; border: none; cursor: pointer; font-size: 12px; font-weight: bold;" onclick="clearPassword(event)">x</button>
+                    </div>
+                </div>
+
+                <!-- 로그인 버튼-->
+                <button
+                    type="submit"
+                    class="w-full btn-primary py-3 font-semibold"
+                >
+                    로그인
+                </button>
+            </form>
+
+            <!-- 홈으로 돌아가기 -->
+            <div class="text-center mt-6">
+                <a href="/" class="text-blue-500 hover:text-blue-600">
+                    홈으로 돌아가기
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 비밀번호 필드에 숫자 추가
+        function addToPassword(event, number) {
+            event.preventDefault();
+            const passwordField = document.getElementById('password');
+            passwordField.value += number;
+        }
+
+        // 비밀번호 필드 마지막 문자 삭제
+        function deleteLastPassword(event) {
+            event.preventDefault();
+            const passwordField = document.getElementById('password');
+            passwordField.value = passwordField.value.slice(0, -1);
+        }
+
+        // 비밀번호 필드 전체 삭제
+        function clearPassword(event) {
+            event.preventDefault();
+            const passwordField = document.getElementById('password');
+            passwordField.value = '';
+        }
+    </script>
+</body>
+</html>
