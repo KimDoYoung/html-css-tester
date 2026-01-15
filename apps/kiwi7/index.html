@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Account Stock Manager</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.0/dist/cdn.min.js"></script>
+</head>
+<body x-data="stockApp">
+
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading border-bottom bg-dark user-select-none">
+               Stock Manager
+            </div>
+            <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action" 
+                   :class="{ 'active': currentTab === 'dashboard' }"
+                   @click="switchTab('dashboard')">
+                    <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                </a>
+                <a class="list-group-item list-group-item-action" 
+                   :class="{ 'active': currentTab === 'kiwoom' }"
+                   @click="switchTab('kiwoom')">
+                   <i class="bi bi-bank me-2"></i> Kiwoom
+                </a>
+                <a class="list-group-item list-group-item-action" 
+                   :class="{ 'active': currentTab === 'ls' }"
+                   @click="switchTab('ls')">
+                   <i class="bi bi-buildings me-2"></i> LS Securities
+                </a>
+                <a class="list-group-item list-group-item-action" 
+                   :class="{ 'active': currentTab === 'kis' }"
+                   @click="switchTab('kis')">
+                   <i class="bi bi-graph-up-arrow me-2"></i> KIS (Korea Inv)
+                </a>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+                    <button class="btn btn-primary" id="sidebarToggle" @click="toggleSidebar()">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <div class="ms-auto d-flex align-items-center">
+                        <span class="me-3 text-muted small" x-text="new Date().toLocaleDateString()"></span>
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="bi bi-person-circle h5"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-fluid py-4">
+                
+                <!-- Dashboard View -->
+                <template x-if="currentTab === 'dashboard'">
+                    <div class="animate__animated animate__fadeIn">
+                        <h2 class="mb-4">Dashboard Overview</h2>
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-6">
+                                <div class="card bg-white shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h6 class="text-muted text-uppercase mb-2">Total Assets</h6>
+                                        <h3 class="fw-bold" x-text="formatNumber(totalAssets) + ' KRW'"></h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card bg-white shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h6 class="text-muted text-uppercase mb-2">Daily P/L</h6>
+                                        <h3 class="fw-bold" 
+                                            :class="getPLColor(totalDailyPL)"
+                                            x-text="(totalDailyPL > 0 ? '+' : '') + formatNumber(totalDailyPL) + ' KRW'"></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">Account Summary</div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Account</th>
+                                                <th class="text-end">Balance</th>
+                                                <th class="text-end">Daily P/L</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <template x-for="acc in accounts" :key="acc.id">
+                                                <tr @click="switchTab(acc.id)" style="cursor: pointer">
+                                                    <td x-text="acc.name"></td>
+                                                    <td class="text-end fw-bold" x-text="formatNumber(acc.balance)"></td>
+                                                    <td class="text-end" :class="getPLColor(acc.dailyPL)" 
+                                                        x-text="(acc.dailyPL > 0 ? '+' : '') + formatNumber(acc.dailyPL)"></td>
+                                                </tr>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Specific Account View -->
+                <template x-if="currentTab !== 'dashboard'">
+                    <div>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h2 x-text="currentAccountData.name"></h2>
+                            <span class="badge bg-secondary fs-6" x-text="'Balance: ' + formatNumber(currentAccountData.balance)"></span>
+                        </div>
+
+                        <!-- Account Internal Tabs -->
+                        <ul class="nav nav-pills mb-4">
+                            <li class="nav-item">
+                                <a class="nav-link" :class="{ 'active': activeAccountTab === 'balance' }" 
+                                   href="#" @click.prevent="activeAccountTab = 'balance'">Holdings</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" :class="{ 'active': activeAccountTab === 'order' }" 
+                                   href="#" @click.prevent="activeAccountTab = 'order'">Order</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" :class="{ 'active': activeAccountTab === 'history' }" 
+                                   href="#" @click.prevent="activeAccountTab = 'history'">History</a>
+                            </li>
+                        </ul>
+
+                        <!-- Holdings Tab -->
+                        <template x-if="activeAccountTab === 'balance'">
+                            <div class="card shadow-sm">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Stock Name</th>
+                                                <th class="text-end">Qty</th>
+                                                <th class="text-end">Avg Price</th>
+                                                <th class="text-end">Cur Price</th>
+                                                <th class="text-end">Valuation</th>
+                                                <th class="text-end">P/L (%)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <template x-for="stock in currentAccountData.holdings" :key="stock.code">
+                                                <tr>
+                                                    <td>
+                                                        <div class="fw-bold" x-text="stock.name"></div>
+                                                        <div class="small text-muted" x-text="stock.code"></div>
+                                                    </td>
+                                                    <td class="text-end" x-text="formatNumber(stock.qty)"></td>
+                                                    <td class="text-end" x-text="formatNumber(stock.avg)"></td>
+                                                    <td class="text-end" x-text="formatNumber(stock.cur)"></td>
+                                                    <td class="text-end fw-bold" x-text="formatNumber(stock.cur * stock.qty)"></td>
+                                                    <td class="text-end">
+                                                        <span :class="getPLColor(stock.cur - stock.avg)"
+                                                              x-text="getProfitRate(stock.avg, stock.cur) + '%'"></span>
+                                                        <div class="small" :class="getPLColor(stock.cur - stock.avg)"
+                                                             x-text="formatNumber((stock.cur - stock.avg) * stock.qty)"></div>
+                                                    </td>
+                                                </tr>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </template>
+
+                        <!-- Order Tab -->
+                        <template x-if="activeAccountTab === 'order'">
+                            <div class="row justify-content-center">
+                                <div class="col-md-8 col-lg-6">
+                                    <div class="card shadow-sm border-0">
+                                        <div class="card-body p-4">
+                                            <div class="d-flex mb-4 gap-2">
+                                                <button class="btn flex-fill" 
+                                                    :class="orderType === 'buy' ? 'btn-danger' : 'btn-outline-secondary'"
+                                                    @click="orderType = 'buy'">BUY</button>
+                                                <button class="btn flex-fill" 
+                                                    :class="orderType === 'sell' ? 'btn-primary' : 'btn-outline-secondary'"
+                                                    @click="orderType = 'sell'">SELL</button>
+                                            </div>
+
+                                            <form @submit.prevent="submitOrder">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Stock Code</label>
+                                                    <input type="text" class="form-control" x-model="orderForm.code" placeholder="005930">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Price</label>
+                                                    <input type="number" class="form-control" x-model.number="orderForm.price" placeholder="Amount">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Quantity</label>
+                                                    <input type="number" class="form-control" x-model.number="orderForm.qty" placeholder="Count">
+                                                </div>
+                                                <div class="d-grid mt-4">
+                                                    <button type="submit" class="btn btn-lg"
+                                                            :class="orderType === 'buy' ? 'btn-danger' : 'btn-primary'"
+                                                            x-text="orderType.toUpperCase() + ' ORDER'"></button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                        
+                        <!-- History Tab -->
+                         <template x-if="activeAccountTab === 'history'">
+                             <div class="card shadow-sm">
+                                <div class="card-body text-center py-5 text-muted">
+                                    <i class="bi bi-clock-history display-4 mb-3 d-block"></i>
+                                    <p>Recent trading history will appear here.</p>
+                                </div>
+                             </div>
+                         </template>
+
+                    </div>
+                </template>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Logic -->
+    <script src="app.js"></script>
+</body>
+</html>

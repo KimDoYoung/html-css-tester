@@ -1,0 +1,119 @@
+:root {
+    --sidebar-width: 280px;
+    --sidebar-bg: #212529;
+    --sidebar-text: #fff;
+    --primary-color: #0d6efd;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Sidebar Styles */
+#sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: calc(-1 * var(--sidebar-width));
+    transition: margin 0.25s ease-out;
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    width: var(--sidebar-width);
+    position: fixed;
+    z-index: 1000;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 1.5rem 1.25rem; /* Matches Bootstrap List Group Item padding */
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#sidebar-wrapper .list-group {
+    width: var(--sidebar-width);
+}
+
+#sidebar-wrapper .list-group-item {
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.8);
+    border: none;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#sidebar-wrapper .list-group-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+#sidebar-wrapper .list-group-item.active {
+    background-color: var(--primary-color);
+    color: #fff;
+    font-weight: 500;
+}
+
+/* Page Content Styles */
+#page-content-wrapper {
+    width: 100%;
+    margin-left: 0;
+    transition: margin 0.25s ease-out;
+    min-height: 100vh;
+}
+
+body.sb-sidenav-toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+
+/* Desktop layout: Sidebar always visible by default */
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    #page-content-wrapper {
+        margin-left: var(--sidebar-width);
+    }
+
+    body.sb-sidenav-toggled #sidebar-wrapper {
+        margin-left: calc(-1 * var(--sidebar-width));
+    }
+
+    body.sb-sidenav-toggled #page-content-wrapper {
+        margin-left: 0;
+    }
+}
+
+/* Card Styles */
+.card {
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border-radius: 0.5rem;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    font-weight: 600;
+}
+
+/* Utility */
+.text-profit {
+    color: #dc3545; /* Korean stock red for profit */
+}
+.text-loss {
+    color: #0d6efd; /* Korean stock blue for loss */
+}
+
+/* Table overrides */
+.table > :not(caption) > * > * {
+    padding: 1rem 0.75rem;
+    vertical-align: middle;
+}
