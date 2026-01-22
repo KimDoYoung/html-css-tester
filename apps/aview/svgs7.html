@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
             background: #f8f9fa;
@@ -20,12 +21,12 @@
             justify-content: center;
             align-items: center;
         }
-        
+
         .container {
             max-width: 1200px;
             width: 100%;
         }
-        
+
         h1 {
             text-align: center;
             color: #1a202c;
@@ -33,35 +34,35 @@
             font-weight: 700;
             letter-spacing: -0.5px;
         }
-        
+
         .icons-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 40px;
             justify-content: center;
         }
-        
+
         .icon-card {
             background: white;
             padding: 48px 24px;
             text-align: center;
             border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
             transition: all 0.3s ease;
             cursor: pointer;
-            border: 1px solid rgba(0,0,0,0.02);
+            border: 1px solid rgba(0, 0, 0, 0.02);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
-        
+
         .icon-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 30px rgba(0,0,0,0.08);
-            border-color: rgba(0,0,0,0.05);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.08);
+            border-color: rgba(0, 0, 0, 0.05);
         }
-        
+
         .icon-wrapper {
             width: 96px;
             height: 96px;
@@ -71,16 +72,16 @@
             justify-content: center;
             border-radius: 20px;
             background: linear-gradient(145deg, #ffffff, #f5f7fa);
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.03), -5px -5px 15px rgba(255,255,255,0.8);
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.03), -5px -5px 15px rgba(255, 255, 255, 0.8);
         }
-        
+
         h2 {
             font-size: 18px;
             color: #2d3748;
             margin-bottom: 8px;
             font-weight: 600;
         }
-        
+
         p {
             font-size: 14px;
             color: #718096;
@@ -88,17 +89,19 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Document Actions</h1>
-        
+
         <div class="icons-grid">
-            
+
             <!-- 1. Trash Can (휴지통) -->
             <div class="icon-card">
                 <div class="icon-wrapper">
                     <!-- Color Palette: Soft Red/Rose -->
-                    <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
                         <defs>
                             <linearGradient id="grad-trash" x1="0%" y1="0%" x2="0%" y2="100%">
                                 <stop offset="0%" style="stop-color:#FC8181;stop-opacity:1" />
@@ -106,14 +109,15 @@
                             </linearGradient>
                         </defs>
                         <!-- Lid Handle -->
-                        <path d="M26 14 H38" stroke="#E53E3E" stroke-width="3"/>
+                        <path d="M26 14 H38" stroke="#E53E3E" stroke-width="3" />
                         <!-- Lid -->
-                        <path d="M16 18 H48" stroke="#E53E3E" stroke-width="3"/>
+                        <path d="M16 18 H48" stroke="#E53E3E" stroke-width="3" />
                         <!-- Bin Body -->
-                        <path d="M20 18 L22 52 C22 54.2, 23.8 56, 26 56 H38 C40.2 56, 42 54.2, 42 52 L44 18" fill="url(#grad-trash)" fill-opacity="0.1" stroke="#E53E3E" stroke-width="2.5"/>
+                        <path d="M20 18 L22 52 C22 54.2, 23.8 56, 26 56 H38 C40.2 56, 42 54.2, 42 52 L44 18"
+                            fill="url(#grad-trash)" fill-opacity="0.1" stroke="#E53E3E" stroke-width="2.5" />
                         <!-- Vertical Lines -->
-                        <line x1="28" y1="26" x2="28" y2="46" stroke="#E53E3E" stroke-width="2" stroke-opacity="0.6"/>
-                        <line x1="36" y1="26" x2="36" y2="46" stroke="#E53E3E" stroke-width="2" stroke-opacity="0.6"/>
+                        <line x1="28" y1="26" x2="28" y2="46" stroke="#E53E3E" stroke-width="2" stroke-opacity="0.6" />
+                        <line x1="36" y1="26" x2="36" y2="46" stroke="#E53E3E" stroke-width="2" stroke-opacity="0.6" />
                     </svg>
                 </div>
                 <h2>휴지통</h2>
@@ -124,7 +128,8 @@
             <div class="icon-card">
                 <div class="icon-wrapper">
                     <!-- Color Palette: Indigo/Blue -->
-                    <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
                         <defs>
                             <linearGradient id="grad-copy" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" style="stop-color:#63B3ED;stop-opacity:1" />
@@ -132,18 +137,20 @@
                             </linearGradient>
                         </defs>
                         <!-- Back Paper -->
-                        <rect x="20" y="14" width="28" height="36" rx="2" stroke="#4299E1" stroke-width="2.5" stroke-dasharray="3 3"/>
-                        
+                        <rect x="20" y="14" width="28" height="36" rx="2" stroke="#4299E1" stroke-width="2.5"
+                            stroke-dasharray="3 3" />
+
                         <!-- Front Paper -->
-                        <rect x="14" y="22" width="28" height="36" rx="2" fill="white" stroke="#3182CE" stroke-width="2.5"/>
-                        
+                        <rect x="14" y="22" width="28" height="36" rx="2" fill="white" stroke="#3182CE"
+                            stroke-width="2.5" />
+
                         <!-- Text Lines -->
-                        <line x1="20" y1="30" x2="36" y2="30" stroke="#63B3ED" stroke-width="2"/>
-                        <line x1="20" y1="36" x2="36" y2="36" stroke="#63B3ED" stroke-width="2"/>
-                        <line x1="20" y1="42" x2="32" y2="42" stroke="#63B3ED" stroke-width="2"/>
-                        
+                        <line x1="20" y1="30" x2="36" y2="30" stroke="#63B3ED" stroke-width="2" />
+                        <line x1="20" y1="36" x2="36" y2="36" stroke="#63B3ED" stroke-width="2" />
+                        <line x1="20" y1="42" x2="32" y2="42" stroke="#63B3ED" stroke-width="2" />
+
                         <!-- Nice Corner Fold indication (subtle) -->
-                        <path d="M37 22 V27 H42" fill="none" stroke="#3182CE" stroke-width="1.5" opacity="0.5"/>
+                        <path d="M37 22 V27 H42" fill="none" stroke="#3182CE" stroke-width="1.5" opacity="0.5" />
                     </svg>
                 </div>
                 <h2>복사</h2>
@@ -154,19 +161,22 @@
             <div class="icon-card">
                 <div class="icon-wrapper">
                     <!-- Color Palette: Teal/Green -->
-                    <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
                         <!-- Document Outline -->
-                        <rect x="16" y="12" width="32" height="40" rx="2" stroke="#38A169" stroke-width="2.5" fill="#F0FFF4"/>
+                        <rect x="16" y="12" width="32" height="40" rx="2" stroke="#38A169" stroke-width="2.5"
+                            fill="#F0FFF4" />
                         <!-- Lines representing text -->
-                        <line x1="22" y1="20" x2="42" y2="20" stroke="#9AE6B4" stroke-width="2"/>
-                        <line x1="22" y1="26" x2="42" y2="26" stroke="#9AE6B4" stroke-width="2"/>
-                        <line x1="22" y1="32" x2="30" y2="32" stroke="#9AE6B4" stroke-width="2"/>
-                        
+                        <line x1="22" y1="20" x2="42" y2="20" stroke="#9AE6B4" stroke-width="2" />
+                        <line x1="22" y1="26" x2="42" y2="26" stroke="#9AE6B4" stroke-width="2" />
+                        <line x1="22" y1="32" x2="30" y2="32" stroke="#9AE6B4" stroke-width="2" />
+
                         <!-- Eye Icon Overlay -->
                         <g transform="translate(32, 40)">
-                            <circle cx="0" cy="0" r="14" fill="white" stroke="none"/> <!-- Background for eye -->
-                            <path d="M-12 0 C-8 -8, 8 -8, 12 0 C8 8, -8 8, -12 0 Z" fill="none" stroke="#38A169" stroke-width="2.5"/>
-                            <circle cx="0" cy="0" r="3.5" fill="#38A169"/>
+                            <circle cx="0" cy="0" r="14" fill="white" stroke="none" /> <!-- Background for eye -->
+                            <path d="M-12 0 C-8 -8, 8 -8, 12 0 C8 8, -8 8, -12 0 Z" fill="none" stroke="#38A169"
+                                stroke-width="2.5" />
+                            <circle cx="0" cy="0" r="3.5" fill="#38A169" />
                         </g>
                     </svg>
                 </div>
@@ -180,10 +190,11 @@
             <div class="icon-card">
                 <div class="icon-wrapper">
                     <!-- Icon: Interlocking Links (Purple & Pink) -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-</svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                    </svg>
                 </div>
                 <h2>경로복사</h2>
                 <p>파일의 경로(URL)를<br>클립보드에 복사</p>
@@ -193,35 +204,87 @@
             <div class="icon-card">
                 <div class="icon-wrapper">
                     <!-- Color Palette: Cyan/Teal (Freshness) -->
-                    <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
                         <defs>
                             <linearGradient id="grad-refresh" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" style="stop-color:#4FD1C5;stop-opacity:1" />
                                 <stop offset="100%" style="stop-color:#38B2AC;stop-opacity:1" />
                             </linearGradient>
                         </defs>
-                        
+
                         <!-- Circular Arrow -->
                         <!-- Arc starting from top-right and going clockwise -->
-                        <path d="M32 14 A 18 18 0 1 1 15.5 25" stroke="url(#grad-refresh)" stroke-width="5" stroke-linecap="round" />
-                        
+                        <path d="M32 14 A 18 18 0 1 1 15.5 25" stroke="url(#grad-refresh)" stroke-width="5"
+                            stroke-linecap="round" />
+
                         <!-- Arrowhead -->
-                        <path d="M32 14 L 38 18 M 32 14 L 39 8" stroke="url(#grad-refresh)" stroke-width="5" stroke-linecap="round"/>
-                        
+                        <path d="M32 14 L 38 18 M 32 14 L 39 8" stroke="url(#grad-refresh)" stroke-width="5"
+                            stroke-linecap="round" />
+
                         <!-- Alternative Arrowhead shape check -->
                         <!-- Let's make a cleaner arrowhead -->
-                        <path d="M 26 14 L 32 14 L 32 20" stroke="none" fill="none"/> <!-- spacer -->
-                        
+                        <path d="M 26 14 L 32 14 L 32 20" stroke="none" fill="none" /> <!-- spacer -->
+
                         <!-- Re-drawing arrowhead manually for better look -->
-                        <path d="M37 9 L 32 14 L 39 19" stroke="url(#grad-refresh)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                        
+                        <path d="M37 9 L 32 14 L 39 19" stroke="url(#grad-refresh)" stroke-width="5"
+                            stroke-linecap="round" stroke-linejoin="round" fill="none" />
+
                     </svg>
                 </div>
                 <h2>새로 고침</h2>
                 <p>화면의 내용을<br>최신으로 갱신</p>
             </div>
 
+            <!-- 6. Kiwi (키위) -->
+            <div class="icon-card">
+                <div class="icon-wrapper">
+                    <!-- Color Palette: Green/Brown -->
+                    <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <defs>
+                            <radialGradient id="grad-kiwi-inner" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" style="stop-color:#F0FFF4;stop-opacity:1" /> <!-- Core -->
+                                <stop offset="30%" style="stop-color:#9AE6B4;stop-opacity:1" /> <!-- Light Green -->
+                                <stop offset="100%" style="stop-color:#48BB78;stop-opacity:1" /> <!-- Green -->
+                            </radialGradient>
+                        </defs>
+
+                        <!-- Skin/Outer Shape -->
+                        <circle cx="32" cy="32" r="26" stroke="#D69E2E" stroke-width="2.5" fill="none" />
+
+                        <!-- Flesh Fill -->
+                        <circle cx="32" cy="32" r="23" stroke="none" fill="url(#grad-kiwi-inner)" opacity="0.4" />
+
+                        <!-- Core -->
+                        <ellipse cx="32" cy="32" rx="6" ry="8" stroke="#48BB78" stroke-width="2" fill="white" />
+
+                        <!-- Seeds Ring -->
+                        <g fill="#2F855A">
+                            <circle cx="38" cy="22" r="1.5" />
+                            <circle cx="42" cy="26" r="1.5" />
+                            <circle cx="42" cy="38" r="1.5" />
+                            <circle cx="38" cy="42" r="1.5" />
+                            <circle cx="26" cy="42" r="1.5" />
+                            <circle cx="22" cy="38" r="1.5" />
+                            <circle cx="22" cy="26" r="1.5" />
+                            <circle cx="26" cy="22" r="1.5" />
+                        </g>
+
+                        <!-- Radiating Lines details -->
+                        <path d="M32 20 L32 10" stroke="#48BB78" stroke-width="1.5" opacity="0.6" />
+                        <path d="M32 44 L32 54" stroke="#48BB78" stroke-width="1.5" opacity="0.6" />
+                        <path d="M44 32 L54 32" stroke="#48BB78" stroke-width="1.5" opacity="0.6" />
+                        <path d="M20 32 L10 32" stroke="#48BB78" stroke-width="1.5" opacity="0.6" />
+
+                    </svg>
+                </div>
+                <h2>키위</h2>
+                <p>신선한 키위의<br>상큼한 단면</p>
+            </div>
+
         </div>
     </div>
 </body>
+
 </html>
