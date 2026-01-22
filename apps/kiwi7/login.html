@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galactic Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --accent: #a855f7;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            background: #09090b;
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* SPACE BACKGROUND & ANIMATION */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle 5s infinite;
+        }
+
+        @keyframes twinkle {
+            0% {
+                opacity: 0;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(1);
+            }
+        }
+
+        /* Generate stars randomly via JS, but here is a backup CSS-only starfield parallax
+           Using box-shadow for thousands of stars is heavy, let's use a cleaner approach or JS.
+           I will use JS to generate the stars for a better effect.
+        */
+
+        .comet {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #6366f1;
+            opacity: 0;
+            z-index: 0;
+        }
+
+        /* LOGIN FORM */
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+            transform: rotate(45deg);
+            pointer-events: none;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .input-group label {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            color: rgba(255, 255, 255, 0.6);
+            pointer-events: none;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+
+        .input-group input:focus~label,
+        .input-group input:valid~label {
+            top: -20px;
+            left: 5px;
+            font-size: 12px;
+            color: var(--primary);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        button:hover::after {
+            left: 100%;
+        }
+
+        .links {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: 0.3s;
+            margin: 0 10px;
+        }
+
+        .links a:hover {
+            color: #fff;
+        }
+
+        /* 3D Planet */
+        .planet {
+            position: fixed;
+            bottom: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #4338ca, #1e1b4b);
+            border-radius: 50%;
+            box-shadow: inset -40px -40px 100px rgba(0, 0, 0, 0.8), 0 0 50px rgba(67, 56, 202, 0.4);
+            z-index: 0;
+            opacity: 0.8;
+        }
+
+        .planet::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 140%;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            filter: blur(5px);
+            transform: rotate(-30deg) translate(-10%, -50%);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="stars-container" id="starsContainer">
+        <!-- Stars will be generated by JS -->
+        <div class="planet"></div>
+    </div>
+
+    <div class="login-card">
+        <h2>SPACE AVIEW</h2>
+        <form>
+            <div class="input-group">
+                <input type="text" required>
+                <label>Username</label>
+            </div>
+            <div class="input-group">
+                <input type="password" required>
+                <label>Password</label>
+            </div>
+            <button type="submit">Warp Login</button>
+            <div class="links">
+                <a href="#">Forgot Password?</a>
+                <a href="#">Create Account</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const container = document.getElementById('starsContainer');
+        const starCount = 200;
+
+        // Generate static twinkling stars
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const xy = Math.random() * 100;
+            const duration = Math.random() * 3 + 2;
+            const size = Math.random() * 2 + 1;
+
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.animationDuration = `${duration}s`;
+            star.style.animationDelay = `${Math.random() * 5}s`;
+
+            container.appendChild(star);
+        }
+
+        // Generate shooting stars (comets)
+        function createComet() {
+            const comet = document.createElement('div');
+            comet.className = 'comet';
+
+            // Random start position (top or left)
+            const startX = Math.random() * window.innerWidth;
+            const startY = Math.random() * window.innerHeight / 2;
+
+            comet.style.left = `${startX}px`;
+            comet.style.top = `${startY}px`;
+
+            const duration = Math.random() * 1000 + 1000;
+
+            // Animation via WAAPI for better control
+            const animation = comet.animate([
+                { opacity: 1, transform: 'translate(0, 0) scale(1)' },
+                { opacity: 0, transform: `translate(${Math.random() * 400 - 200}px, ${Math.random() * 400 + 200}px) scale(0.1)` }
+            ], {
+                duration: duration,
+                easing: 'ease-out'
+            });
+
+            container.appendChild(comet);
+
+            animation.onfinish = () => comet.remove();
+        }
+
+        setInterval(createComet, 2000);
+
+        // Interactive parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+
+            container.style.transform = `translate(-${x * 20}px, -${y * 20}px)`;
+        });
+    </script>
+</body>
+
+</html>
