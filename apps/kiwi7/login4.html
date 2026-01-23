@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Morph Login</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: #111;
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            filter: contrast(150%) brightness(100%);
+        }
+
+        /* The gooey filter needs a white background and black blobs usually, 
+           or we use SVG filter. Let's use standard canvas blending for colorful blobs. */
+
+        .login-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 360px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+        }
+
+        .login-card {
+            width: 100%;
+            padding: 40px 30px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transform-style: preserve-3d;
+            transition: transform 0.1s;
+        }
+
+        h2 {
+            font-family: 'Syncopate', sans-serif;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #00f260, #0575e6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .input-box {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 12px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            outline: none;
+            color: #fff;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .input-box label {
+            position: absolute;
+            top: 12px;
+            left: 0;
+            pointer-events: none;
+            color: rgba(255, 255, 255, 0.5);
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .input-box input:focus,
+        .input-box input:valid {
+            border-bottom-color: #00f260;
+        }
+
+        .input-box input:focus~label,
+        .input-box input:valid~label {
+            top: -10px;
+            color: #00f260;
+            font-size: 12px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, #00f260, #0575e6);
+            border: none;
+            border-radius: 30px;
+            color: #fff;
+            font-weight: 600;
+            font-family: 'Syncopate', sans-serif;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 242, 96, 0.4);
+        }
+
+        /* SVG Filter for Gooey Effect */
+        .goo-filter {
+            position: absolute;
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="canvas"></canvas>
+
+    <div class="login-wrapper">
+        <div class="login-card" id="card">
+            <h2>Liquid</h2>
+            <form>
+                <div class="input-box">
+                    <input type="text" required>
+                    <label>Username</label>
+                </div>
+                <div class="input-box">
+                    <input type="password" required>
+                    <label>Password</label>
+                </div>
+                <button type="submit">Enter</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Resize canvas
+        let width, height;
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Blobs
+        const blobs = [];
+        const colors = ['#00f260', '#0575e6', '#8e2de2', '#4a00e0', '#fc466b', '#3f5efb'];
+
+        class Blob {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 2;
+                this.vy = (Math.random() - 0.5) * 2;
+                this.size = Math.random() * 100 + 100; // 100-200px
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.growth = 0;
+                this.growthSpeed = (Math.random() - 0.5) * 0.05;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Bounce off walls
+                if (this.x < -this.size) this.x = width + this.size;
+                if (this.x > width + this.size) this.x = -this.size;
+                if (this.y < -this.size) this.y = height + this.size;
+                if (this.y > height + this.size) this.y = -this.size;
+
+                // Pulse size
+                this.growth += this.growthSpeed;
+                // Simple sine pulse
+                // let pulse = Math.sin(this.growth) * 20; 
+            }
+
+            draw() {
+                ctx.beginPath();
+                // Create gradient for 3D-ish look
+                let grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+                grad.addColorStop(0, this.color);
+                grad.addColorStop(1, 'transparent');
+
+                // We use globalCompositeOperation to making them blend
+                ctx.fillStyle = grad;
+                ctx.globalCompositeOperation = 'screen'; // 'screen' or 'lighter' for glowing effect
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 15; i++) {
+            blobs.push(new Blob());
+        }
+
+        // Mouse interaction
+        let mouseX = 0, mouseY = 0;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            // Tilt card effect
+            const card = document.getElementById('card');
+            const ax = -(window.innerWidth / 2 - e.pageX) / 20;
+            const ay = (window.innerHeight / 2 - e.pageY) / 10;
+            card.style.transform = `rotateY(${ax}deg) rotateX(${ay}deg)`;
+        });
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Background
+            ctx.fillStyle = '#111';
+            ctx.fillRect(0, 0, width, height);
+
+            blobs.forEach(blob => {
+                blob.update();
+                blob.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+
+</html>

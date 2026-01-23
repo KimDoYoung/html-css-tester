@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <radialGradient id="grad-kiwi-inner" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" style="stop-color:#F0FFF4;stop-opacity:1" /> <!-- Core -->
+            <stop offset="30%" style="stop-color:#9AE6B4;stop-opacity:1" /> <!-- Light Green -->
+            <stop offset="100%" style="stop-color:#48BB78;stop-opacity:1" /> <!-- Green -->
+        </radialGradient>
+    </defs>
+    
+    <!-- Skin/Outer Shape with White Fill to remove transparency -->
+    <circle cx="32" cy="32" r="26" stroke="#D69E2E" stroke-width="2.5" fill="#FFFFFF"/>
+    
+    <!-- Flesh Fill -->
+    <circle cx="32" cy="32" r="23" stroke="none" fill="url(#grad-kiwi-inner)" opacity="0.8"/>
+    
+    <!-- Core: Changed from ellipse to circle -->
+    <circle cx="32" cy="32" r="7" stroke="#48BB78" stroke-width="2" fill="white"/>
+    
+    <!-- Seeds Ring -->
+    <g fill="#2F855A">
+        <circle cx="38" cy="22" r="1.5" />
+        <circle cx="42" cy="26" r="1.5" />
+        <circle cx="42" cy="38" r="1.5" />
+        <circle cx="38" cy="42" r="1.5" />
+        <circle cx="26" cy="42" r="1.5" />
+        <circle cx="22" cy="38" r="1.5" />
+        <circle cx="22" cy="26" r="1.5" />
+        <circle cx="26" cy="22" r="1.5" />
+    </g>
+    
+    <!-- Radiating Lines details -->
+    <path d="M32 20 L32 10" stroke="#48BB78" stroke-width="1.5" opacity="0.6"/>
+    <path d="M32 44 L32 54" stroke="#48BB78" stroke-width="1.5" opacity="0.6"/>
+    <path d="M44 32 L54 32" stroke="#48BB78" stroke-width="1.5" opacity="0.6"/>
+    <path d="M20 32 L10 32" stroke="#48BB78" stroke-width="1.5" opacity="0.6"/>
+    
+</svg>
