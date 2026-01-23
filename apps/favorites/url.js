@@ -59,6 +59,12 @@ window.FAVORITES_DATA = {
                     "url": "http://172.20.100.114:8080/user1/index1",
                     "description": "Remote KFS Homepage",
                     "icon": "server"
+                },
+                {
+                    "name": "AView",
+                    "url": "http://172.20.100.114:8181/aview",
+                    "description": "Document viewer for AssetERP",
+                    "icon": "server"
                 }
             ]
         },
