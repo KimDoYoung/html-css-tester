@@ -25,7 +25,7 @@ window.FAVORITES_DATA = {
                 },
                 {
                     "name": "aview",
-                    "url": "http://localhost:8080/aview/",
+                    "url": "http://localhost:8181/aview/",
                     "description": "AView Application",
                     "icon": "code-bracket"
                 }
@@ -53,6 +53,12 @@ window.FAVORITES_DATA = {
                     "url": "http://172.20.100.114:8001/login",
                     "description": "Kiwi System Login",
                     "icon": "server"
+                },
+                {
+                    "name": "aview",
+                    "url": "http://172.20.100.114:8181/aview/",
+                    "description": "AView Application",
+                    "icon": "code-bracket"
                 },
                 {
                     "name": "KFS홈페이지",
