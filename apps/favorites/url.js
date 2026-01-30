@@ -67,9 +67,9 @@ window.FAVORITES_DATA = {
                     "icon": "server"
                 },
                 {
-                    "name": "AView",
-                    "url": "http://172.20.100.114:8181/aview",
-                    "description": "Document viewer for AssetERP",
+                    "name": "law-crawler",
+                    "url": "http://172.20.100.114:8004/dashboard",
+                    "description": "법률정보 수집",
                     "icon": "server"
                 }
             ]
