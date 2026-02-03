@@ -71,7 +71,14 @@ window.FAVORITES_DATA = {
                     "url": "http://172.20.100.114:8004/dashboard",
                     "description": "법률정보 수집",
                     "icon": "server"
-                }
+                },
+                {
+                    "name": "batmon-s",
+                    "url": "http://172.20.100.65:8002/main",
+                    "description": "서버실windows 자원모니터링",
+                    "icon": "server"
+                },
+
             ]
         },
         {
@@ -128,6 +135,7 @@ window.FAVORITES_DATA = {
                     "description": "xAI Grok",
                     "icon": "server"
                 }
+
             ]
         }
     ]
