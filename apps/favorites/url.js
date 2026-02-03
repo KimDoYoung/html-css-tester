@@ -97,6 +97,12 @@ window.FAVORITES_DATA = {
                     "url": "http://www.k-fs.co.kr",
                     "description": "한국펀드서비스(주) 홈페이지",
                     "icon": "cloud"
+                },
+                {
+                    "name": "AView Public",
+                    "url": "http://aview.k-fs.co.kr/aview/",
+                    "description": "AView Public Access",
+                    "icon": "cloud"
                 }
             ]
         },
