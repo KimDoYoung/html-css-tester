@@ -100,7 +100,7 @@ window.FAVORITES_DATA = {
                 },
                 {
                     "name": "AView Public",
-                    "url": "http://aview.k-fs.co.kr/aview/",
+                    "url": "http://aview.k-fs.co.kr:7171/aview/",
                     "description": "AView Public Access",
                     "icon": "cloud"
                 }
