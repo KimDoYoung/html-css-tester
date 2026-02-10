@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="pastel">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Order Condition Input</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        body { font-size: 11pt; }
+        .text-11pt { font-size: 11pt; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+        input, select { height: 1.5rem; padding-left: 0.25rem; font-size: 11pt; border: 1px solid #ccc; border-radius: 2px; }
+        .table-custom td, .table-custom th { padding: 2px 4px; font-size: 11pt; white-space: nowrap; }
+        
+        /* Resizer */
+        .resizer {
+            width: 5px;
+            cursor: col-resize;
+            background-color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .resizer:hover { background-color: #94a3b8; }
+    </style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden bg-base-100 text-base-content" x-data="{ leftWidth: 30 }">
+
+    <!-- Header (Same as 1.html) -->
+    <header class="h-10 bg-gradient-to-r from-slate-200 to-slate-100 border-b border-slate-300 flex items-center justify-between px-2 shrink-0">
+        <div class="flex items-center gap-4">
+            <h1 class="text-xl font-bold italic text-slate-700 tracking-tighter">ai Trader</h1>
+            <div class="flex items-center gap-1 bg-white border border-slate-300 rounded p-0.5">
+                <span class="text-[10px] font-bold px-1 text-slate-500">SEARCH</span>
+                <input type="text" value="검색" class="bg-blue-100 border-none h-5 w-32 focus:outline-none text-sm">
+                <button class="btn btn-ghost btn-xs h-5 min-h-0 px-1">🔍</button>
+                <div class="btn btn-ghost btn-xs h-5 min-h-0 text-[10px]">HISTORY ▾</div>
+            </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <button class="flex flex-col items-center justify-center w-8 hover:bg-slate-200 rounded"><div class="w-4 h-4 bg-blue-300 rounded-sm mb-0.5"></div><span class="text-[8px] leading-none">MONIT</span></button>
+            <button class="flex flex-col items-center justify-center w-8 hover:bg-slate-200 rounded"><div class="w-4 h-4 bg-green-300 rounded-sm mb-0.5"></div><span class="text-[8px] leading-none">SAFE</span></button>
+            <div class="w-[1px] h-6 bg-slate-300 mx-1"></div>
+            <button class="btn btn-square btn-xs btn-ghost">_</button>
+            <button class="btn btn-square btn-xs btn-ghost">□</button>
+            <button class="btn btn-square btn-xs btn-ghost">x</button>
+        </div>
+    </header>
+
+    <!-- Sub Header -->
+    <div class="h-8 bg-slate-600 text-white flex items-center px-2 gap-4 text-xs shrink-0">
+        <div class="flex items-center gap-1 opacity-80">📁</div>
+        <div class="flex gap-4">
+            <span>주문관리</span>
+            <span class="opacity-50">></span>
+            <span>국내주식</span>
+            <span class="opacity-50">></span>
+            <span class="font-bold">주식 주문조건입력(TORD2101M00)</span>
+        </div>
+        <div class="ml-auto flex gap-2">
+            <button class="btn btn-xs btn-ghost text-white font-normal hover:bg-slate-500 gap-1">↻ 초기화</button>
+            <button class="btn btn-xs btn-ghost text-white font-normal hover:bg-slate-500 gap-1">📷 화면캡쳐</button>
+            <button class="btn btn-xs btn-ghost text-white font-normal hover:bg-slate-500 gap-1">🖨️ 화면인쇄</button>
+            <button class="btn btn-xs btn-ghost text-white font-normal hover:bg-slate-500">★</button>
+            <button class="btn btn-xs btn-ghost text-white font-normal hover:bg-slate-500">🔒</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col p-2 gap-2 overflow-hidden bg-base-100">
+        
+        <!-- Top Search Area -->
+        <div class="bg-base-200 p-2 rounded border border-base-300 shrink-0 flex items-center justify-between">
+            <div class="flex gap-4 items-center">
+                <label class="font-bold">운용역*</label>
+                <select class="w-32 bg-red-50 border-red-300"><option>전체</option></select>
+                <label class="font-bold">헤지펀드</label>
+                <select class="w-32"><option>비헤지펀드</option></select>
+            </div>
+            <div class="flex gap-1">
+                <button class="btn btn-sm btn-primary text-white font-normal px-4 gap-1">🔍 조회</button>
+                <button class="btn btn-sm btn-outline font-normal px-4">위반조회</button>
+            </div>
+        </div>
+
+        <button class="btn btn-xs btn-info text-white font-normal w-24 self-end">승인요청</button>
+
+        <!-- Split Pane Container -->
+        <div class="flex-1 flex overflow-hidden border border-slate-300 rounded relative" @mousemove.window="if(dragging) { leftWidth = (event.clientX / window.innerWidth) * 100 } " @mouseup.window="dragging = false" x-data="{ dragging: false }">
+            
+            <!-- Left Pane -->
+            <div class="flex flex-col overflow-hidden bg-slate-50 p-2 gap-2" :style="`width: ${leftWidth}%`">
+                <!-- Form -->
+                <div class="bg-white p-2 border border-slate-200 rounded shadow-sm text-xs grid grid-cols-[auto_1fr] gap-x-2 gap-y-1 items-center">
+                    <label class="text-right">주문지명</label>
+                    <input type="text" value="(자)-002E13-USER01-과세" class="w-full bg-slate-100" readonly>
+                    
+                    <label class="text-right">운용역</label>
+                    <div class="flex gap-1">
+                        <input type="text" value="USER01" class="w-full bg-slate-100" readonly>
+                        <span class="whitespace-nowrap">헤지구분</span>
+                        <input type="text" value="N" class="w-8 text-center bg-slate-100" readonly>
+                    </div>
+
+                    <label class="text-right">CMP대상</label>
+                    <div class="flex gap-1">
+                         <input type="text" value="N" class="w-8 text-center bg-slate-100" readonly>
+                         <span class="whitespace-nowrap">CIO대상</span>
+                         <input type="text" value="N" class="w-8 text-center bg-slate-100" readonly>
+                    </div>
+
+                    <label class="text-right">요청</label>
+                    <div class="flex gap-1 items-center">
+                        <input type="text" class="flex-1">
+                        <span class="text-[10px]">TR</span>
+                        <input type="text" class="flex-1">
+                        <span class="text-[10px]">CMP</span>
+                        <input type="text" class="flex-1">
+                    </div>
+
+                    <label class="text-right">승인</label>
+                    <div class="flex gap-1 items-center">
+                        <input type="text" class="flex-1">
+                        <span class="text-[10px]">CIO</span>
+                        <input type="text" class="w-16">
+                    </div>
+                </div>
+
+                <!-- Left Grid -->
+                <div class="flex-1 overflow-auto border border-slate-300 bg-white">
+                    <table class="table table-xs table-pin-rows table-custom w-full">
+                        <thead>
+                            <tr class="bg-slate-100 text-center">
+                                <th>No</th> <th>선택</th> <th>SLIP</th> <th>주문지명</th> <th>CMP</th> <th>CIO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template x-data="{ rows: Array.from({length: 15}) }" x-for="(row, index) in rows">
+                                <tr class="hover:bg-blue-50 border-b border-slate-50 text-center">
+                                    <td x-text="index+1" class="bg-slate-50"></td>
+                                    <td><input type="checkbox" class="checkbox checkbox-xs rounded-sm"></td>
+                                    <td x-text="12 - index"></td>
+                                    <td class="text-left">(자)-002E13-USER01-</td>
+                                    <td>N</td>
+                                    <td>N</td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Resizer Handle -->
+            <div class="resizer w-1 bg-slate-200 hover:bg-blue-300 cursor-col-resize z-10" @mousedown="dragging = true"></div>
+
+            <!-- Right Pane -->
+            <div class="flex-1 flex flex-col overflow-hidden bg-white p-2 gap-2" :style="`width: ${100 - leftWidth}%`">
+                <!-- Top Form -->
+                <div class="bg-slate-50 p-2 border border-slate-200 rounded shadow-sm grid grid-cols-[auto_1fr] gap-x-2 gap-y-1 items-center">
+                    <label class="text-right">주문조건</label>
+                    <select class="w-48"><option></option></select>
+                    
+                    <label class="text-right">매매</label>
+                    <select class="w-48"><option></option></select>
+                    
+                    <label class="text-right">운용역 메모</label>
+                    <input type="text" class="w-full">
+                    
+                    <div class="col-span-2 flex items-center gap-4 mt-1 pl-20">
+                         <label class="flex items-center gap-1 text-xs"><input type="checkbox" class="checkbox checkbox-xs rounded-sm"> 차입여부</label>
+                         <label class="flex items-center gap-1 text-xs"><input type="checkbox" class="checkbox checkbox-xs rounded-sm"> 예약여부</label>
+                         <label class="flex items-center gap-1 text-xs">예약일자구분 <select class="w-32 ml-1"><option></option></select></label>
+                    </div>
+                </div>
+
+                <!-- Main Grid -->
+                <div class="flex-1 overflow-auto border border-slate-300 bg-white">
+                    <table class="table table-xs table-pin-rows table-custom w-full">
+                        <thead>
+                            <tr class="bg-slate-100 text-center">
+                                <th>NO</th> <th>제외</th> <th>위반</th> <th>차입</th> <th>종목</th> <th>종목명</th> <th>B/S</th> <th>주문수량</th> <th>주문조건</th> <th>단가</th> <th>매체</th> <th>운용역메모</th> <th>예상액(백만)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-yellow-50 text-center font-bold">
+                                <td>1</td> <td><input type="checkbox" class="checkbox checkbox-xs"></td>
+                                <td>N</td> <td>-</td> <td>A005930</td> <td>삼성전자</td> 
+                                <td class="text-red-500">S</td> <td class="bg-blue-50 text-right pr-2">2</td> 
+                                <td><select class="select select-xs w-20 p-0 h-4 min-h-0 border-none bg-transparent"><option>지정가</option></select></td> 
+                                <td class="text-right pr-2">0</td> <td></td> <td></td> <td class="text-right pr-2">0.62</td>
+                            </tr>
+                            <template x-data="{ rows: Array.from({length: 10}) }" x-for="(row, index) in rows">
+                                <tr class="hover:bg-blue-50 border-b border-slate-50 text-center">
+                                    <td x-text="index+2" class="bg-slate-50"></td>
+                                    <td><input type="checkbox" class="checkbox checkbox-xs"></td>
+                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Sum Row -->
+                <div class="bg-pink-100 h-6 border border-slate-300 flex items-center justify-between px-2 text-xs font-bold shrink-0">
+                    <span>합계</span>
+                    <div class="flex gap-8">
+                        <span>2</span>
+                        <span>0.62</span>
+                    </div>
+                </div>
+
+                <!-- Bottom Grid -->
+                <div class="h-24 overflow-auto border border-slate-300 bg-white shrink-0 mt-1">
+                    <table class="table table-xs table-pin-rows table-custom w-full">
+                        <thead>
+                            <tr class="bg-purple-100 text-center">
+                                <th>NO</th> <th>펀드</th> <th>펀드명</th> <th>B/S</th> <th>주문수량</th> <th>약후종목%</th> <th>약후편입%</th> <th>가용자금</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center font-bold bg-yellow-50">
+                                <td>1</td> <td>002E13</td> <td>FUND_00011</td> <td class="text-blue-500">S</td> <td class="text-right">2</td> <td class="text-right">0.00</td> <td class="text-right">0.00</td> <td class="text-right">73,563,908.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <div class="h-7 bg-slate-300 flex items-end px-1 gap-1 shrink-0 text-xs">
+        <button class="btn btn-xs btn-square btn-ghost">🏠</button>
+        <div class="bg-white border border-slate-400 px-2 py-0.5 rounded-t flex items-center gap-2">
+             <span>주식 주문조건입력</span>
+             <button class="hover:text-red-500">×</button>
+        </div>
+    </div>
+    
+    <footer class="h-6 bg-slate-700 text-white flex items-center justify-between px-2 text-[10px] shrink-0">
+        <div class="flex gap-4">
+            <div class="flex items-center gap-1">
+                <span class="font-bold">KOSDAQ</span>
+                <span class="text-blue-400">503.37</span>
+                <span class="text-blue-400">▼ 1.98</span>
+            </div>
+            <div class="text-slate-300">정상적으로 조회되었습니다.</div>
+        </div>
+        <div class="flex gap-4 items-center">
+            <span>메시지가 없습니다.</span>
+            <span class="bg-red-600 rounded-full px-1.5 text-white font-bold">0</span>
+        </div>
+    </footer>
+
+</body>
+</html>

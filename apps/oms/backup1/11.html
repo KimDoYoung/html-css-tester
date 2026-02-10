@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="corporate">
+<head>
+    <meta charset="UTF-8">
+    <title>Enterprise OMS - Alpine.js & DaisyUI</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        :root { font-size: 11pt; }
+        body { height: 100vh; overflow: hidden; }
+        /* OMS 특화: 테이블 행 높이 최소화 */
+        .table-xs th, .table-xs td { padding: 0.25rem 0.5rem; height: 2rem; }
+        .tab { --tab-height: 2rem; font-size: 11pt; }
+    </style>
+</head>
+<body class="bg-base-200 flex flex-col" x-data="omsApp()">
+
+    <div class="navbar bg-neutral text-neutral-content min-h-[3rem] p-0 px-4 shrink-0 shadow-lg">
+        <div class="flex-1">
+            <a class="text-xl font-bold italic tracking-tighter">ai Trader <span class="text-xs font-normal not-italic opacity-70 ml-2">OMS v2.0</span></a>
+        </div>
+        <div class="flex-none gap-2">
+            <div class="form-control">
+                <input type="text" placeholder="Menu Search..." class="input input-bordered input-xs w-48 text-base-content" />
+            </div>
+            <button class="btn btn-ghost btn-xs">History</button>
+            <button class="btn btn-circle btn-ghost btn-xs">
+                <div class="badge badge-xs badge-error"></div>
+            </button>
+        </div>
+    </div>
+
+    <main class="flex-1 flex overflow-hidden p-1 gap-1">
+        
+        <aside class="w-72 bg-base-100 border border-base-300 flex flex-col rounded-sm shadow-sm">
+            <div class="bg-base-300 p-2 font-bold text-sm">주문지 목록</div>
+            <div class="flex-1 overflow-auto">
+                <table class="table table-xs table-zebra w-full">
+                    <thead>
+                        <tr class="bg-base-200">
+                            <th>No</th><th>구분</th><th>주문지명</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template x-for="order in orderList" :key="order.id">
+                            <tr class="hover cursor-pointer" :class="selectedOrder === order.id ? 'active' : ''" @click="selectedOrder = order.id">
+                                <td x-text="order.id"></td>
+                                <td x-text="order.type"></td>
+                                <td x-text="order.name" class="font-semibold"></td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </aside>
+
+        <div class="flex-1 flex flex-col gap-1 overflow-hidden">
+            
+            <div class="card card-compact bg-base-100 border border-base-300 rounded-sm">
+                <div class="card-body flex-row items-center gap-4 p-2">
+                    <div class="flex items-center gap-2">
+                        <span class="label-text font-bold">운용역</span>
+                        <select class="select select-bordered select-xs w-28">
+                            <option>전체</option>
+                            <option>USER01</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="label-text font-bold">헤지펀드</span>
+                        <select class="select select-bordered select-xs w-40">
+                            <option>비헤지펀드</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary btn-xs ml-auto px-6" @click="fetchData()">조회</button>
+                </div>
+            </div>
+
+            <div class="flex-1 flex flex-col bg-base-100 border border-base-300 rounded-sm overflow-hidden">
+                <div class="tabs tabs-lifted">
+                    <button class="tab tab-active">주문지취소</button>
+                    <button class="tab">종목별취소</button>
+                    <div class="flex-1 border-b border-base-300"></div>
+                </div>
+
+                <div class="p-2 border-b flex justify-between items-center bg-base-50">
+                    <div class="flex gap-4 items-center">
+                        <span class="badge badge-outline">Selected: <strong class="ml-1" x-text="selectedOrder"></strong></span>
+                        <input type="text" placeholder="취소사유를 입력하세요" class="input input-bordered input-xs w-64" x-model="cancelReason" />
+                    </div>
+                    <div class="flex gap-1">
+                        <button class="btn btn-warning btn-xs" @click="alert('승인요청: ' + cancelReason)">승인요청</button>
+                        <button class="btn btn-error btn-xs text-white">전체취소</button>
+                    </div>
+                </div>
+
+                <div class="flex-1 overflow-auto">
+                    <table class="table table-xs table-pin-rows table-pin-cols border-separate border-spacing-0">
+                        <thead>
+                            <tr class="bg-base-200 text-primary">
+                                <th><input type="checkbox" class="checkbox checkbox-xs" /></th>
+                                <th>No</th><th>종목</th><th>종목명</th><th>B/S</th><th>수량</th><th>체결</th><th>취소가능</th><th>취소수량</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template x-for="(item, index) in gridData" :key="index">
+                                <tr class="hover">
+                                    <td><input type="checkbox" class="checkbox checkbox-xs" x-model="item.selected" /></td>
+                                    <td x-text="index + 1"></td>
+                                    <td x-text="item.code" class="font-mono text-blue-600"></td>
+                                    <td x-text="item.name" class="font-bold"></td>
+                                    <td><span :class="item.bs === '매수' ? 'text-error' : 'text-info'" x-text="item.bs"></span></td>
+                                    <td x-text="item.qty"></td>
+                                    <td x-text="item.executed"></td>
+                                    <td x-text="item.available" class="bg-yellow-50"></td>
+                                    <td><input type="number" class="input input-bordered input-xs w-20 text-right" x-model="item.cancelQty" /></td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="h-32 bg-base-100 border border-base-300 rounded-sm overflow-hidden flex flex-col shrink-0">
+                <div class="bg-secondary text-secondary-content px-2 py-1 text-xs font-bold uppercase">Fund Liquidity Status</div>
+                <div class="flex-1 overflow-auto">
+                    <table class="table table-xs w-full">
+                        <thead class="sticky top-0 bg-base-200">
+                            <tr><th>펀드코드</th><th>펀드명</th><th>가용자금</th><th>약후종목%</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>001260</td>
+                                <td class="font-bold">FUND_00002</td>
+                                <td class="text-right font-mono text-success">949,568,586</td>
+                                <td class="text-right">4,735.75%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-neutral text-neutral-content p-1 px-4 flex justify-between items-center text-[10pt] shrink-0">
+        <div class="flex gap-4">
+            <span class="flex items-center gap-1"><span class="badge badge-error badge-xs"></span> KOSDAQ 553.94 ▲ 1.11</span>
+            <span class="opacity-70">Message: <span x-text="statusMsg"></span></span>
+        </div>
+        <div class="flex gap-2">
+            <span class="badge badge-outline badge-sm" x-text="new Date().toLocaleTimeString()"></span>
+        </div>
+    </footer>
+
+    <script>
+        function omsApp() {
+            return {
+                selectedOrder: 'USER01',
+                cancelReason: '',
+                statusMsg: '정상 조회되었습니다.',
+                orderList: [
+                    { id: 'USER01', type: '27', name: '(수)-USER01' },
+                    { id: 'USER02', type: '29', name: '(뮤)-0001S0' },
+                    { id: 'USER03', type: '30', name: '(뮤)-0002S0' }
+                ],
+                gridData: [
+                    { selected: true, code: 'C060310', name: '3S', bs: '매수', qty: 3, executed: 0, available: 3, cancelQty: 3 },
+                    { selected: false, code: 'C005930', name: '삼성전자', bs: '매수', qty: 100, executed: 20, available: 80, cancelQty: 0 },
+                    { selected: false, code: 'C000660', name: 'SK하이닉스', bs: '매도', qty: 50, executed: 50, available: 0, cancelQty: 0 }
+                ],
+                fetchData() {
+                    this.statusMsg = '데이터를 갱신 중입니다...';
+                    setTimeout(() => {
+                        this.statusMsg = '조회가 완료되었습니다.';
+                    }, 500);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ai Trader - 11pt Edition</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 유저 요청: 폰트 11pt 설정 */
+        :root { font-size: 11pt; }
+        body { 
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            overflow: hidden; /* 전체 화면 스크롤 방지 */
+            height: 100vh;
+        }
+        
+        /* 조밀한 배치를 위한 커스텀 스타일 */
+        .dense-table th, .dense-table td { 
+            padding: 4px 8px !important; 
+            height: 32px;
+            border: 1px solid #dee2e6;
+            white-space: nowrap;
+        }
+        .input-dense {
+            height: 28px !important;
+            padding: 0 8px !important;
+            font-size: 11pt !important;
+        }
+        .section-header {
+            background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+            font-weight: bold;
+            padding: 4px 10px;
+            border-bottom: 1px solid #adb5bd;
+        }
+    </style>
+</head>
+<body class="bg-gray-200 flex flex-col">
+
+    <header class="bg-[#1e3a5f] text-white p-2 flex justify-between items-center shrink-0">
+        <div class="flex items-center gap-6">
+            <h1 class="font-bold italic text-xl">ai Trader</h1>
+            <div class="join">
+                <select class="join-item select select-bordered select-sm text-black border-none">
+                    <option>검색</option>
+                </select>
+                <input class="join-item input input-bordered input-sm text-black w-64" placeholder="메뉴를 입력하세요" />
+                <button class="join-item btn btn-sm btn-info">🔍</button>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+            <button class="btn btn-ghost btn-xs">History</button>
+            <div class="divider divider-horizontal mx-0"></div>
+            <button class="btn btn-ghost btn-xs">설정</button>
+            <button class="btn btn-ghost btn-xs">로그아웃</button>
+        </div>
+    </header>
+
+    <nav class="bg-[#4a69bd] text-white flex gap-1 px-2 shrink-0">
+        <button class="px-4 py-1 hover:bg-blue-700 border-r border-blue-400">주문관리</button>
+        <button class="px-4 py-1 hover:bg-blue-700 border-r border-blue-400">국내주식</button>
+        <button class="px-4 py-1 bg-white text-blue-900 font-bold rounded-t-sm mt-1">주식 주문취소</button>
+    </nav>
+
+    <main class="flex-1 flex overflow-hidden p-1 gap-1">
+        
+        <aside class="w-72 flex flex-col border border-gray-300 bg-white shrink-0">
+            <div class="section-header">주문지 목록</div>
+            <div class="flex-1 overflow-auto">
+                <table class="table dense-table w-full">
+                    <thead class="sticky top-0 bg-gray-100 shadow-sm">
+                        <tr><th>No</th><th>구분</th><th>주문지명</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hover bg-blue-50 cursor-pointer"><td>1</td><td>27</td><td>(수)-USER01</td></tr>
+                        <tr class="hover"><td>2</td><td>29</td><td>(뮤)-0001S0...</td></tr>
+                        <tr class="hover"><td>3</td><td>30</td><td>(뮤)-0001S0...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </aside>
+
+        <div class="flex-1 flex flex-col gap-1 overflow-hidden">
+            
+            <div class="bg-[#d1dceb] p-2 flex flex-wrap gap-4 items-center border border-blue-300 rounded-sm">
+                <div class="flex items-center gap-2">
+                    <span class="font-bold">운용역</span>
+                    <select class="select select-bordered input-dense w-32"><option>전체</option></select>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="font-bold">헤지펀드</span>
+                    <select class="select select-bordered input-dense w-40"><option>비헤지펀드</option></select>
+                </div>
+                <button class="btn btn-primary btn-sm ml-auto px-6">조회</button>
+            </div>
+
+            <div class="flex-1 flex flex-col border border-gray-300 bg-white overflow-hidden">
+                <div class="tabs tabs-lifted bg-gray-50">
+                    <button class="tab tab-active font-bold">주문지취소</button>
+                    <button class="tab">종목별취소</button>
+                </div>
+                
+                <div class="p-2 border-b flex justify-between bg-gray-50 items-center">
+                    <div class="flex gap-4">
+                        <div class="flex items-center gap-2">
+                            <span>주문지명</span>
+                            <input type="text" value="(수)-USER01" class="input input-bordered input-dense w-40 bg-gray-100" readonly />
+                        </div>
+                        <div class="flex items-center gap-2 text-gray-500">
+                            <span>운용역</span>
+                            <span>USER01</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <input type="text" placeholder="취소사유 입력" class="input input-bordered input-dense w-64" />
+                        <button class="btn btn-error btn-sm">승인요청</button>
+                        <button class="btn btn-success btn-sm">승 인</button>
+                    </div>
+                </div>
+
+                <div class="flex-1 overflow-auto">
+                    <table class="table dense-table w-full table-pin-rows">
+                        <thead class="bg-gray-100 text-blue-900">
+                            <tr>
+                                <th>No</th><th>선택</th><th>종목코드</th><th>종목명</th>
+                                <th>매도/매수</th><th>주문수량</th><th>체결수량</th><th>취소가능</th><th>취소수량</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-yellow-50">
+                                <td>1</td>
+                                <td><input type="checkbox" class="checkbox checkbox-sm" checked /></td>
+                                <td>C060310</td>
+                                <td class="font-bold">3S</td>
+                                <td class="text-red-600 font-bold">매수</td>
+                                <td>3</td><td>0</td><td>3</td>
+                                <td><input type="text" value="3" class="input input-bordered input-dense w-20 text-right border-blue-400" /></td>
+                            </tr>
+                            <script>
+                                for(let i=2; i<=10; i++) {
+                                    document.write(`<tr><td>${i}</td><td><input type="checkbox" class="checkbox checkbox-sm" /></td><td>-</td><td>-</td><td>-</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>`);
+                                }
+                            </script>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="h-32 border border-gray-300 bg-white overflow-auto shrink-0">
+                <div class="section-header text-purple-800">펀드별 가용자금 현황</div>
+                <table class="table dense-table w-full">
+                    <thead class="bg-purple-50">
+                        <tr><th>No</th><th>펀드코드</th><th>펀드명</th><th>구분</th><th>주문수량</th><th>가용자금</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td><td>001260</td><td>FUND_00002</td><td class="text-red-600">매수</td><td>3</td><td class="text-right font-mono font-bold">949,568,586</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-[#34495e] text-white p-1 px-4 flex justify-between items-center shrink-0">
+        <div class="flex gap-6 items-center">
+            <span class="badge badge-error gap-2 font-bold">KOSDAQ 553.94 ▲ 1.11</span>
+            <span class="text-sm">● 정상적으로 연결되었습니다.</span>
+        </div>
+        <div class="flex gap-4 text-xs">
+            <span>2026-02-10 16:04:53</span>
+            <span class="bg-red-800 px-2 rounded">Server: Connected</span>
+        </div>
+    </footer>
+
+</body>
+</html>

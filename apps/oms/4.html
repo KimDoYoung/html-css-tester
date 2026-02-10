@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="pastel">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sector / Holdings / NAV</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        body { font-size: 11pt; }
+        .text-11pt { font-size: 11pt; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+        input, select { height: 1.5rem; padding-left: 0.25rem; font-size: 11pt; border: 1px solid #ccc; border-radius: 2px; }
+        .table-custom td, .table-custom th { padding: 2px 4px; font-size: 11pt; white-space: nowrap; }
+        .resizer {
+            width: 5px; cursor: col-resize; background-color: #cbd5e1;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .resizer:hover { background-color: #94a3b8; }
+    </style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden bg-base-100 text-base-content" x-data="{ leftWidth: 60 }">
+
+    <!-- Header -->
+    <header class="h-10 bg-gradient-to-r from-slate-200 to-slate-100 border-b border-slate-300 flex items-center justify-between px-2 shrink-0">
+        <div class="flex items-center gap-4">
+            <h1 class="text-xl font-bold italic text-slate-700 tracking-tighter">ai Trader</h1>
+            <div class="flex items-center gap-1 bg-white border border-slate-300 rounded p-0.5">
+                <span class="text-[10px] font-bold px-1 text-slate-500">SEARCH</span>
+                <input type="text" value="검색" class="bg-blue-100 border-none h-5 w-32 focus:outline-none text-sm">
+                <button class="btn btn-ghost btn-xs h-5 min-h-0 px-1">🔍</button>
+            </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <!-- Icons -->
+            <button class="btn btn-square btn-xs btn-ghost">x</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col pt-1 bg-base-100 overflow-hidden">
+        
+        <!-- Tabs -->
+        <div class="flex border-b border-slate-300 shrink-0 px-2 gap-1 text-xs">
+            <button class="px-3 bg-white border border-b-0 border-slate-300 rounded-t font-bold text-blue-900 border-t-2 border-t-blue-500 py-1">Sector</button>
+            <button class="px-3 bg-slate-100 border border-b-0 border-slate-300 rounded-t text-slate-500 hover:bg-slate-50 py-1">Holdings</button>
+            <button class="px-3 bg-slate-100 border border-b-0 border-slate-300 rounded-t text-slate-500 hover:bg-slate-50 py-1">NAV</button>
+            <button class="px-3 bg-slate-100 border border-b-0 border-slate-300 rounded-t text-slate-500 hover:bg-slate-50 py-1">편입자산</button>
+        </div>
+
+        <!-- Search & Summary -->
+        <div class="p-2 gap-2 flex flex-col border-b border-slate-300 bg-base-200">
+            <div class="flex items-center gap-4 justify-between">
+                <div class="flex items-center gap-2">
+                    <label class="font-bold">구분*</label>
+                    <select class="w-32"><option>전체(권한)</option></select>
+                    <label class="font-bold">펀드*</label>
+                    <div class="flex gap-1">
+                        <input type="text" class="w-20 bg-red-50 border-red-300">
+                        <button class="btn btn-xs btn-square">🔍</button>
+                        <input type="text" class="w-32" value="전체" readonly>
+                    </div>
+                </div>
+                <button class="btn btn-sm btn-primary text-white font-normal px-4 gap-1">🔍 조회</button>
+            </div>
+            
+            <div class="bg-slate-50 border border-slate-300 rounded p-1 flex flex-wrap gap-x-6 gap-y-1 text-xs items-center">
+                 <div class="flex gap-2 items-center"><span class="font-bold">종목수</span> <span class="bg-white border px-2 py-0.5 w-16 text-right">270</span></div>
+                 <div class="flex gap-2 items-center"><span class="font-bold">총평가액</span> <span class="bg-white border px-2 py-0.5 w-24 text-right">7,404,406</span></div>
+                 <div class="flex gap-2 items-center font-bold"><span>KOSPI</span> <span class="text-red-500">1957.33 (▲ 1.37) 0.07 %</span></div>
+                 
+                 <div class="w-full h-px bg-slate-200 my-0.5"></div>
+                 
+                 <div class="flex gap-2 items-center"><span class="font-bold">약편입비중</span> <span class="bg-white border px-2 py-0.5 w-16 text-right">245.37 %</span></div>
+                 <div class="flex gap-2 items-center font-bold"><span>KOSDAQ</span> <span class="text-blue-500">503.37 (▼ 1.98) 0.39 %</span></div>
+                 
+                 <div class="ml-auto flex items-center gap-2">
+                     <span class="font-bold">마감</span> <span class="bg-white border px-1">N</span>
+                 </div>
+            </div>
+        </div>
+        
+        <!-- Toolbar -->
+        <div class="flex justify-between items-center px-2 py-1 bg-slate-100 border-b border-slate-300 text-xs">
+            <button class="btn btn-xs btn-outline bg-white gap-1"><span class="text-blue-500">📈</span> 종목별 시뮬레이션</button>
+            <button class="btn btn-xs btn-error text-white font-bold animate-pulse">빠른주문</button>
+        </div>
+
+        <!-- Split Grid -->
+        <div class="flex-1 flex overflow-hidden relative" @mousemove.window="if(dragging) { leftWidth = (event.clientX / window.innerWidth) * 100 } " @mouseup.window="dragging = false" x-data="{ dragging: false }">
+            
+            <!-- Left Grid Pane -->
+            <div class="flex flex-col overflow-auto bg-white border-r border-slate-200" :style="`width: ${leftWidth}%`">
+                <table class="table table-xs table-pin-rows table-custom w-full">
+                    <thead>
+                        <tr class="bg-slate-100 text-center font-bold text-slate-600">
+                             <th>No</th> <th>업종명</th> <th>비중(%)</th> <th>종목</th> <th>종목명</th> <th>편드</th> <th>전일수량</th> <th>매수주문</th> <th>매수체결</th> <th>당일수량</th> <th>편입비중</th> <th>약편입비중</th> <th>시장비(%)</th> <th>현재가</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template x-data="{ rows: [
+                            {no:97, name:'전기,전자', weight:29.03, code:'A029530', item:'신도리코', fund:21, qty:26162, price:62400, up:false},
+                            {no:98, name:'전기,전자', weight:29.03, code:'A033240', item:'자화전자', fund:50, qty:266109, price:17500, up:true},
+                            {no:99, name:'전기,전자', weight:29.03, code:'A034220', item:'LG디스플레이', fund:144, qty:5882937, price:28900, up:true},
+                            {no:100, name:'전기,전자', weight:29.03, code:'A066570', item:'LG전자', fund:145, qty:1981627, price:74200, up:true},
+                            {no:101, name:'운수장비', weight:10.91, code:'A000270', item:'기아차', fund:30, qty:174001, price:50800, up:false},
+                            {no:102, name:'운수장비', weight:10.91, code:'A003570', item:'S&T중공업', fund:36, qty:798706, price:11700, up:true},
+                            {no:103, name:'운수장비', weight:10.91, code:'A005380', item:'현대차', fund:143, qty:1757973, price:203000, up:false},
+                            {no:104, name:'운수장비', weight:10.91, code:'A005387', item:'현대차2우B', fund:19, qty:72205, price:73100, up:false},
+                        ] }" x-for="row in rows">
+                            <tr class="hover:bg-blue-50 border-b border-slate-50 text-center">
+                                <td x-text="row.no" class="bg-slate-50"></td>
+                                <td x-text="row.name"></td>
+                                <td x-text="row.weight"></td>
+                                <td x-text="row.code"></td>
+                                <td x-text="row.item" class="text-left pl-2"></td>
+                                <td x-text="row.fund"></td>
+                                <td x-text="row.qty.toLocaleString()" class="text-right"></td>
+                                <td>0</td> <td>0</td>
+                                <td x-text="row.qty.toLocaleString()" class="text-right"></td>
+                                <td>0.02</td> <td>0.05</td> <td>0.06</td>
+                                <td class="text-right font-bold" :class="row.up ? 'text-red-500' : 'text-blue-500'">
+                                    <span x-text="row.price.toLocaleString()"></span>
+                                    <span x-text="row.up ? '▲' : '▼'" class="text-[8px]"></span>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Resizer -->
+            <div class="resizer w-1 bg-slate-200 hover:bg-blue-300 cursor-col-resize z-10" @mousedown="dragging = true"></div>
+
+            <!-- Right Grid Pane -->
+            <div class="flex-1 overflow-auto bg-white" :style="`width: ${100 - leftWidth}%`">
+                 <table class="table table-xs table-pin-rows table-custom w-full">
+                    <thead>
+                        <tr class="bg-slate-100 text-center font-bold text-slate-600">
+                             <th>펀드</th> <th>펀드명</th> <th>체결기준<br>당일수량</th> <th>전일비중</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                         <template x-data="{ rows: Array.from({length: 15}) }" x-for="(row, index) in rows">
+                            <tr class="hover:bg-blue-50 border-b border-slate-50 text-center">
+                                <td>017260</td>
+                                <td class="text-left">FUND_00061</td>
+                                <td class="text-right">1,856</td>
+                                <td class="text-right">0.15</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                 </table>
+            </div>
+            
+        </div>
+        
+        <!-- Bottom Tab Bar -->
+        <div class="h-6 bg-pink-100 text-xs flex justify-between items-center px-4 font-bold border-t border-slate-300">
+             <span>합계</span>
+             <span>100.00</span>
+             <span>21,225</span>
+        </div>
+
+    </main>
+
+    <!-- Footer Status -->
+    <div class="h-6 bg-slate-700 text-white flex items-center justify-between px-2 text-[10px] shrink-0">
+         <div>KOSPI 1957.33 ...</div>
+    </div>
+</body>
+</html>

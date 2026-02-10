@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="corporate">
+<head>
+    <meta charset="UTF-8">
+    <title>Enterprise OMS - Resizable Layout</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        :root { font-size: 11pt; }
+        body { height: 100vh; overflow: hidden; user-select: none; }
+        
+        /* 테이블 조밀도 유지 */
+        .table-xs th, .table-xs td { padding: 0.25rem 0.5rem; height: 1.8rem; border: 1px solid #e5e7eb; }
+        
+        /* 리사이저 스타일 */
+        .resizer-v { cursor: col-resize; width: 4px; transition: background 0.2s; }
+        .resizer-v:hover, .resizer-v:active { background: #3b82f6; }
+        
+        .resizer-h { cursor: row-resize; height: 4px; transition: background 0.2s; }
+        .resizer-h:hover, .resizer-h:active { background: #3b82f6; }
+    </style>
+</head>
+<body class="bg-base-200 flex flex-col" 
+      x-data="omsApp()" 
+      @mousemove="resize($event)" 
+      @mouseup="stopResize()">
+
+    <header class="navbar bg-[#1e3a5f] text-white min-h-[2.5rem] p-0 px-4 shrink-0 shadow-md">
+        <div class="flex-1 font-bold italic">ai Trader OMS</div>
+        <div class="flex-none gap-2 text-xs">
+            <span>[USER01] 님 환영합니다</span>
+            <button class="btn btn-ghost btn-xs">Logout</button>
+        </div>
+    </header>
+
+    <main class="flex-1 flex overflow-hidden p-1 gap-0">
+        
+        <aside class="bg-base-100 border border-base-300 flex flex-col rounded-sm shrink-0"
+               :style="`width: ${leftWidth}px`"
+               style="min-width: 150px; max-width: 500px;">
+            <div class="bg-base-300 p-1 text-sm font-bold border-b">주문지 목록</div>
+            <div class="flex-1 overflow-auto">
+                <table class="table table-xs table-zebra w-full">
+                    <thead class="sticky top-0">
+                        <tr class="bg-base-200"><th>No</th><th>주문지명</th></tr>
+                    </thead>
+                    <tbody>
+                        <template x-for="n in 10">
+                            <tr class="hover cursor-pointer"><td x-text="n"></td><td x-text="'(수)-USER0'+n"></td></tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </aside>
+
+        <div class="resizer-v" @mousedown="startResize('left')"></div>
+
+        <div class="flex-1 flex flex-col overflow-hidden min-w-0">
+            
+            <div class="flex-1 flex flex-col min-h-0 bg-base-100 border border-base-300 rounded-sm">
+                <div class="p-2 bg-blue-50 border-b flex gap-4 items-center">
+                    <span class="label-text font-bold">운용역</span>
+                    <select class="select select-bordered select-xs w-24"><option>전체</option></select>
+                    <button class="btn btn-primary btn-xs ml-auto">조회</button>
+                </div>
+                
+                <div class="tabs tabs-lifted px-1 pt-1">
+                    <button class="tab tab-active">주문지취소</button>
+                    <button class="tab">종목별취소</button>
+                </div>
+
+                <div class="flex-1 overflow-auto p-1">
+                    <table class="table table-xs table-pin-rows w-full">
+                        <thead>
+                            <tr class="bg-base-200 text-blue-800">
+                                <th>No</th><th>종목명</th><th>매수/도</th><th>수량</th><th>취소가능</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template x-for="n in 20">
+                                <tr class="hover">
+                                    <td x-text="n"></td>
+                                    <td class="font-bold">삼성전자</td>
+                                    <td class="text-red-500">매수</td>
+                                    <td class="text-right">1,000</td>
+                                    <td class="text-right">500</td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="resizer-h" @mousedown="startResize('bottom')"></div>
+
+            <aside class="bg-base-100 border border-base-300 rounded-sm overflow-hidden flex flex-col shrink-0"
+                   :style="`height: ${bottomHeight}px`"
+                   style="min-height: 50px; max-height: 400px;">
+                <div class="bg-purple-700 text-white p-1 text-xs font-bold uppercase">Fund Liquidity Status</div>
+                <div class="flex-1 overflow-auto">
+                    <table class="table table-xs w-full">
+                        <thead class="sticky top-0 bg-base-200">
+                            <tr><th>펀드명</th><th>가용자금</th><th>약후종목%</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-bold">KOREA_INDEX_FUND_01</td>
+                                <td class="text-right font-mono text-success">1,245,568,586</td>
+                                <td class="text-right">12.5%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="bg-slate-800 text-white p-1 px-4 flex justify-between items-center text-xs shrink-0">
+        <span>KOSPI 2,543.12 ▲ 0.5%</span>
+        <span class="text-green-400">● Live Connected</span>
+    </footer>
+
+    <script>
+        function omsApp() {
+            return {
+                leftWidth: 280,   // 초기 좌측 너비
+                bottomHeight: 150, // 초기 하단 높이
+                isResizing: null, // 현재 리사이징 중인 방향 ('left' 또는 'bottom')
+
+                startResize(dir) {
+                    this.isResizing = dir;
+                    // 드래그 중 텍스트 선택 방지
+                    document.body.style.cursor = dir === 'left' ? 'col-resize' : 'row-resize';
+                },
+
+                stopResize() {
+                    this.isResizing = null;
+                    document.body.style.cursor = 'default';
+                },
+
+                resize(e) {
+                    if (!this.isResizing) return;
+
+                    if (this.isResizing === 'left') {
+                        // 마우스 X 좌표를 그대로 너비로 설정
+                        this.leftWidth = e.clientX;
+                    } else if (this.isResizing === 'bottom') {
+                        // 전체 높이에서 마우스 Y 좌표를 뺀 값을 하단 높이로 설정
+                        const footerHeight = 25; // 푸터 대략 높이
+                        this.bottomHeight = window.innerHeight - e.clientY - footerHeight;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

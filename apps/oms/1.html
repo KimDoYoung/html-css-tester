@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="pastel">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Simulation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        body { font-size: 11pt; }
+        .text-11pt { font-size: 11pt; }
+        /* Custom scrollbar for dense tables */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+        
+        .tab-active-custom {
+            border-bottom: 2px solid #000;
+            font-weight: bold;
+        }
+        input, select { height: 1.5rem; padding-left: 0.25rem; font-size: 11pt; border: 1px solid #ccc; border-radius: 2px; }
+        .btn-xs-custom { height: 1.5rem; min-height: 1.5rem; font-size: 10pt; }
+        
+        /* Table density overrides */
+        .table-custom td, .table-custom th { padding: 2px 4px; font-size: 11pt; white-space: nowrap; }
+    </style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden bg-base-100 text-base-content">
+
+    <!-- Top Header -->
+    <header class="h-10 bg-gradient-to-r from-slate-200 to-slate-100 border-b border-slate-300 flex items-center justify-between px-2 shrink-0">
+        <div class="flex items-center gap-4">
+            <h1 class="text-xl font-bold italic text-slate-700 tracking-tighter">ai Trader</h1>
+            <div class="flex items-center gap-1 bg-white border border-slate-300 rounded p-0.5">
+                <span class="text-[10px] font-bold px-1 text-slate-500">SEARCH</span>
+                <input type="text" value="검색" class="bg-blue-100 border-none h-5 w-32 focus:outline-none text-sm">
+                <button class="btn btn-ghost btn-xs h-5 min-h-0 px-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg></button>
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-xs h-5 min-h-0 text-[10px]">HISTORY ▾</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-2">
+            <!-- Toolbar Icons -->
+            <button class="flex flex-col items-center justify-center w-8 hover:bg-slate-200 rounded">
+                <div class="w-4 h-4 bg-blue-300 rounded-sm mb-0.5"></div>
+                <span class="text-[8px] leading-none">MONIT</span>
+            </button>
+            <button class="flex flex-col items-center justify-center w-8 hover:bg-slate-200 rounded">
+                <div class="w-4 h-4 bg-green-300 rounded-sm mb-0.5"></div>
+                <span class="text-[8px] leading-none">SAFE</span>
+            </button>
+            <button class="flex flex-col items-center justify-center w-8 hover:bg-slate-200 rounded">
+                <div class="w-4 h-4 bg-purple-300 rounded-sm mb-0.5"></div>
+                <span class="text-[8px] leading-none">TRANS</span>
+            </button>
+            <div class="w-[1px] h-6 bg-slate-300 mx-1"></div>
+            <button class="btn btn-square btn-xs btn-ghost">_</button>
+            <button class="btn btn-square btn-xs btn-ghost">□</button>
+            <button class="btn btn-square btn-xs btn-ghost">x</button>
+        </div>
+    </header>
+
+    <!-- Sub Header / Breadcrumb -->
+    <div class="h-8 bg-slate-600 text-white flex items-center px-2 gap-4 text-xs shrink-0">
+        <div class="flex items-center gap-1 opacity-80">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+        </div>
+        <div class="flex gap-4">
+            <span>시뮬레이션</span>
+            <span class="opacity-50">></span>
+            <span>국내주식</span>
+            <span class="opacity-50">></span>
+            <span class="font-bold">주식 종목별시뮬레이션(TSIM1101M00)</span>
+        </div>
+        <div class="ml-auto flex gap-2">
+            <button class="btn btn-xs btn-ghost text-white font-normal hover:bg-slate-500 gap-1"><span class="text-xs">↻</span> 초기화</button>
+            <button class="btn btn-xs btn-ghost text-white font-normal hover:bg-slate-500 gap-1"><span class="text-xs">📷</span> 화면캡쳐</button>
+            <button class="btn btn-xs btn-ghost text-white font-normal hover:bg-slate-500 gap-1"><span class="text-xs">🖨️</span> 화면인쇄</button>
+            <button class="btn btn-xs btn-ghost text-white font-normal hover:bg-slate-500">★</button>
+            <button class="btn btn-xs btn-ghost text-white font-normal hover:bg-slate-500">🔒</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col p-2 gap-2 overflow-hidden bg-base-100">
+        
+        <!-- Tabs -->
+        <div class="flex border-b border-slate-300 shrink-0">
+            <button class="px-4 py-1 bg-white border border-b-0 border-slate-300 rounded-t font-bold text-blue-900 border-t-2 border-t-blue-500 text-sm">순자산배분(약관)</button>
+            <button class="px-4 py-1 bg-slate-100 border border-b-0 border-slate-300 rounded-t text-slate-500 text-sm hover:bg-slate-50">종목비배분</button>
+            <button class="px-4 py-1 bg-slate-100 border border-b-0 border-slate-300 rounded-t text-slate-500 text-sm hover:bg-slate-50">기보유증감(종목)</button>
+            <button class="px-4 py-1 bg-slate-100 border border-b-0 border-slate-300 rounded-t text-slate-500 text-sm hover:bg-slate-50">종목비중조정</button>
+        </div>
+
+        <!-- Search Form -->
+        <div class="bg-base-200 p-2 rounded border border-base-300 shrink-0">
+            <div class="grid grid-cols-[auto_1fr_auto] gap-x-4 gap-y-1 items-center">
+                
+                <!-- Left Form Inputs -->
+                <div class="grid grid-cols-[auto_1fr_auto_1fr] gap-x-2 gap-y-1 items-center">
+                    <label class="font-bold text-right">구분*</label>
+                    <select class="w-32"><option>전체(권한)</option></select>
+                    
+                    <label class="font-bold text-right">펀드*</label>
+                    <div class="flex gap-1">
+                        <input type="text" class="w-20 bg-red-50 border-red-300">
+                        <button class="btn btn-xs btn-square">🔍</button>
+                        <input type="text" class="w-40" value="전체" readonly>
+                    </div>
+
+                    <label class="font-bold text-right">헤지펀드</label>
+                    <select class="w-32"><option>비헤지펀드</option></select>
+                    
+                    <label class="font-bold text-right">종목코드*</label>
+                    <div class="flex gap-1">
+                        <input type="text" class="w-20 bg-red-50 border-red-300">
+                        <button class="btn btn-xs btn-square">🔍</button>
+                        <input type="text" class="w-40">
+                    </div>
+                </div>
+
+                <!-- Spacer -->
+                <div></div>
+
+                <!-- Right Buttons -->
+                <div class="flex gap-1">
+                    <button class="btn btn-sm btn-primary text-white font-normal px-4 gap-1"><span class="text-xs">🔍</span> 조회</button>
+                    <button class="btn btn-sm btn-outline font-normal px-4">위반조회</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detail Form Area -->
+        <div class="bg-base-200 px-2 py-1 rounded border border-base-300 shrink-0 flex items-center justify-between">
+            <div class="flex gap-4 items-center">
+                <div class="grid grid-cols-[auto_auto] gap-x-2 gap-y-1 items-center">
+                    <label class="text-right text-xs">보유주수</label>
+                    <input type="text" class="w-24 text-right" readonly>
+                    <label class="text-right text-xs">시세</label>
+                    <input type="text" class="w-24 text-right" readonly>
+                </div>
+                <div class="grid grid-cols-[auto_auto] gap-x-2 gap-y-1 items-center">
+                    <label class="text-right text-xs">매수금액</label>
+                    <input type="text" class="w-24 text-right" readonly>
+                    <label class="text-right text-xs">매도금액</label>
+                    <input type="text" class="w-24 text-right" readonly>
+                </div>
+                <div class="flex items-center gap-1">
+                    <label class="text-xs">시장비</label>
+                    <input type="text" class="w-16 text-right" readonly>
+                    <span>%</span>
+                </div>
+            </div>
+
+            <div class="flex gap-2 items-center">
+                <div class="flex items-center gap-2 border-r border-slate-300 pr-4">
+                    <label class="text-xs">주문수량</label>
+                    <input type="text" class="w-24 text-right">
+                    <div class="flex gap-1 border border-slate-300 rounded px-1 bg-white">
+                        <label class="flex items-center gap-1 text-xs cursor-pointer"><input type="radio" name="orderType" class="radio radio-xs radio-primary" checked> <span>매수</span></label>
+                        <label class="flex items-center gap-1 text-xs cursor-pointer"><input type="radio" name="orderType" class="radio radio-xs radio-error"> <span>매도</span></label>
+                    </div>
+                </div>
+                <div class="flex items-center gap-1">
+                    <label class="text-xs">수수료</label>
+                    <input type="text" value="50" class="w-12 text-right">
+                    <span class="text-xs">bp</span>
+                </div>
+                <div class="flex gap-1 ml-2">
+                    <button class="btn btn-xs btn-info text-white font-normal px-3">시뮬레이션</button>
+                    <button class="btn btn-xs btn-primary text-white font-normal px-3">주문생성</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grid Toolbar -->
+        <div class="flex justify-between items-center shrink-0 h-6">
+            <div class="flex gap-1">
+                <button class="btn btn-xs btn-square btn-ghost border border-slate-300">🔢</button>
+                <button class="btn btn-xs btn-square btn-ghost border border-slate-300">⚙️</button>
+                <button class="btn btn-xs btn-square btn-ghost border border-slate-300">💾</button>
+                <button class="btn btn-xs btn-square btn-ghost border border-slate-300">📋</button>
+            </div>
+            <div class="flex gap-2 text-xs items-center">
+                <div class="flex gap-0.5">
+                    <input type="text" class="w-16 bg-slate-100 border border-slate-300 h-5">
+                    <input type="text" class="w-16 bg-slate-100 border border-slate-300 h-5">
+                </div>
+                <span>총 0건</span>
+            </div>
+        </div>
+
+        <!-- Data Grid -->
+        <div class="flex-1 overflow-auto border border-slate-300 bg-white relative">
+            <table class="table table-xs table-pin-rows table-custom w-full">
+                <thead>
+                    <tr class="bg-slate-100 text-slate-600 font-bold text-center">
+                        <th class="border-r border-slate-200">No</th>
+                        <th class="border-r border-slate-200">제외</th>
+                        <th class="border-r border-slate-200">펀드</th>
+                        <th class="border-r border-slate-200">펀드명</th>
+                        <th class="border-r border-slate-200">위반</th>
+                        <th class="border-r border-slate-200">NAV</th>
+                        <th class="border-r border-slate-200">조정</th>
+                        <th class="border-r border-slate-200">약정목비</th>
+                        <th class="border-r border-slate-200">순종목비</th>
+                        <th class="border-r border-slate-200">보유주수</th>
+                        <th class="border-r border-slate-200">권리/질권</th>
+                        <th class="border-r border-slate-200">고정</th>
+                        <th class="border-r border-slate-200">B/S</th>
+                        <th class="border-r border-slate-200">주문수량</th>
+                        <th class="border-r border-slate-200">체결예상금액</th>
+                        <th class="border-r border-slate-200">가용자금</th>
+                        <th>약후종목</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Empty rows for grid lines -->
+                    <template x-data="{ rows: Array.from({length: 20}) }" x-for="(row, index) in rows">
+                        <tr class="hover:bg-blue-50 border-b border-slate-100 text-center">
+                            <td class="border-r border-slate-100 bg-slate-50" x-text="index + 1"></td>
+                            <td class="border-r border-slate-100"><input type="checkbox" class="checkbox checkbox-xs rounded-sm"></td>
+                            <td class="border-r border-slate-100"></td>
+                            <td class="border-r border-slate-100"></td>
+                            <td class="border-r border-slate-100"></td>
+                            <td class="border-r border-slate-100"></td>
+                            <td class="border-r border-slate-100"></td>
+                            <td class="border-r border-slate-100"></td>
+                            <td class="border-r border-slate-100"></td>
+                            <td class="border-r border-slate-100"></td>
+                            <td class="border-r border-slate-100"></td>
+                            <td class="border-r border-slate-100"></td>
+                            <td class="border-r border-slate-100"></td>
+                            <td class="border-r border-slate-100"></td>
+                            <td class="border-r border-slate-100"></td>
+                            <td class="border-r border-slate-100"></td>
+                            <td></td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Grid Footer (Sum) -->
+        <div class="h-8 bg-pink-100 border border-slate-300 border-t-0 flex items-center px-2 shrink-0 font-bold text-xs">
+            <span class="w-12">합계</span>
+            <div class="flex-1 flex justify-between pr-4">
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Bottom Status Bar -->
+    <footer class="h-6 bg-slate-700 text-white flex items-center justify-between px-2 text-[10px] shrink-0">
+        <div class="flex gap-4">
+            <div class="flex items-center gap-1">
+                <span class="font-bold">KOSPI</span>
+                <span class="text-red-400">1957.33</span>
+                <span class="text-red-400">▲ 1.37</span>
+            </div>
+            <div class="text-slate-300">정상적으로 처리하였습니다.</div>
+        </div>
+        <div class="flex gap-4 items-center">
+            <span>메시지가 없습니다.</span>
+            <span class="bg-red-600 rounded-full px-1.5 text-white font-bold">0</span>
+        </div>
+    </footer>
+    
+    <!-- Open Window Tabs (Bottom) -->
+    <div class="h-7 bg-slate-300 flex items-end px-1 gap-1 shrink-0 text-xs">
+        <button class="btn btn-xs btn-square btn-ghost">🏠</button>
+        <div class="bg-white border border-slate-400 px-2 py-0.5 rounded-t flex items-center gap-2">
+             <span>주식 종목별시뮬레이션</span>
+             <button class="hover:text-red-500">×</button>
+        </div>
+    </div>
+</body>
+</html>

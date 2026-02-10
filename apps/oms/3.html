@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="pastel">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Order Cancel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        body { font-size: 11pt; }
+        .text-11pt { font-size: 11pt; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+        input, select { height: 1.5rem; padding-left: 0.25rem; font-size: 11pt; border: 1px solid #ccc; border-radius: 2px; }
+        .table-custom td, .table-custom th { padding: 2px 4px; font-size: 11pt; white-space: nowrap; }
+        .resizer {
+            width: 5px; cursor: col-resize; background-color: #cbd5e1;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .resizer:hover { background-color: #94a3b8; }
+    </style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden bg-base-100 text-base-content" x-data="{ leftWidth: 30 }">
+
+    <!-- Header -->
+    <header class="h-10 bg-gradient-to-r from-slate-200 to-slate-100 border-b border-slate-300 flex items-center justify-between px-2 shrink-0">
+        <div class="flex items-center gap-4">
+            <h1 class="text-xl font-bold italic text-slate-700 tracking-tighter">ai Trader</h1>
+            <div class="flex items-center gap-1 bg-white border border-slate-300 rounded p-0.5">
+                <span class="text-[10px] font-bold px-1 text-slate-500">SEARCH</span>
+                <input type="text" value="검색" class="bg-blue-100 border-none h-5 w-32 focus:outline-none text-sm">
+                <button class="btn btn-ghost btn-xs h-5 min-h-0 px-1">🔍</button>
+            </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <button class="flex flex-col items-center justify-center w-8 hover:bg-slate-200 rounded"><div class="w-4 h-4 bg-blue-300 rounded-sm mb-0.5"></div><span class="text-[8px] leading-none">MONIT</span></button>
+            <!-- ... other icons ... -->
+            <button class="btn btn-square btn-xs btn-ghost">x</button>
+        </div>
+    </header>
+
+    <!-- Sub Header -->
+    <div class="h-8 bg-slate-600 text-white flex items-center px-2 gap-4 text-xs shrink-0">
+        <div class="flex items-center gap-1 opacity-80">📁</div>
+        <div class="flex gap-4">
+            <span>주문관리</span>
+            <span class="opacity-50">></span>
+            <span>국내주식</span>
+            <span class="opacity-50">></span>
+            <span class="font-bold">주식 주문취소(TORD2102M00)</span>
+        </div>
+        <div class="ml-auto flex gap-2">
+            <button class="btn btn-xs btn-ghost text-white font-normal hover:bg-slate-500 gap-1">↻ 초기화</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col p-2 gap-2 overflow-hidden bg-base-100">
+        <!-- Top Search -->
+        <div class="bg-base-200 p-2 rounded border border-base-300 shrink-0 flex items-center justify-between">
+            <div class="flex gap-4 items-center">
+                <label class="font-bold">운용역*</label>
+                <select class="w-32 bg-red-50 border-red-300"><option>전체</option></select>
+                <label class="font-bold">헤지펀드</label>
+                <select class="w-32"><option>비헤지펀드</option></select>
+            </div>
+            <button class="btn btn-sm btn-primary text-white font-normal px-4 gap-1">🔍 조회</button>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="flex border-b border-slate-300 shrink-0 h-6 items-end gap-1">
+            <button class="px-2 bg-white border border-b-0 border-slate-300 rounded-t font-bold text-blue-900 border-t-2 border-t-blue-500 text-xs py-1">주문지취소</button>
+             <button class="px-2 bg-slate-100 border border-b-0 border-slate-300 rounded-t text-slate-500 text-xs py-1">종목별취소</button>
+        </div>
+
+        <div class="flex items-center gap-4 bg-white p-1 border-b border-slate-200">
+            <label class="flex items-center gap-1 text-xs"><input type="checkbox" class="checkbox checkbox-xs rounded-sm"> 펀드 변경</label>
+            <div class="flex items-center gap-1">
+                <span class="text-xs text-right w-16">취소사유</span>
+                <input type="text" class="w-64">
+            </div>
+            <div class="flex gap-1 ml-auto">
+                 <button class="btn btn-xs btn-info text-white font-normal px-2">사유정정</button>
+                 <button class="btn btn-xs btn-info text-white font-normal px-2">승인요청</button>
+                 <button class="btn btn-xs btn-primary text-white font-normal px-2">승인</button>
+            </div>
+        </div>
+
+        <!-- Split Pane -->
+        <div class="flex-1 flex overflow-hidden border border-slate-300 rounded relative" @mousemove.window="if(dragging) { leftWidth = (event.clientX / window.innerWidth) * 100 } " @mouseup.window="dragging = false" x-data="{ dragging: false }">
+            
+            <!-- Left Pane -->
+            <div class="flex flex-col overflow-hidden bg-slate-50 p-2" :style="`width: ${leftWidth}%`" x-data="{ topHeight: 200, resizing: false }" @mousemove.window="if(resizing) { topHeight = Math.max(100, event.clientY - $el.getBoundingClientRect().top - 8) }" @mouseup.window="resizing = false">
+                
+                <!-- Expanded Form -->
+                <div class="bg-white p-2 border border-slate-200 rounded shadow-sm text-xs grid grid-cols-[auto_1fr] gap-x-2 gap-y-1 items-center shrink-0 overflow-hidden" :style="`height: ${topHeight}px`">
+                    <label class="text-right">주문지명</label>
+                    <input type="text" value="(수)-USER01" class="w-full bg-slate-100" readonly>
+                    
+                    <label class="text-right">운용역</label>
+                    <div class="flex gap-1">
+                        <input type="text" value="USER01" class="w-full bg-slate-100" readonly>
+                        <span class="whitespace-nowrap flex items-center">헤지구분</span>
+                        <input type="text" value="N" class="w-8 text-center bg-slate-100" readonly>
+                    </div>
+
+                    <label class="text-right">CMP대상</label>
+                    <div class="flex gap-1">
+                         <input type="text" value="N" class="w-8 text-center bg-slate-100" readonly>
+                         <span class="whitespace-nowrap flex items-center">CIO대상</span>
+                         <input type="text" value="N" class="w-8 text-center bg-slate-100" readonly>
+                    </div>
+
+                    <label class="text-right">요청</label>
+                    <div class="flex gap-1 items-center">
+                        <input type="text" value="09:53:50" class="w-16 bg-slate-100 text-center" readonly>
+                        <span class="text-[10px] text-slate-500">TR</span>
+                        <input type="text" class="flex-1 bg-slate-100" readonly>
+                        <span class="text-[10px] text-slate-500">CMP</span>
+                        <input type="text" class="flex-1 bg-slate-100" readonly>
+                    </div>
+
+                    <label class="text-right">승인</label>
+                    <div class="flex gap-1 items-center">
+                        <input type="text" value="09:53:50" class="w-16 bg-slate-100 text-center" readonly>
+                        <span class="text-[10px] text-slate-500">CIO</span>
+                        <input type="text" class="w-16 bg-slate-100" readonly>
+                    </div>
+                    
+                    <fieldset class="col-span-2 border border-slate-200 rounded p-1 mt-1">
+                        <legend class="text-[10px] px-1 font-bold text-slate-500 ml-2">헤지</legend>
+                        <div class="flex items-center gap-1 px-2">
+                            <label class="text-[10px] whitespace-nowrap">전략/그룹/트렌치</label>
+                            <input type="text" class="w-8 bg-slate-100" readonly>
+                            <span class="text-slate-400">/</span>
+                            <input type="text" class="w-8 bg-slate-100" readonly>
+                            <span class="text-slate-400">/</span>
+                            <input type="text" class="flex-1 bg-slate-100" readonly>
+                        </div>
+                    </fieldset>
+                </div>
+                
+                <!-- Vertical Resizer -->
+                <div class="h-2 hover:bg-blue-300 cursor-row-resize flex items-center justify-center shrink-0 my-0.5" @mousedown="resizing = true">
+                    <div class="w-8 h-1 bg-slate-300 rounded-full"></div>
+                </div>
+                
+                <div class="flex-1 overflow-auto border border-slate-300 bg-white">
+                    <table class="table table-xs table-pin-rows table-custom w-full">
+                        <thead>
+                            <tr class="bg-slate-100 text-center">
+                                <th>No</th> <th>구분</th> <th>주문지</th> <th>주문지명</th> <th>체결율(%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                             <tr class="hover:bg-blue-50 border-b border-slate-50 text-center bg-yellow-100">
+                                <td>1</td> <td>27</td> <td>(수)-USER01</td> <td>0</td> <td>0</td>
+                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Resizer -->
+            <div class="resizer w-1 bg-slate-200 hover:bg-blue-300 cursor-col-resize z-10" @mousedown="dragging = true"></div>
+
+            <!-- Right Pane -->
+            <div class="flex-1 flex flex-col overflow-hidden bg-white p-2" :style="`width: ${100 - leftWidth}%`" x-data="{ bottomHeight: 100, resizingBottom: false }" @mousemove.window="if(resizingBottom) { bottomHeight = Math.max(50, window.innerHeight - event.clientY - 60) }" @mouseup.window="resizingBottom = false">
+                <div class="flex-1 overflow-auto border border-slate-300 bg-white">
+                    <table class="table table-xs table-pin-rows table-custom w-full">
+                        <thead>
+                            <tr class="bg-slate-100 text-center">
+                                <th>No</th> <th>선택</th> <th>차입</th> <th>종목</th> <th>종목명</th> <th>B/S</th> <th>주문수량</th> <th>체결수량</th> <th>취소가능수량</th> <th>취소수량</th> <th>취소사유</th> <th>주문조건</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                             <tr class="hover:bg-blue-50 border-b border-slate-50 text-center bg-yellow-100 font-bold">
+                                <td>1</td> <td><input type="checkbox" class="checkbox checkbox-xs" checked></td> <td>N</td> <td>C060310</td> <td>GS</td> 
+                                <td class="text-red-500">B</td> <td class="text-right">3</td> <td class="text-right">0</td> <td class="text-right">3</td>
+                                <td><input type="text" value="0" class="w-16 text-right h-4 border border-slate-300 rounded-sm"></td>
+                                <td><input type="text" class="w-32 h-4 border border-slate-300 rounded-sm"></td>
+                                <td>단순CD</td>
+                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Resizer -->
+                <div class="h-2 hover:bg-blue-300 cursor-row-resize flex items-center justify-center shrink-0 my-0.5" @mousedown="resizingBottom = true">
+                    <div class="w-8 h-1 bg-slate-300 rounded-full"></div>
+                </div>
+
+                <!-- Bottom Details -->
+                <div class="overflow-auto border border-slate-300 bg-white shrink-0" :style="`height: ${bottomHeight}px`">
+                    <table class="table table-xs table-pin-rows table-custom w-full">
+                        <thead>
+                            <tr class="bg-purple-100 text-center">
+                                <th>No</th> <th>펀드</th> <th>펀드명</th> <th>구분</th> <th>주문수량</th> <th>약후종목%</th> <th>약후편입%</th> <th>가용자금</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center bg-yellow-50 font-bold">
+                                <td>1</td> <td>001260</td> <td>FUND_00002</td> <td class="text-red-500">B</td> 
+                                <td class="text-right">3</td> <td class="text-right">0.05</td> <td class="text-right">4,735.75</td> 
+                                <td class="text-right">949,568,586</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <div class="h-7 bg-slate-300 flex items-end px-1 gap-1 shrink-0 text-xs">
+        <div class="flex items-center gap-1 bg-slate-400 px-2 rounded-t text-white py-0.5"><span>주식 보유&NAV</span> <button class="ml-1">×</button></div>
+        <div class="flex items-center gap-1 bg-slate-400 px-2 rounded-t text-white py-0.5"><span>주문지상황판</span> <button class="ml-1">×</button></div>
+        <div class="bg-white border border-slate-400 px-2 py-0.5 rounded-t flex items-center gap-2 font-bold text-slate-800">
+             <span>주식 주문취소</span> <button class="hover:text-red-500">×</button>
+        </div>
+    </div>
+    <footer class="h-6 bg-slate-700 text-white flex items-center justify-between px-2 text-[10px] shrink-0">
+        <div class="flex gap-4">
+            <div class="flex items-center gap-1">
+                <span class="font-bold">KOSDAQ</span>
+                <span class="text-red-400">553.94</span>
+                <span class="text-red-400">▲ 1.11</span>
+            </div>
+            <div class="text-slate-300">정상적으로 조회되었습니다.</div>
+        </div>
+        <div class="flex gap-4 items-center">
+            <span>The message does not exist.</span>
+            <span class="bg-red-600 rounded-full px-1.5 text-white font-bold">0</span>
+        </div>
+    </footer>
+</body>
+</html>

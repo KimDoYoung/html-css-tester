@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ai Trader Clone</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 초고밀도 디자인을 위한 폰트 및 패딩 강제 조정 */
+        body { font-size: 11px; overflow: hidden; }
+        .table-xs th, .table-xs td { padding: 0.15rem 0.4rem; font-size: 10px; border: 1px solid #e5e7eb; }
+        input, select, button { height: 22px !important; font-size: 11px !important; padding: 0 4px !important; }
+        .tab { height: 24px !important; font-size: 11px; }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen flex flex-col">
+
+    <header class="bg-[#1e3a5f] text-white p-1 flex justify-between items-center shadow-md">
+        <div class="flex items-center gap-4">
+            <h1 class="font-bold italic text-lg ml-2">ai Trader</h1>
+            <div class="join border border-blue-400">
+                <input class="join-item bg-white text-black px-2 w-48" placeholder="검색" />
+                <button class="join-item btn btn-xs btn-ghost text-white border-l border-blue-400">🔍</button>
+            </div>
+        </div>
+        <div class="flex gap-2">
+            <button class="btn btn-ghost btn-xs">초기화</button>
+            <button class="btn btn-ghost btn-xs text-red-300">화면캡쳐</button>
+            <button class="btn btn-ghost btn-xs">화면인쇄</button>
+        </div>
+    </header>
+
+    <nav class="bg-[#4a69bd] text-white flex gap-1 p-1 text-[11px]">
+        <span class="px-2 border-r border-blue-300">주문관리</span>
+        <span class="px-2 border-r border-blue-300">국내주식</span>
+        <span class="px-2 font-bold bg-white text-blue-900 rounded-t">주식 주문취소(TORD2102M00)</span>
+    </nav>
+
+    <main class="flex-1 flex overflow-hidden p-1 gap-1">
+        
+        <aside class="w-64 flex flex-col gap-1">
+            <div class="border bg-white p-1 rounded">
+                <table class="table table-xs w-full">
+                    <thead class="bg-gray-200">
+                        <tr><th>No</th><th>구분</th><th>주문지</th><th>체결율</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hover bg-blue-50"><td>1</td><td>27</td><td>(수)-USER01</td><td>0</td></tr>
+                        <tr><td>2</td><td>29</td><td>(뮤)-0001S0...</td><td>0</td></tr>
+                        <tr><td>3</td><td>30</td><td>(뮤)-0001S0...</td><td>0</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </aside>
+
+        <div class="flex-1 flex flex-col gap-1 overflow-hidden">
+            
+            <div class="bg-[#d1dceb] p-1 flex gap-2 items-center border border-blue-200">
+                <label>운용역</label>
+                <select class="select select-bordered select-xs w-24"><option>전체</option></select>
+                <label>헤지펀드</label>
+                <select class="select select-bordered select-xs w-32"><option>비헤지펀드</option></select>
+                <div class="ml-auto">
+                    <button class="btn btn-primary btn-xs px-4">조회</button>
+                </div>
+            </div>
+
+            <div class="tabs tabs-lifted">
+                <a class="tab tab-active">주문지취소</a>
+                <a class="tab">종목별취소</a>
+            </div>
+
+            <div class="grid grid-cols-3 gap-1 bg-white border p-1 border-t-0">
+                <div class="col-span-1 border-r pr-2 flex flex-col gap-1">
+                    <div class="flex justify-between items-center">
+                        <span>주문지명</span>
+                        <input type="text" value="(수)-USER01" class="input input-bordered w-32" readonly />
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span>운용역</span>
+                        <input type="text" value="USER01" class="input input-bordered w-32 text-gray-400" />
+                    </div>
+                </div>
+                <div class="col-span-2 flex gap-4 items-end justify-end pb-1">
+                    <label class="flex items-center gap-1"><input type="checkbox" class="checkbox checkbox-xs" /> 펀드 변경</label>
+                    <label>취소사유</label>
+                    <input type="text" class="input input-bordered w-48" />
+                    <button class="btn btn-xs bg-gray-200">사유정정</button>
+                    <button class="btn btn-xs bg-blue-100 text-blue-700">승인요청</button>
+                    <button class="btn btn-xs btn-primary">승 인</button>
+                </div>
+            </div>
+
+            <div class="flex-1 overflow-auto border bg-white">
+                <table class="table table-xs w-full table-pin-rows">
+                    <thead class="bg-blue-50 text-[#1e3a5f]">
+                        <tr>
+                            <th>No</th><th>선택</th><th>차입</th><th>종목</th><th>종목명</th>
+                            <th>B/S</th><th>주문수량</th><th>체결수량</th><th>취소가능</th><th>취소수량</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-yellow-50">
+                            <td>1</td>
+                            <td><input type="checkbox" class="checkbox checkbox-xs" checked /></td>
+                            <td>N</td>
+                            <td>C060310</td>
+                            <td class="font-bold">3S</td>
+                            <td class="text-red-500">B</td>
+                            <td>3</td><td>0</td><td>3</td>
+                            <td><input type="text" value="0" class="input input-xs w-full text-right border-blue-400" /></td>
+                        </tr>
+                        <script>for(let i=2; i<=15; i++) document.write(`<tr><td>${i}</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>`)</script>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="h-24 overflow-hidden border bg-white">
+                <table class="table table-xs w-full">
+                    <thead class="bg-purple-50">
+                        <tr><th>No</th><th>펀드</th><th>펀드명</th><th>구분</th><th>주문수량</th><th>약후종목%</th><th>가용자금</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td><td>001260</td><td>FUND_00002</td><td class="text-red-500">B</td><td>3</td><td>0.05</td><td class="text-right">949,568,586</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-slate-700 text-white text-[10px] p-0.5 flex justify-between px-2">
+        <div class="flex gap-4">
+            <span class="text-red-400">KOSDAQ 553.94 ▲ 1.11</span>
+            <span>정상적으로 조회되었습니다.</span>
+        </div>
+        <div class="bg-red-700 px-2">The message does not exist.</div>
+    </footer>
+
+</body>
+</html>
