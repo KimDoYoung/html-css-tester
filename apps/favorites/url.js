@@ -88,19 +88,19 @@ window.FAVORITES_DATA = {
             "items": [
                 {
                     "name": "kiwi7",
-                    "url": "https://jskn.iptime.org/kiwi7",
+                    "url": "http://jskn.iptime.org/kiwi7",
                     "description": "Asset Management",
                     "icon": "cloud"
                 },
                 {
                     "name": "aview(jskn)",
-                    "url": "https://jskn.iptime.org/aview",
+                    "url": "http://jskn.iptime.org/aview",
                     "description": "Document Viewer",
                     "icon": "cloud"
                 },
                 {
                     "name": "KALPAdb",
-                    "url": "https://jskn.iptime.org/kalpadb-api",
+                    "url": "http://jskn.iptime.org/kalpadb-api",
                     "description": "PCMS External Access",
                     "icon": "cloud"
                 },
