@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m http.server:*)",
+      "mcp__playwright__browser_take_screenshot"
+    ]
+  }
+}

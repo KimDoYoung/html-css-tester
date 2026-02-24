@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>주식 종목별 시뮬레이션 - 수자산배분(약관)</title>
+<link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js" defer></script>
+<style>
+  * { font-size: 11px; font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; }
+  body { background: #c0c0c0; margin: 0; padding: 0; }
+  .app-header { background: linear-gradient(to bottom, #1a2a5e, #0e1a3d); color: white; height: 52px; display: flex; align-items: center; padding: 0 8px; }
+  .app-header .logo { font-size: 18px; font-weight: bold; color: #5bc0de; font-style: italic; margin-right: 12px; }
+  .app-header .logo span { color: #e8c840; }
+  .search-box { background: white; border-radius: 3px; padding: 2px 4px; display: flex; align-items: center; margin-right: 8px; }
+  .search-box input { border: none; outline: none; font-size: 11px; width: 80px; }
+  .btn-header { background: linear-gradient(to bottom, #5a6a9a, #3a4a7a); color: white; border: 1px solid #2a3a6a; border-radius: 3px; padding: 3px 10px; font-size: 11px; cursor: pointer; margin: 0 2px; }
+  .tab-bar { background: #d8dce8; display: flex; border-bottom: 1px solid #aab; padding: 0 4px; height: 24px; align-items: flex-end; }
+  .tab-item { background: #e8ecf4; border: 1px solid #aab; border-bottom: none; padding: 3px 12px; margin-right: 2px; cursor: pointer; border-radius: 3px 3px 0 0; color: #333; }
+  .tab-item.active { background: white; font-weight: bold; border-bottom: 1px solid white; margin-bottom: -1px; }
+  .sub-tab-bar { background: #e8ecf4; display: flex; border-bottom: 1px solid #ccc; padding: 2px 8px; height: 22px; align-items: center; }
+  .sub-tab { padding: 2px 10px; cursor: pointer; color: #333; border: 1px solid transparent; }
+  .sub-tab.active { background: white; border: 1px solid #bbb; border-bottom: 1px solid white; font-weight: bold; }
+  .main-content { background: white; margin: 0; padding: 0; }
+  .title-bar { background: #f0f0f8; border-bottom: 1px solid #ccc; padding: 4px 8px; font-weight: bold; color: #333; }
+  .form-area { padding: 6px 8px; }
+  .form-row { display: flex; align-items: center; margin-bottom: 4px; gap: 6px; flex-wrap: wrap; }
+  .form-label { color: #333; white-space: nowrap; min-width: 48px; }
+  .form-input { border: 1px solid #bbb; padding: 2px 4px; font-size: 11px; height: 20px; }
+  .form-select { border: 1px solid #bbb; padding: 1px 2px; font-size: 11px; height: 20px; background: white; }
+  .form-btn { background: linear-gradient(to bottom, #f8f8fa, #e0e0e8); border: 1px solid #aaa; padding: 2px 8px; cursor: pointer; font-size: 11px; height: 22px; }
+  .form-btn:hover { background: #d0d0d8; }
+  .form-btn-blue { background: linear-gradient(to bottom, #6888c8, #4868a8); color: white; border: 1px solid #3858a0; padding: 2px 12px; cursor: pointer; font-size: 11px; height: 22px; border-radius: 2px; }
+  .grid-header { background: #e0e4ec; border: 1px solid #bbb; }
+  .grid-header th { border: 1px solid #bbb; padding: 3px 4px; text-align: center; font-weight: normal; color: #333; background: linear-gradient(to bottom, #eef0f6, #d8dce8); white-space: nowrap; }
+  .grid-body td { border: 1px solid #ddd; padding: 2px 4px; text-align: center; }
+  .grid-body tr:hover { background: #f0f4ff; }
+  .summary-row { background: #ffe0e0 !important; }
+  .summary-row td { font-weight: bold; color: #c00; }
+  table.grid { border-collapse: collapse; width: 100%; }
+  .status-bar { background: linear-gradient(to bottom, #1a2a5e, #0e1a3d); color: white; height: 24px; display: flex; align-items: center; padding: 0 8px; justify-content: space-between; }
+  .status-bar .left { display: flex; align-items: center; gap: 8px; }
+  .kospi-badge { background: #c00; color: white; padding: 1px 6px; border-radius: 2px; font-size: 10px; }
+  .tab-bottom-bar { background: #e8ecf4; border-top: 1px solid #ccc; padding: 2px 8px; display: flex; align-items: center; height: 22px; }
+  .tab-bottom { padding: 2px 10px; cursor: pointer; color: #333; font-size: 11px; }
+  .tab-bottom.active { font-weight: bold; }
+  .separator { border-left: 1px solid #aaa; height: 14px; margin: 0 4px; }
+  .icon-btn { width: 20px; height: 20px; border: 1px solid #bbb; background: #f0f0f4; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 10px; }
+  .checkbox-area { display: flex; align-items: center; gap: 2px; }
+</style>
+</head>
+<body x-data="{ activeMainTab: '주문관리', activeSubTab: '수자산배분(약관)' }">
+
+<!-- Header -->
+<div class="app-header">
+  <div class="logo">ai <span>Trader</span></div>
+  <div class="search-box">
+    <span style="color:#888; margin-right:2px;">SEARCH</span>
+  </div>
+  <div class="search-box" style="width:100px;">
+    <input type="text" placeholder="검색">
+    <span style="color:#888;">🔍</span>
+  </div>
+  <div class="btn-header">Q</div>
+  <div style="margin-left:8px;">
+    <span class="btn-header">HISTORY ▼</span>
+  </div>
+  <div style="flex:1;"></div>
+  <div style="display:flex; gap:4px;">
+    <div style="width:24px; height:24px; background:#3a5a8a; border-radius:3px; display:flex; align-items:center; justify-content:center;">📋</div>
+    <div style="width:24px; height:24px; background:#3a5a8a; border-radius:3px; display:flex; align-items:center; justify-content:center;">⚙</div>
+  </div>
+</div>
+
+<!-- Main Tab Bar -->
+<div class="tab-bar">
+  <template x-for="tab in ['시뮬레이션', '국내주식', '주식 종목별 시뮬레이션(ZTSM1S10M00)']">
+    <div class="tab-item" :class="{ 'active': tab === '주식 종목별 시뮬레이션(ZTSM1S10M00)' }" x-text="tab"></div>
+  </template>
+</div>
+
+<!-- Sub Tab Bar -->
+<div class="sub-tab-bar">
+  <template x-for="st in ['수자산배분(약관)', '종목선정(약관)', '가감산정산', '종목배분표관리', '종목배분표관리2']">
+    <div class="sub-tab" :class="{ 'active': st === activeSubTab }" @click="activeSubTab = st" x-text="st"></div>
+  </template>
+</div>
+
+<!-- Content Area -->
+<div class="main-content" style="min-height: 400px;">
+  <!-- Form Section -->
+  <div class="form-area" style="border-bottom: 1px solid #ddd;">
+    <!-- Row 1 -->
+    <div class="form-row">
+      <span class="form-label">구분</span>
+      <select class="form-select" style="width:90px;">
+        <option>전체/편입</option>
+      </select>
+      <span style="margin: 0 4px;">▼</span>
+      <span class="form-label" style="margin-left:16px;">펀드</span>
+      <input type="text" class="form-input" style="width:60px;">
+      <span>🔍</span>
+      <span class="form-label" style="margin-left:4px;">전체</span>
+    </div>
+    <!-- Row 2 -->
+    <div class="form-row">
+      <span class="form-label">배치펀드</span>
+      <select class="form-select" style="width:90px;">
+        <option>비배치펀드</option>
+      </select>
+      <span class="form-label" style="margin-left:16px;">종목코드</span>
+      <select class="form-select" style="width:60px;">
+        <option></option>
+      </select>
+      <span>▼</span>
+    </div>
+    <!-- Row 3 (divider) -->
+    <div style="border-top: 1px solid #ddd; margin: 4px 0;"></div>
+    <!-- Row 4 -->
+    <div class="form-row">
+      <span class="form-label">보유수수</span>
+      <input type="text" class="form-input" style="width:80px;">
+      <span class="form-label" style="margin-left:8px;">매수금액</span>
+      <input type="text" class="form-input" style="width:80px;">
+      <span class="form-label" style="margin-left:8px;">시장배</span>
+      <input type="text" class="form-input" style="width:40px;">
+      <span>%</span>
+      <span class="form-label" style="margin-left:16px;">주문수량</span>
+      <input type="text" class="form-input" style="width:80px;">
+      <div style="margin-left: auto; display: flex; gap: 4px; align-items: center;">
+        <button class="form-btn" style="background: #f8f0f0; border-color: #c88;">▶ 매도/1/0도</button>
+      </div>
+    </div>
+    <!-- Row 5 -->
+    <div class="form-row">
+      <span class="form-label">시세</span>
+      <input type="text" class="form-input" style="width:80px;">
+      <span class="form-label" style="margin-left:8px;">매도금액</span>
+      <input type="text" class="form-input" style="width:80px;">
+      <span class="form-label" style="margin-left:94px;">수수료</span>
+      <input type="text" class="form-input" style="width:40px;">
+      <span class="form-label" style="margin-left:4px;">50</span>
+      <span class="form-label">bp</span>
+      <div style="margin-left: auto; display: flex; gap: 4px;">
+        <button class="form-btn-blue">시 시뮬레이션 저장</button>
+        <button class="form-btn">조건설정</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grid icons -->
+  <div style="padding: 2px 8px; border-bottom: 1px solid #ddd; display:flex; align-items:center; gap:4px;">
+    <span class="icon-btn">📊</span>
+    <span class="icon-btn">📈</span>
+    <div style="flex:1;"></div>
+    <span style="color:#888;">|◀</span>
+    <span style="color:#888;">◀</span>
+    <span style="color:#888;">▶</span>
+    <span style="color:#888;">▶|</span>
+  </div>
+
+  <!-- Data Grid -->
+  <div style="overflow-x: auto; padding: 0;">
+    <table class="grid">
+      <thead class="grid-header">
+        <tr>
+          <th style="width:24px;">No</th>
+          <th>계정</th>
+          <th>펀드</th>
+          <th>펀드명</th>
+          <th>위탁</th>
+          <th>NAV</th>
+          <th>조정</th>
+          <th>약정종목</th>
+          <th>순위펀드</th>
+          <th>보유수수</th>
+          <th>편입금리/고정</th>
+          <th>BIS</th>
+          <th>구분/수량</th>
+          <th>해결매산금액</th>
+          <th>가용자산합</th>
+          <th>약정종목</th>
+        </tr>
+      </thead>
+      <tbody class="grid-body">
+        <!-- Empty rows -->
+        <template x-for="i in 15">
+          <tr>
+            <td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+          </tr>
+        </template>
+        <!-- Summary row -->
+        <tr class="summary-row">
+          <td colspan="2" style="text-align:left; padding-left:8px; color:#c00; font-weight:bold;">합계</td>
+          <td></td><td></td><td></td><td></td><td></td><td>0</td><td></td><td></td><td></td><td>0</td><td></td><td>0</td><td>0</td><td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Bottom Tab -->
+<div class="tab-bottom-bar">
+  <span class="tab-bottom active">주식 종목별시뮬레이션</span>
+  <span style="cursor:pointer; margin-left:4px;">✕</span>
+</div>
+
+<!-- Status Bar -->
+<div class="status-bar">
+  <div class="left">
+    <span class="kospi-badge">KOSPI</span>
+    <span style="color:#aaa;">■■■</span>
+  </div>
+  <div style="display:flex; align-items:center; gap:12px;">
+    <span style="color:#8a8;">정상적으로 처리하였습니다.</span>
+    <span style="color:#aaa;">메시지가 없습니다.</span>
+    <span style="background:#c00; width:12px; height:12px; border-radius:50%; display:inline-block;"></span>
+  </div>
+</div>
+
+</body>
+</html>

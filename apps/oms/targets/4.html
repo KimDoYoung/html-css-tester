@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>실시간 주문체결현황</title>
+<link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js" defer></script>
+<style>
+  * { font-size: 11px; font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; }
+  body { background: #c0c0c0; margin: 0; padding: 0; }
+  .app-header { background: linear-gradient(to bottom, #1a2a5e, #0e1a3d); color: white; height: 36px; display: flex; align-items: center; padding: 0 8px; }
+  .app-header .logo { font-size: 14px; font-weight: bold; color: #5bc0de; font-style: italic; margin-right: 8px; }
+  .app-header .logo span { color: #e8c840; }
+  .main-content { background: white; margin: 0; padding: 0; }
+  .toolbar { background: #f0f0f8; border-bottom: 1px solid #ccc; padding: 3px 8px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .form-label { color: #333; white-space: nowrap; }
+  .form-input { border: 1px solid #bbb; padding: 1px 3px; font-size: 11px; height: 19px; }
+  .form-select { border: 1px solid #bbb; padding: 0 2px; font-size: 11px; height: 19px; background: white; }
+  .form-btn { background: linear-gradient(to bottom, #f8f8fa, #e0e0e8); border: 1px solid #aaa; padding: 1px 8px; cursor: pointer; font-size: 11px; height: 20px; }
+  .form-btn-blue { background: linear-gradient(to bottom, #6888c8, #4868a8); color: white; border: 1px solid #3858a0; padding: 1px 8px; cursor: pointer; font-size: 11px; height: 20px; border-radius: 2px; }
+  .section-label { background: #1a3a6a; color: white; padding: 2px 8px; font-weight: bold; margin-right: 4px; }
+  .grid-header th { background: linear-gradient(to bottom, #eef0f6, #d8dce8); border: 1px solid #bbb; padding: 2px 3px; text-align: center; font-weight: normal; white-space: nowrap; position: sticky; top: 0; z-index: 1; }
+  .grid-body td { border: 1px solid #e0e0e0; padding: 1px 3px; text-align: center; white-space: nowrap; }
+  .grid-body tr:nth-child(even) { background: #f8f8fc; }
+  .grid-body tr:hover { background: #e0e8ff; }
+  table.grid { border-collapse: collapse; width: 100%; }
+  .status-bar { background: linear-gradient(to bottom, #1a2a5e, #0e1a3d); color: white; height: 22px; display: flex; align-items: center; padding: 0 8px; justify-content: space-between; }
+  .num-red { color: #c00; }
+  .num-blue { color: #00c; }
+  .num-black { color: #000; }
+  .text-right { text-align: right !important; }
+  .text-left { text-align: left !important; }
+  .highlight-row { background: #fff8e0 !important; }
+  .tab-bar { background: #d8dce8; display: flex; border-bottom: 1px solid #aab; padding: 0 4px; height: 22px; align-items: flex-end; }
+  .tab-item { background: #e8ecf4; border: 1px solid #aab; border-bottom: none; padding: 2px 10px; margin-right: 2px; cursor: pointer; border-radius: 3px 3px 0 0; color: #333; }
+  .tab-item.active { background: white; font-weight: bold; border-bottom: 1px solid white; margin-bottom: -1px; }
+  .toolbar-row2 { background: #f4f4fa; border-bottom: 1px solid #ddd; padding: 3px 8px; display: flex; align-items: center; gap: 6px; }
+  .icon-bar { display: flex; align-items: center; gap: 2px; padding: 2px 8px; border-bottom: 1px solid #ddd; }
+  .icon-btn { width: 18px; height: 18px; border: 1px solid #bbb; background: #f0f0f4; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 9px; }
+  .filter-chip { background: #e8ecf4; border: 1px solid #bbb; padding: 1px 6px; border-radius: 10px; cursor: pointer; }
+  .filter-chip.active { background: #4868a8; color: white; border-color: #3858a0; }
+</style>
+</head>
+<body x-data="{
+  orders: [
+    { no: 1, time: '09:01:23', account: 'A1_01', userId: 'AUSER01', type: '시장가', side: '매수', stock: '삼성전자', code: '005930', qty: 500, price: 71200, execQty: 500, execPrice: 71200, remain: 0, status: '체결완료', fund: 'FUND_000001', ordNo: '00001' },
+    { no: 2, time: '09:01:24', account: 'A1_01', userId: 'AUSER01', type: '시장가', side: '매수', stock: 'SK하이닉스', code: '000660', qty: 300, price: 140800, execQty: 300, execPrice: 140800, remain: 0, status: '체결완료', fund: 'FUND_000001', ordNo: '00002' },
+    { no: 3, time: '09:02:15', account: 'A1_01', userId: 'AUSER01', type: '지정가', side: '매수', stock: 'NAVER', code: '035420', qty: 200, price: 190500, execQty: 150, execPrice: 190500, remain: 50, status: '부분체결', fund: 'FUND_000001', ordNo: '00003' },
+    { no: 4, time: '09:03:01', account: 'A1_01', userId: 'AUSER01', type: '지정가', side: '매도', stock: '카카오', code: '035720', qty: 100, price: 55200, execQty: 0, execPrice: 0, remain: 100, status: '접수', fund: 'FUND_000002', ordNo: '00004' },
+    { no: 5, time: '09:05:33', account: 'A2_35', userId: 'AUSER01', type: '시장가', side: '매수', stock: 'LG에너지', code: '373220', qty: 50, price: 382000, execQty: 50, execPrice: 382000, remain: 0, status: '체결완료', fund: 'FUND_000002', ordNo: '00005' },
+    { no: 6, time: '09:06:12', account: 'A2_35', userId: 'AUSER01', type: '지정가', side: '매수', stock: '현대차', code: '005380', qty: 120, price: 228500, execQty: 80, execPrice: 228500, remain: 40, status: '부분체결', fund: 'FUND_000003', ordNo: '00006' },
+    { no: 7, time: '09:08:45', account: 'A2_35', userId: 'AUSER01', type: '시장가', side: '매도', stock: 'POSCO홀딩스', code: '005490', qty: 80, price: 385000, execQty: 80, execPrice: 385200, remain: 0, status: '체결완료', fund: 'FUND_000003', ordNo: '00007' },
+    { no: 8, time: '09:10:22', account: 'A3_02', userId: 'BUSER02', type: '지정가', side: '매수', stock: '삼성SDI', code: '006400', qty: 60, price: 415000, execQty: 0, execPrice: 0, remain: 60, status: '접수', fund: 'FUND_000004', ordNo: '00008' },
+    { no: 9, time: '09:11:55', account: 'A3_02', userId: 'BUSER02', type: '시장가', side: '매수', stock: '기아', code: '000270', qty: 250, price: 89400, execQty: 250, execPrice: 89400, remain: 0, status: '체결완료', fund: 'FUND_000004', ordNo: '00009' },
+    { no: 10, time: '09:12:34', account: 'A3_02', userId: 'BUSER02', type: '지정가', side: '매도', stock: 'KB금융', code: '105560', qty: 150, price: 62800, execQty: 100, execPrice: 62800, remain: 50, status: '부분체결', fund: 'FUND_000004', ordNo: '00010' },
+    { no: 11, time: '09:15:01', account: 'A1_01', userId: 'AUSER01', type: '시장가', side: '매수', stock: '셀트리온', code: '068270', qty: 180, price: 178500, execQty: 180, execPrice: 178500, remain: 0, status: '체결완료', fund: 'FUND_000001', ordNo: '00011' },
+    { no: 12, time: '09:16:40', account: 'A2_35', userId: 'AUSER01', type: '지정가', side: '매수', stock: '삼성바이오', code: '207940', qty: 30, price: 805000, execQty: 0, execPrice: 0, remain: 30, status: '접수', fund: 'FUND_000002', ordNo: '00012' },
+    { no: 13, time: '09:18:12', account: 'A3_02', userId: 'BUSER02', type: '시장가', side: '매도', stock: 'LG화학', code: '051910', qty: 40, price: 498000, execQty: 40, execPrice: 498200, remain: 0, status: '체결완료', fund: 'FUND_000003', ordNo: '00013' },
+    { no: 14, time: '09:20:05', account: 'A1_01', userId: 'AUSER01', type: '지정가', side: '매수', stock: '카카오뱅크', code: '323410', qty: 400, price: 24150, execQty: 200, execPrice: 24150, remain: 200, status: '부분체결', fund: 'FUND_000001', ordNo: '00014' },
+    { no: 15, time: '09:21:30', account: 'A2_35', userId: 'AUSER01', type: '시장가', side: '매수', stock: '크래프톤', code: '259960', qty: 25, price: 245000, execQty: 25, execPrice: 245000, remain: 0, status: '체결완료', fund: 'FUND_000002', ordNo: '00015' },
+    { no: 16, time: '09:23:48', account: 'A3_02', userId: 'BUSER02', type: '조건부', side: '매도', stock: '한화에어로', code: '012450', qty: 90, price: 165000, execQty: 0, execPrice: 0, remain: 90, status: '접수', fund: 'FUND_000004', ordNo: '00016' },
+    { no: 17, time: '09:25:10', account: 'A1_01', userId: 'AUSER01', type: '시장가', side: '매수', stock: '두산에너빌', code: '034020', qty: 350, price: 18950, execQty: 350, execPrice: 18950, remain: 0, status: '체결완료', fund: 'FUND_000001', ordNo: '00017' },
+    { no: 18, time: '09:27:22', account: 'A2_35', userId: 'AUSER01', type: '지정가', side: '매도', stock: 'HD현대중공', code: '329180', qty: 60, price: 152000, execQty: 40, execPrice: 152000, remain: 20, status: '부분체결', fund: 'FUND_000003', ordNo: '00018' }
+  ]
+}">
+
+<!-- Header (compact) -->
+<div class="app-header">
+  <div class="logo">ai <span>Trader</span></div>
+  <div style="flex:1;"></div>
+</div>
+
+<!-- Tab Bar -->
+<div class="tab-bar">
+  <div class="tab-item">주문관리</div>
+  <div class="tab-item active">실시간 주문체결현황 ▼</div>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+  <!-- Toolbar Row 1: Filters -->
+  <div class="toolbar">
+    <span class="form-label" style="font-weight:bold;">계좌번호</span>
+    <select class="form-select" style="width:70px;"><option>전체펀드 ▼</option></select>
+    <span class="form-label" style="margin-left:8px;">운용역</span>
+    <input type="text" class="form-input" style="width:50px;">
+    <span>🔍</span>
+    <span class="form-label" style="margin-left:8px;">구분</span>
+    <span>전체</span>
+    <div style="margin-left: auto; display: flex; gap: 4px;">
+      <button class="form-btn-blue">조회</button>
+      <button class="form-btn">Excel</button>
+    </div>
+  </div>
+
+  <!-- Toolbar Row 2: Summary -->
+  <div class="toolbar-row2">
+    <span class="form-label">조회기준</span>
+    <input type="text" class="form-input" style="width:70px;" value="20260210">
+    <span class="form-label" style="margin-left:8px;">KOSPI</span>
+    <span class="num-red" style="font-weight:bold;">▲ 2,812.54</span>
+    <span class="num-red">1.82</span>
+    <span class="num-red">0.06%</span>
+    <span class="form-label" style="margin-left:12px;">KOSDAQ</span>
+    <span class="num-blue" style="font-weight:bold;">▼ 821.33</span>
+    <span class="num-blue">-3.45</span>
+    <span class="num-blue">-0.42%</span>
+  </div>
+
+  <!-- Icon Bar -->
+  <div class="icon-bar">
+    <span class="section-label">실시간 주문체결현황</span>
+    <div style="flex:1;"></div>
+    <span class="filter-chip active">전체</span>
+    <span class="filter-chip">체결</span>
+    <span class="filter-chip">미체결</span>
+    <span class="filter-chip">취소</span>
+    <span style="margin-left:8px; color:#888;">|</span>
+    <span class="icon-btn" title="새로고침">↻</span>
+    <span class="icon-btn" title="인쇄">🖨</span>
+  </div>
+
+  <!-- Main Data Grid -->
+  <div style="overflow: auto; max-height: 380px;">
+    <table class="grid">
+      <thead class="grid-header">
+        <tr>
+          <th style="width:28px;">No</th>
+          <th>시간</th>
+          <th>계정</th>
+          <th>사용자</th>
+          <th>PT</th>
+          <th>구분</th>
+          <th>종목명</th>
+          <th>종목코드</th>
+          <th>주문수량</th>
+          <th>주문가</th>
+          <th>체결수량</th>
+          <th>체결가</th>
+          <th>미체결</th>
+          <th>상태</th>
+          <th>펀드</th>
+          <th>주문번호</th>
+        </tr>
+      </thead>
+      <tbody class="grid-body">
+        <template x-for="ord in orders" :key="ord.no">
+          <tr :class="{ 'highlight-row': ord.status === '접수' }">
+            <td x-text="ord.no"></td>
+            <td x-text="ord.time"></td>
+            <td x-text="ord.account"></td>
+            <td x-text="ord.userId"></td>
+            <td x-text="ord.type"></td>
+            <td :class="{ 'num-red': ord.side === '매수', 'num-blue': ord.side === '매도' }" x-text="ord.side" style="font-weight:bold;"></td>
+            <td class="text-left" x-text="ord.stock"></td>
+            <td x-text="ord.code"></td>
+            <td class="text-right" x-text="ord.qty.toLocaleString()"></td>
+            <td class="text-right" x-text="ord.price.toLocaleString()"></td>
+            <td class="text-right" x-text="ord.execQty.toLocaleString()"></td>
+            <td class="text-right" x-text="ord.execPrice > 0 ? ord.execPrice.toLocaleString() : ''"></td>
+            <td class="text-right" :class="{ 'num-red': ord.remain > 0 }" x-text="ord.remain > 0 ? ord.remain.toLocaleString() : '0'"></td>
+            <td>
+              <span :class="{
+                'text-green-700': ord.status === '체결완료',
+                'text-orange-600': ord.status === '부분체결',
+                'text-gray-500': ord.status === '접수'
+              }" x-text="ord.status"></span>
+            </td>
+            <td x-text="ord.fund"></td>
+            <td x-text="ord.ordNo"></td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Status Bar -->
+<div class="status-bar">
+  <div style="display:flex; align-items:center; gap:8px;">
+    <span style="color:#aaa;">총 <span x-text="orders.length"></span>건</span>
+    <span style="color:#aaa;">|</span>
+    <span style="color:#8a8;">체결: 10건</span>
+    <span style="color:#e88;">미체결: 4건</span>
+    <span style="color:#ea8;">부분: 4건</span>
+  </div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <span style="color:#8a8;">정상적으로 조회하였습니다.</span>
+    <span style="background:#0a0; width:10px; height:10px; border-radius:50%; display:inline-block;"></span>
+    <span style="color:#aaa;">LIVE</span>
+  </div>
+</div>
+
+</body>
+</html>

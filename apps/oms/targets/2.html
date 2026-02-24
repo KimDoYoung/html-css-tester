@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>주식 종목별 시뮬레이션 - 데이터 조회</title>
+<link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js" defer></script>
+<style>
+  * { font-size: 11px; font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; }
+  body { background: #c0c0c0; margin: 0; padding: 0; }
+  .app-header { background: linear-gradient(to bottom, #1a2a5e, #0e1a3d); color: white; height: 52px; display: flex; align-items: center; padding: 0 8px; }
+  .app-header .logo { font-size: 18px; font-weight: bold; color: #5bc0de; font-style: italic; margin-right: 12px; }
+  .app-header .logo span { color: #e8c840; }
+  .search-box { background: white; border-radius: 3px; padding: 2px 4px; display: flex; align-items: center; margin-right: 8px; }
+  .search-box input { border: none; outline: none; font-size: 11px; width: 80px; }
+  .btn-header { background: linear-gradient(to bottom, #5a6a9a, #3a4a7a); color: white; border: 1px solid #2a3a6a; border-radius: 3px; padding: 3px 10px; font-size: 11px; cursor: pointer; }
+  .tab-bar { background: #d8dce8; display: flex; border-bottom: 1px solid #aab; padding: 0 4px; height: 24px; align-items: flex-end; }
+  .tab-item { background: #e8ecf4; border: 1px solid #aab; border-bottom: none; padding: 3px 12px; margin-right: 2px; cursor: pointer; border-radius: 3px 3px 0 0; color: #333; }
+  .tab-item.active { background: white; font-weight: bold; border-bottom: 1px solid white; margin-bottom: -1px; }
+  .sub-tab-bar { background: #e8ecf4; display: flex; border-bottom: 1px solid #ccc; padding: 2px 8px; height: 22px; align-items: center; }
+  .sub-tab { padding: 2px 10px; cursor: pointer; color: #333; }
+  .sub-tab.active { background: white; border: 1px solid #bbb; font-weight: bold; }
+  .main-content { background: white; margin: 0; padding: 0; display: flex; min-height: 400px; }
+  .left-panel { width: 180px; border-right: 1px solid #ccc; background: #fafafa; padding: 4px; overflow-y: auto; }
+  .left-panel .fund-item { padding: 2px 4px; cursor: pointer; white-space: nowrap; border-bottom: 1px solid #eee; }
+  .left-panel .fund-item:hover { background: #e8f0ff; }
+  .left-panel .fund-item.selected { background: #c8d8f8; font-weight: bold; }
+  .right-panel { flex: 1; overflow: hidden; }
+  .form-area { padding: 4px 8px; border-bottom: 1px solid #ddd; }
+  .form-row { display: flex; align-items: center; margin-bottom: 3px; gap: 4px; }
+  .form-label { color: #333; white-space: nowrap; min-width: 48px; }
+  .form-input { border: 1px solid #bbb; padding: 2px 4px; font-size: 11px; height: 20px; }
+  .form-select { border: 1px solid #bbb; padding: 1px 2px; font-size: 11px; height: 20px; background: white; }
+  .form-btn { background: linear-gradient(to bottom, #f8f8fa, #e0e0e8); border: 1px solid #aaa; padding: 2px 8px; cursor: pointer; font-size: 11px; height: 22px; }
+  .form-btn-blue { background: linear-gradient(to bottom, #6888c8, #4868a8); color: white; border: 1px solid #3858a0; padding: 2px 12px; cursor: pointer; font-size: 11px; height: 22px; border-radius: 2px; }
+  .grid-header th { background: linear-gradient(to bottom, #eef0f6, #d8dce8); border: 1px solid #bbb; padding: 3px 4px; text-align: center; font-weight: normal; white-space: nowrap; }
+  .grid-body td { border: 1px solid #ddd; padding: 2px 4px; text-align: center; white-space: nowrap; }
+  .grid-body tr:hover { background: #f0f4ff; }
+  .summary-row { background: #ffe0e0 !important; }
+  .summary-row td { font-weight: bold; color: #c00; }
+  table.grid { border-collapse: collapse; width: 100%; }
+  .status-bar { background: linear-gradient(to bottom, #1a2a5e, #0e1a3d); color: white; height: 24px; display: flex; align-items: center; padding: 0 8px; justify-content: space-between; }
+  .kospi-badge { background: #c00; color: white; padding: 1px 6px; border-radius: 2px; font-size: 10px; }
+  .tab-bottom-bar { background: #e8ecf4; border-top: 1px solid #ccc; padding: 2px 8px; display: flex; align-items: center; height: 22px; }
+  .tab-bottom { padding: 2px 10px; cursor: pointer; color: #333; }
+  .tab-bottom.active { font-weight: bold; }
+  .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.3); z-index: 100; display: flex; align-items: center; justify-content: center; }
+  .modal-dialog { background: white; border: 2px solid #667; box-shadow: 4px 4px 12px rgba(0,0,0,0.3); width: 260px; }
+  .modal-title { background: linear-gradient(to bottom, #4a5a8a, #2a3a6a); color: white; padding: 4px 8px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+  .modal-body { padding: 16px; text-align: center; }
+  .modal-footer { padding: 8px; text-align: center; border-top: 1px solid #ddd; }
+  .num-red { color: #c00; }
+  .num-blue { color: #00c; }
+  .icon-btn { width: 20px; height: 20px; border: 1px solid #bbb; background: #f0f0f4; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+  .fund-header { background: #e0e4ec; padding: 3px 6px; font-weight: bold; border-bottom: 1px solid #bbb; }
+</style>
+</head>
+<body x-data="{ showModal: true }">
+
+<!-- Header -->
+<div class="app-header">
+  <div class="logo">ai <span>Trader</span></div>
+  <div class="search-box"><input type="text" placeholder="검색"> <span>🔍</span></div>
+  <div class="btn-header">Q</div>
+  <div class="btn-header" style="margin-left:4px;">HISTORY ▼</div>
+  <div style="flex:1;"></div>
+  <div style="display:flex; gap:4px;">
+    <div style="width:24px; height:24px; background:#3a5a8a; border-radius:3px; display:flex; align-items:center; justify-content:center;">📋</div>
+    <div style="width:24px; height:24px; background:#3a5a8a; border-radius:3px; display:flex; align-items:center; justify-content:center;">⚙</div>
+  </div>
+</div>
+
+<!-- Tab Bar -->
+<div class="tab-bar">
+  <div class="tab-item">시뮬레이션</div>
+  <div class="tab-item">국내주식</div>
+  <div class="tab-item active">주식 종목별 시뮬레이션(ZTSM1S10M00)</div>
+</div>
+
+<!-- Sub Tab Bar -->
+<div class="sub-tab-bar">
+  <div class="sub-tab active">수자산배분(약관)</div>
+  <div class="sub-tab">종목선정(약관)</div>
+  <div class="sub-tab">가감산정산</div>
+  <div class="sub-tab">종목배분표관리</div>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+  <!-- Left Fund List Panel -->
+  <div class="left-panel">
+    <div class="fund-header">펀드목록</div>
+    <div class="fund-item selected">FM - 001 성장형펀드A</div>
+    <div class="fund-item">FM - 002 안정형펀드B</div>
+    <div class="fund-item">FM - 003 혼합형펀드C</div>
+    <div class="fund-item">FM - 004 채권형펀드D</div>
+    <div class="fund-item">FM - 005 인덱스펀드E</div>
+    <div class="fund-item">FM - 006 가치형펀드F</div>
+    <div class="fund-item">FM - 007 배당형펀드G</div>
+    <div class="fund-item">FM - 008 테마형펀드H</div>
+    <div class="fund-item">FM - 009 글로벌펀드I</div>
+    <div class="fund-item">FM - 010 신기술펀드J</div>
+    <div class="fund-item">FM - 011 중소형펀드K</div>
+    <div class="fund-item">FM - 012 대형주펀드L</div>
+  </div>
+
+  <!-- Right Content -->
+  <div class="right-panel">
+    <!-- Form -->
+    <div class="form-area">
+      <div class="form-row">
+        <span class="form-label">구분</span>
+        <select class="form-select" style="width:90px;"><option>전체/편입</option></select>
+        <span class="form-label" style="margin-left:12px;">펀드</span>
+        <input type="text" class="form-input" style="width:60px;" value="FM-001">
+        <span>🔍</span>
+      </div>
+      <div class="form-row">
+        <span class="form-label">배치펀드</span>
+        <select class="form-select" style="width:90px;"><option>비배치펀드</option></select>
+        <span class="form-label" style="margin-left:12px;">종목코드</span>
+        <input type="text" class="form-input" style="width:60px;">
+      </div>
+      <div style="border-top:1px solid #ddd; margin: 3px 0;"></div>
+      <div class="form-row">
+        <span class="form-label">보유수수</span>
+        <input type="text" class="form-input" style="width:70px;" value="15,000">
+        <span class="form-label">매수금액</span>
+        <input type="text" class="form-input" style="width:80px;" value="450,000,000">
+        <span class="form-label">시장배</span>
+        <input type="text" class="form-input" style="width:35px;" value="5.2">
+        <span>%</span>
+        <span class="form-label" style="margin-left:8px;">주문수량</span>
+        <input type="text" class="form-input" style="width:60px;">
+        <div style="margin-left:auto; display:flex; gap:4px;">
+          <button class="form-btn" style="background:#f8f0f0;">▶ 매도/1/0도</button>
+        </div>
+      </div>
+      <div class="form-row">
+        <span class="form-label">시세</span>
+        <input type="text" class="form-input" style="width:70px;" value="30,000">
+        <span class="form-label">매도금액</span>
+        <input type="text" class="form-input" style="width:80px;">
+        <span class="form-label" style="margin-left:56px;">수수료</span>
+        <input type="text" class="form-input" style="width:35px;" value="50">
+        <span>bp</span>
+        <div style="margin-left:auto; display:flex; gap:4px;">
+          <button class="form-btn-blue">시 시뮬레이션 저장</button>
+          <button class="form-btn">조건설정</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div style="overflow-x:auto;">
+      <table class="grid">
+        <thead class="grid-header">
+          <tr>
+            <th>No</th><th>계정</th><th>펀드</th><th>펀드명</th><th>위탁</th><th>NAV</th><th>조정</th><th>약정종목</th><th>순위펀드</th><th>보유수수</th><th>편입금리</th><th>BIS</th><th>구분/수량</th><th>해결매산금액</th><th>가용자산합</th><th>약정종목</th>
+          </tr>
+        </thead>
+        <tbody class="grid-body">
+          <tr>
+            <td>1</td><td>01</td><td>FM-001</td><td>성장형펀드A</td><td>위탁</td><td>8,520,000</td><td>0</td><td>삼성전자</td><td>1</td><td>15,000</td><td>5.2</td><td>120</td><td>매수/500</td><td>15,000,000</td><td>3,520,000</td><td>005930</td>
+          </tr>
+          <tr>
+            <td>2</td><td>01</td><td>FM-001</td><td>성장형펀드A</td><td>위탁</td><td>8,520,000</td><td>0</td><td>SK하이닉스</td><td>2</td><td>8,000</td><td>3.1</td><td>85</td><td>매수/300</td><td>42,000,000</td><td>3,520,000</td><td>000660</td>
+          </tr>
+          <tr>
+            <td>3</td><td>01</td><td>FM-001</td><td>성장형펀드A</td><td>위탁</td><td>8,520,000</td><td>0</td><td>NAVER</td><td>3</td><td>5,000</td><td>2.8</td><td>72</td><td>매수/200</td><td>38,000,000</td><td>3,520,000</td><td>035420</td>
+          </tr>
+          <tr>
+            <td>4</td><td>01</td><td>FM-001</td><td>성장형펀드A</td><td>위탁</td><td>8,520,000</td><td>0</td><td>카카오</td><td>4</td><td>12,000</td><td>1.5</td><td>45</td><td>매도/100</td><td>5,500,000</td><td>3,520,000</td><td>035720</td>
+          </tr>
+          <tr>
+            <td>5</td><td>01</td><td>FM-001</td><td>성장형펀드A</td><td>위탁</td><td>8,520,000</td><td>0</td><td>LG에너지</td><td>5</td><td>3,000</td><td>4.2</td><td>98</td><td>매수/150</td><td>57,000,000</td><td>3,520,000</td><td>373220</td>
+          </tr>
+          <template x-for="i in 8">
+            <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          </template>
+          <tr class="summary-row">
+            <td colspan="2" style="text-align:left; padding-left:6px;">합계</td>
+            <td></td><td></td><td></td><td></td><td></td><td>5</td><td></td><td>43,000</td><td></td><td>420</td><td></td><td>157,500,000</td><td>3,520,000</td><td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Dialog (Popup) -->
+<div class="modal-overlay" x-show="showModal" @click.self="showModal=false">
+  <div class="modal-dialog">
+    <div class="modal-title">
+      <span>알림</span>
+      <span style="cursor:pointer;" @click="showModal=false">✕</span>
+    </div>
+    <div class="modal-body">
+      <p style="margin:8px 0;">시뮬레이션이 완료되었습니다.</p>
+      <p style="margin:4px 0; color:#666;">총 5건의 종목이 처리되었습니다.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="form-btn" style="padding:4px 24px;" @click="showModal=false">확인</button>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom Tab -->
+<div class="tab-bottom-bar">
+  <span class="tab-bottom active">주식 종목별시뮬레이션</span>
+  <span style="cursor:pointer; margin-left:4px;">✕</span>
+</div>
+
+<!-- Status Bar -->
+<div class="status-bar">
+  <div style="display:flex; align-items:center; gap:8px;">
+    <span class="kospi-badge">KOSPI</span>
+    <span style="color:#aaa;">■■■</span>
+  </div>
+  <div style="display:flex; align-items:center; gap:12px;">
+    <span style="color:#8a8;">정상적으로 처리하였습니다.</span>
+    <span style="color:#aaa;">메시지가 없습니다.</span>
+    <span style="background:#c00; width:12px; height:12px; border-radius:50%; display:inline-block;"></span>
+  </div>
+</div>
+
+</body>
+</html>
